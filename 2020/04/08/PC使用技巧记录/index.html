@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Windows下使用技巧记录     Excel移动列选中列，按住shift键，当鼠标变成十字型时候，可以拖拽到任意指定列  Win10设置右键打开cmdhttps:&#x2F;&#x2F;blog.csdn.net&#x2F;mooneve&#x2F;article&#x2F;details&#x2F;78821843 https:&#x2F;&#x2F;blog.csdn.net&#x2F;hiudawn&#x2F;article&#x2F;details&#x2F;80701935  ffmpeg提取字幕流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PC使用技巧记录">
+<meta property="og:url" content="https://xtvj.github.io/2020/04/08/PC%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="XTVJ">
+<meta property="og:description" content="Windows下使用技巧记录     Excel移动列选中列，按住shift键，当鼠标变成十字型时候，可以拖拽到任意指定列  Win10设置右键打开cmdhttps:&#x2F;&#x2F;blog.csdn.net&#x2F;mooneve&#x2F;article&#x2F;details&#x2F;78821843 https:&#x2F;&#x2F;blog.csdn.net&#x2F;hiudawn&#x2F;article&#x2F;details&#x2F;80701935  ffmpeg提取字幕流">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-04-07T21:41:58.000Z">
+<meta property="article:modified_time" content="2020-10-17T20:14:46.245Z">
+<meta property="article:author" content="xtvj">
+<meta property="article:tag" content="技巧">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xtvj.github.io/2020/04/08/PC%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>PC使用技巧记录 | XTVJ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">XTVJ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2020/04/08/PC%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PC使用技巧记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-08 05:41:58" itemprop="dateCreated datePublished" datetime="2020-04-08T05:41:58+08:00">2020-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-18 04:14:46" itemprop="dateModified" datetime="2020-10-18T04:14:46+08:00">2020-10-18</time>
+              </span>
+
+          
+            <span id="/2020/04/08/PC%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="PC使用技巧记录" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+         <center><font color=blue size=20>Windows下使用技巧记录</font></center>
+
+
+
+<ul>
+<li><h5 id="Excel移动列"><a href="#Excel移动列" class="headerlink" title="Excel移动列"></a>Excel移动列</h5><p>选中列，按住shift键，当鼠标变成十字型时候，可以拖拽到任意指定列</p>
+</li>
+<li><h5 id="Win10设置右键打开cmd"><a href="#Win10设置右键打开cmd" class="headerlink" title="Win10设置右键打开cmd"></a>Win10设置右键打开cmd</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mooneve/article/details/78821843">https://blog.csdn.net/mooneve/article/details/78821843</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hiudawn/article/details/80701935">https://blog.csdn.net/hiudawn/article/details/80701935</a></p>
+</li>
+<li><h5 id="ffmpeg提取字幕流"><a href="#ffmpeg提取字幕流" class="headerlink" title="ffmpeg提取字幕流"></a>ffmpeg提取字幕流</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;原始文本输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br><span class="line">ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt</span><br><span class="line">&#x2F;&#x2F;ass格式输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="Windows自带MD5、SHA1、SHA256命令"><a href="#Windows自带MD5、SHA1、SHA256命令" class="headerlink" title="Windows自带MD5、SHA1、SHA256命令"></a>Windows自带MD5、SHA1、SHA256命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line">certutil -hashfile  3.mp4 SHA256</span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="ffmpeg合并音频和视频"><a href="#ffmpeg合并音频和视频" class="headerlink" title="ffmpeg合并音频和视频"></a>ffmpeg合并音频和视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav  -c:v copy -c:a aac -strict experimental output.mp4</span><br></pre></td></tr></table></figure>
+
+<p>复制音频而无需重新编码，如果您的输出容器可以（几乎）处理任何编解码器（例如MKV），那么您只需复制音频和视频流即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<hr>
+ <center><font color=blue size=20>Mac下使用技巧记录</font></center>
+
+
+
+<ul>
+<li><h5 id="显示隐藏文件-文件夹"><a href="#显示隐藏文件-文件夹" class="headerlink" title="显示隐藏文件/文件夹"></a>显示隐藏文件/文件夹</h5><p>Command+Shift+. 可以显示隐藏文件、文件夹，再按一次，恢复隐藏；</p>
+</li>
+<li><h5 id="修改文件默认打开方式"><a href="#修改文件默认打开方式" class="headerlink" title="修改文件默认打开方式"></a>修改文件默认打开方式</h5><p>显示简介-&gt;打开方式-&gt;全部更改</p>
+</li>
+<li><h5 id="brew切换为国内源"><a href="#brew切换为国内源" class="headerlink" title="brew切换为国内源"></a>brew切换为国内源</h5><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1614039">https://cloud.tencent.com/developer/article/1614039</a></p>
+</li>
+<li><h5 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h5><p>关闭/退出应用 Command + Q<br>Mac 自带屏幕截图 Command + Shift + 5</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag"># 技巧</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="prev" title="设计模式">
+      <i class="fa fa-chevron-left"></i> 设计模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/" rel="next" title="观看电影记录">
+      观看电影记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Excel%E7%A7%BB%E5%8A%A8%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">Excel移动列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Win10%E8%AE%BE%E7%BD%AE%E5%8F%B3%E9%94%AE%E6%89%93%E5%BC%80cmd"><span class="nav-number">2.</span> <span class="nav-text">Win10设置右键打开cmd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ffmpeg%E6%8F%90%E5%8F%96%E5%AD%97%E5%B9%95%E6%B5%81"><span class="nav-number">3.</span> <span class="nav-text">ffmpeg提取字幕流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Windows%E8%87%AA%E5%B8%A6MD5%E3%80%81SHA1%E3%80%81SHA256%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">Windows自带MD5、SHA1、SHA256命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ffmpeg%E5%90%88%E5%B9%B6%E9%9F%B3%E9%A2%91%E5%92%8C%E8%A7%86%E9%A2%91"><span class="nav-number">5.</span> <span class="nav-text">ffmpeg合并音频和视频</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E9%9A%90%E8%97%8F%E6%96%87%E4%BB%B6-%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">6.</span> <span class="nav-text">显示隐藏文件&#x2F;文件夹</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E9%BB%98%E8%AE%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">修改文件默认打开方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#brew%E5%88%87%E6%8D%A2%E4%B8%BA%E5%9B%BD%E5%86%85%E6%BA%90"><span class="nav-number">8.</span> <span class="nav-text">brew切换为国内源</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">9.</span> <span class="nav-text">快捷键</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xtvj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-xtvj"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xtvj</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"zeDT3l0ztzwlk0wPL25byWOQ-gzGzoHsz","app_key":"s3WLoCqJNVvpt8MictofXBIW","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

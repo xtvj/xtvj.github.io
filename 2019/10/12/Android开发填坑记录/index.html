@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1person -&gt; person.getName();  可以替换成 1Person::getName  表达式 1() -&gt; new HashMap&lt;&gt;();  可以替换成 1HashMap::new  这种[方法引用]或者说[双冒号运算]对应的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发填坑记录">
+<meta property="og:url" content="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="XTVJ">
+<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1person -&gt; person.getName();  可以替换成 1Person::getName  表达式 1() -&gt; new HashMap&lt;&gt;();  可以替换成 1HashMap::new  这种[方法引用]或者说[双冒号运算]对应的">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-10-12T14:31:45.000Z">
+<meta property="article:modified_time" content="2020-08-24T21:55:44.000Z">
+<meta property="article:author" content="xtvj">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Android开发填坑记录 | XTVJ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">XTVJ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android开发填坑记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-10-12 22:31:45" itemprop="dateCreated datePublished" datetime="2019-10-12T22:31:45+08:00">2019-10-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-25 05:55:44" itemprop="dateModified" datetime="2020-08-25T05:55:44+08:00">2020-08-25</time>
+              </span>
+
+          
+            <span id="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="Android开发填坑记录" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>双冒号运算</strong>就是Java中的[方法引用],[方法引用]的格式是 <strong>类名::方法名。</strong></p>
+<p>一般是用作Lambda表达式</p>
+<p><strong>例如</strong></p>
+<p>表达式:</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person -&gt; person.getName();</span><br></pre></td></tr></table></figure>
+
+<p>可以替换成</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person::getName</span><br></pre></td></tr></table></figure>
+
+<p>表达式</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() -&gt; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>可以替换成</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashMap::new</span><br></pre></td></tr></table></figure>
+
+<p>这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。</p>
+<hr>
+<p><strong>Android studio快捷键</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>按键</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shift + F2</td>
+<td>定位到错误行</td>
+</tr>
+<tr>
+<td>Ctrl(Command)+Shift+ - / +</td>
+<td>折叠/展开全部代码</td>
+</tr>
+<tr>
+<td>Ctrl(Command)+F12</td>
+<td>显示当前文件的结构</td>
+</tr>
+<tr>
+<td>Shift + F11</td>
+<td>查看书签</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>添加书签</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + M</td>
+<td>快速抽取方法</td>
+</tr>
+</tbody></table>
+<hr>
+<p>一、启动app adb shell am start 包名/MainActivity </p>
+<p>二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据</p>
+<p>adb shell pm clear com.xxx.xxx 这种方法不仅会停止APP进程，而且会清除这个APP进程产生的所有数据</p>
+<hr>
+<p>ffmpeg 卡顿问题</p>
+<p>ffmpeg 转码H.264 High Profile的输入做直播时会有卡顿的现象；而且设定的帧率也达不到； 是因为解码H.264 HP的速度达不到造成的。 将编译时的“–disable-optimizations”去掉就可以了；</p>
+<hr>
+<p>使用Properties做本地储存时，读取的中文为乱码，可以在android studio中进入File &gt; Settings &gt; Editor &gt; File Encodings 里Project Encoding（如果右下角<Transparent native-to-ascii conversion >为打对勾，则需要勾选上）</p>
+<hr>
+<p>指定device来执行adb shell</p>
+<p> adb -s devicename shell</p>
+<hr>
+<p>AtomicBoolean是java.util.concurrent.atomic包下的原子变量，这个包里面提供了一组原子类。其基本的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成。</p>
+<p>CAS，在Java并发应用中通常指CompareAndSwap或CompareAndSet，即比较并交换。CAS是一个原子操作，它比较一个内存位置的值并且只有相等时修改这个内存位置的值为新的值，保证了新的值总是基于最新的信息计算的，如果有其他线程在这期间修改了这个值则CAS失败。CAS返回是否成功或者内存位置原来的值用于判断是否CAS成功。</p>
+<p>可以粗暴地认为是个线程锁功能。</p>
+<hr>
+<p>Fragment重叠问题</p>
+<p>出现这种问题的原因是：当我们旋转屏幕的时候，activity会被销毁并重新创建，并且在销毁之前执行了onSaveInstanceState(Bundle outState)这个方法。这个方法会保存activity的一些信息，其中就包括添加过的fragment，当activity被重新创建时，会初始化其中的变量，这个时候点击底部导航的话会重新去添加fragment，也就导致了重叠的问题。</p>
+<p>问题重现：手机的 “设置” - “开发者选项” - 打开”不保留活动”(主要用于模拟Activity被及时回收) 。</p>
+<p>解决方法：</p>
+<p>一、通过注释掉这句话，这样主 Activity 因为种种原因被回收的时候就不会保存之前的 fragment state</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protectedvoidonSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">&#x2F;&#x2F;如果用以下这种做法则不保存状态，再次进来的话会显示默认tab</span><br><span class="line">&#x2F;&#x2F;总是执行这句代码来调用父类去保存视图层的状态</span><br><span class="line">&#x2F;&#x2F;super.onSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>二、阻止系统恢复Fragment state，在FragmentActivity保存所有Fragment状态前把Fragment从FragmentManager中移除掉。（不可取，开启新的Activity也可能触发onSaveInstanceState,如果没判空就会崩溃，判空的话，返回这个界面，就是空白，因为Fragment全部被移除了。除非自行判空，没验证。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       FragmentTransaction transaction &#x3D; fm.beginTransaction();</span><br><span class="line">       transaction.remove(tab1);</span><br><span class="line">       transaction.remove(tab2);</span><br><span class="line">       transaction.remove(tab3);</span><br><span class="line">       transaction.remove(tab4);</span><br><span class="line">       transaction.commitAllowingStateLoss();</span><br><span class="line">       super.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>三、在onSaveInstanceState(outState)中去保存fragment，当activity被恢复时，取出这些fragment即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;onCreate方法中</span><br><span class="line">if (savedInstanceState !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;*获取保存的fragment  没有的话返回null*&#x2F;</span><br><span class="line">            homeFragment &#x3D; (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);</span><br><span class="line">            dashboardFragment &#x3D; (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);</span><br><span class="line">            noticeFragment &#x3D; (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);</span><br><span class="line">            addToList(homeFragment);</span><br><span class="line">            addToList(dashboardFragment);</span><br><span class="line">            addToList(noticeFragment);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            initFragment();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>让APP重启自己的两种方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;重启应用</span><br><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">       &#x2F;&#x2F;重启应用，得使用PendingIntent</span><br><span class="line">       PendingIntent restartIntent &#x3D; PendingIntent.getActivity(</span><br><span class="line">               getApplicationContext(), 0, intent,</span><br><span class="line">               PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">       &#x2F;&#x2F;退出程序</span><br><span class="line">       AlarmManager mAlarmManager &#x3D; (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line">       mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,</span><br><span class="line">               restartIntent); &#x2F;&#x2F; 100毫秒后重启应用</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<p>  Android 设置Edittext获取焦点并弹出软键盘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">editText.setFocusable(true);</span><br><span class="line">      editText.setFocusableInTouchMode(true);</span><br><span class="line">      editText.requestFocus();</span><br><span class="line">      &#x2F;&#x2F;显示软键盘</span><br><span class="line">  activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);</span><br><span class="line">      &#x2F;&#x2F;如果上面的代码没有弹出软键盘 可以使用下面另一种方式</span><br><span class="line">      &#x2F;&#x2F;InputMethodManager imm &#x3D; (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">     &#x2F;&#x2F; imm.showSoftInput(editText, 0); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>用命令行新建指定大小的文件</p>
+<p>在Linux环境下的实现方法</p>
+<p>  使用dd命令：功能是复制文件，并且可以通过选项指定复制方式。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;test.txt bs&#x3D;32 count&#x3D;32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>（源文件是/dev/zero，目标文件是test.txt，也就是需要生成的文件。复制生成文件大小的是32*32=1024字节）</p>
+<p>在Windows环境下的实现方法</p>
+<p>  使用fsutil命令，在windows xp和win 7下应该都自带了这个命令。命令的格式是 fsutil file createnew 新文件名 文件大小。例如生成一个1K大小的文件，可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fsutil file createnew test.txt 1024</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>在activity中调用 moveTaskToBack (boolean nonRoot)方法即可将activity 退到后台，注意不是finish()退出。<br>参数为false代表只有当前activity是task根，指应用启动的第一个activity时，才有效;<br>如果为true则忽略这个限制，任何activity都可以有效。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;android 应用退到后台，类似最小化</span><br><span class="line">moveTaskToBack(true);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>ANR分析办法之一：traces.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb pull &#x2F;data&#x2F;anr&#x2F;traces.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在文件中使用 ctrl + F 查找包名可以快速定位相关代码。<br>通过log可以看出相关问题<br>产生新的ANR，原来的 traces.txt 文件会被覆盖</p>
+<hr>
+<p>BottomNavigationView切换时不显示图标颜色，需要取消导航栏图标着色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">navigation.setItemIconTintList(null);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p> <strong>JNI 数据类型映射</strong></p>
+<ul>
+<li>基本数据类型：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>本地类型（Native Type）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>boolean</td>
+<td>jboolean</td>
+<td>C/C++无符号8位整型 （unsigned char）</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>jbyte</td>
+<td>C/C++带符号8位整型 （char）</td>
+</tr>
+<tr>
+<td>char</td>
+<td>jchar</td>
+<td>C/C+无符号16位整型 （unsigned short）</td>
+</tr>
+<tr>
+<td>short</td>
+<td>jshort</td>
+<td>C/C++带符号16位整型 （short）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>jint</td>
+<td>C/C++带符号32位整型 （int）</td>
+</tr>
+<tr>
+<td>long</td>
+<td>jlong</td>
+<td>C/C++带符号64位整型 （long）</td>
+</tr>
+<tr>
+<td>float</td>
+<td>jfloat</td>
+<td>C/C++32位浮点型 （float）</td>
+</tr>
+<tr>
+<td>double</td>
+<td>jdouble</td>
+<td>C/C++64位浮点型 （double）</td>
+</tr>
+</tbody></table>
+<p>基本数据类型的映射即在Java的基本数据类型前面添加 j 就是本地类型的基本数据类型</p>
+<ul>
+<li>引用数据类型：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>本地类型（Native Type）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Object</td>
+<td>jobject</td>
+<td>任何java对象</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>jclass</td>
+<td>Class类对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>jstring</td>
+<td>字符串对象</td>
+</tr>
+<tr>
+<td>Object[]</td>
+<td>jobjectArray</td>
+<td>任何对象的数组</td>
+</tr>
+<tr>
+<td>boolean[]</td>
+<td>jbooleanArray</td>
+<td>布尔型数组</td>
+</tr>
+<tr>
+<td>byte[]</td>
+<td>jbyteArray</td>
+<td>比特型数组</td>
+</tr>
+<tr>
+<td>char[]</td>
+<td>jcahrArray</td>
+<td>字符型数组</td>
+</tr>
+<tr>
+<td>short[]</td>
+<td>jshortArray</td>
+<td>短整型数组</td>
+</tr>
+<tr>
+<td>int[]</td>
+<td>jintArray</td>
+<td>整型数组</td>
+</tr>
+<tr>
+<td>long[]</td>
+<td>jlongArray</td>
+<td>长整形数组</td>
+</tr>
+<tr>
+<td>float[]</td>
+<td>jfloatArray</td>
+<td>浮点型数组</td>
+</tr>
+<tr>
+<td>double[]</td>
+<td>jdoubleArray</td>
+<td>双浮点型数组</td>
+</tr>
+<tr>
+<td>void</td>
+<td>void</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<p>沉浸式状态栏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">	&#x2F;*</span><br><span class="line">    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static void setStatusBar(Activity context) &#123;</span><br><span class="line">        View decorView &#x3D; context.getWindow().getDecorView();</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        decorView.setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置白色状态栏 color用R.color.***</span><br><span class="line">    public static void setWhiteStatusBar(Activity context,int color) &#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_IMMERSIVE</span><br><span class="line">                | View.SYSTEM_UI_FLAG_VISIBLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        if (Build.VERSION.SDK_INT &gt;&#x3D; Build.VERSION_CODES.M) &#123;</span><br><span class="line">            context.getWindow().setStatusBarColor(context.getColor(color));</span><br><span class="line">context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置暗色状态栏</span><br><span class="line">    public static void setDarkStatusBar(Activity context)&#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>P版本应用在sd卡根目录(getExternalCacheDir)保存的应用数据卸载时不会被清除，但是Q版本这部分数据实际保存的是应用的沙箱目录 下，卸载的时候回全部被清除；应用如果不想卸载的时候被删除数据，需要应用在manifest文件增加:，这样卸载应用的时候，系统弹出的对话框中才会有第二个勾选框出现(不增加该属性是不会有第二个勾选出现)，默认删除，勾选保留。</p>
+<hr>
+<p> 拍照、选择图片 适配7.0以上，从 Android 7.0 开始，禁止在您的应用外部公开 file:// URI</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;&#x2F;指定Uri，拍照返回的data为空</span><br><span class="line">String tempImagePath &#x3D; getFilesDir().getPath();</span><br><span class="line">tempImageFile &#x3D; File.createTempFile(&quot;image_&quot;, &quot;.jpg&quot;, new File(tempImagePath));</span><br><span class="line">Intent intent &#x3D; new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;&#x3D; 24) &#123;</span><br><span class="line">  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT,</span><br><span class="line">  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,</span><br><span class="line">                                        &quot;com.huangyuanlove.adaptationhighversion.fileprovider&quot;, tempImageFile));</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));</span><br><span class="line">&#125;</span><br><span class="line">startActivityForResult(intent, TAKE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>当拍照返回之后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitmap &#x3D; BitmapFactory.decodeFile(tempImageFile.getPath());</span><br><span class="line">showImage.setImageBitmap(bitmap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>选择图片的时候：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent albumIntent &#x3D; new Intent(Intent.ACTION_PICK);</span><br><span class="line">albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &quot;image&#x2F;*&quot;);</span><br><span class="line">startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>选择图片返回的时候</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (data !&#x3D; null) &#123;</span><br><span class="line">  Uri selectedImage &#x3D; data.getData();</span><br><span class="line">  String[] filePathColumn &#x3D; &#123;MediaStore.Images.Media.DATA&#125;;</span><br><span class="line">  Cursor cursor &#x3D; getContentResolver().query(selectedImage,</span><br><span class="line">                                             filePathColumn, null, null, null);</span><br><span class="line">  cursor.moveToFirst();</span><br><span class="line">  int columnIndex &#x3D; cursor.getColumnIndex(filePathColumn[0]);</span><br><span class="line">  String picturePath &#x3D; cursor.getString(columnIndex);</span><br><span class="line">  cursor.close();</span><br><span class="line">  bitmap &#x3D; BitmapFactory.decodeFile(picturePath);</span><br><span class="line">  showImage.setImageBitmap(bitmap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>自定义View</p>
+<p><a target="_blank" rel="noopener" href="https://www.gcssloop.com/category/customview">https://www.gcssloop.com/category/customview</a></p>
+<hr>
+<p>google flexboxlayout</p>
+<p>layout_wrapBefore：这个属性使得子 View 可以强制换行，该属性在 flex_wrap 属性值 为 nowrap（不换行）的时候是无效的。 该属性结束 boolean 变量，默认 false，即不强制换行。</p>
+<p>layout_flexGrow：这个属性类似于 LinearLayout 中的 layout_weight 属性，如果没有指定，则将 0 设置为默认值。如果果同一 flex 行中的多个子 View 有正的 layout_flexGrow 值，那么剩余的空闲空间将根据它们声明的 layout_flexGrow 值的比例分布。</p>
+<hr>
+<p>ROOM数据库使用填坑</p>
+<p>引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;Room数据库</span><br><span class="line">implementation &quot;androidx.room:room-runtime:2.2.0-alpha01&quot;</span><br><span class="line">annotationProcessor &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果多加一行implementation “androidx.room:room-compiler:2.2.0-alpha01”，会导致项目中多出很多没用的libs，包括com.ibm.icu:icu4j等，可能使得apk整整多出15M没用的文件。</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wangliblog/article/details/56834439">让APK只包含指定平台的so库（abi）</a></p>
+<p>第一种：对每个要生成的渠道包进行分别配置（在app下的build.gradle文件中配置）<br>第二种：全局配置（这种需求比较多，同样是在app下的build.gradle下配置）</p>
+<hr>
+<p>PriorityBlockingQueue：</p>
+<p>PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.util.PriorityQueue 一样的排序规则。你无法向这个队列中插入 null 值。所有插入到 PriorityBlockingQueue 的元素必须实现 java.lang.Comparable 接口。因此该队列中元素的排序就取决于你自己的 Comparable 实现</p>
+<hr>
+<p>使用SparseArray和ArrayMap代替HashMap</p>
+<p>1、如果key的类型已经确定为int类型，那么使用SparseArray，因为它避免了自动装箱的过程，如果key为long类型，它还提供了一个LongSparseArray来确保key为long类型时的使用</p>
+<p>2、如果key类型为其它的类型，则可使用ArrayMap</p>
+<p>如果我们要兼容aip19以下版本的话，那么导入的包需要为v4包</p>
+<hr>
+<p>通过以下代码可以列出设备底层支持的编码格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MediaCodecList codecList &#x3D; new MediaCodecList(MediaCodecList.ALL_CODECS);</span><br><span class="line">for (int i &#x3D; 0; i &lt; codecList.getCodecInfos().length; i++) &#123;  </span><br><span class="line">	Log.d(TAG, &quot;编解码器: &quot; + codecList.getCodecInfos()[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>如果遇到硬编H264等一些视频编码时，编出来的数据显示正常，但晃动摄像头时数据量变大，带宽占用很高，设置低一点的码率也不起作用时。很可能是系统的编码器支持的不够好，可用上面的方式获取系统支持的编解码器有哪些，在new MediaCodec的时候使用MediaCodec.createByCodecName(“OMX.google.h264.encoder”)等一些固定的编解码器，再查看效果。(OMX.google.h264.encoder为软编)</p>
+<hr>
+<p>getChildFragmentManager()是fragment中的方法， 返回的是管理当前fragment内部子fragments的manager。<br>getFragmentManager()在activity和fragment中都有。getChildFragmentManager在fragment内嵌套fragment时使用。</p>
+<hr>
+<p>DataBinding中notifyPropertyChanged(int *)只会更新一个字段的数据，notifyChange()会更新所有字段数据。<br>DataBinding资源引用只限于控件本身，比如button的paddingLeft里可以用三元表达，因为paddingLeft是控件自带的，但是margin就不行，因为margin是控件组里的属性，不能使用dataBinding的功能，不然会报找不到ActivityBindingBindingImpl的错。</p>
+<hr>
+<p>int默认值是0，Integer默认值是null。int是基本类型，Integer是引用类型。Integer范围是-128~127  int的范围是 -$$2^{31}$$ ~$$2^{31}$$ -1。</p>
+<hr>
+<p>Fork/Join 框架是java7中加入的一个并行任务框架，可以将任务分割成足够小的小任务，然后让不同的线程来做这些分割出来的小事情，然后完成之后再进行join，将小任务的结果组装成大任务的结果。 </p>
+<p>例如求一个文件夹的大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line">        final File file;</span><br><span class="line">        public FileSizeFinder(final File theFile) &#123;</span><br><span class="line">            file &#x3D; theFile;</span><br><span class="line">        &#125;</span><br><span class="line">        @Override</span><br><span class="line">        public Long compute() &#123;</span><br><span class="line">            long size &#x3D; 0;</span><br><span class="line">            if (file.isFile()) &#123;</span><br><span class="line">                size &#x3D; file.length();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                final File[] children &#x3D; file.listFiles();</span><br><span class="line">                if (children !&#x3D; null) &#123;</span><br><span class="line">                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks &#x3D; new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();</span><br><span class="line">                    for (final File child : children) &#123;</span><br><span class="line">                        if (child.isFile()) &#123;</span><br><span class="line">                            size +&#x3D; child.length();</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            tasks.add(new FileSizeFinder(child));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) &#123;</span><br><span class="line">                        size +&#x3D; task.join();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return size;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    long size &#x3D; new ForkJoinPool().invoke(new FileSizeFinder(new File(&quot;&#x2F;home&quot;)));</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>Netty拆包：LengthFieldBasedFrameDecoder的使用</p>
+<p>发送数据包长度 = 长度域的值 + lengthFieldOffset + lengthFieldLength + lengthAdjustment </p>
+<p>lengthAdjustment： 长度域的值的补偿，长度域的值加上这个值之后的值是这个长度域后面还需要读取的字节数</p>
+<p>使用LengthFieldBasedFrameDecoder时注意设置ByteOrder.LITTLE_ENDIAN或ByteOrder BIG_ENDIAN（默认值）</p>
+<hr>
+<p>在ConstraintLayout中设置控件的宽高时，尽量不在比例前加W或H，这样可以在横竖屏下都可以在屏内保持宽高比，不然控件边界可能会超出屏幕。</p>
+<hr>
+<p>Android Studio 在WiFi中启用adb工具</p>
+<p>adb tcpip 5555 //端口<br>adb connect 192.168.1.1 //手机本地IP地址</p>
+<p>在Android Studio中的Terminal里输入即可。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" rel="prev" title="不Root手机禁用系统应用">
+      <i class="fa fa-chevron-left"></i> 不Root手机禁用系统应用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="next" title="设计模式">
+      设计模式 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xtvj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-xtvj"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xtvj</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"zeDT3l0ztzwlk0wPL25byWOQ-gzGzoHsz","app_key":"s3WLoCqJNVvpt8MictofXBIW","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

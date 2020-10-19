@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="RecyclerViewRecyclerView局部刷新闪烁问题在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法在更新局部数据的时候用notifyItemChanged(position, poyload：1);参考：http:&#x2F;&#x2F;wetest.qq.com&#x2F;lab&#x2F;view&#x2F;176.html FragmentFrag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="温习知识点记录">
+<meta property="og:url" content="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="XTVJ">
+<meta property="og:description" content="RecyclerViewRecyclerView局部刷新闪烁问题在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法在更新局部数据的时候用notifyItemChanged(position, poyload：1);参考：http:&#x2F;&#x2F;wetest.qq.com&#x2F;lab&#x2F;view&#x2F;176.html FragmentFrag">
+<meta property="og:locale">
+<meta property="og:image" content="https://xtvj.github.io/images/img.jpg">
+<meta property="article:published_time" content="2018-06-23T10:30:55.000Z">
+<meta property="article:modified_time" content="2020-07-17T19:46:18.000Z">
+<meta property="article:author" content="xtvj">
+<meta property="article:tag" content="android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xtvj.github.io/images/img.jpg">
+
+<link rel="canonical" href="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>温习知识点记录 | XTVJ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">XTVJ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          温习知识点记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-23 18:30:55" itemprop="dateCreated datePublished" datetime="2018-06-23T18:30:55+08:00">2018-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-18 03:46:18" itemprop="dateModified" datetime="2020-07-18T03:46:18+08:00">2020-07-18</time>
+              </span>
+
+          
+            <span id="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="温习知识点记录" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h1><h6 id="RecyclerView局部刷新闪烁问题"><a href="#RecyclerView局部刷新闪烁问题" class="headerlink" title="RecyclerView局部刷新闪烁问题"></a>RecyclerView局部刷新闪烁问题</h6><p>在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法<br>在更新局部数据的时候用notifyItemChanged(position, poyload：1);<br>参考：<a target="_blank" rel="noopener" href="http://wetest.qq.com/lab/view/176.html">http://wetest.qq.com/lab/view/176.html</a></p>
+<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><h6 id="FragmentPageAdapter和FragmentPageStateAdapter的区别"><a href="#FragmentPageAdapter和FragmentPageStateAdapter的区别" class="headerlink" title="FragmentPageAdapter和FragmentPageStateAdapter的区别"></a>FragmentPageAdapter和FragmentPageStateAdapter的区别</h6><p>FragmentPageAdapter在每次切换页面的的时候，是将Fragment进行分离，适合页面较少的Fragment使用以保存一些内存，对系统内存不会多大影响<br>FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收，适合页面较多的Fragment使用，这样就不会消耗更多的内存</p>
+<h1 id="SharedPreferences"><a href="#SharedPreferences" class="headerlink" title="SharedPreferences"></a>SharedPreferences</h1><p>getStringSet的返回值不能直接修改<br>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7a880ec4ae52">https://www.jianshu.com/p/7a880ec4ae52</a>    </p>
+<h1 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h1><p>相对于子布局Cl与Rl属性对照</p>
+<table>
+<thead>
+<tr>
+<th>CL属性</th>
+<th>RL属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout_constraintLeft_toLeftOf</td>
+<td>layout_alignLeft</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toRightOf</td>
+<td>layout_toRightOf</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toLeftOf</td>
+<td>layout_toLeftOf</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toRightOf</td>
+<td>layout_alignRight</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toTopOf</td>
+<td>layout_alignTop</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toBottomOf</td>
+<td>layout_below</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toTopOf</td>
+<td>layout_above</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toBottomOf</td>
+<td>layout_alignBottom</td>
+</tr>
+<tr>
+<td>layout_constraintBaseline_toBaselineOf</td>
+<td>layout_alignBaseline</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toEndOf</td>
+<td>layout_toEndOf (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toStartOf</td>
+<td>layout_alignStart (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toStartOf</td>
+<td>layout_toStartOf (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toEndOf</td>
+<td>layout_alignEnd (API 17)</td>
+</tr>
+</tbody></table>
+<p>相对于父布局Cl与Rl属性对照</p>
+<table>
+<thead>
+<tr>
+<th>CL属性</th>
+<th>RL属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout_constraintTop_toTopOf=”parent”</td>
+<td>layout_alignParentTop=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_alignParentBottom=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent”</td>
+<td>layout_alignParentLeft=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toRightOf=”parent”</td>
+<td>layout_alignParentRight=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toStartOf=”parent”</td>
+<td>layout_alignParentStart=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toEndOf=”parent”</td>
+<td>layout_alignParentEnd=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent”</td>
+<td>layout_centerHorizontal=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_centerVertical=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent” layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_centerInParent=”true”</td>
+</tr>
+</tbody></table>
+<p>在设置了各类居中属性的基础上，通过layout_constraintHorizontal_bias和layout_constraintVertical_bias两个属性，可以简单直观的完成间距比例的设置。</p>
+<p>chain是CL中新加入的控件与控件间的关系。组成chain的多个控件，可以在同一方向上更加方便的完成复杂的布局要求</p>
+<p><img src="https://xtvj.github.io/images/img.jpg" alt="img"></p>
+<h1 id="RelativeLayout"><a href="#RelativeLayout" class="headerlink" title="RelativeLayout"></a>RelativeLayout</h1><p>经常会有同学在RelativeLayout中使用include标签<br>但是却发现include进来的控件无法用layout_alignParentBottom=”true”之类的标签来调整。这个真的非常恼火。其实解决方法非常简单，只要你在include的时候同时重载下layout_width和layout_height这两个标签就可以了。如果不重载，任何针对include的layout调整都是无效的！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/android/" rel="tag"># android</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" rel="prev" title="记录文摘">
+      <i class="fa fa-chevron-left"></i> 记录文摘
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" rel="next" title="不Root手机禁用系统应用">
+      不Root手机禁用系统应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RecyclerView"><span class="nav-number">1.</span> <span class="nav-text">RecyclerView</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#RecyclerView%E5%B1%80%E9%83%A8%E5%88%B7%E6%96%B0%E9%97%AA%E7%83%81%E9%97%AE%E9%A2%98"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">RecyclerView局部刷新闪烁问题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fragment"><span class="nav-number">2.</span> <span class="nav-text">Fragment</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#FragmentPageAdapter%E5%92%8CFragmentPageStateAdapter%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.0.0.0.0.1.</span> <span class="nav-text">FragmentPageAdapter和FragmentPageStateAdapter的区别</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SharedPreferences"><span class="nav-number">3.</span> <span class="nav-text">SharedPreferences</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ConstraintLayout"><span class="nav-number">4.</span> <span class="nav-text">ConstraintLayout</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RelativeLayout"><span class="nav-number">5.</span> <span class="nav-text">RelativeLayout</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xtvj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-xtvj"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xtvj</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"zeDT3l0ztzwlk0wPL25byWOQ-gzGzoHsz","app_key":"s3WLoCqJNVvpt8MictofXBIW","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

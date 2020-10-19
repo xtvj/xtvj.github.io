@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。 手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。执行以下命令（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不Root手机禁用系统应用">
+<meta property="og:url" content="https://xtvj.github.io/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="XTVJ">
+<meta property="og:description" content="用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。 手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。执行以下命令（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-06-27T12:23:52.000Z">
+<meta property="article:modified_time" content="2019-03-23T09:24:38.000Z">
+<meta property="article:author" content="xtvj">
+<meta property="article:tag" content="Root">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://xtvj.github.io/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>不Root手机禁用系统应用 | XTVJ</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">XTVJ</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          不Root手机禁用系统应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-27 20:23:52" itemprop="dateCreated datePublished" datetime="2018-06-27T20:23:52+08:00">2018-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-03-23 17:24:38" itemprop="dateModified" datetime="2019-03-23T17:24:38+08:00">2019-03-23</time>
+              </span>
+
+          
+            <span id="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="不Root手机禁用系统应用" title="Views">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。</p>
+<p>手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。<br>执行以下命令<br>（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">pm disable-user com.mobeam.barcodeService</span><br><span class="line">pm disable-user com.sec.android.widgetapp.samsungapps</span><br><span class="line">pm disable-user com.samsung.android.app.galaxyfinder</span><br><span class="line">pm disable-user com.samsung.android.themestore</span><br><span class="line">pm disable-user com.samsung.android.app.cocktailbarservice</span><br><span class="line">pm disable-user com.samsung.svoice.sync</span><br><span class="line">pm disable-user com.osp.app.signin</span><br><span class="line">pm disable-user com.google.android.onetimeinitializer</span><br><span class="line">pm disable-user com.google.android.ext.shared</span><br><span class="line">pm disable-user com.android.wallpapercropper</span><br><span class="line">pm disable-user com.samsung.android.app.withtv</span><br><span class="line">pm disable-user com.samsung.android.smartmirroring</span><br><span class="line">pm disable-user org.simalliance.openmobileapi.service</span><br><span class="line">pm disable-user com.samsung.android.easysetup</span><br><span class="line">pm disable-user com.sec.android.easyonehand</span><br><span class="line">pm disable-user com.sec.factory</span><br><span class="line">pm disable-user com.samsung.android.app.sbrowseredge</span><br><span class="line">pm disable-user com.samsung.android.wechatwifiservice</span><br><span class="line">pm disable-user com.sec.android.easyMover.Agent</span><br><span class="line">pm disable-user com.samsung.faceservice</span><br><span class="line">pm disable-user com.sec.android.widgetapp.easymodecontactswidget</span><br><span class="line">pm disable-user com.sec.android.app.samsungapps</span><br><span class="line">pm disable-user com.oupeng.max.sdk</span><br><span class="line">pm disable-user com.google.android.configupdater</span><br><span class="line">pm disable-user com.sec.android.app.billing</span><br><span class="line">pm disable-user com.sec.android.daemonapp</span><br><span class="line">pm disable-user com.sec.sve</span><br><span class="line">pm disable-user com.dsi.ant.service.socket</span><br><span class="line">pm disable-user com.sec.android.AutoPreconfig</span><br><span class="line">pm disable-user com.sec.android.app.soundalive</span><br><span class="line">pm disable-user com.samsung.android.securitylogagent</span><br><span class="line">pm disable-user com.samsung.SMT</span><br><span class="line">pm disable-user com.samsung.android.drivelink.stub</span><br><span class="line">pm disable-user com.samsung.hongbaoassistant</span><br><span class="line">pm disable-user com.dsi.ant.sample.acquirechannels</span><br><span class="line">pm disable-user com.android.backupconfirm</span><br><span class="line">pm disable-user com.sec.android.app.SecSetupWizard</span><br><span class="line">pm disable-user com.sec.bcservice</span><br><span class="line">pm disable-user com.sec.android.uibcvirtualsoftkey</span><br><span class="line">pm disable-user com.samsung.android.sdk.professionalaudio.utility.jammonitor</span><br><span class="line">pm disable-user com.android.sharedstoragebackup</span><br><span class="line">pm disable-user com.android.printspooler</span><br><span class="line">pm disable-user com.samsung.android.hmt.vrsvc</span><br><span class="line">pm disable-user com.samsung.storyservice</span><br><span class="line">pm disable-user com.android.dreams.basic</span><br><span class="line">pm disable-user com.sec.android.app.dictionary</span><br><span class="line">pm disable-user com.samsung.android.app.talkback</span><br><span class="line">pm disable-user com.android.bips</span><br><span class="line">pm disable-user com.samsung.android.game.gametools</span><br><span class="line">pm disable-user com.samsung.android.app.simplesharing</span><br><span class="line">pm disable-user com.samsung.android.service.peoplestripe</span><br><span class="line">pm disable-user com.samsung.app.slowmotion</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.vpn</span><br><span class="line">pm disable-user com.samsung.android.weather</span><br><span class="line">pm disable-user com.dsi.ant.plugins.antplus</span><br><span class="line">pm disable-user com.samsung.android.personalpage.service</span><br><span class="line">pm disable-user com.samsung.android.app.taskedge</span><br><span class="line">pm disable-user com.samsung.advp.imssettings</span><br><span class="line">pm disable-user com.sec.android.inputmethod</span><br><span class="line">pm disable-user com.samsung.android.app.advsounddetector</span><br><span class="line">pm disable-user com.samsung.android.app.mirrorlink</span><br><span class="line">pm disable-user com.samsung.android.opencalendar</span><br><span class="line">pm disable-user com.samsung.android.sm</span><br><span class="line">pm disable-user com.google.android.partnersetup</span><br><span class="line">pm disable-user com.sec.android.diagmonagent</span><br><span class="line">pm disable-user com.trustonic.tuiservice</span><br><span class="line">pm disable-user com.samsung.hidden.china</span><br><span class="line">pm disable-user com.sec.spp.push</span><br><span class="line">pm disable-user com.dsi.ant.server</span><br><span class="line">pm disable-user com.sec.android.app.myfiles</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.fileshare</span><br><span class="line">pm disable-user com.sec.android.app.apex</span><br><span class="line">pm disable-user com.google.android.syncadapters.calendar</span><br><span class="line">pm disable-user com.sec.android.app.sbrowser</span><br><span class="line">pm disable-user com.android.dreams.phototable</span><br><span class="line">pm disable-user com.sec.android.service.health</span><br><span class="line">pm disable-user com.samsung.safetyinformation</span><br><span class="line">pm disable-user com.samsung.app.highlightplayer</span><br><span class="line">pm disable-user com.sec.android.app.vepreload</span><br><span class="line">pm disable-user com.samsung.android.keyguardwallpaperupdator</span><br><span class="line">pm disable-user com.android.wallpaper.livepicker</span><br><span class="line">pm disable-user com.samsung.android.beaconmanager</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.services.simpin</span><br><span class="line">pm disable-user com.android.apps.tag</span><br><span class="line">pm disable-user com.samsung.networkui</span><br><span class="line">pm disable-user com.sec.android.soagent</span><br><span class="line">pm disable-user com.sec.android.app.quicktool</span><br><span class="line">pm disable-user com.samsung.android.fmm</span><br><span class="line">pm disable-user com.samsung.android.mdm</span><br><span class="line">pm disable-user com.baidu.map.location</span><br><span class="line">pm disable-user com.mobilesrepublic.sohu.launcher</span><br><span class="line">pm disable-user com.google.android.backuptransport</span><br><span class="line">pm disable-user com.sec.android.yellowpage</span><br><span class="line">pm disable-user com.samsung.android.scloud</span><br><span class="line">pm disable-user com.sec.app.RilErrorNotifier</span><br><span class="line">pm disable-user com.samsung.android.spayfw</span><br><span class="line">pm disable-user com.samsung.android.svoice</span><br><span class="line">pm disable-user com.android.bookmarkprovider</span><br><span class="line">pm disable-user com.samsung.app.newtrim</span><br><span class="line">pm disable-user com.samsung.android.spay</span><br><span class="line">pm disable-user com.samsung.android.bluelightfilter</span><br><span class="line">pm disable-user com.samsung.android.bbc.bbcagent</span><br><span class="line">pm disable-user com.samsung.android.voicewakeup</span><br><span class="line">pm disable-user com.sec.android.splitsound</span><br><span class="line">pm disable-user com.samsung.android.productsearch</span><br><span class="line">pm disable-user com.wssnps</span><br><span class="line">pm disable-user com.samsung.android.app.watchmanagerstub</span><br><span class="line">pm disable-user com.policydm</span><br><span class="line">pm disable-user com.samsung.android.svoiceime</span><br><span class="line">pm disable-user com.samsung.android.mateagent</span><br><span class="line">pm disable-user com.google.android.apps.pdfviewer</span><br><span class="line">pm disable-user com.samsung.android.widgetapp.briefing</span><br><span class="line">pm disable-user com.android.wallpaperbackup</span><br><span class="line">pm disable-user com.sec.enterprise.knox.cloudmdm.smdms</span><br><span class="line">pm disable-user com.samsung.android.app.camera.sticker.stamp.preload</span><br><span class="line">pm disable-user com.android.emergency</span><br><span class="line">pm disable-user com.sec.svoice.lang.en_US</span><br><span class="line">pm disable-user com.wssyncmldm</span><br><span class="line">pm disable-user com.sec.svoice.lang.zh_CN</span><br><span class="line">pm disable-user com.samsung.android.app.appsedge</span><br><span class="line">pm disable-user com.samsung.voiceserviceplatform</span><br><span class="line">pm disable-user com.samsung.aasaservice</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.mediashare</span><br><span class="line">pm disable-user com.android.bluetooth</span><br><span class="line">pm disable-user com.samsung.android.app.clipboardedge</span><br><span class="line">pm disable-user com.sec.android.app.magnifier</span><br><span class="line">pm disable-user com.sec.android.widgetapp.webmanual</span><br><span class="line">pm disable-user com.samsung.android.coreapps</span><br><span class="line">pm disable-user com.samsung.android.video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果想重新启用某个软件，找到软件的包名，执行“pm enable 包名”就可以启用软件了。<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm enable com.sec.android.inputmethod</span><br></pre></td></tr></table></figure>
+
+<p>把包名换成你想恢复的包名就行了。</p>
+<p>如果你的手机是安卓7.0以前的版本，在禁用手机应用的时候用pm disable，如果是7.0或7.0以上，就用pm disable-user。</p>
+<p>附：ADB和Fastboot for Windows 工具下载<br><a target="_blank" rel="noopener" href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a><br>可以直接解压，在得到的文件夹内按shift+ 右键。选“在此处打开命令窗口”，打开cmd执行代码。<br>也可参考网上的教程：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013250071/article/details/78416274">https://blog.csdn.net/u013250071/article/details/78416274</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/class_brick/article/details/72512982">https://blog.csdn.net/class_brick/article/details/72512982</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Root/" rel="tag"># Root</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" rel="prev" title="温习知识点记录">
+      <i class="fa fa-chevron-left"></i> 温习知识点记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" rel="next" title="Android开发填坑记录">
+      Android开发填坑记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">xtvj</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2016 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-xtvj"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xtvj</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"zeDT3l0ztzwlk0wPL25byWOQ-gzGzoHsz","app_key":"s3WLoCqJNVvpt8MictofXBIW","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
