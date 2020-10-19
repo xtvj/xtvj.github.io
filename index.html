@@ -181,7 +181,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-10-20 02:02:06 / Modified: 02:19:05" itemprop="dateCreated datePublished" datetime="2020-10-20T02:02:06+08:00">2020-10-20</time>
+              <time title="Created: 2020-10-20 02:02:06 / Modified: 02:36:26" itemprop="dateCreated datePublished" datetime="2020-10-20T02:02:06+08:00">2020-10-20</time>
             </span>
 
           
@@ -197,7 +197,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>58</span>
+              <span>521</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -216,7 +216,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>环境：<strong>macOS Catalina</strong> 10.15.4  <strong>hexo</strong> 5.2.0 <strong>hexo-cli</strong> 4.2.0 <strong>Nodejs</strong> 12.19.0</p>
+          <p>环境：<strong>macOS Catalina</strong> 10.15.4  <strong>hexo</strong> 5.2.0 <strong>hexo-cli</strong> 4.2.0 <strong>Nodejs</strong> 12.19.0 <strong>Next</strong> 7.8.0</p>
+<p>由Windows转到Mac后一直用Next3.X版本，并没有更新就一直使用，今天记录终端改造编辑图片时发现有个警告，就修改了下Hexo的配置，折腾起来就换了最新的版本。以前都不记录，到升级的时候发现改的太多，也不知道动了哪些就不敢升了。</p>
+<p>以下记录花费时间才找到方式解决的，对于大部分不用查阅就可修改使用的不作记录。</p>
+<h3 id="1-修改页面宽度"><a href="#1-修改页面宽度" class="headerlink" title="1.修改页面宽度"></a>1.修改页面宽度</h3><p>打开/themes/next/source/css/_variables/base.styl文件，找到Layout sizes字段修改如下</p>
+<figure class="highlight plain"><figcaption><span>Layout sizes</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Layout sizes</span><br><span class="line">&#x2F;&#x2F; --------------------------------------------------</span><br><span class="line">$content-desktop                &#x3D; 82%;&#x2F;&#x2F;修改为占屏幕的82%，原先是固定值</span><br><span class="line">$content-desktop-large          &#x3D; 82%;</span><br><span class="line">$content-desktop-largest        &#x3D; 82%;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1415,13 +1420,13 @@ table th:nth-of-type(7) {
       <i class="fa fa-area-chart"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">36k</span>
+    <span title="Symbols count total">37k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">33 mins.</span>
+    <span title="Reading time total">34 mins.</span>
 </div>
 
 <div>
