@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1person -&gt; person.getName();  可以替换成 1Person::getName  表达式 1() -&gt; new HashMap&lt;&gt;();  可以替换成 1HashMap::new  这种[方法引用]或者说[双冒号运算]对应的">
+  <meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android开发填坑记录">
 <meta property="og:url" content="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="XTVJ">
-<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1person -&gt; person.getName();  可以替换成 1Person::getName  表达式 1() -&gt; new HashMap&lt;&gt;();  可以替换成 1HashMap::new  这种[方法引用]或者说[双冒号运算]对应的">
+<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-10-12T14:31:45.000Z">
 <meta property="article:modified_time" content="2020-08-24T21:55:44.000Z">
@@ -231,16 +231,16 @@
 <p>一般是用作Lambda表达式</p>
 <p><strong>例如</strong></p>
 <p>表达式:</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person -&gt; person.getName();</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">person -&gt; person.getName();</span><br></pre></td></tr></table></figure>
 
 <p>可以替换成</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person::getName</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Person::getName</span><br></pre></td></tr></table></figure>
 
 <p>表达式</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">() -&gt; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">() -&gt; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
 
 <p>可以替换成</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashMap::new</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">HashMap::new</span><br></pre></td></tr></table></figure>
 
 <p>这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。</p>
 <hr>
@@ -299,49 +299,49 @@
 <p>问题重现：手机的 “设置” - “开发者选项” - 打开”不保留活动”(主要用于模拟Activity被及时回收) 。</p>
 <p>解决方法：</p>
 <p>一、通过注释掉这句话，这样主 Activity 因为种种原因被回收的时候就不会保存之前的 fragment state</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protectedvoidonSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">&#x2F;&#x2F;如果用以下这种做法则不保存状态，再次进来的话会显示默认tab</span><br><span class="line">&#x2F;&#x2F;总是执行这句代码来调用父类去保存视图层的状态</span><br><span class="line">&#x2F;&#x2F;super.onSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protectedvoidonSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">&#x2F;&#x2F;如果用以下这种做法则不保存状态，再次进来的话会显示默认tab</span><br><span class="line">&#x2F;&#x2F;总是执行这句代码来调用父类去保存视图层的状态</span><br><span class="line">&#x2F;&#x2F;super.onSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>二、阻止系统恢复Fragment state，在FragmentActivity保存所有Fragment状态前把Fragment从FragmentManager中移除掉。（不可取，开启新的Activity也可能触发onSaveInstanceState,如果没判空就会崩溃，判空的话，返回这个界面，就是空白，因为Fragment全部被移除了。除非自行判空，没验证。）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       FragmentTransaction transaction &#x3D; fm.beginTransaction();</span><br><span class="line">       transaction.remove(tab1);</span><br><span class="line">       transaction.remove(tab2);</span><br><span class="line">       transaction.remove(tab3);</span><br><span class="line">       transaction.remove(tab4);</span><br><span class="line">       transaction.commitAllowingStateLoss();</span><br><span class="line">       super.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       FragmentTransaction transaction &#x3D; fm.beginTransaction();</span><br><span class="line">       transaction.remove(tab1);</span><br><span class="line">       transaction.remove(tab2);</span><br><span class="line">       transaction.remove(tab3);</span><br><span class="line">       transaction.remove(tab4);</span><br><span class="line">       transaction.commitAllowingStateLoss();</span><br><span class="line">       super.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 <p>三、在onSaveInstanceState(outState)中去保存fragment，当activity被恢复时，取出这些fragment即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;onCreate方法中</span><br><span class="line">if (savedInstanceState !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;*获取保存的fragment  没有的话返回null*&#x2F;</span><br><span class="line">            homeFragment &#x3D; (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);</span><br><span class="line">            dashboardFragment &#x3D; (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);</span><br><span class="line">            noticeFragment &#x3D; (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);</span><br><span class="line">            addToList(homeFragment);</span><br><span class="line">            addToList(dashboardFragment);</span><br><span class="line">            addToList(noticeFragment);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            initFragment();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;onCreate方法中</span><br><span class="line">if (savedInstanceState !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;*获取保存的fragment  没有的话返回null*&#x2F;</span><br><span class="line">            homeFragment &#x3D; (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);</span><br><span class="line">            dashboardFragment &#x3D; (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);</span><br><span class="line">            noticeFragment &#x3D; (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);</span><br><span class="line">            addToList(homeFragment);</span><br><span class="line">            addToList(dashboardFragment);</span><br><span class="line">            addToList(noticeFragment);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            initFragment();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>让APP重启自己的两种方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;重启应用</span><br><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;重启应用</span><br><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">       &#x2F;&#x2F;重启应用，得使用PendingIntent</span><br><span class="line">       PendingIntent restartIntent &#x3D; PendingIntent.getActivity(</span><br><span class="line">               getApplicationContext(), 0, intent,</span><br><span class="line">               PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">       &#x2F;&#x2F;退出程序</span><br><span class="line">       AlarmManager mAlarmManager &#x3D; (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line">       mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,</span><br><span class="line">               restartIntent); &#x2F;&#x2F; 100毫秒后重启应用</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">       &#x2F;&#x2F;重启应用，得使用PendingIntent</span><br><span class="line">       PendingIntent restartIntent &#x3D; PendingIntent.getActivity(</span><br><span class="line">               getApplicationContext(), 0, intent,</span><br><span class="line">               PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">       &#x2F;&#x2F;退出程序</span><br><span class="line">       AlarmManager mAlarmManager &#x3D; (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line">       mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,</span><br><span class="line">               restartIntent); &#x2F;&#x2F; 100毫秒后重启应用</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
 <hr>
 <p>  Android 设置Edittext获取焦点并弹出软键盘</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">editText.setFocusable(true);</span><br><span class="line">      editText.setFocusableInTouchMode(true);</span><br><span class="line">      editText.requestFocus();</span><br><span class="line">      &#x2F;&#x2F;显示软键盘</span><br><span class="line">  activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);</span><br><span class="line">      &#x2F;&#x2F;如果上面的代码没有弹出软键盘 可以使用下面另一种方式</span><br><span class="line">      &#x2F;&#x2F;InputMethodManager imm &#x3D; (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">     &#x2F;&#x2F; imm.showSoftInput(editText, 0); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">editText.setFocusable(true);</span><br><span class="line">      editText.setFocusableInTouchMode(true);</span><br><span class="line">      editText.requestFocus();</span><br><span class="line">      &#x2F;&#x2F;显示软键盘</span><br><span class="line">  activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);</span><br><span class="line">      &#x2F;&#x2F;如果上面的代码没有弹出软键盘 可以使用下面另一种方式</span><br><span class="line">      &#x2F;&#x2F;InputMethodManager imm &#x3D; (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">     &#x2F;&#x2F; imm.showSoftInput(editText, 0); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>用命令行新建指定大小的文件</p>
 <p>在Linux环境下的实现方法</p>
 <p>  使用dd命令：功能是复制文件，并且可以通过选项指定复制方式。比如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;test.txt bs&#x3D;32 count&#x3D;32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;test.txt bs&#x3D;32 count&#x3D;32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>（源文件是/dev/zero，目标文件是test.txt，也就是需要生成的文件。复制生成文件大小的是32*32=1024字节）</p>
 <p>在Windows环境下的实现方法</p>
 <p>  使用fsutil命令，在windows xp和win 7下应该都自带了这个命令。命令的格式是 fsutil file createnew 新文件名 文件大小。例如生成一个1K大小的文件，可以使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fsutil file createnew test.txt 1024</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">fsutil file createnew test.txt 1024</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>在activity中调用 moveTaskToBack (boolean nonRoot)方法即可将activity 退到后台，注意不是finish()退出。<br>参数为false代表只有当前activity是task根，指应用启动的第一个activity时，才有效;<br>如果为true则忽略这个限制，任何activity都可以有效。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;android 应用退到后台，类似最小化</span><br><span class="line">moveTaskToBack(true);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;android 应用退到后台，类似最小化</span><br><span class="line">moveTaskToBack(true);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>ANR分析办法之一：traces.txt</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb pull &#x2F;data&#x2F;anr&#x2F;traces.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb pull &#x2F;data&#x2F;anr&#x2F;traces.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>在文件中使用 ctrl + F 查找包名可以快速定位相关代码。<br>通过log可以看出相关问题<br>产生新的ANR，原来的 traces.txt 文件会被覆盖</p>
 <hr>
 <p>BottomNavigationView切换时不显示图标颜色，需要取消导航栏图标着色。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">navigation.setItemIconTintList(null);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">navigation.setItemIconTintList(null);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p> <strong>JNI 数据类型映射</strong></p>
@@ -477,22 +477,22 @@
 </tbody></table>
 <hr>
 <p>沉浸式状态栏</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">	&#x2F;*</span><br><span class="line">    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static void setStatusBar(Activity context) &#123;</span><br><span class="line">        View decorView &#x3D; context.getWindow().getDecorView();</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        decorView.setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置白色状态栏 color用R.color.***</span><br><span class="line">    public static void setWhiteStatusBar(Activity context,int color) &#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_IMMERSIVE</span><br><span class="line">                | View.SYSTEM_UI_FLAG_VISIBLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        if (Build.VERSION.SDK_INT &gt;&#x3D; Build.VERSION_CODES.M) &#123;</span><br><span class="line">            context.getWindow().setStatusBarColor(context.getColor(color));</span><br><span class="line">context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置暗色状态栏</span><br><span class="line">    public static void setDarkStatusBar(Activity context)&#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">	&#x2F;*</span><br><span class="line">    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static void setStatusBar(Activity context) &#123;</span><br><span class="line">        View decorView &#x3D; context.getWindow().getDecorView();</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        decorView.setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置白色状态栏 color用R.color.***</span><br><span class="line">    public static void setWhiteStatusBar(Activity context,int color) &#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_IMMERSIVE</span><br><span class="line">                | View.SYSTEM_UI_FLAG_VISIBLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        if (Build.VERSION.SDK_INT &gt;&#x3D; Build.VERSION_CODES.M) &#123;</span><br><span class="line">            context.getWindow().setStatusBarColor(context.getColor(color));</span><br><span class="line">context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;设置暗色状态栏</span><br><span class="line">    public static void setDarkStatusBar(Activity context)&#123;</span><br><span class="line">        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>P版本应用在sd卡根目录(getExternalCacheDir)保存的应用数据卸载时不会被清除，但是Q版本这部分数据实际保存的是应用的沙箱目录 下，卸载的时候回全部被清除；应用如果不想卸载的时候被删除数据，需要应用在manifest文件增加:，这样卸载应用的时候，系统弹出的对话框中才会有第二个勾选框出现(不增加该属性是不会有第二个勾选出现)，默认删除，勾选保留。</p>
 <hr>
 <p> 拍照、选择图片 适配7.0以上，从 Android 7.0 开始，禁止在您的应用外部公开 file:// URI</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;&#x2F;指定Uri，拍照返回的data为空</span><br><span class="line">String tempImagePath &#x3D; getFilesDir().getPath();</span><br><span class="line">tempImageFile &#x3D; File.createTempFile(&quot;image_&quot;, &quot;.jpg&quot;, new File(tempImagePath));</span><br><span class="line">Intent intent &#x3D; new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;&#x3D; 24) &#123;</span><br><span class="line">  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT,</span><br><span class="line">  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,</span><br><span class="line">                                        &quot;com.huangyuanlove.adaptationhighversion.fileprovider&quot;, tempImageFile));</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));</span><br><span class="line">&#125;</span><br><span class="line">startActivityForResult(intent, TAKE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &#x2F;&#x2F;指定Uri，拍照返回的data为空</span><br><span class="line">String tempImagePath &#x3D; getFilesDir().getPath();</span><br><span class="line">tempImageFile &#x3D; File.createTempFile(&quot;image_&quot;, &quot;.jpg&quot;, new File(tempImagePath));</span><br><span class="line">Intent intent &#x3D; new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;&#x3D; 24) &#123;</span><br><span class="line">  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT,</span><br><span class="line">  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,</span><br><span class="line">                                        &quot;com.huangyuanlove.adaptationhighversion.fileprovider&quot;, tempImageFile));</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));</span><br><span class="line">&#125;</span><br><span class="line">startActivityForResult(intent, TAKE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>当拍照返回之后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitmap &#x3D; BitmapFactory.decodeFile(tempImageFile.getPath());</span><br><span class="line">showImage.setImageBitmap(bitmap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bitmap &#x3D; BitmapFactory.decodeFile(tempImageFile.getPath());</span><br><span class="line">showImage.setImageBitmap(bitmap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>选择图片的时候：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent albumIntent &#x3D; new Intent(Intent.ACTION_PICK);</span><br><span class="line">albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &quot;image&#x2F;*&quot;);</span><br><span class="line">startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Intent albumIntent &#x3D; new Intent(Intent.ACTION_PICK);</span><br><span class="line">albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &quot;image&#x2F;*&quot;);</span><br><span class="line">startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>选择图片返回的时候</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if (data !&#x3D; null) &#123;</span><br><span class="line">  Uri selectedImage &#x3D; data.getData();</span><br><span class="line">  String[] filePathColumn &#x3D; &#123;MediaStore.Images.Media.DATA&#125;;</span><br><span class="line">  Cursor cursor &#x3D; getContentResolver().query(selectedImage,</span><br><span class="line">                                             filePathColumn, null, null, null);</span><br><span class="line">  cursor.moveToFirst();</span><br><span class="line">  int columnIndex &#x3D; cursor.getColumnIndex(filePathColumn[0]);</span><br><span class="line">  String picturePath &#x3D; cursor.getString(columnIndex);</span><br><span class="line">  cursor.close();</span><br><span class="line">  bitmap &#x3D; BitmapFactory.decodeFile(picturePath);</span><br><span class="line">  showImage.setImageBitmap(bitmap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if (data !&#x3D; null) &#123;</span><br><span class="line">  Uri selectedImage &#x3D; data.getData();</span><br><span class="line">  String[] filePathColumn &#x3D; &#123;MediaStore.Images.Media.DATA&#125;;</span><br><span class="line">  Cursor cursor &#x3D; getContentResolver().query(selectedImage,</span><br><span class="line">                                             filePathColumn, null, null, null);</span><br><span class="line">  cursor.moveToFirst();</span><br><span class="line">  int columnIndex &#x3D; cursor.getColumnIndex(filePathColumn[0]);</span><br><span class="line">  String picturePath &#x3D; cursor.getString(columnIndex);</span><br><span class="line">  cursor.close();</span><br><span class="line">  bitmap &#x3D; BitmapFactory.decodeFile(picturePath);</span><br><span class="line">  showImage.setImageBitmap(bitmap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>自定义View</p>
@@ -504,7 +504,7 @@
 <hr>
 <p>ROOM数据库使用填坑</p>
 <p>引入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;Room数据库</span><br><span class="line">implementation &quot;androidx.room:room-runtime:2.2.0-alpha01&quot;</span><br><span class="line">annotationProcessor &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;Room数据库</span><br><span class="line">implementation &quot;androidx.room:room-runtime:2.2.0-alpha01&quot;</span><br><span class="line">annotationProcessor &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>如果多加一行implementation “androidx.room:room-compiler:2.2.0-alpha01”，会导致项目中多出很多没用的libs，包括com.ibm.icu:icu4j等，可能使得apk整整多出15M没用的文件。</p>
 <hr>
@@ -520,7 +520,7 @@
 <p>如果我们要兼容aip19以下版本的话，那么导入的包需要为v4包</p>
 <hr>
 <p>通过以下代码可以列出设备底层支持的编码格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MediaCodecList codecList &#x3D; new MediaCodecList(MediaCodecList.ALL_CODECS);</span><br><span class="line">for (int i &#x3D; 0; i &lt; codecList.getCodecInfos().length; i++) &#123;  </span><br><span class="line">	Log.d(TAG, &quot;编解码器: &quot; + codecList.getCodecInfos()[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MediaCodecList codecList &#x3D; new MediaCodecList(MediaCodecList.ALL_CODECS);</span><br><span class="line">for (int i &#x3D; 0; i &lt; codecList.getCodecInfos().length; i++) &#123;  </span><br><span class="line">	Log.d(TAG, &quot;编解码器: &quot; + codecList.getCodecInfos()[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>如果遇到硬编H264等一些视频编码时，编出来的数据显示正常，但晃动摄像头时数据量变大，带宽占用很高，设置低一点的码率也不起作用时。很可能是系统的编码器支持的不够好，可用上面的方式获取系统支持的编解码器有哪些，在new MediaCodec的时候使用MediaCodec.createByCodecName(“OMX.google.h264.encoder”)等一些固定的编解码器，再查看效果。(OMX.google.h264.encoder为软编)</p>
@@ -533,7 +533,7 @@
 <hr>
 <p>Fork/Join 框架是java7中加入的一个并行任务框架，可以将任务分割成足够小的小任务，然后让不同的线程来做这些分割出来的小事情，然后完成之后再进行join，将小任务的结果组装成大任务的结果。 </p>
 <p>例如求一个文件夹的大小：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line">        final File file;</span><br><span class="line">        public FileSizeFinder(final File theFile) &#123;</span><br><span class="line">            file &#x3D; theFile;</span><br><span class="line">        &#125;</span><br><span class="line">        @Override</span><br><span class="line">        public Long compute() &#123;</span><br><span class="line">            long size &#x3D; 0;</span><br><span class="line">            if (file.isFile()) &#123;</span><br><span class="line">                size &#x3D; file.length();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                final File[] children &#x3D; file.listFiles();</span><br><span class="line">                if (children !&#x3D; null) &#123;</span><br><span class="line">                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks &#x3D; new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();</span><br><span class="line">                    for (final File child : children) &#123;</span><br><span class="line">                        if (child.isFile()) &#123;</span><br><span class="line">                            size +&#x3D; child.length();</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            tasks.add(new FileSizeFinder(child));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) &#123;</span><br><span class="line">                        size +&#x3D; task.join();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return size;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    long size &#x3D; new ForkJoinPool().invoke(new FileSizeFinder(new File(&quot;&#x2F;home&quot;)));</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line">        final File file;</span><br><span class="line">        public FileSizeFinder(final File theFile) &#123;</span><br><span class="line">            file &#x3D; theFile;</span><br><span class="line">        &#125;</span><br><span class="line">        @Override</span><br><span class="line">        public Long compute() &#123;</span><br><span class="line">            long size &#x3D; 0;</span><br><span class="line">            if (file.isFile()) &#123;</span><br><span class="line">                size &#x3D; file.length();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                final File[] children &#x3D; file.listFiles();</span><br><span class="line">                if (children !&#x3D; null) &#123;</span><br><span class="line">                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks &#x3D; new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();</span><br><span class="line">                    for (final File child : children) &#123;</span><br><span class="line">                        if (child.isFile()) &#123;</span><br><span class="line">                            size +&#x3D; child.length();</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            tasks.add(new FileSizeFinder(child));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) &#123;</span><br><span class="line">                        size +&#x3D; task.join();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return size;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    long size &#x3D; new ForkJoinPool().invoke(new FileSizeFinder(new File(&quot;&#x2F;home&quot;)));</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>Netty拆包：LengthFieldBasedFrameDecoder的使用</p>
@@ -552,6 +552,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xtvj
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Android开发填坑记录">https://xtvj.github.io/2019/10/12/Android开发填坑记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -583,11 +600,7 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
-  </div>
-  
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -639,6 +652,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -788,19 +803,23 @@ setInterval("createtime()",250);
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo        : 'xtvj.github.io',
+      owner       : 'xtvj',
+      admin       : [''],
+      id          : '4e2ec58d6a14eab6ac392ba58ccde6df',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script>
 

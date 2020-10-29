@@ -33,8 +33,8 @@
 <meta property="article:published_time" content="2020-08-20T05:37:46.000Z">
 <meta property="article:modified_time" content="2020-10-19T18:47:34.329Z">
 <meta property="article:author" content="xtvj">
-<meta property="article:tag" content="android">
 <meta property="article:tag" content="Git">
+<meta property="article:tag" content="android">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://xtvj.github.io/images/Git和GitHub1.jpg">
 
@@ -265,11 +265,28 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xtvj
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xtvj.github.io/2020/08/20/AndroidStudio%E4%B8%ADGit%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" title="AndroidStudio中Git的使用教程">https://xtvj.github.io/2020/08/20/AndroidStudio中Git的使用教程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/android/" rel="tag"># android</a>
               <a href="/tags/Git/" rel="tag"># Git</a>
+              <a href="/tags/android/" rel="tag"># android</a>
           </div>
 
         
@@ -297,11 +314,7 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
-  </div>
-  
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -353,6 +366,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -502,19 +517,23 @@ setInterval("createtime()",250);
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo        : 'xtvj.github.io',
+      owner       : 'xtvj',
+      admin       : [''],
+      id          : '4d426f14a8e84b1f5896fc07dea25b96',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script>
 

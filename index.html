@@ -190,7 +190,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>606</span>
+              <span>601</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -213,7 +213,7 @@
 <p>由Windows转到Mac后一直用Next3.X版本，并没有更新就一直使用，今天记录终端改造编辑图片时发现有个警告，就修改了下Hexo的配置，折腾起来就换了最新的版本。以前都不记录，到升级的时候发现改的太多，也不知道动了哪些就不敢升了。建了个新目录重新配置Hexo，缺点就是Git提交时覆盖了以往所有记录。</p>
 <p>以下记录花费时间才找到方式解决的，对于大部分不用查阅就可修改使用的不作记录。</p>
 <h3 id="1-修改页面宽度"><a href="#1-修改页面宽度" class="headerlink" title="1.修改页面宽度"></a>1.修改页面宽度</h3><p>打开/themes/next/source/css/_variables/base.styl文件，找到Layout sizes字段修改如下</p>
-<figure class="highlight plain"><figcaption><span>Layout sizes</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Layout sizes</span><br><span class="line">&#x2F;&#x2F; --------------------------------------------------</span><br><span class="line">$content-desktop                &#x3D; 82%;&#x2F;&#x2F;修改为占屏幕的82%，原先是固定值</span><br><span class="line">$content-desktop-large          &#x3D; 82%;</span><br><span class="line">$content-desktop-largest        &#x3D; 82%;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>Layout sizes</span></figcaption><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; Layout sizes</span><br><span class="line">&#x2F;&#x2F; --------------------------------------------------</span><br><span class="line">$content-desktop                &#x3D; 82%;&#x2F;&#x2F;修改为占屏幕的82%，原先是固定值</span><br><span class="line">$content-desktop-large          &#x3D; 82%;</span><br><span class="line">$content-desktop-largest        &#x3D; 82%;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-中文菜单"><a href="#2-中文菜单" class="headerlink" title="2.中文菜单"></a>2.中文菜单</h3><p>默认language改为zh-Hans显示的是英文，改为zh-CN才显示中文。莫名其妙。</p>
 
@@ -299,42 +299,42 @@
 <h3 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h3><p>安装：<code>brew cask install iterm2</code></p>
 <p>或去官网下载安装：<a target="_blank" rel="noopener" href="https://iterm2.com/downloads.html">https://iterm2.com/downloads.html</a></p>
 <h3 id="代码配色"><a href="#代码配色" class="headerlink" title="代码配色"></a>代码配色</h3><p>使用 <a target="_blank" rel="noopener" href="https://github.com/mbadolato/iTerm2-Color-Schemes">iTerm2-Color-Schemes</a> 的配色合集</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~&#x2F;.iterm2 &amp;&amp; cd ~&#x2F;.iterm2</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;mbadolato&#x2F;iTerm2-Color-Schemes</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir ~&#x2F;.iterm2 &amp;&amp; cd ~&#x2F;.iterm2</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;mbadolato&#x2F;iTerm2-Color-Schemes</span><br></pre></td></tr></table></figure>
 
 
 
 <h5 id="导入配色方案"><a href="#导入配色方案" class="headerlink" title="导入配色方案"></a>导入配色方案</h5><p>Preferences…→Profiles→Colors→Color Presets…→Import…→选择刚才.iterm2的子文件夹schemes下的所有文件。</p>
 <p>导入后再在Colors Presets中选择想用的配色。上图所用配色为Dracula</p>
 <h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p>如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># git clone</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;powerline&#x2F;fonts.git</span><br><span class="line"></span><br><span class="line"># install</span><br><span class="line">cd fonts</span><br><span class="line"></span><br><span class="line">.&#x2F;install.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># git clone</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;powerline&#x2F;fonts.git</span><br><span class="line"></span><br><span class="line"># install</span><br><span class="line">cd fonts</span><br><span class="line"></span><br><span class="line">.&#x2F;install.sh</span><br></pre></td></tr></table></figure>
 
 <p>然后按照下面的设置（记得选一个名字后面有for Powerline的字体）</p>
 <p> <img src="https://xtvj.github.io/images/%E5%AD%97%E4%BD%93.png"></p>
-<h3 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh</span><br></pre></td></tr></table></figure>
+<h3 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install zsh</span><br></pre></td></tr></table></figure>
 
 <p>默认的 shell 是 bash，需要修改为 zsh：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &quot;echo $(which zsh) &gt;&gt; &#x2F;etc&#x2F;shells&quot;</span><br><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo sh -c &quot;echo $(which zsh) &gt;&gt; &#x2F;etc&#x2F;shells&quot;</span><br><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure>
 
 <p>使用<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>配置zsh</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
 
 <p>安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 <code>.zshrc</code> 的配置文件，以后主要就是修改它了。</p>
 <h5 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h5><p>主题文件存储在 <code>~/.oh-my-zsh/themes</code> 目录下，你也可以使用其他的。</p>
 <p>推荐 <a target="_blank" rel="noopener" href="https://github.com/bhilburn/powerlevel9k">powerlevel9k</a> 的高颜值主题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;bhilburn&#x2F;powerlevel9k.git ~&#x2F;.oh-my-zsh&#x2F;custom&#x2F;themes&#x2F;powerlevel9k</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;bhilburn&#x2F;powerlevel9k.git ~&#x2F;.oh-my-zsh&#x2F;custom&#x2F;themes&#x2F;powerlevel9k</span><br></pre></td></tr></table></figure>
 
 <p>然后修改 <code>zsh</code> 主题配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME&#x3D;&quot;powerlevel9k&#x2F;powerlevel9k&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ZSH_THEME&#x3D;&quot;powerlevel9k&#x2F;powerlevel9k&quot;</span><br></pre></td></tr></table></figure>
 
 <p>修改配置文件后一定要记得让配置生效，使用 <code>source</code> 命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~&#x2F;.zshrc</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source ~&#x2F;.zshrc</span><br></pre></td></tr></table></figure>
 
 <h3 id="zsh-插件"><a href="#zsh-插件" class="headerlink" title="zsh 插件"></a>zsh 插件</h3><p>  <strong>插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开</strong></p>
 <h6 id="extract"><a href="#extract" class="headerlink" title="extract"></a>extract</h6><p>用于解压，不用另行安装，直接在plugins中加就行 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract">官方说明</a></p>
 <h6 id="autojump"><a href="#autojump" class="headerlink" title="autojump"></a>autojump</h6><p>自动跳转目录，只能当使用cd命令进入文件夹后，才能使用<code>j 文件夹名</code>进入文件夹</p>
 <p>安装：<code>brew install autojump</code></p>
 <p>再追加一句命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -s $(brew --prefix)&#x2F;etc&#x2F;profile.d&#x2F;autojump.sh ]] &amp;&amp; . $(brew --prefix)&#x2F;etc&#x2F;profile.d&#x2F;autojump.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[ -s $(brew --prefix)&#x2F;etc&#x2F;profile.d&#x2F;autojump.sh ]] &amp;&amp; . $(brew --prefix)&#x2F;etc&#x2F;profile.d&#x2F;autojump.sh</span><br></pre></td></tr></table></figure>
 
 <h6 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h6><p>亮亮功能，安装<code>brew install zsh-syntax-highlighting</code></p>
 <h6 id="zsh-autosuggestions"><a href="#zsh-autosuggestions" class="headerlink" title="zsh-autosuggestions"></a>zsh-autosuggestions</h6><p>自动提示，只提示输入过的命令。历史记录可在用户根目录.zsh_history文件内查看到。</p>
@@ -563,7 +563,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>366</span>
+              <span>347</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -583,7 +583,7 @@
 
       
           <p>在表格前面加入以下代码，有几列就加入几个参数，nth-of-type(1)第一列，nth-of-type(2)第二列。在width中加入想要设置的列宽。每列都设置一下，起初少设置一两列结果没显示成功，以为此方式不能用，后来全设置后显示效果不错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">table th:nth-of-type(1) &#123;</span><br><span class="line">    width: 30px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(2) &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(3) &#123;</span><br><span class="line">    width: 120px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(4) &#123;</span><br><span class="line">    width: 60px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">table th:nth-of-type(1) &#123;</span><br><span class="line">    width: 30px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(2) &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(3) &#123;</span><br><span class="line">    width: 120px;</span><br><span class="line">&#125;</span><br><span class="line">table th:nth-of-type(4) &#123;</span><br><span class="line">    width: 60px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -647,7 +647,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>347</span>
+              <span>341</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -666,7 +666,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;img style&#x3D;&quot;zoom: 33%;&quot;</span><br><span class="line">    src&#x3D;&quot;https:&#x2F;&#x2F;xtvj.github.io&#x2F;images&#x2F;Git和GitHub1.jpg&quot;</span><br><span class="line">    &lt;div onclick&#x3D;&quot;window.open(&#39;https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1kg4y187VP&#39;)&quot;&gt;&lt;br&gt;</span><br><span class="line">    &lt;div &gt;第51集 Git和GitHub（1）&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br></pre></td></tr></table></figure>
+          <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;img style&#x3D;&quot;zoom: 33%;&quot;</span><br><span class="line">    src&#x3D;&quot;https:&#x2F;&#x2F;xtvj.github.io&#x2F;images&#x2F;Git和GitHub1.jpg&quot;</span><br><span class="line">    &lt;div onclick&#x3D;&quot;window.open(&#39;https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1kg4y187VP&#39;)&quot;&gt;&lt;br&gt;</span><br><span class="line">    &lt;div &gt;第51集 Git和GitHub（1）&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1175,7 +1175,7 @@ table th:nth-of-type(7) {
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>980</span>
+              <span>971</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1204,14 +1204,14 @@ table th:nth-of-type(7) {
 <li><h5 id="Win10设置右键打开cmd"><a href="#Win10设置右键打开cmd" class="headerlink" title="Win10设置右键打开cmd"></a>Win10设置右键打开cmd</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mooneve/article/details/78821843">https://blog.csdn.net/mooneve/article/details/78821843</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hiudawn/article/details/80701935">https://blog.csdn.net/hiudawn/article/details/80701935</a></p>
 </li>
-<li><h5 id="ffmpeg提取字幕流"><a href="#ffmpeg提取字幕流" class="headerlink" title="ffmpeg提取字幕流"></a>ffmpeg提取字幕流</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;原始文本输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br><span class="line">ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt</span><br><span class="line">&#x2F;&#x2F;ass格式输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
+<li><h5 id="ffmpeg提取字幕流"><a href="#ffmpeg提取字幕流" class="headerlink" title="ffmpeg提取字幕流"></a>ffmpeg提取字幕流</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;原始文本输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br><span class="line">ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt</span><br><span class="line">&#x2F;&#x2F;ass格式输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
 </li>
-<li><h5 id="Windows自带MD5、SHA1、SHA256命令"><a href="#Windows自带MD5、SHA1、SHA256命令" class="headerlink" title="Windows自带MD5、SHA1、SHA256命令"></a>Windows自带MD5、SHA1、SHA256命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line">certutil -hashfile  3.mp4 SHA256</span><br></pre></td></tr></table></figure>
+<li><h5 id="Windows自带MD5、SHA1、SHA256命令"><a href="#Windows自带MD5、SHA1、SHA256命令" class="headerlink" title="Windows自带MD5、SHA1、SHA256命令"></a>Windows自带MD5、SHA1、SHA256命令</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line">certutil -hashfile  3.mp4 SHA256</span><br></pre></td></tr></table></figure>
 </li>
-<li><h5 id="ffmpeg合并音频和视频"><a href="#ffmpeg合并音频和视频" class="headerlink" title="ffmpeg合并音频和视频"></a>ffmpeg合并音频和视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav  -c:v copy -c:a aac -strict experimental output.mp4</span><br></pre></td></tr></table></figure>
+<li><h5 id="ffmpeg合并音频和视频"><a href="#ffmpeg合并音频和视频" class="headerlink" title="ffmpeg合并音频和视频"></a>ffmpeg合并音频和视频</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav  -c:v copy -c:a aac -strict experimental output.mp4</span><br></pre></td></tr></table></figure>
 
 <p>复制音频而无需重新编码，如果您的输出容器可以（几乎）处理任何编解码器（例如MKV），那么您只需复制音频和视频流即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -1310,6 +1310,8 @@ table th:nth-of-type(7) {
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>

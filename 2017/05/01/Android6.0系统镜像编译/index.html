@@ -240,48 +240,48 @@
 <h4 id="1、编译准备"><a href="#1、编译准备" class="headerlink" title="1、编译准备"></a>1、编译准备</h4><p>系统：<a target="_blank" rel="noopener" href="https://www.linuxmint.com/download.php">linuxmint-18.1-cinnamon-64bit</a>(LinuxMint是基于Ubuntu的Linux操作系统，是目前DistroWatch排行榜上第一名的Linux发行版，而且cinnamon版本在与Windows系统并存时可以自动引导Windows系统，十分方便，推荐使用。)</p>
 <p>JDK：Android 5.x (Lollipop) - Android 6.0 (Marshmallow): Ubuntu - OpenJDK 7</p>
 <p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/761127/how-do-i-install-openjdk-7-on-ubuntu-16-04-or-higher">OpenJDK7安装方法</a>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:openjdk-r/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install openjdk-7-jdk</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:openjdk-r/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install openjdk-7-jdk</span><br></pre></td></tr></table></figure>
 
 <p>repo工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/bin</span><br><span class="line">PATH=~/bin:<span class="variable">$PATH</span></span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkdir ~/bin</span><br><span class="line">PATH=~/bin:<span class="variable">$PATH</span></span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
 
 <p>Git</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
 
 <p>下载每月更新的初始化包:</p>
 <p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar">https://mirrors.tuna.tsinghua.edu.cn/aosp-monthly/aosp-latest.tar</a></p>
 <p>Ubuntu16.0需要的依赖：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev g++-multilib</span><br><span class="line">sudo apt-get install -y git flex bison gperf build-essential libncurses5-dev:i386</span><br><span class="line">sudo apt-get install tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386</span><br><span class="line">sudo apt-get install dpkg-dev libsdl1.2-dev libesd0-dev</span><br><span class="line">sudo apt-get install git-core gnupg flex bison gperf build-essential</span><br><span class="line">sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib</span><br><span class="line">sudo apt-get install libc6-dev-i386</span><br><span class="line">sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev</span><br><span class="line">sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4</span><br><span class="line">sudo apt-get install lib32z-dev ccache</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-dev g++-multilib</span><br><span class="line">sudo apt-get install -y git flex bison gperf build-essential libncurses5-dev:i386</span><br><span class="line">sudo apt-get install tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386</span><br><span class="line">sudo apt-get install dpkg-dev libsdl1.2-dev libesd0-dev</span><br><span class="line">sudo apt-get install git-core gnupg flex bison gperf build-essential</span><br><span class="line">sudo apt-get install zip curl zlib1g-dev gcc-multilib g++-multilib</span><br><span class="line">sudo apt-get install libc6-dev-i386</span><br><span class="line">sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev</span><br><span class="line">sudo apt-get install libgl1-mesa-dev libxml2-utils xsltproc unzip m4</span><br><span class="line">sudo apt-get install lib32z-dev ccache</span><br></pre></td></tr></table></figure>
 
 <h4 id="2、开始同步"><a href="#2、开始同步" class="headerlink" title="2、开始同步"></a>2、开始同步</h4><p>在Linux系统里解压下载好的aosp-latest.tar，文件不能放在Windows的NTFS硬盘里，因为NTFS不支持Linux的文件权限管理。</p>
 <p>通过以下命令同步源码，这里我用的是android-6.0.1_r79版本，可以在<a target="_blank" rel="noopener" href="https://source.android.com/source/build-numbers#source-code-tags-and-builds">Source Code Tags and Builds</a>页面找你想要的版本。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar xf aosp-latest.tar <span class="comment"># 解压文件，过程可能要很久，慢慢等吧</span></span><br><span class="line"><span class="built_in">cd</span> AOSP   <span class="comment"># 解压得到的 AOSP 工程目录</span></span><br><span class="line">repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-6.0.1_r79 <span class="comment"># 使用清华源</span></span><br><span class="line">repo sync <span class="comment"># 正常同步一遍即可得到完整目录</span></span><br><span class="line"><span class="comment"># 或 repo sync -l 仅checkout代码</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar xf aosp-latest.tar <span class="comment"># 解压文件，过程可能要很久，慢慢等吧</span></span><br><span class="line"><span class="built_in">cd</span> AOSP   <span class="comment"># 解压得到的 AOSP 工程目录</span></span><br><span class="line">repo init -u https://aosp.tuna.tsinghua.edu.cn/platform/manifest -b android-6.0.1_r79 <span class="comment"># 使用清华源</span></span><br><span class="line">repo sync <span class="comment"># 正常同步一遍即可得到完整目录</span></span><br><span class="line"><span class="comment"># 或 repo sync -l 仅checkout代码</span></span><br></pre></td></tr></table></figure>
 <p>这个过程要很久，我是陆陆续续同步了一周才同步完成。过程中可以随时Ctrl + C来停止，下次直接运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">repo sync</span><br></pre></td></tr></table></figure>
 <p>就可以自动接着同步了。同步完后，文件夹大概有70多G。</p>
-<h4 id="3、编译"><a href="#3、编译" class="headerlink" title="3、编译"></a>3、编译</h4> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch <span class="comment"># 接着需要输入相应的数字即可.我选的是1，也就是aosp_arm64-eng</span></span><br><span class="line">make <span class="comment"># 开始编译，一般四小时</span></span><br><span class="line"><span class="comment"># 成功后会有### make completed successfully (00:55:20(hh:mm:ss)) ###的提示</span></span><br><span class="line">emulator <span class="comment">#	运行虚拟机，此时会加载刚才编译好的系统了。</span></span><br></pre></td></tr></table></figure>
+<h4 id="3、编译"><a href="#3、编译" class="headerlink" title="3、编译"></a>3、编译</h4> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch <span class="comment"># 接着需要输入相应的数字即可.我选的是1，也就是aosp_arm64-eng</span></span><br><span class="line">make <span class="comment"># 开始编译，一般四小时</span></span><br><span class="line"><span class="comment"># 成功后会有### make completed successfully (00:55:20(hh:mm:ss)) ###的提示</span></span><br><span class="line">emulator <span class="comment">#	运行虚拟机，此时会加载刚才编译好的系统了。</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="4、模块编译"><a href="#4、模块编译" class="headerlink" title="4、模块编译"></a>4、模块编译</h4><p> 编译环境初始化(即执行source build/envsetup.sh)之后,我们可以得到一些有用的指令,除了上边用到的lunch,还有以下:<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- croot: Changes directory to the top of the tree.</span><br><span class="line">- m: Makes from the top of the tree.</span><br><span class="line">- mm: Builds all of the modules <span class="keyword">in</span> the current directory.</span><br><span class="line">- mmm: Builds all of the modules <span class="keyword">in</span> the supplied directories.</span><br><span class="line">- cgrep: Greps on all <span class="built_in">local</span> C/C++ files.</span><br><span class="line">- jgrep: Greps on all <span class="built_in">local</span> Java files.</span><br><span class="line">- resgrep: Greps on all <span class="built_in">local</span> res/*.xml files.</span><br><span class="line">- godir: Go to the directory containing a file.</span><br></pre></td></tr></table></figure></p>
+<h4 id="4、模块编译"><a href="#4、模块编译" class="headerlink" title="4、模块编译"></a>4、模块编译</h4><p> 编译环境初始化(即执行source build/envsetup.sh)之后,我们可以得到一些有用的指令,除了上边用到的lunch,还有以下:<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">- croot: Changes directory to the top of the tree.</span><br><span class="line">- m: Makes from the top of the tree.</span><br><span class="line">- mm: Builds all of the modules <span class="keyword">in</span> the current directory.</span><br><span class="line">- mmm: Builds all of the modules <span class="keyword">in</span> the supplied directories.</span><br><span class="line">- cgrep: Greps on all <span class="built_in">local</span> C/C++ files.</span><br><span class="line">- jgrep: Greps on all <span class="built_in">local</span> Java files.</span><br><span class="line">- resgrep: Greps on all <span class="built_in">local</span> res/*.xml files.</span><br><span class="line">- godir: Go to the directory containing a file.</span><br></pre></td></tr></table></figure></p>
 <p> 使用mmm可以单独编译一个apk</p>
 <p>Android系统自带的apk文件都在out/target/product/generic/system/apk目录下;</p>
 <p>一些可执行文件(比如C编译的执行),放在out/target/product/generic/system/bin目录下;</p>
 <p>动态链接库放在out/target/product/generic/system/lib目录下;</p>
 <p>硬件抽象层文件都放在out/targer/product/generic/system/lib/hw目录</p>
-<h3 id="编译中出现的错误"><a href="#编译中出现的错误" class="headerlink" title="编译中出现的错误"></a>编译中出现的错误</h3><p> 错误一:<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">clang: error: linker <span class="built_in">command</span> failed with <span class="built_in">exit</span> code 1 (use -v to see invocation)</span><br><span class="line">build/core/host_shared_library_internal.mk:51: recipe <span class="keyword">for</span> target <span class="string">&#x27;out/host/linux-x86/obj/lib/libart.so&#x27;</span> failed</span><br><span class="line">make: *** [out/host/linux-x86/obj/lib/libart.so] Error 1</span><br><span class="line"></span><br><span class="line"><span class="comment">#### make failed to build some targets (28:37 (mm:ss)) ####</span></span><br></pre></td></tr></table></figure><br>ubuntu16.04 clang编译器导致的问题，在ubuntu14.04上正常。目前可行的修改方法时在art/build/Android.common_build.mk ,中将host 默认编辑器使用clang关掉，找到WITHOUT_HOST_CLANG,关闭clang即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Host.</span></span><br><span class="line">ART_HOST_CLANG := <span class="literal">false</span></span><br><span class="line">ifneq ($(WITHOUT_HOST_CLANG),<span class="literal">true</span>)</span><br><span class="line">  <span class="comment"># By default, host builds use clang for better warnings.</span></span><br><span class="line"></span><br><span class="line">  ART_HOST_CLANG := <span class="literal">false</span></span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+<h3 id="编译中出现的错误"><a href="#编译中出现的错误" class="headerlink" title="编译中出现的错误"></a>编译中出现的错误</h3><p> 错误一:<br> <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">clang: error: linker <span class="built_in">command</span> failed with <span class="built_in">exit</span> code 1 (use -v to see invocation)</span><br><span class="line">build/core/host_shared_library_internal.mk:51: recipe <span class="keyword">for</span> target <span class="string">&#x27;out/host/linux-x86/obj/lib/libart.so&#x27;</span> failed</span><br><span class="line">make: *** [out/host/linux-x86/obj/lib/libart.so] Error 1</span><br><span class="line"></span><br><span class="line"><span class="comment">#### make failed to build some targets (28:37 (mm:ss)) ####</span></span><br></pre></td></tr></table></figure><br>ubuntu16.04 clang编译器导致的问题，在ubuntu14.04上正常。目前可行的修改方法时在art/build/Android.common_build.mk ,中将host 默认编辑器使用clang关掉，找到WITHOUT_HOST_CLANG,关闭clang即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Host.</span></span><br><span class="line">ART_HOST_CLANG := <span class="literal">false</span></span><br><span class="line">ifneq ($(WITHOUT_HOST_CLANG),<span class="literal">true</span>)</span><br><span class="line">  <span class="comment"># By default, host builds use clang for better warnings.</span></span><br><span class="line"></span><br><span class="line">  ART_HOST_CLANG := <span class="literal">false</span></span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
 
 <p>错误二：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/bin/bash: xmllint: 未找到命令</span><br><span class="line">build/core/Makefile:34: recipe <span class="keyword">for</span> target <span class="string">&#x27;out/target/product/generic/system/etc/apns-conf.xml&#x27;</span> failed</span><br><span class="line">make: *** [out/target/product/generic/system/etc/apns-conf.xml] Error 127</span><br><span class="line"></span><br><span class="line"><span class="comment">#### make failed to build some targets (03:57:00 (hh:mm:ss)) ####</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/bin/bash: xmllint: 未找到命令</span><br><span class="line">build/core/Makefile:34: recipe <span class="keyword">for</span> target <span class="string">&#x27;out/target/product/generic/system/etc/apns-conf.xml&#x27;</span> failed</span><br><span class="line">make: *** [out/target/product/generic/system/etc/apns-conf.xml] Error 127</span><br><span class="line"></span><br><span class="line"><span class="comment">#### make failed to build some targets (03:57:00 (hh:mm:ss)) ####</span></span><br></pre></td></tr></table></figure>
 <p>安装xmllint就可以了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install  libxml2-utils</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install  libxml2-utils</span><br></pre></td></tr></table></figure>
 
 <h3 id="导入源码到Android-Studio"><a href="#导入源码到Android-Studio" class="headerlink" title="导入源码到Android Studio"></a>导入源码到Android Studio</h3><p>在导入到Android Studio之前，还需要进行一些处理。首先是要编译idegen模块，使用如下命令:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mmm development/tools/idegen/</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mmm development/tools/idegen/</span><br></pre></td></tr></table></figure>
 <p>m、mm、mmm命令可以让你只编译单独模块，而不用费大量的时间比编译整个Android系统。</p>
 <p>如果你的shell和我一样使用的是zsh，而不是bash，使用mmm就会得到错误信息。因为oh-my-zsh是不支持mmm的，具体可以参见：Android source code build commend “mm or mmm” couldn’t use in oh-my-zsh，因此，这里只能切换回bash，切换回bash的命令是chsh -s /bin/bash。</p>
 <p>当然如果你和我一样得到了错误信息-bash: mmm: command not found，那么就需要在源码目录下执行如下指令（点与build之间是有空格的）：. build/envsetup.sh</p>
 <p>然后在根目录生成对应的android.ipr、android.iml IDEA工程配置文件。使用以下脚本：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ development/tools/idegen/idegen.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ development/tools/idegen/idegen.sh</span><br></pre></td></tr></table></figure>
 <p>大概半分钟后（视你的电脑配置决定），会在源码根目录下生成android.ipr和android.iml。</p>
 <p>使用Android studio打开任意一个项目，然后选择File-&gt;Open，打开根目录下的android.ipr文件夹，然后等待漫长的index完成后，就可以方便查看源码了。</p>
 <h3 id="推荐阅读的源码"><a href="#推荐阅读的源码" class="headerlink" title="推荐阅读的源码"></a>推荐阅读的源码</h3><p>AOSP 项目这么庞大，就算是 Framework 部分也有够看上一阵子的，所以推荐从常用的看起，由浅及深，同时向横向和纵向深入阅读。</p>
@@ -308,6 +308,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xtvj
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xtvj.github.io/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/" title="Android6.0系统镜像编译">https://xtvj.github.io/2017/05/01/Android6.0系统镜像编译/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -336,11 +353,7 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
-  </div>
-  
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -393,6 +406,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -542,19 +557,23 @@ setInterval("createtime()",250);
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo        : 'xtvj.github.io',
+      owner       : 'xtvj',
+      admin       : [''],
+      id          : '5026519c50bbb71ebe7aef0ac13093ba',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script>
 

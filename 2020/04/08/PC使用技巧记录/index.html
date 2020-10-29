@@ -208,7 +208,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>980</span>
+              <span>971</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -237,14 +237,14 @@
 <li><h5 id="Win10设置右键打开cmd"><a href="#Win10设置右键打开cmd" class="headerlink" title="Win10设置右键打开cmd"></a>Win10设置右键打开cmd</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/mooneve/article/details/78821843">https://blog.csdn.net/mooneve/article/details/78821843</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hiudawn/article/details/80701935">https://blog.csdn.net/hiudawn/article/details/80701935</a></p>
 </li>
-<li><h5 id="ffmpeg提取字幕流"><a href="#ffmpeg提取字幕流" class="headerlink" title="ffmpeg提取字幕流"></a>ffmpeg提取字幕流</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;原始文本输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br><span class="line">ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt</span><br><span class="line">&#x2F;&#x2F;ass格式输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
+<li><h5 id="ffmpeg提取字幕流"><a href="#ffmpeg提取字幕流" class="headerlink" title="ffmpeg提取字幕流"></a>ffmpeg提取字幕流</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;原始文本输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt</span><br><span class="line">ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt</span><br><span class="line">&#x2F;&#x2F;ass格式输出</span><br><span class="line">ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass</span><br></pre></td></tr></table></figure>
 </li>
-<li><h5 id="Windows自带MD5、SHA1、SHA256命令"><a href="#Windows自带MD5、SHA1、SHA256命令" class="headerlink" title="Windows自带MD5、SHA1、SHA256命令"></a>Windows自带MD5、SHA1、SHA256命令</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line">certutil -hashfile  3.mp4 SHA256</span><br></pre></td></tr></table></figure>
+<li><h5 id="Windows自带MD5、SHA1、SHA256命令"><a href="#Windows自带MD5、SHA1、SHA256命令" class="headerlink" title="Windows自带MD5、SHA1、SHA256命令"></a>Windows自带MD5、SHA1、SHA256命令</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;certutil -hashfile  &lt;文件名&gt;  &lt;hash类型&gt;</span><br><span class="line">certutil -hashfile  3.mp4 SHA256</span><br></pre></td></tr></table></figure>
 </li>
-<li><h5 id="ffmpeg合并音频和视频"><a href="#ffmpeg合并音频和视频" class="headerlink" title="ffmpeg合并音频和视频"></a>ffmpeg合并音频和视频</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav  -c:v copy -c:a aac -strict experimental output.mp4</span><br></pre></td></tr></table></figure>
+<li><h5 id="ffmpeg合并音频和视频"><a href="#ffmpeg合并音频和视频" class="headerlink" title="ffmpeg合并音频和视频"></a>ffmpeg合并音频和视频</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav  -c:v copy -c:a aac -strict experimental output.mp4</span><br></pre></td></tr></table></figure>
 
 <p>复制音频而无需重新编码，如果您的输出容器可以（几乎）处理任何编解码器（例如MKV），那么您只需复制音频和视频流即可：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -273,6 +273,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xtvj
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xtvj.github.io/2020/04/08/PC%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95/" title="PC使用技巧记录">https://xtvj.github.io/2020/04/08/PC使用技巧记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -304,11 +321,7 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
-  </div>
-  
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -361,6 +374,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -510,19 +525,23 @@ setInterval("createtime()",250);
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo        : 'xtvj.github.io',
+      owner       : 'xtvj',
+      admin       : [''],
+      id          : '7e3a1eb4e5250b641bf440790362fa8b',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script>
 

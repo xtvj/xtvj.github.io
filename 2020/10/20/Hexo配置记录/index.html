@@ -202,7 +202,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>606</span>
+              <span>601</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -225,7 +225,7 @@
 <p>由Windows转到Mac后一直用Next3.X版本，并没有更新就一直使用，今天记录终端改造编辑图片时发现有个警告，就修改了下Hexo的配置，折腾起来就换了最新的版本。以前都不记录，到升级的时候发现改的太多，也不知道动了哪些就不敢升了。建了个新目录重新配置Hexo，缺点就是Git提交时覆盖了以往所有记录。</p>
 <p>以下记录花费时间才找到方式解决的，对于大部分不用查阅就可修改使用的不作记录。</p>
 <h3 id="1-修改页面宽度"><a href="#1-修改页面宽度" class="headerlink" title="1.修改页面宽度"></a>1.修改页面宽度</h3><p>打开/themes/next/source/css/_variables/base.styl文件，找到Layout sizes字段修改如下</p>
-<figure class="highlight plain"><figcaption><span>Layout sizes</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Layout sizes</span><br><span class="line">&#x2F;&#x2F; --------------------------------------------------</span><br><span class="line">$content-desktop                &#x3D; 82%;&#x2F;&#x2F;修改为占屏幕的82%，原先是固定值</span><br><span class="line">$content-desktop-large          &#x3D; 82%;</span><br><span class="line">$content-desktop-largest        &#x3D; 82%;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><figcaption><span>Layout sizes</span></figcaption><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; Layout sizes</span><br><span class="line">&#x2F;&#x2F; --------------------------------------------------</span><br><span class="line">$content-desktop                &#x3D; 82%;&#x2F;&#x2F;修改为占屏幕的82%，原先是固定值</span><br><span class="line">$content-desktop-large          &#x3D; 82%;</span><br><span class="line">$content-desktop-largest        &#x3D; 82%;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2-中文菜单"><a href="#2-中文菜单" class="headerlink" title="2.中文菜单"></a>2.中文菜单</h3><p>默认language改为zh-Hans显示的是英文，改为zh-CN才显示中文。莫名其妙。</p>
 
@@ -234,6 +234,23 @@
     
     
     
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>xtvj
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://xtvj.github.io/2020/10/20/Hexo%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" title="Hexo配置记录">https://xtvj.github.io/2020/10/20/Hexo配置记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
 
       <footer class="post-footer">
           <div class="post-tags">
@@ -262,11 +279,7 @@
 
           </div>
           
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzc4OC8xMDM0MQ=="></div>
-  </div>
-  
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -319,6 +332,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xtvj"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -468,19 +483,23 @@ setInterval("createtime()",250);
 
   
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
 <script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo        : 'xtvj.github.io',
+      owner       : 'xtvj',
+      admin       : [''],
+      id          : '26e472c86dfeeef65f2d84dd23a37065',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
 });
 </script>
 
