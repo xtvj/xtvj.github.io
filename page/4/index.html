@@ -21,33 +21,28 @@
     var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="概述下载过程参考清华源、科大源和谷歌的使用说明。 1、编译准备系统：linuxmint-18.1-cinnamon-64bit(LinuxMint是基于Ubuntu的Linux操作系统，是目前DistroWatch排行榜上第一名的Linux发行版，而且cinnamon版本在与Windows系统并存时可以自动引导Windows系统，十分方便，推荐使用。) JDK：Android 5.x (Lolli">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android6.0系统镜像编译">
-<meta property="og:url" content="https://xtvj.github.io/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="XTVJ">
+<meta property="og:url" content="https://xtvj.github.io/page/4/index.html">
 <meta property="og:site_name" content="XTVJ">
-<meta property="og:description" content="概述下载过程参考清华源、科大源和谷歌的使用说明。 1、编译准备系统：linuxmint-18.1-cinnamon-64bit(LinuxMint是基于Ubuntu的Linux操作系统，是目前DistroWatch排行榜上第一名的Linux发行版，而且cinnamon版本在与Windows系统并存时可以自动引导Windows系统，十分方便，推荐使用。) JDK：Android 5.x (Lolli">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2017-05-01T12:16:45.000Z">
-<meta property="article:modified_time" content="2019-10-12T14:42:30.000Z">
 <meta property="article:author" content="xtvj">
-<meta property="article:tag" content="android">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://xtvj.github.io/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/">
+<link rel="canonical" href="https://xtvj.github.io/page/4/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Android6.0系统镜像编译 | XTVJ</title>
+  <title>XTVJ</title>
   
 
 
@@ -155,10 +150,413 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">温习知识点记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-23 18:30:55" itemprop="dateCreated datePublished" datetime="2018-06-23T18:30:55+08:00">2018-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-18 03:46:18" itemprop="dateModified" datetime="2020-07-18T03:46:18+08:00">2020-07-18</time>
+              </span>
+
+          
+            <span id="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="温习知识点记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
 
     
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h1><h6 id="RecyclerView局部刷新闪烁问题"><a href="#RecyclerView局部刷新闪烁问题" class="headerlink" title="RecyclerView局部刷新闪烁问题"></a>RecyclerView局部刷新闪烁问题</h6><p>在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法<br>在更新局部数据的时候用notifyItemChanged(position, poyload：1);<br>参考：<a target="_blank" rel="noopener" href="http://wetest.qq.com/lab/view/176.html">http://wetest.qq.com/lab/view/176.html</a></p>
+<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><h6 id="FragmentPageAdapter和FragmentPageStateAdapter的区别"><a href="#FragmentPageAdapter和FragmentPageStateAdapter的区别" class="headerlink" title="FragmentPageAdapter和FragmentPageStateAdapter的区别"></a>FragmentPageAdapter和FragmentPageStateAdapter的区别</h6><p>FragmentPageAdapter在每次切换页面的的时候，是将Fragment进行分离，适合页面较少的Fragment使用以保存一些内存，对系统内存不会多大影响<br>FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收，适合页面较多的Fragment使用，这样就不会消耗更多的内存</p>
+<h1 id="SharedPreferences"><a href="#SharedPreferences" class="headerlink" title="SharedPreferences"></a>SharedPreferences</h1><p>getStringSet的返回值不能直接修改<br>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7a880ec4ae52">https://www.jianshu.com/p/7a880ec4ae52</a>    </p>
+<h1 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h1><p>相对于子布局Cl与Rl属性对照</p>
+<table>
+<thead>
+<tr>
+<th>CL属性</th>
+<th>RL属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout_constraintLeft_toLeftOf</td>
+<td>layout_alignLeft</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toRightOf</td>
+<td>layout_toRightOf</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toLeftOf</td>
+<td>layout_toLeftOf</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toRightOf</td>
+<td>layout_alignRight</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toTopOf</td>
+<td>layout_alignTop</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toBottomOf</td>
+<td>layout_below</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toTopOf</td>
+<td>layout_above</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toBottomOf</td>
+<td>layout_alignBottom</td>
+</tr>
+<tr>
+<td>layout_constraintBaseline_toBaselineOf</td>
+<td>layout_alignBaseline</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toEndOf</td>
+<td>layout_toEndOf (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toStartOf</td>
+<td>layout_alignStart (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toStartOf</td>
+<td>layout_toStartOf (API 17)</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toEndOf</td>
+<td>layout_alignEnd (API 17)</td>
+</tr>
+</tbody></table>
+<p>相对于父布局Cl与Rl属性对照</p>
+<table>
+<thead>
+<tr>
+<th>CL属性</th>
+<th>RL属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>layout_constraintTop_toTopOf=”parent”</td>
+<td>layout_alignParentTop=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_alignParentBottom=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent”</td>
+<td>layout_alignParentLeft=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintRight_toRightOf=”parent”</td>
+<td>layout_alignParentRight=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintStart_toStartOf=”parent”</td>
+<td>layout_alignParentStart=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintEnd_toEndOf=”parent”</td>
+<td>layout_alignParentEnd=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent”</td>
+<td>layout_centerHorizontal=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_centerVertical=”true”</td>
+</tr>
+<tr>
+<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent” layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
+<td>layout_centerInParent=”true”</td>
+</tr>
+</tbody></table>
+<p>在设置了各类居中属性的基础上，通过layout_constraintHorizontal_bias和layout_constraintVertical_bias两个属性，可以简单直观的完成间距比例的设置。</p>
+<p>chain是CL中新加入的控件与控件间的关系。组成chain的多个控件，可以在同一方向上更加方便的完成复杂的布局要求</p>
+<p><img src="https://xtvj.github.io/images/img.jpg" alt="img"></p>
+<h1 id="RelativeLayout"><a href="#RelativeLayout" class="headerlink" title="RelativeLayout"></a>RelativeLayout</h1><p>经常会有同学在RelativeLayout中使用include标签<br>但是却发现include进来的控件无法用layout_alignParentBottom=”true”之类的标签来调整。这个真的非常恼火。其实解决方法非常简单，只要你在include的时候同时重载下layout_width和layout_height这两个标签就可以了。如果不重载，任何针对include的layout调整都是无效的！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" class="post-title-link" itemprop="url">记录文摘</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-19 16:06:49" itemprop="dateCreated datePublished" datetime="2018-05-19T16:06:49+08:00">2018-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-03-23 17:28:06" itemprop="dateModified" datetime="2019-03-23T17:28:06+08:00">2019-03-23</time>
+              </span>
+
+          
+            <span id="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" class="post-meta-item leancloud_visitors" data-flag-title="记录文摘" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>99</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li>人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Linux系统使用时的一些建议与记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-05-12 23:12:27" itemprop="dateCreated datePublished" datetime="2017-05-12T23:12:27+08:00">2017-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-13 16:50:12" itemprop="dateModified" datetime="2020-07-13T16:50:12+08:00">2020-07-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="Linux系统使用时的一些建议与记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  很早以前就尝试用Linux系统替代Windows来作日常使用了。当时不怎么会搞系统引导，装了Linux用不了Windows，便只在笔记本上装Linux用。后来在维基百科上看到说LinuxMint是排名第一的Linux发行版系统。便下了在虚拟机上试用，发现cinnamon版的LinuxMint可以自动引导硬盘的Win系统。现在一直在使用这个版本，系统真心好用。便有此记录。</p>
+<hr>
+<h2 id="软件推荐"><a href="#软件推荐" class="headerlink" title="软件推荐"></a>软件推荐</h2><h5 id="浏览器："><a href="#浏览器：" class="headerlink" title="浏览器："></a>浏览器：</h5><p> <a target="_blank" rel="noopener" href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>　：　同Win系统下的设置。</p>
+<h5 id="Office："><a href="#Office：" class="headerlink" title="Office："></a>Office：</h5><p> LibreOffice　:　瞬间打开，比WPS之类的快很多，一般Linux发行版标配了。</p>
+<h5 id="视频播放器："><a href="#视频播放器：" class="headerlink" title="视频播放器："></a>视频播放器：</h5><p> SMPlayer　:　可以通过“首选项”DIY界面。</p>
+<h2 id="一些命令及设置"><a href="#一些命令及设置" class="headerlink" title="一些命令及设置"></a>一些命令及设置</h2><h5 id="查询软件安装路径"><a href="#查询软件安装路径" class="headerlink" title="查询软件安装路径"></a>查询软件安装路径</h5><p>​    在Linux操作系统中查看软件安装路径是通过whereis 命令，如查看php软件的安装路径时输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whereis php</span><br></pre></td></tr></table></figure>
+
+<h5 id="切换java"><a href="#切换java" class="headerlink" title="切换java"></a>切换java</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br><span class="line">sudo update-alternatives --config javac</span><br></pre></td></tr></table></figure>
+
+<h5 id="Subllime-Text-3-使用技巧"><a href="#Subllime-Text-3-使用技巧" class="headerlink" title="Subllime Text 3 使用技巧"></a>Subllime Text 3 使用技巧</h5><p>​    矩形（垂直）选区：鼠标右键 + Shift</p>
+<h5 id="列出系统中安装的软件"><a href="#列出系统中安装的软件" class="headerlink" title="列出系统中安装的软件"></a>列出系统中安装的软件</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo dpkg -l</span><br></pre></td></tr></table></figure>
+
+<h5 id="Rime安装五笔输入法"><a href="#Rime安装五笔输入法" class="headerlink" title="Rime安装五笔输入法"></a>Rime安装五笔输入法</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install fcitx-rime</span><br></pre></td></tr></table></figure>
+
+<p>​    然后重启或者注销一次，在 设置 -› 文本输入 里面添加 “中州韵(Fcitx)” 就可以使用了。但是默认是没有五笔输入法的需要安装一下：（注：不同发行版可能要复制到不同的位置。）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install librime-data-wubi</span><br><span class="line">cp &#x2F;usr&#x2F;share&#x2F;rime-data&#x2F;wubi86.schema.yaml ~&#x2F;.config&#x2F;fcitx&#x2F;rime&#x2F;</span><br><span class="line">cp &#x2F;usr&#x2F;share&#x2F;rime-data&#x2F;wubi_pinyin.schema.yaml ~&#x2F;.config&#x2F;fcitx&#x2F;rime&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>这样就安装完成了，编辑~/.config/fcitx/rime/default.yaml，在schema_list下方加入：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- schema: wubi_pinyin</span><br><span class="line">- schema: wubi86</span><br></pre></td></tr></table></figure>
+
+<p>然后重新部署输入法，按F4就可以切换了。</p>
+<h5 id="Linux与Windows系统时间不统一："><a href="#Linux与Windows系统时间不统一：" class="headerlink" title="Linux与Windows系统时间不统一："></a>Linux与Windows系统时间不统一：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo timedatectl set-local-rtc 1</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -174,9 +572,10 @@
       <meta itemprop="name" content="XTVJ">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Android6.0系统镜像编译
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/" class="post-title-link" itemprop="url">Android6.0系统镜像编译</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -236,7 +635,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>下载过程参考<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华源</a>、<a target="_blank" rel="noopener" href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp">科大源</a>和<a target="_blank" rel="noopener" href="https://source.android.com/source/downloading">谷歌</a>的使用说明。</p>
+          <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>下载过程参考<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华源</a>、<a target="_blank" rel="noopener" href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp">科大源</a>和<a target="_blank" rel="noopener" href="https://source.android.com/source/downloading">谷歌</a>的使用说明。</p>
 <h4 id="1、编译准备"><a href="#1、编译准备" class="headerlink" title="1、编译准备"></a>1、编译准备</h4><p>系统：<a target="_blank" rel="noopener" href="https://www.linuxmint.com/download.php">linuxmint-18.1-cinnamon-64bit</a>(LinuxMint是基于Ubuntu的Linux操作系统，是目前DistroWatch排行榜上第一名的Linux发行版，而且cinnamon版本在与Windows系统并存时可以自动引导Windows系统，十分方便，推荐使用。)</p>
 <p>JDK：Android 5.x (Lollipop) - Android 6.0 (Marshmallow): Ubuntu - OpenJDK 7</p>
 <p><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/761127/how-do-i-install-openjdk-7-on-ubuntu-16-04-or-higher">OpenJDK7安装方法</a>：</p>
@@ -303,57 +702,30 @@
 <p>2、<a target="_blank" rel="noopener" href="http://kaedea.com/2016/02/09/android-about-source-code-how-to-read/">阅读 ANDROID 源码的一些姿势</a></p>
 <p>3、<a target="_blank" rel="noopener" href="http://wl9739.github.io/2016/05/09/Android%E6%BA%90%E7%A0%81%E7%9A%84%E4%B8%8B%E8%BD%BD%E3%80%81%E7%BC%96%E8%AF%91%E4%B8%8E%E5%AF%BC%E5%85%A5%E5%88%B0Android-Studio/">Android源码的下载、编译与导入到Android Studio</a></p>
 
+      
     </div>
 
     
     
     
-        
-
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>xtvj
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://xtvj.github.io/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/" title="Android6.0系统镜像编译">https://xtvj.github.io/2017/05/01/Android6.0系统镜像编译/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/android/" rel="tag"># android</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item"></div>
-      <div class="post-nav-item">
-    <a href="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" rel="next" title="Linux系统使用时的一些建议与记录">
-      Linux系统使用时的一些建议与记录 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
 
 
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
 
           </div>
           
-    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -400,7 +772,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E3%80%81%E7%BC%96%E8%AF%91%E5%87%86%E5%A4%87"><span class="nav-number">2.</span> <span class="nav-text">1、编译准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2%E3%80%81%E5%BC%80%E5%A7%8B%E5%90%8C%E6%AD%A5"><span class="nav-number">3.</span> <span class="nav-text">2、开始同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E3%80%81%E7%BC%96%E8%AF%91"><span class="nav-number">4.</span> <span class="nav-text">3、编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E3%80%81%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91"><span class="nav-number">5.</span> <span class="nav-text">4、模块编译</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E4%B8%AD%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF"><span class="nav-number"></span> <span class="nav-text">编译中出现的错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%BA%90%E7%A0%81%E5%88%B0Android-Studio"><span class="nav-number"></span> <span class="nav-text">导入源码到Android Studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E9%98%85%E8%AF%BB%E7%9A%84%E6%BA%90%E7%A0%81"><span class="nav-number"></span> <span class="nav-text">推荐阅读的源码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Handler-Message-Looper"><span class="nav-number">0.1.</span> <span class="nav-text">Handler-Message-Looper</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activity-%E5%92%8C-Service"><span class="nav-number">0.2.</span> <span class="nav-text">Activity 和 Service</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Fragment"><span class="nav-number">1.</span> <span class="nav-text">Fragment</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#View"><span class="nav-number">1.1.</span> <span class="nav-text">View</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MotionEvent"><span class="nav-number">1.2.</span> <span class="nav-text">MotionEvent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LayoutInflator"><span class="nav-number">1.3.</span> <span class="nav-text">LayoutInflator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SurfaceView-%E5%92%8C-TextureView"><span class="nav-number">1.4.</span> <span class="nav-text">SurfaceView 和 TextureView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AsyncTask"><span class="nav-number">1.5.</span> <span class="nav-text">AsyncTask</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Volley"><span class="nav-number">1.6.</span> <span class="nav-text">Volley</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#android-util"><span class="nav-number">1.7.</span> <span class="nav-text">android.util.*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Context"><span class="nav-number">1.8.</span> <span class="nav-text">Context</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ClassLoader"><span class="nav-number">1.9.</span> <span class="nav-text">ClassLoader</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Binder"><span class="nav-number">1.10.</span> <span class="nav-text">Binder</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#WMS%EF%BC%8CAMS%EF%BC%8CPMS%EF%BC%8CNMS%EF%BC%8CIMS-%E7%AD%89%E7%B3%BB%E7%BB%9F-Service"><span class="nav-number">1.11.</span> <span class="nav-text">WMS，AMS，PMS，NMS，IMS 等系统 Service</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83-%EF%BC%9A"><span class="nav-number"></span> <span class="nav-text">参考 ：</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -630,25 +1001,6 @@ setInterval("createtime()",250);
 
   
 
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-<script>
-NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '23f32929e0b2e2db8f94',
-      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
-      repo        : 'xtvj.github.io',
-      owner       : 'xtvj',
-      admin       : ['xtvj'],
-      id          : '5026519c50bbb71ebe7aef0ac13093ba',
-        language: 'zh-CN',
-      distractionFreeMode: true
-    });
-    gitalk.render('gitalk-container');
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
