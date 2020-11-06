@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://xtvj.github.io/images/下载转换完成.png">
 <meta property="og:image" content="https://xtvj.github.io/images/比对SHA值.png">
 <meta property="article:published_time" content="2020-10-29T02:09:51.000Z">
-<meta property="article:modified_time" content="2020-11-05T14:39:16.933Z">
+<meta property="article:modified_time" content="2020-11-06T08:00:05.892Z">
 <meta property="article:author" content="xtvj">
 <meta property="article:tag" content="Mac">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-05 22:39:16" itemprop="dateModified" datetime="2020-11-05T22:39:16+08:00">2020-11-05</time>
+                <time title="修改时间：2020-11-06 16:00:05" itemprop="dateModified" datetime="2020-11-06T16:00:05+08:00">2020-11-06</time>
               </span>
 
           
@@ -235,7 +235,7 @@
         <p>之前很多东西都懒得记录，现在发现改的东西多了，很多细节很容易就忘，故做此流水记录。</p>
 <a id="more"></a>
 
-<h2 id="软件："><a href="#软件：" class="headerlink" title="软件："></a>软件：</h2><style>
+<h4 id="软件："><a href="#软件：" class="headerlink" title="软件："></a>软件：</h4><style>
 table th:nth-of-type(1) {
     width: 100px;
 }
@@ -348,20 +348,15 @@ table th:nth-of-type(2) {
 <td><a target="_blank" rel="noopener" href="https://nodejs.org/download/release/latest-v12.x/">https://nodejs.org/download/release/latest-v12.x/</a><br/>sudo npm install hexo-cli -g</td>
 </tr>
 </tbody></table>
-<h2 id="设置："><a href="#设置：" class="headerlink" title="设置："></a>设置：</h2><p><strong>隐藏Clover引导界面多余的启动项</strong></p>
-<p>Gui-Hide Volume：填入相应的卷标名字，不需要完全填写，只需要填写其中一部分即可，例如Preboot、Recovery</p>
-<p><strong>Clover重新生成设备序列号</strong></p>
-<p>SMBIOS-Serial Number-Generate New</p>
-<p><strong>修改Mac的键盘键位映射</strong></p>
-<p>打开系统偏好设置-键盘-键盘-修改键(如果插入有线键盘/鼠标/USB适配器的鼠标，没有打错，请注意在上方选择是设置哪个键盘)</p>
+<h4 id="设置："><a href="#设置：" class="headerlink" title="设置："></a>设置：</h4><h5 id="隐藏Clover引导界面多余的启动项"><a href="#隐藏Clover引导界面多余的启动项" class="headerlink" title="隐藏Clover引导界面多余的启动项"></a><strong>隐藏Clover引导界面多余的启动项</strong></h5><p>Gui-Hide Volume：填入相应的卷标名字，不需要完全填写，只需要填写其中一部分即可，例如Preboot、Recovery</p>
+<h5 id="Clover重新生成设备序列号"><a href="#Clover重新生成设备序列号" class="headerlink" title="Clover重新生成设备序列号"></a><strong>Clover重新生成设备序列号</strong></h5><p>SMBIOS-Serial Number-Generate New</p>
+<h5 id="修改Mac的键盘键位映射"><a href="#修改Mac的键盘键位映射" class="headerlink" title="修改Mac的键盘键位映射"></a><strong>修改Mac的键盘键位映射</strong></h5><p>打开系统偏好设置-键盘-键盘-修改键(如果插入有线键盘/鼠标/USB适配器的鼠标，没有打错，请注意在上方选择是设置哪个键盘)</p>
 <p>Option键：Command</p>
 <p>Command键：Option</p>
 <p>根据习惯，可以自行调整Control/Caps Lock(大小写)的位置</p>
 <p>确定后，即刻生效</p>
-<p><strong>检测机器硬解码能力</strong></p>
-<p><a target="_blank" rel="noopener" href="https://www.imacpc.net/archives/548">如何得知開內顯＋GPU 硬件加速 HEVC</a></p>
-<p><strong>使用终端下载Mac原版系统</strong></p>
-<p>使用开源项目<a target="_blank" rel="noopener" href="https://github.com/munki/macadmin-scripts">macadmin-scripts</a>下载原版系统，使用<a target="_blank" rel="noopener" href="https://github.com/notpeter/apple-installer-checksums">apple-installer-checksums</a>里的信息来验证下载内容的SHA1值。</p>
+<h5 id="检测机器硬解码能力"><a href="#检测机器硬解码能力" class="headerlink" title="检测机器硬解码能力"></a><strong>检测机器硬解码能力</strong></h5><p><a target="_blank" rel="noopener" href="https://www.imacpc.net/archives/548">如何得知開內顯＋GPU 硬件加速 HEVC</a></p>
+<h5 id="使用终端下载Mac原版系统"><a href="#使用终端下载Mac原版系统" class="headerlink" title="使用终端下载Mac原版系统"></a><strong>使用终端下载Mac原版系统</strong></h5><p>使用开源项目<a target="_blank" rel="noopener" href="https://github.com/munki/macadmin-scripts">macadmin-scripts</a>下载原版系统，使用<a target="_blank" rel="noopener" href="https://github.com/notpeter/apple-installer-checksums">apple-installer-checksums</a>里的信息来验证下载内容的SHA1值。</p>
 <p>使用Python在终端运行macadmin-scripts里的installinstallmacos.py脚本，如图</p>
 <img src="https://xtvj.github.io/images/运行脚本.png" style="zoom: 50%;margin: 0 auto;" />
 
@@ -376,8 +371,7 @@ table th:nth-of-type(2) {
 
 
 
-<p><strong>命令行技巧记录</strong></p>
-<style>
+<h5 id="命令行技巧记录"><a href="#命令行技巧记录" class="headerlink" title="命令行技巧记录"></a><strong>命令行技巧记录</strong></h5><style>
 table th:nth-of-type(1) {
     width: 100px;
 }
@@ -507,7 +501,7 @@ table th:nth-of-type(2) {
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">软件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">设置：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">软件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%EF%BC%9A"><span class="nav-number">2.</span> <span class="nav-text">设置：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%9A%90%E8%97%8FClover%E5%BC%95%E5%AF%BC%E7%95%8C%E9%9D%A2%E5%A4%9A%E4%BD%99%E7%9A%84%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="nav-number">2.1.</span> <span class="nav-text">隐藏Clover引导界面多余的启动项</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Clover%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90%E8%AE%BE%E5%A4%87%E5%BA%8F%E5%88%97%E5%8F%B7"><span class="nav-number">2.2.</span> <span class="nav-text">Clover重新生成设备序列号</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9Mac%E7%9A%84%E9%94%AE%E7%9B%98%E9%94%AE%E4%BD%8D%E6%98%A0%E5%B0%84"><span class="nav-number">2.3.</span> <span class="nav-text">修改Mac的键盘键位映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%9C%BA%E5%99%A8%E7%A1%AC%E8%A7%A3%E7%A0%81%E8%83%BD%E5%8A%9B"><span class="nav-number">2.4.</span> <span class="nav-text">检测机器硬解码能力</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BB%88%E7%AB%AF%E4%B8%8B%E8%BD%BDMac%E5%8E%9F%E7%89%88%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.5.</span> <span class="nav-text">使用终端下载Mac原版系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%8A%80%E5%B7%A7%E8%AE%B0%E5%BD%95"><span class="nav-number">2.6.</span> <span class="nav-text">命令行技巧记录</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
