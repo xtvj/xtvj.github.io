@@ -170,7 +170,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -231,7 +231,7 @@
 
       
         <p>由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。</p>
-<img src="https://xtvj.github.io/images/Iterm2.png" style="zoom: 50%;margin: 0 auto;" />
+<img src="https://xtvj.github.io/images/Iterm2.png" style="zoom: 50%;margin: 0 auto;">
 
 
 <h4 id="iTerm2"><a href="#iTerm2" class="headerlink" title="iTerm2"></a>iTerm2</h4><p>安装brew：</p>
@@ -240,10 +240,10 @@
 <p>安装iTerm2：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew cask install iterm2</span><br></pre></td></tr></table></figure>
 
-<p>或去官网下载安装：<a target="_blank" rel="noopener" href="https://iterm2.com/downloads.html">https://iterm2.com/downloads.html</a></p>
+<p>或去官网下载安装：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://iterm2.com/downloads.html">https://iterm2.com/downloads.html</a></p>
 <a id="more"></a>
 
-<h4 id="代码配色"><a href="#代码配色" class="headerlink" title="代码配色"></a>代码配色</h4><p>使用 <a target="_blank" rel="noopener" href="https://github.com/mbadolato/iTerm2-Color-Schemes">iTerm2-Color-Schemes</a> 的配色合集</p>
+<h4 id="代码配色"><a href="#代码配色" class="headerlink" title="代码配色"></a>代码配色</h4><p>使用 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/mbadolato/iTerm2-Color-Schemes">iTerm2-Color-Schemes</a> 的配色合集</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkdir ~&#x2F;.iterm2 &amp;&amp; cd ~&#x2F;.iterm2</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;mbadolato&#x2F;iTerm2-Color-Schemes</span><br></pre></td></tr></table></figure>
 
 <h6 id="导入配色方案"><a href="#导入配色方案" class="headerlink" title="导入配色方案"></a>导入配色方案</h6><p>Preferences…→Profiles→Colors→Color Presets…→Import…→选择刚才.iterm2的子文件夹schemes下的所有文件。</p>
@@ -252,7 +252,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># git clone</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;powerline&#x2F;fonts.git</span><br><span class="line"></span><br><span class="line"># install</span><br><span class="line">cd fonts</span><br><span class="line">.&#x2F;install.sh</span><br></pre></td></tr></table></figure>
 
 <p>然后按照下面的设置（记得选一个名字后面有for Powerline的字体）</p>
-<img src="https://xtvj.github.io/images/字体.png" style="zoom: 50%;margin: 0 auto;" />
+<img src="https://xtvj.github.io/images/字体.png" style="zoom: 50%;margin: 0 auto;">
 
 <h4 id="设置默认窗口大小："><a href="#设置默认窗口大小：" class="headerlink" title="设置默认窗口大小："></a>设置默认窗口大小：</h4><p>Preferences…→Profiles→Window→Settings for New Windows ：120：30</p>
 <h4 id="安装zsh"><a href="#安装zsh" class="headerlink" title="安装zsh"></a>安装zsh</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install zsh</span><br></pre></td></tr></table></figure>
@@ -260,12 +260,12 @@
 <p>默认的 shell 是 bash，需要修改为 zsh：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo sh -c &quot;echo $(which zsh) &gt;&gt; &#x2F;etc&#x2F;shells&quot;</span><br><span class="line">chsh -s $(which zsh)</span><br></pre></td></tr></table></figure>
 
-<p>使用<a target="_blank" rel="noopener" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>配置zsh</p>
+<p>使用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/robbyrussell/oh-my-zsh">oh-my-zsh</a>配置zsh</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sh -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;robbyrussell&#x2F;oh-my-zsh&#x2F;master&#x2F;tools&#x2F;install.sh)&quot;</span><br></pre></td></tr></table></figure>
 
 <p>安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 <code>.zshrc</code> 的配置文件，以后主要就是修改它了。</p>
 <h4 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h4><p>主题文件存储在 <code>~/.oh-my-zsh/themes</code> 目录下，你也可以使用其他的。</p>
-<p>推荐 <a target="_blank" rel="noopener" href="https://github.com/bhilburn/powerlevel9k">powerlevel9k</a> 的高颜值主题</p>
+<p>推荐 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/bhilburn/powerlevel9k">powerlevel9k</a> 的高颜值主题</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;bhilburn&#x2F;powerlevel9k.git ~&#x2F;.oh-my-zsh&#x2F;custom&#x2F;themes&#x2F;powerlevel9k</span><br></pre></td></tr></table></figure>
 
 <p>然后修改 <code>zsh</code> 主题配置：</p>
@@ -275,7 +275,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">source ~&#x2F;.zshrc</span><br></pre></td></tr></table></figure>
 
 <h4 id="zsh-插件"><a href="#zsh-插件" class="headerlink" title="zsh 插件"></a>zsh 插件</h4><p>  <strong>插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开</strong></p>
-<h6 id="extract"><a href="#extract" class="headerlink" title="extract"></a>extract</h6><p>用于解压，不用另行安装，直接在plugins中加就行 <a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract">官方说明</a></p>
+<h6 id="extract"><a href="#extract" class="headerlink" title="extract"></a>extract</h6><p>用于解压，不用另行安装，直接在plugins中加就行 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract">官方说明</a></p>
 <h6 id="autojump"><a href="#autojump" class="headerlink" title="autojump"></a>autojump</h6><p>自动跳转目录，只能当使用cd命令进入文件夹后，才能使用<code>j 文件夹名</code>进入文件夹</p>
 <p>安装：<code>brew install autojump</code></p>
 <p>再执行一句命令：</p>
@@ -288,15 +288,15 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;zsh-users&#x2F;zsh-autosuggestions $&#123;ZSH_CUSTOM:-~&#x2F;.oh-my-zsh&#x2F;custom&#125;&#x2F;plugins&#x2F;zsh-autosuggestions</span><br></pre></td></tr></table></figure>
 
 <p>自动提示。历史记录可在用户根目录.zsh_history文件内查看到。</p>
-<h6 id="osx"><a href="#osx" class="headerlink" title="osx"></a>osx</h6><p>Mac下快捷命令应用，参考<a target="_blank" rel="noopener" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/osx">官方说明</a>，可实现在终端快速定位到访达目录等操作。</p>
+<h6 id="osx"><a href="#osx" class="headerlink" title="osx"></a>osx</h6><p>Mac下快捷命令应用，参考<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/osx">官方说明</a>，可实现在终端快速定位到访达目录等操作。</p>
 <p>自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions osx)</p>
 <hr>
 <h4 id="完成上面设置后终端会提示："><a href="#完成上面设置后终端会提示：" class="headerlink" title="完成上面设置后终端会提示："></a>完成上面设置后终端会提示：</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[oh-my-zsh] Insecure completion-dependent directories detected:</span><br><span class="line">drwxrwxr-x  7 **  admin  224 Nov  3 12:31 &#x2F;usr&#x2F;local&#x2F;share&#x2F;zsh</span><br><span class="line">drwxrwxr-x  5 **  admin  160 Nov  3 12:34 &#x2F;usr&#x2F;local&#x2F;share&#x2F;zsh&#x2F;site-functions</span><br><span class="line"></span><br><span class="line">[oh-my-zsh] For safety, we will not load completions from these directories until</span><br><span class="line">[oh-my-zsh] you fix their permissions and ownership and restart zsh.</span><br><span class="line">[oh-my-zsh] See the above list for directories with group or other writability.</span><br><span class="line"></span><br><span class="line">[oh-my-zsh] To fix your permissions you can do so by disabling</span><br><span class="line">[oh-my-zsh] the write permission of &quot;group&quot; and &quot;others&quot; and making sure that the</span><br><span class="line">[oh-my-zsh] owner of these directories is either root or your current user.</span><br><span class="line">[oh-my-zsh] The following command may help:</span><br><span class="line">[oh-my-zsh]     compaudit | xargs chmod g-w,o-w</span><br><span class="line"></span><br><span class="line">[oh-my-zsh] If the above didn&#39;t help or you want to skip the verification of</span><br><span class="line">[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to</span><br><span class="line">[oh-my-zsh] &quot;true&quot; before oh-my-zsh is sourced in your zshrc file.</span><br></pre></td></tr></table></figure>
 
 <p>按照说明在.zshrc文件<strong>第一行</strong>中添加 ZSH_DISABLE_COMPFIX=true即可。</p>
 <p>参考文章：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html">打造 Mac 下高颜值好用的终端环境</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gggg989898/article/details/108882880">Mac terminal终端或iterm2出现问号解决方案</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html">打造 Mac 下高颜值好用的终端环境</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/gggg989898/article/details/108882880">Mac terminal终端或iterm2出现问号解决方案</a></p>
 
     </div>
 
@@ -315,7 +315,7 @@
     <a href="https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/" title="Mac上好用又漂亮的终端">https://xtvj.github.io/2020/10/19/Mac上好用又漂亮的终端/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
   </li>
 </ul>
 </div>
@@ -398,14 +398,13 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#iTerm2"><span class="nav-number">1.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%85%8D%E8%89%B2"><span class="nav-number">2.</span> <span class="nav-text">代码配色</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"><span class="nav-number">2.0.1.</span> <span class="nav-text">导入配色方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">3.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">设置默认窗口大小：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85zsh"><span class="nav-number">5.</span> <span class="nav-text">安装zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">配置主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zsh-%E6%8F%92%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">zsh 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#extract"><span class="nav-number">7.0.1.</span> <span class="nav-text">extract</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#autojump"><span class="nav-number">7.0.2.</span> <span class="nav-text">autojump</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">7.0.3.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#zsh-autosuggestions"><span class="nav-number">7.0.4.</span> <span class="nav-text">zsh-autosuggestions</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#osx"><span class="nav-number">7.0.5.</span> <span class="nav-text">osx</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E4%B8%8A%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%90%8E%E7%BB%88%E7%AB%AF%E4%BC%9A%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">完成上面设置后终端会提示：</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#iTerm2"><span class="nav-number">1.</span> <span class="nav-text">iTerm2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%85%8D%E8%89%B2"><span class="nav-number">2.</span> <span class="nav-text">代码配色</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E9%85%8D%E8%89%B2%E6%96%B9%E6%A1%88"><span class="nav-number">2.0.1.</span> <span class="nav-text">导入配色方案</span></a></li></ol></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">3.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E7%AA%97%E5%8F%A3%E5%A4%A7%E5%B0%8F%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">设置默认窗口大小：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85zsh"><span class="nav-number">5.</span> <span class="nav-text">安装zsh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">配置主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zsh-%E6%8F%92%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">zsh 插件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#extract"><span class="nav-number">7.0.1.</span> <span class="nav-text">extract</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#autojump"><span class="nav-number">7.0.2.</span> <span class="nav-text">autojump</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">7.0.3.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#zsh-autosuggestions"><span class="nav-number">7.0.4.</span> <span class="nav-text">zsh-autosuggestions</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#osx"><span class="nav-number">7.0.5.</span> <span class="nav-text">osx</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8C%E6%88%90%E4%B8%8A%E9%9D%A2%E8%AE%BE%E7%BD%AE%E5%90%8E%E7%BB%88%E7%AB%AF%E4%BC%9A%E6%8F%90%E7%A4%BA%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">完成上面设置后终端会提示：</span></a></li></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="xtvj"
-      src="/images/avatar.gif">
+    <img class="site-author-image" itemprop="image" alt="xtvj" src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">xtvj</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -432,7 +431,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
   </div>
 
