@@ -4,7 +4,7 @@ Disallow: /
 User-agent: baiduspider
 Disallow: /
 User-agent: Googlebot-image
-Disallow:
+Disallow: /
 
 User-agent: *
 Disallow: /resources/ 
