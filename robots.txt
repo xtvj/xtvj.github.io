@@ -3,12 +3,23 @@ Allow: /
 Allow: /archives/
 Disallow: /categories/
 Allow: /tags/ 
-Allow: /resources/ 
+Allow: /about/ 
+Disallow: /resources/ 
 Disallow: /vendors/
 Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
+Disallow: /images/
+Disallow: .jpg$
+Disallow: .png$
+Disallow: .gif$
 
 Sitemap: https://xtvj.github.io/sitemap.xml
+
+
+User-agent: Baiduspider
+Disallow: /
+User-agent: baiduspider
+Disallow: /
