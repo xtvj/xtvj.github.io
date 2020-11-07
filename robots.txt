@@ -1,4 +1,3 @@
-
 User-agent: Baiduspider
 Disallow: /
 User-agent: baiduspider
@@ -25,5 +24,3 @@ Allow: /tags/
 Allow: /about/ 
 
 Sitemap: https://xtvj.github.io/sitemap.xml
-
-
