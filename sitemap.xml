@@ -2,14 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://xtvj.github.io/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</loc>
+    <loc>https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</loc>
     
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     
   </url>
   
   <url>
     <loc>https://xtvj.github.io/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+    
+    <lastmod>2020-11-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2020-11-08</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</loc>
     
     <lastmod>2020-11-07</lastmod>
     
@@ -40,20 +54,6 @@
     <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2020-11-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</loc>
-    
-    <lastmod>2020-11-06</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2020-11-05</lastmod>
     
   </url>
   
@@ -151,7 +151,7 @@
 
   <url>
     <loc>https://xtvj.github.io/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -159,91 +159,91 @@
   
   <url>
     <loc>https://xtvj.github.io/tags/android/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Git/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Hexo/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Linux/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Mac/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Root/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E8%AE%B0%E5%BD%95/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/others/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Markdown/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -252,14 +252,14 @@
   
   <url>
     <loc>https://xtvj.github.io/categories/android/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/Linux/</loc>
-    <lastmod>2020-11-07</lastmod>
+    <lastmod>2020-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
