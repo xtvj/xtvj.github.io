@@ -585,7 +585,7 @@ table th:nth-of-type(2) {
 <script>
     var now = new Date();
     function createtime() {
-        var grt= new Date("2017/05/01/ 20:00:00");
+        var grt = Date.UTC(2017,05,01,20,00,00); // 这里设置建站时间
         now.setTime(now.getTime()+250);
         days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
         hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
