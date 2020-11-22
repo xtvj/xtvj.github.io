@@ -157,6 +157,100 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="xtvj">
+      <meta itemprop="description" content>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XTVJ">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">不Root手机禁用系统应用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-06-27 20:23:52" itemprop="dateCreated datePublished" datetime="2018-06-27T20:23:52+08:00">2018-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-03-23 17:24:38" itemprop="dateModified" datetime="2019-03-23T17:24:38+08:00">2019-03-23</time>
+              </span>
+
+          
+            <span id="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="不Root手机禁用系统应用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。</p>
+<p>手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。<br>执行以下命令<br>（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">pm disable-user com.mobeam.barcodeService</span><br><span class="line">pm disable-user com.sec.android.widgetapp.samsungapps</span><br><span class="line">pm disable-user com.samsung.android.app.galaxyfinder</span><br><span class="line">pm disable-user com.samsung.android.themestore</span><br><span class="line">pm disable-user com.samsung.android.app.cocktailbarservice</span><br><span class="line">pm disable-user com.samsung.svoice.sync</span><br><span class="line">pm disable-user com.osp.app.signin</span><br><span class="line">pm disable-user com.google.android.onetimeinitializer</span><br><span class="line">pm disable-user com.google.android.ext.shared</span><br><span class="line">pm disable-user com.android.wallpapercropper</span><br><span class="line">pm disable-user com.samsung.android.app.withtv</span><br><span class="line">pm disable-user com.samsung.android.smartmirroring</span><br><span class="line">pm disable-user org.simalliance.openmobileapi.service</span><br><span class="line">pm disable-user com.samsung.android.easysetup</span><br><span class="line">pm disable-user com.sec.android.easyonehand</span><br><span class="line">pm disable-user com.sec.factory</span><br><span class="line">pm disable-user com.samsung.android.app.sbrowseredge</span><br><span class="line">pm disable-user com.samsung.android.wechatwifiservice</span><br><span class="line">pm disable-user com.sec.android.easyMover.Agent</span><br><span class="line">pm disable-user com.samsung.faceservice</span><br><span class="line">pm disable-user com.sec.android.widgetapp.easymodecontactswidget</span><br><span class="line">pm disable-user com.sec.android.app.samsungapps</span><br><span class="line">pm disable-user com.oupeng.max.sdk</span><br><span class="line">pm disable-user com.google.android.configupdater</span><br><span class="line">pm disable-user com.sec.android.app.billing</span><br><span class="line">pm disable-user com.sec.android.daemonapp</span><br><span class="line">pm disable-user com.sec.sve</span><br><span class="line">pm disable-user com.dsi.ant.service.socket</span><br><span class="line">pm disable-user com.sec.android.AutoPreconfig</span><br><span class="line">pm disable-user com.sec.android.app.soundalive</span><br><span class="line">pm disable-user com.samsung.android.securitylogagent</span><br><span class="line">pm disable-user com.samsung.SMT</span><br><span class="line">pm disable-user com.samsung.android.drivelink.stub</span><br><span class="line">pm disable-user com.samsung.hongbaoassistant</span><br><span class="line">pm disable-user com.dsi.ant.sample.acquirechannels</span><br><span class="line">pm disable-user com.android.backupconfirm</span><br><span class="line">pm disable-user com.sec.android.app.SecSetupWizard</span><br><span class="line">pm disable-user com.sec.bcservice</span><br><span class="line">pm disable-user com.sec.android.uibcvirtualsoftkey</span><br><span class="line">pm disable-user com.samsung.android.sdk.professionalaudio.utility.jammonitor</span><br><span class="line">pm disable-user com.android.sharedstoragebackup</span><br><span class="line">pm disable-user com.android.printspooler</span><br><span class="line">pm disable-user com.samsung.android.hmt.vrsvc</span><br><span class="line">pm disable-user com.samsung.storyservice</span><br><span class="line">pm disable-user com.android.dreams.basic</span><br><span class="line">pm disable-user com.sec.android.app.dictionary</span><br><span class="line">pm disable-user com.samsung.android.app.talkback</span><br><span class="line">pm disable-user com.android.bips</span><br><span class="line">pm disable-user com.samsung.android.game.gametools</span><br><span class="line">pm disable-user com.samsung.android.app.simplesharing</span><br><span class="line">pm disable-user com.samsung.android.service.peoplestripe</span><br><span class="line">pm disable-user com.samsung.app.slowmotion</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.vpn</span><br><span class="line">pm disable-user com.samsung.android.weather</span><br><span class="line">pm disable-user com.dsi.ant.plugins.antplus</span><br><span class="line">pm disable-user com.samsung.android.personalpage.service</span><br><span class="line">pm disable-user com.samsung.android.app.taskedge</span><br><span class="line">pm disable-user com.samsung.advp.imssettings</span><br><span class="line">pm disable-user com.sec.android.inputmethod</span><br><span class="line">pm disable-user com.samsung.android.app.advsounddetector</span><br><span class="line">pm disable-user com.samsung.android.app.mirrorlink</span><br><span class="line">pm disable-user com.samsung.android.opencalendar</span><br><span class="line">pm disable-user com.samsung.android.sm</span><br><span class="line">pm disable-user com.google.android.partnersetup</span><br><span class="line">pm disable-user com.sec.android.diagmonagent</span><br><span class="line">pm disable-user com.trustonic.tuiservice</span><br><span class="line">pm disable-user com.samsung.hidden.china</span><br><span class="line">pm disable-user com.sec.spp.push</span><br><span class="line">pm disable-user com.dsi.ant.server</span><br><span class="line">pm disable-user com.sec.android.app.myfiles</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.fileshare</span><br><span class="line">pm disable-user com.sec.android.app.apex</span><br><span class="line">pm disable-user com.google.android.syncadapters.calendar</span><br><span class="line">pm disable-user com.sec.android.app.sbrowser</span><br><span class="line">pm disable-user com.android.dreams.phototable</span><br><span class="line">pm disable-user com.sec.android.service.health</span><br><span class="line">pm disable-user com.samsung.safetyinformation</span><br><span class="line">pm disable-user com.samsung.app.highlightplayer</span><br><span class="line">pm disable-user com.sec.android.app.vepreload</span><br><span class="line">pm disable-user com.samsung.android.keyguardwallpaperupdator</span><br><span class="line">pm disable-user com.android.wallpaper.livepicker</span><br><span class="line">pm disable-user com.samsung.android.beaconmanager</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.services.simpin</span><br><span class="line">pm disable-user com.android.apps.tag</span><br><span class="line">pm disable-user com.samsung.networkui</span><br><span class="line">pm disable-user com.sec.android.soagent</span><br><span class="line">pm disable-user com.sec.android.app.quicktool</span><br><span class="line">pm disable-user com.samsung.android.fmm</span><br><span class="line">pm disable-user com.samsung.android.mdm</span><br><span class="line">pm disable-user com.baidu.map.location</span><br><span class="line">pm disable-user com.mobilesrepublic.sohu.launcher</span><br><span class="line">pm disable-user com.google.android.backuptransport</span><br><span class="line">pm disable-user com.sec.android.yellowpage</span><br><span class="line">pm disable-user com.samsung.android.scloud</span><br><span class="line">pm disable-user com.sec.app.RilErrorNotifier</span><br><span class="line">pm disable-user com.samsung.android.spayfw</span><br><span class="line">pm disable-user com.samsung.android.svoice</span><br><span class="line">pm disable-user com.android.bookmarkprovider</span><br><span class="line">pm disable-user com.samsung.app.newtrim</span><br><span class="line">pm disable-user com.samsung.android.spay</span><br><span class="line">pm disable-user com.samsung.android.bluelightfilter</span><br><span class="line">pm disable-user com.samsung.android.bbc.bbcagent</span><br><span class="line">pm disable-user com.samsung.android.voicewakeup</span><br><span class="line">pm disable-user com.sec.android.splitsound</span><br><span class="line">pm disable-user com.samsung.android.productsearch</span><br><span class="line">pm disable-user com.wssnps</span><br><span class="line">pm disable-user com.samsung.android.app.watchmanagerstub</span><br><span class="line">pm disable-user com.policydm</span><br><span class="line">pm disable-user com.samsung.android.svoiceime</span><br><span class="line">pm disable-user com.samsung.android.mateagent</span><br><span class="line">pm disable-user com.google.android.apps.pdfviewer</span><br><span class="line">pm disable-user com.samsung.android.widgetapp.briefing</span><br><span class="line">pm disable-user com.android.wallpaperbackup</span><br><span class="line">pm disable-user com.sec.enterprise.knox.cloudmdm.smdms</span><br><span class="line">pm disable-user com.samsung.android.app.camera.sticker.stamp.preload</span><br><span class="line">pm disable-user com.android.emergency</span><br><span class="line">pm disable-user com.sec.svoice.lang.en_US</span><br><span class="line">pm disable-user com.wssyncmldm</span><br><span class="line">pm disable-user com.sec.svoice.lang.zh_CN</span><br><span class="line">pm disable-user com.samsung.android.app.appsedge</span><br><span class="line">pm disable-user com.samsung.voiceserviceplatform</span><br><span class="line">pm disable-user com.samsung.aasaservice</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.mediashare</span><br><span class="line">pm disable-user com.android.bluetooth</span><br><span class="line">pm disable-user com.samsung.android.app.clipboardedge</span><br><span class="line">pm disable-user com.sec.android.app.magnifier</span><br><span class="line">pm disable-user com.sec.android.widgetapp.webmanual</span><br><span class="line">pm disable-user com.samsung.android.coreapps</span><br><span class="line">pm disable-user com.samsung.android.video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果想重新启用某个软件，找到软件的包名，执行“pm enable 包名”就可以启用软件了。<br>如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell pm enable com.sec.android.inputmethod</span><br></pre></td></tr></table></figure>
+
+<p>把包名换成你想恢复的包名就行了。</p>
+<p>如果你的手机是安卓7.0以前的版本，在禁用手机应用的时候用pm disable，如果是7.0或7.0以上，就用pm disable-user。</p>
+<p>附：ADB和Fastboot for Windows 工具下载<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a><br>可以直接解压，在得到的文件夹内按shift+ 右键。选“在此处打开命令窗口”，打开cmd执行代码。<br>也可参考网上的教程：<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/u013250071/article/details/78416274">https://blog.csdn.net/u013250071/article/details/78416274</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/class_brick/article/details/72512982">https://blog.csdn.net/class_brick/article/details/72512982</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -787,7 +881,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -798,7 +892,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
