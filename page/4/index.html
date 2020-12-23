@@ -1,1046 +1,320 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png">
-  <link rel="mask-icon" href="/images/favicon.svg" color="#222">
-  <meta http-equiv="Cache-Control" content="no-transform">
-  <meta http-equiv="Cache-Control" content="no-siteapp">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"xtvj.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XTVJ</title><meta name="author" content="xtvj"><meta name="copyright" content="xtvj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
 <meta property="og:title" content="XTVJ">
 <meta property="og:url" content="https://xtvj.github.io/page/4/index.html">
 <meta property="og:site_name" content="XTVJ">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xtvj.github.io/images/avatar.gif">
 <meta property="article:author" content="xtvj">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xtvj.github.io/images/avatar.gif"><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://xtvj.github.io/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
 
-<link rel="canonical" href="https://xtvj.github.io/page/4/">
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
 
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-CN'
-  };
-</script>
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
 
-  <title>XTVJ</title>
-  
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
 
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2020-12-24 07:28:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
   }
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}const fontSizeVal = saveToLocal.get('global-font-size')
+if (fontSizeVal !== undefined) {
+  document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+}})()</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/images/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="no-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">XTVJ</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Android开发填坑记录">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android开发填坑记录"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Android开发填坑记录">Android开发填坑记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2019-10-12T14:31:45.000Z" title="发表于 2019-10-12 22:31:45">2019-10-12</time></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/android/">android</a></span></div><div class="content">双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。
+一般是用作Lambda表达式
+例如
+表达式:
+person -&gt; person.getName();
 
-</head>
+可以替换成
+Person::getName
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+表达式
+() -&gt; new HashMap&lt;&gt;();
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+可以替换成
+HashMap::new
 
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">XTVJ</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
+这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。
 
 
 
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
-
-  </li>
-  </ul>
-</nav>
+Android studio快捷键
 
 
 
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+按键
+说明
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content index posts-expand">
+Shift + F2
+定位到错误行
+
+
+Ctrl(Command)+Shift+ - / +
+折叠/展开全部代码
+
+
+Ctrl(Command)+F12
+显示当前文件的结构
+
+
+Shift + F11
+查看书签
+
+
+F11
+添加书签
+
+
+Ctrl + Alt + M
+快速抽取方法
+
+
+
+一、启动app adb shell am start 包名/MainActivity 
+二、停止app adb shell am force-stop com.xxx.x ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" title="不Root手机禁用系统应用">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="不Root手机禁用系统应用"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" title="不Root手机禁用系统应用">不Root手机禁用系统应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-06-27T12:23:52.000Z" title="发表于 2018-06-27 20:23:52">2018-06-27</time></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/Root/">Root</a></span></div><div class="content">用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。
+手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。执行以下命令（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）
+adb shellpm disable-user com.mobeam.barcodeServicepm disable-user com.sec.android.widgetapp.samsungappspm disable-user com.samsung.android.app.galaxyfinderpm disable-user com.samsung.android.themestorepm disable-user com.samsung.android.app.cocktailbarservicepm disable-user com.sa ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" title="温习知识点记录">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="温习知识点记录"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" title="温习知识点记录">温习知识点记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-06-23T10:30:55.000Z" title="发表于 2018-06-23 18:30:55">2018-06-23</time></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/android/">android</a></span></div><div class="content">RecyclerViewRecyclerView局部刷新闪烁问题在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法在更新局部数据的时候用notifyItemChanged(position, poyload：1);参考：http://wetest.qq.com/lab/view/176.html
+FragmentFragmentPageAdapter和FragmentPageStateAdapter的区别FragmentPageAdapter在每次切换页面的的时候，是将Fragment进行分离，适合页面较少的Fragment使用以保存一些内存，对系统内存不会多大影响FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收，适合页面较多的Fragment使用，这样就不会消耗更多的内存
+SharedPreferencesgetStringSet的返回值不能直接修改参考：https://www.jianshu.com/p/7a880ec4ae52    
+Constrain ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" title="记录文摘">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="记录文摘"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" title="记录文摘">记录文摘</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2018-05-19T08:06:49.000Z" title="发表于 2018-05-19 16:06:49">2018-05-19</time></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/others/">others</a></span></div><div class="content">
+人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。
+
+</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" title="Linux系统使用时的一些建议与记录">     <img class="post_bg" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux系统使用时的一些建议与记录"></a></div><div class="recent-post-info"><a class="article-title" href="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" title="Linux系统使用时的一些建议与记录">Linux系统使用时的一些建议与记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2017-05-12T15:12:27.000Z" title="发表于 2017-05-12 23:12:27">2017-05-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag article-meta__icon"></i><a class="article-meta__tags" href="/tags/Linux/">Linux</a></span></div><div class="content">前言  很早以前就尝试用Linux系统替代Windows来作日常使用了。当时不怎么会搞系统引导，装了Linux用不了Windows，便只在笔记本上装Linux用。后来在维基百科上看到说LinuxMint是排名第一的Linux发行版系统。便下了在虚拟机上试用，发现cinnamon版的LinuxMint可以自动引导硬盘的Win系统。现在一直在使用这个版本，系统真心好用。便有此记录。
+
+软件推荐浏览器： Google Chrome　：　同Win系统下的设置。
+Office： LibreOffice　:　瞬间打开，比WPS之类的快很多，一般Linux发行版标配了。
+视频播放器： SMPlayer　:　可以通过“首选项”DIY界面。
+一些命令及设置查询软件安装路径​    在Linux操作系统中查看软件安装路径是通过whereis 命令，如查看php软件的安装路径时输入命令：
+whereis php
+
+切换javasudo update-alternatives --config javasudo update-alternatives --config javac
+
+Subllime Text ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/images/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"><div class="author-info__name">xtvj</div><div class="author-info__description">探寻生活的多种意义</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/xtvj"><i class="fab fa-github"></i><span>Github</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xtvj" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zhangxu0922@gmail.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer"><i class="fas fa-envelope"></i></a></div></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"></a><div class="content"><a class="title" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频">使用youtube-dl下载视频、音频、播放列表中的多个视频或音频</a><time datetime="2020-11-22T10:39:02.000Z" title="发表于 2020-11-22 18:39:02">2020-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android中使用Hilt依赖注入，超赞的一个库"></a><div class="content"><a class="title" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库">Android中使用Hilt依赖注入，超赞的一个库</a><time datetime="2020-11-15T11:12:02.000Z" title="发表于 2020-11-15 19:12:02">2020-11-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="五笔拆字表"></a><div class="content"><a class="title" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表">五笔拆字表</a><time datetime="2020-11-04T06:58:56.000Z" title="发表于 2020-11-04 14:58:56">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" title="Mac使用记录"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Mac使用记录"></a><div class="content"><a class="title" href="/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" title="Mac使用记录">Mac使用记录</a><time datetime="2020-10-29T02:09:51.000Z" title="发表于 2020-10-29 10:09:51">2020-10-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/20/Hexo%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" title="Hexo配置记录"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hexo配置记录"></a><div class="content"><a class="title" href="/2020/10/20/Hexo%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/" title="Hexo配置记录">Hexo配置记录</a><time datetime="2020-10-19T18:02:06.000Z" title="发表于 2020-10-20 02:02:06">2020-10-20</time></div></div></div></div></div><div class="card-widget" id="card-newest-comments"><div class="card-content"><div class="item-headline"><i class="fas fa-bolt"></i><span>最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/android/"><span class="card-category-list-name">android</span><span class="card-category-list-count">1</span></a></li>
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XTVJ">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Android开发填坑记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-10-12 22:31:45" itemprop="dateCreated datePublished" datetime="2019-10-12T22:31:45+08:00">2019-10-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-18 12:39:40" itemprop="dateModified" datetime="2020-12-18T12:39:40+08:00">2020-12-18</time>
-              </span>
-
-          
-            <span id="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="Android开发填坑记录" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>12k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><strong>双冒号运算</strong>就是Java中的[方法引用],[方法引用]的格式是 <strong>类名::方法名。</strong></p>
-<p>一般是用作Lambda表达式</p>
-<p><strong>例如</strong></p>
-<p>表达式:</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">person -&gt; person.getName();</span><br></pre></td></tr></table></figure>
-
-<p>可以替换成</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">Person::getName</span><br></pre></td></tr></table></figure>
-
-<p>表达式</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">() -&gt; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>可以替换成</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">HashMap::new</span><br></pre></td></tr></table></figure>
-
-<p>这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XTVJ">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">不Root手机禁用系统应用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-27 20:23:52" itemprop="dateCreated datePublished" datetime="2018-06-27T20:23:52+08:00">2018-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-23 17:24:38" itemprop="dateModified" datetime="2019-03-23T17:24:38+08:00">2019-03-23</time>
-              </span>
-
-          
-            <span id="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="不Root手机禁用系统应用" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。</p>
-<p>手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。<br>执行以下命令<br>（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell</span><br><span class="line">pm disable-user com.mobeam.barcodeService</span><br><span class="line">pm disable-user com.sec.android.widgetapp.samsungapps</span><br><span class="line">pm disable-user com.samsung.android.app.galaxyfinder</span><br><span class="line">pm disable-user com.samsung.android.themestore</span><br><span class="line">pm disable-user com.samsung.android.app.cocktailbarservice</span><br><span class="line">pm disable-user com.samsung.svoice.sync</span><br><span class="line">pm disable-user com.osp.app.signin</span><br><span class="line">pm disable-user com.google.android.onetimeinitializer</span><br><span class="line">pm disable-user com.google.android.ext.shared</span><br><span class="line">pm disable-user com.android.wallpapercropper</span><br><span class="line">pm disable-user com.samsung.android.app.withtv</span><br><span class="line">pm disable-user com.samsung.android.smartmirroring</span><br><span class="line">pm disable-user org.simalliance.openmobileapi.service</span><br><span class="line">pm disable-user com.samsung.android.easysetup</span><br><span class="line">pm disable-user com.sec.android.easyonehand</span><br><span class="line">pm disable-user com.sec.factory</span><br><span class="line">pm disable-user com.samsung.android.app.sbrowseredge</span><br><span class="line">pm disable-user com.samsung.android.wechatwifiservice</span><br><span class="line">pm disable-user com.sec.android.easyMover.Agent</span><br><span class="line">pm disable-user com.samsung.faceservice</span><br><span class="line">pm disable-user com.sec.android.widgetapp.easymodecontactswidget</span><br><span class="line">pm disable-user com.sec.android.app.samsungapps</span><br><span class="line">pm disable-user com.oupeng.max.sdk</span><br><span class="line">pm disable-user com.google.android.configupdater</span><br><span class="line">pm disable-user com.sec.android.app.billing</span><br><span class="line">pm disable-user com.sec.android.daemonapp</span><br><span class="line">pm disable-user com.sec.sve</span><br><span class="line">pm disable-user com.dsi.ant.service.socket</span><br><span class="line">pm disable-user com.sec.android.AutoPreconfig</span><br><span class="line">pm disable-user com.sec.android.app.soundalive</span><br><span class="line">pm disable-user com.samsung.android.securitylogagent</span><br><span class="line">pm disable-user com.samsung.SMT</span><br><span class="line">pm disable-user com.samsung.android.drivelink.stub</span><br><span class="line">pm disable-user com.samsung.hongbaoassistant</span><br><span class="line">pm disable-user com.dsi.ant.sample.acquirechannels</span><br><span class="line">pm disable-user com.android.backupconfirm</span><br><span class="line">pm disable-user com.sec.android.app.SecSetupWizard</span><br><span class="line">pm disable-user com.sec.bcservice</span><br><span class="line">pm disable-user com.sec.android.uibcvirtualsoftkey</span><br><span class="line">pm disable-user com.samsung.android.sdk.professionalaudio.utility.jammonitor</span><br><span class="line">pm disable-user com.android.sharedstoragebackup</span><br><span class="line">pm disable-user com.android.printspooler</span><br><span class="line">pm disable-user com.samsung.android.hmt.vrsvc</span><br><span class="line">pm disable-user com.samsung.storyservice</span><br><span class="line">pm disable-user com.android.dreams.basic</span><br><span class="line">pm disable-user com.sec.android.app.dictionary</span><br><span class="line">pm disable-user com.samsung.android.app.talkback</span><br><span class="line">pm disable-user com.android.bips</span><br><span class="line">pm disable-user com.samsung.android.game.gametools</span><br><span class="line">pm disable-user com.samsung.android.app.simplesharing</span><br><span class="line">pm disable-user com.samsung.android.service.peoplestripe</span><br><span class="line">pm disable-user com.samsung.app.slowmotion</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.vpn</span><br><span class="line">pm disable-user com.samsung.android.weather</span><br><span class="line">pm disable-user com.dsi.ant.plugins.antplus</span><br><span class="line">pm disable-user com.samsung.android.personalpage.service</span><br><span class="line">pm disable-user com.samsung.android.app.taskedge</span><br><span class="line">pm disable-user com.samsung.advp.imssettings</span><br><span class="line">pm disable-user com.sec.android.inputmethod</span><br><span class="line">pm disable-user com.samsung.android.app.advsounddetector</span><br><span class="line">pm disable-user com.samsung.android.app.mirrorlink</span><br><span class="line">pm disable-user com.samsung.android.opencalendar</span><br><span class="line">pm disable-user com.samsung.android.sm</span><br><span class="line">pm disable-user com.google.android.partnersetup</span><br><span class="line">pm disable-user com.sec.android.diagmonagent</span><br><span class="line">pm disable-user com.trustonic.tuiservice</span><br><span class="line">pm disable-user com.samsung.hidden.china</span><br><span class="line">pm disable-user com.sec.spp.push</span><br><span class="line">pm disable-user com.dsi.ant.server</span><br><span class="line">pm disable-user com.sec.android.app.myfiles</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.fileshare</span><br><span class="line">pm disable-user com.sec.android.app.apex</span><br><span class="line">pm disable-user com.google.android.syncadapters.calendar</span><br><span class="line">pm disable-user com.sec.android.app.sbrowser</span><br><span class="line">pm disable-user com.android.dreams.phototable</span><br><span class="line">pm disable-user com.sec.android.service.health</span><br><span class="line">pm disable-user com.samsung.safetyinformation</span><br><span class="line">pm disable-user com.samsung.app.highlightplayer</span><br><span class="line">pm disable-user com.sec.android.app.vepreload</span><br><span class="line">pm disable-user com.samsung.android.keyguardwallpaperupdator</span><br><span class="line">pm disable-user com.android.wallpaper.livepicker</span><br><span class="line">pm disable-user com.samsung.android.beaconmanager</span><br><span class="line">pm disable-user com.sec.enterprise.mdm.services.simpin</span><br><span class="line">pm disable-user com.android.apps.tag</span><br><span class="line">pm disable-user com.samsung.networkui</span><br><span class="line">pm disable-user com.sec.android.soagent</span><br><span class="line">pm disable-user com.sec.android.app.quicktool</span><br><span class="line">pm disable-user com.samsung.android.fmm</span><br><span class="line">pm disable-user com.samsung.android.mdm</span><br><span class="line">pm disable-user com.baidu.map.location</span><br><span class="line">pm disable-user com.mobilesrepublic.sohu.launcher</span><br><span class="line">pm disable-user com.google.android.backuptransport</span><br><span class="line">pm disable-user com.sec.android.yellowpage</span><br><span class="line">pm disable-user com.samsung.android.scloud</span><br><span class="line">pm disable-user com.sec.app.RilErrorNotifier</span><br><span class="line">pm disable-user com.samsung.android.spayfw</span><br><span class="line">pm disable-user com.samsung.android.svoice</span><br><span class="line">pm disable-user com.android.bookmarkprovider</span><br><span class="line">pm disable-user com.samsung.app.newtrim</span><br><span class="line">pm disable-user com.samsung.android.spay</span><br><span class="line">pm disable-user com.samsung.android.bluelightfilter</span><br><span class="line">pm disable-user com.samsung.android.bbc.bbcagent</span><br><span class="line">pm disable-user com.samsung.android.voicewakeup</span><br><span class="line">pm disable-user com.sec.android.splitsound</span><br><span class="line">pm disable-user com.samsung.android.productsearch</span><br><span class="line">pm disable-user com.wssnps</span><br><span class="line">pm disable-user com.samsung.android.app.watchmanagerstub</span><br><span class="line">pm disable-user com.policydm</span><br><span class="line">pm disable-user com.samsung.android.svoiceime</span><br><span class="line">pm disable-user com.samsung.android.mateagent</span><br><span class="line">pm disable-user com.google.android.apps.pdfviewer</span><br><span class="line">pm disable-user com.samsung.android.widgetapp.briefing</span><br><span class="line">pm disable-user com.android.wallpaperbackup</span><br><span class="line">pm disable-user com.sec.enterprise.knox.cloudmdm.smdms</span><br><span class="line">pm disable-user com.samsung.android.app.camera.sticker.stamp.preload</span><br><span class="line">pm disable-user com.android.emergency</span><br><span class="line">pm disable-user com.sec.svoice.lang.en_US</span><br><span class="line">pm disable-user com.wssyncmldm</span><br><span class="line">pm disable-user com.sec.svoice.lang.zh_CN</span><br><span class="line">pm disable-user com.samsung.android.app.appsedge</span><br><span class="line">pm disable-user com.samsung.voiceserviceplatform</span><br><span class="line">pm disable-user com.samsung.aasaservice</span><br><span class="line">pm disable-user com.samsung.android.allshare.service.mediashare</span><br><span class="line">pm disable-user com.android.bluetooth</span><br><span class="line">pm disable-user com.samsung.android.app.clipboardedge</span><br><span class="line">pm disable-user com.sec.android.app.magnifier</span><br><span class="line">pm disable-user com.sec.android.widgetapp.webmanual</span><br><span class="line">pm disable-user com.samsung.android.coreapps</span><br><span class="line">pm disable-user com.samsung.android.video</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果想重新启用某个软件，找到软件的包名，执行“pm enable 包名”就可以启用软件了。<br>如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell pm enable com.sec.android.inputmethod</span><br></pre></td></tr></table></figure>
-
-<p>把包名换成你想恢复的包名就行了。</p>
-<p>如果你的手机是安卓7.0以前的版本，在禁用手机应用的时候用pm disable，如果是7.0或7.0以上，就用pm disable-user。</p>
-<p>附：ADB和Fastboot for Windows 工具下载<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">https://dl.google.com/android/repository/platform-tools-latest-windows.zip</a><br>可以直接解压，在得到的文件夹内按shift+ 右键。选“在此处打开命令窗口”，打开cmd执行代码。<br>也可参考网上的教程：<br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/u013250071/article/details/78416274">https://blog.csdn.net/u013250071/article/details/78416274</a><br><a target="_blank" rel="external nofollow noopener noreferrer" href="https://blog.csdn.net/class_brick/article/details/72512982">https://blog.csdn.net/class_brick/article/details/72512982</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XTVJ">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">温习知识点记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-06-23 18:30:55" itemprop="dateCreated datePublished" datetime="2018-06-23T18:30:55+08:00">2018-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-18 03:46:18" itemprop="dateModified" datetime="2020-07-18T03:46:18+08:00">2020-07-18</time>
-              </span>
-
-          
-            <span id="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="温习知识点记录" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="RecyclerView"><a href="#RecyclerView" class="headerlink" title="RecyclerView"></a>RecyclerView</h1><h6 id="RecyclerView局部刷新闪烁问题"><a href="#RecyclerView局部刷新闪烁问题" class="headerlink" title="RecyclerView局部刷新闪烁问题"></a>RecyclerView局部刷新闪烁问题</h6><p>在Adapter中重载带三个参数的onBindViewHolder方法，让其调用带两个参数的onBindViewHolder方法<br>在更新局部数据的时候用notifyItemChanged(position, poyload：1);<br>参考：<a target="_blank" rel="external nofollow noopener noreferrer" href="http://wetest.qq.com/lab/view/176.html">http://wetest.qq.com/lab/view/176.html</a></p>
-<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><h6 id="FragmentPageAdapter和FragmentPageStateAdapter的区别"><a href="#FragmentPageAdapter和FragmentPageStateAdapter的区别" class="headerlink" title="FragmentPageAdapter和FragmentPageStateAdapter的区别"></a>FragmentPageAdapter和FragmentPageStateAdapter的区别</h6><p>FragmentPageAdapter在每次切换页面的的时候，是将Fragment进行分离，适合页面较少的Fragment使用以保存一些内存，对系统内存不会多大影响<br>FragmentPageStateAdapter在每次切换页面的时候，是将Fragment进行回收，适合页面较多的Fragment使用，这样就不会消耗更多的内存</p>
-<h1 id="SharedPreferences"><a href="#SharedPreferences" class="headerlink" title="SharedPreferences"></a>SharedPreferences</h1><p>getStringSet的返回值不能直接修改<br>参考：<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.jianshu.com/p/7a880ec4ae52">https://www.jianshu.com/p/7a880ec4ae52</a>    </p>
-<h1 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h1><p>相对于子布局Cl与Rl属性对照</p>
-<table>
-<thead>
-<tr>
-<th>CL属性</th>
-<th>RL属性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>layout_constraintLeft_toLeftOf</td>
-<td>layout_alignLeft</td>
-</tr>
-<tr>
-<td>layout_constraintLeft_toRightOf</td>
-<td>layout_toRightOf</td>
-</tr>
-<tr>
-<td>layout_constraintRight_toLeftOf</td>
-<td>layout_toLeftOf</td>
-</tr>
-<tr>
-<td>layout_constraintRight_toRightOf</td>
-<td>layout_alignRight</td>
-</tr>
-<tr>
-<td>layout_constraintTop_toTopOf</td>
-<td>layout_alignTop</td>
-</tr>
-<tr>
-<td>layout_constraintTop_toBottomOf</td>
-<td>layout_below</td>
-</tr>
-<tr>
-<td>layout_constraintBottom_toTopOf</td>
-<td>layout_above</td>
-</tr>
-<tr>
-<td>layout_constraintBottom_toBottomOf</td>
-<td>layout_alignBottom</td>
-</tr>
-<tr>
-<td>layout_constraintBaseline_toBaselineOf</td>
-<td>layout_alignBaseline</td>
-</tr>
-<tr>
-<td>layout_constraintStart_toEndOf</td>
-<td>layout_toEndOf (API 17)</td>
-</tr>
-<tr>
-<td>layout_constraintStart_toStartOf</td>
-<td>layout_alignStart (API 17)</td>
-</tr>
-<tr>
-<td>layout_constraintEnd_toStartOf</td>
-<td>layout_toStartOf (API 17)</td>
-</tr>
-<tr>
-<td>layout_constraintEnd_toEndOf</td>
-<td>layout_alignEnd (API 17)</td>
-</tr>
-</tbody></table>
-<p>相对于父布局Cl与Rl属性对照</p>
-<table>
-<thead>
-<tr>
-<th>CL属性</th>
-<th>RL属性</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>layout_constraintTop_toTopOf=”parent”</td>
-<td>layout_alignParentTop=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintBottom_toBottomOf=”parent”</td>
-<td>layout_alignParentBottom=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintLeft_toLeftOf=”parent”</td>
-<td>layout_alignParentLeft=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintRight_toRightOf=”parent”</td>
-<td>layout_alignParentRight=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintStart_toStartOf=”parent”</td>
-<td>layout_alignParentStart=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintEnd_toEndOf=”parent”</td>
-<td>layout_alignParentEnd=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent”</td>
-<td>layout_centerHorizontal=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
-<td>layout_centerVertical=”true”</td>
-</tr>
-<tr>
-<td>layout_constraintLeft_toLeftOf=”parent” layout_constraintRight_toRightOf=”parent” layout_constraintTop_toTopOf=”parent” layout_constraintBottom_toBottomOf=”parent”</td>
-<td>layout_centerInParent=”true”</td>
-</tr>
-</tbody></table>
-<p>在设置了各类居中属性的基础上，通过layout_constraintHorizontal_bias和layout_constraintVertical_bias两个属性，可以简单直观的完成间距比例的设置。</p>
-<p>chain是CL中新加入的控件与控件间的关系。组成chain的多个控件，可以在同一方向上更加方便的完成复杂的布局要求</p>
-<p><img src="https://xtvj.github.io/images/img.jpg" alt="img"></p>
-<h1 id="RelativeLayout"><a href="#RelativeLayout" class="headerlink" title="RelativeLayout"></a>RelativeLayout</h1><p>经常会有同学在RelativeLayout中使用include标签<br>但是却发现include进来的控件无法用layout_alignParentBottom=”true”之类的标签来调整。这个真的非常恼火。其实解决方法非常简单，只要你在include的时候同时重载下layout_width和layout_height这两个标签就可以了。如果不重载，任何针对include的layout调整都是无效的！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XTVJ">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" class="post-title-link" itemprop="url">记录文摘</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-19 16:06:49" itemprop="dateCreated datePublished" datetime="2018-05-19T16:06:49+08:00">2018-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-03-23 17:28:06" itemprop="dateModified" datetime="2019-03-23T17:28:06+08:00">2019-03-23</time>
-              </span>
-
-          
-            <span id="/2018/05/19/%E8%AE%B0%E5%BD%95%E6%96%87%E6%91%98/" class="post-meta-item leancloud_visitors" data-flag-title="记录文摘" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://xtvj.github.io/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="xtvj">
-      <meta itemprop="description" content>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XTVJ">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Linux系统使用时的一些建议与记录</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-05-12 23:12:27" itemprop="dateCreated datePublished" datetime="2017-05-12T23:12:27+08:00">2017-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-13 16:50:12" itemprop="dateModified" datetime="2020-07-13T16:50:12+08:00">2020-07-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/05/12/Linux%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%BB%BA%E8%AE%AE%E4%B8%8E%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="Linux系统使用时的一些建议与记录" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  很早以前就尝试用Linux系统替代Windows来作日常使用了。当时不怎么会搞系统引导，装了Linux用不了Windows，便只在笔记本上装Linux用。后来在维基百科上看到说LinuxMint是排名第一的Linux发行版系统。便下了在虚拟机上试用，发现cinnamon版的LinuxMint可以自动引导硬盘的Win系统。现在一直在使用这个版本，系统真心好用。便有此记录。</p>
-<hr>
-<h2 id="软件推荐"><a href="#软件推荐" class="headerlink" title="软件推荐"></a>软件推荐</h2><h5 id="浏览器："><a href="#浏览器：" class="headerlink" title="浏览器："></a>浏览器：</h5><p> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.google.com/chrome/browser/desktop/index.html">Google Chrome</a>　：　同Win系统下的设置。</p>
-<h5 id="Office："><a href="#Office：" class="headerlink" title="Office："></a>Office：</h5><p> LibreOffice　:　瞬间打开，比WPS之类的快很多，一般Linux发行版标配了。</p>
-<h5 id="视频播放器："><a href="#视频播放器：" class="headerlink" title="视频播放器："></a>视频播放器：</h5><p> SMPlayer　:　可以通过“首选项”DIY界面。</p>
-<h2 id="一些命令及设置"><a href="#一些命令及设置" class="headerlink" title="一些命令及设置"></a>一些命令及设置</h2><h5 id="查询软件安装路径"><a href="#查询软件安装路径" class="headerlink" title="查询软件安装路径"></a>查询软件安装路径</h5><p>​    在Linux操作系统中查看软件安装路径是通过whereis 命令，如查看php软件的安装路径时输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">whereis php</span><br></pre></td></tr></table></figure>
-
-<h5 id="切换java"><a href="#切换java" class="headerlink" title="切换java"></a>切换java</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br><span class="line">sudo update-alternatives --config javac</span><br></pre></td></tr></table></figure>
-
-<h5 id="Subllime-Text-3-使用技巧"><a href="#Subllime-Text-3-使用技巧" class="headerlink" title="Subllime Text 3 使用技巧"></a>Subllime Text 3 使用技巧</h5><p>​    矩形（垂直）选区：鼠标右键 + Shift</p>
-<h5 id="列出系统中安装的软件"><a href="#列出系统中安装的软件" class="headerlink" title="列出系统中安装的软件"></a>列出系统中安装的软件</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo dpkg -l</span><br></pre></td></tr></table></figure>
-
-<h5 id="Rime安装五笔输入法"><a href="#Rime安装五笔输入法" class="headerlink" title="Rime安装五笔输入法"></a>Rime安装五笔输入法</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install fcitx-rime</span><br></pre></td></tr></table></figure>
-
-<p>​    然后重启或者注销一次，在 设置 -› 文本输入 里面添加 “中州韵(Fcitx)” 就可以使用了。但是默认是没有五笔输入法的需要安装一下：（注：不同发行版可能要复制到不同的位置。）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt-get install librime-data-wubi</span><br><span class="line">cp &#x2F;usr&#x2F;share&#x2F;rime-data&#x2F;wubi86.schema.yaml ~&#x2F;.config&#x2F;fcitx&#x2F;rime&#x2F;</span><br><span class="line">cp &#x2F;usr&#x2F;share&#x2F;rime-data&#x2F;wubi_pinyin.schema.yaml ~&#x2F;.config&#x2F;fcitx&#x2F;rime&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>这样就安装完成了，编辑~/.config/fcitx/rime/default.yaml，在schema_list下方加入：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- schema: wubi_pinyin</span><br><span class="line">- schema: wubi86</span><br></pre></td></tr></table></figure>
-
-<p>然后重新部署输入法，按F4就可以切换了。</p>
-<h5 id="Linux与Windows系统时间不统一："><a href="#Linux与Windows系统时间不统一：" class="headerlink" title="Linux与Windows系统时间不统一："></a>Linux与Windows系统时间不统一：</h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo timedatectl set-local-rtc 1</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/Android/" style="font-size: 1.1em; color: #999">Android</a> <a href="/tags/Git/" style="font-size: 1.1em; color: #999">Git</a> <a href="/tags/Hexo/" style="font-size: 1.23em; color: #999ea6">Hexo</a> <a href="/tags/Hilt/" style="font-size: 1.1em; color: #999">Hilt</a> <a href="/tags/Linux/" style="font-size: 1.1em; color: #999">Linux</a> <a href="/tags/Mac/" style="font-size: 1.37em; color: #99a4b2">Mac</a> <a href="/tags/Markdown/" style="font-size: 1.1em; color: #999">Markdown</a> <a href="/tags/Root/" style="font-size: 1.1em; color: #999">Root</a> <a href="/tags/android/" style="font-size: 1.5em; color: #99a9bf">android</a> <a href="/tags/others/" style="font-size: 1.1em; color: #999">others</a> <a href="/tags/youtube-dl/" style="font-size: 1.1em; color: #999">youtube-dl</a> <a href="/tags/%E4%BA%94%E7%AC%94/" style="font-size: 1.1em; color: #999">五笔</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 1.1em; color: #999">博客</a> <a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 1.37em; color: #99a4b2">技巧</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 1.1em; color: #999">技术</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 1.1em; color: #999">杂谈</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 1.1em; color: #999">记录</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">十一月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">十月 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/09/"><span class="card-archive-list-date">九月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">八月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/02/"><span class="card-archive-list-date">二月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/10/"><span class="card-archive-list-date">十月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
+              <span>查看更多</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">21</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishdate="2017-05-01T12:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastpushdate="2020-12-23T23:28:12.255Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By xtvj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
+    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
     }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
+    return content
   }
-</script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="xtvj" src="/images/avatar.gif">
-  <p class="site-author-name" itemprop="name">xtvj</p>
-  <div class="site-description" itemprop="description"></div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">21</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
-        <span class="site-state-item-name">分类</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">17</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/xtvj" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xtvj" rel="external nofollow noopener noreferrer" target="_blank"><i class="github fa-fw"></i>GitHub</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="xtvj"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">xtvj</span>
-</div>
-
-<div>
-<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
-<script>
-    var now = new Date();
-    function createtime() {
-        var grt = Date.UTC(2017,05,01,20,00,00); // 这里设置建站时间
-        now.setTime(now.getTime()+250);
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
-    }
-setInterval("createtime()",250);
-</script>
-</div>
-
-        
-
-
-
-
-
-
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
+  const getComment = () => {
+    fetch('https://api.github.com/repos/xtvj/xtvj.github.io/issues/comments?sort=updated&direction=desc&per_page=6&page=1')
+      .then(response => response.json())
+      .then(data => {
+        const githubArray = data.map(item => {
+          return {
+            'avatar': item.user.avatar_url,
+            'content': changeContent(item.body),
+            'nick': item.user.login,
+            'url': item.html_url,
+            'date': item.updated_at
           }
         })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
+        saveToLocal.set('github-newest-comments', JSON.stringify(githubArray), 10/(60*24))
+        generateHtml(githubArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+  }
 
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
+  const generateHtml = array => {
+    let result = ''
 
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          let name = 'src'
+          if(false) {
+            name = 'data-lazy-src'
           }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
+          result += `<a href='${array[i].url}' class="thumbnail"><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"zeDT3l0ztzwlk0wPL25byWOQ-gzGzoHsz","app_key":"s3WLoCqJNVvpt8MictofXBIW","server_url":null,"security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('github-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
       }
     }
+  }
 
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-
-</body>
-</html>
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script></div></body></html>
