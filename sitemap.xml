@@ -2,6 +2,41 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2020-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</loc>
+    
+    <lastmod>2020-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2020-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</loc>
+    
+    <lastmod>2020-12-24</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/</loc>
+    
+    <lastmod>2020-12-24</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</loc>
     
     <lastmod>2020-12-24</lastmod>
@@ -23,27 +58,6 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2020-12-22</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2020-12-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/</loc>
-    
-    <lastmod>2020-11-23</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/2020/10/20/Hexo%E9%85%8D%E7%BD%AE%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2020-11-18</lastmod>
@@ -58,23 +72,9 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</loc>
-    
-    <lastmod>2020-11-08</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
     
     <lastmod>2020-11-08</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</loc>
-    
-    <lastmod>2020-11-07</lastmod>
     
   </url>
   
@@ -235,14 +235,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
     <lastmod>2020-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
+    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
     <lastmod>2020-12-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
