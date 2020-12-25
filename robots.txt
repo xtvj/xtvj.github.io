@@ -17,6 +17,5 @@ Disallow: /images/
 Disallow: .jpg$
 Disallow: .png$
 Disallow: .gif$
-Disallow: /categories/
 
 Sitemap: https://xtvj.github.io/sitemap.xml
