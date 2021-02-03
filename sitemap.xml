@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xtvj.github.io/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2021-02-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</loc>
     
     <lastmod>2021-02-03</lastmod>
@@ -10,13 +17,6 @@
   
   <url>
     <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2021-02-03</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2021-02-03</lastmod>
     
@@ -165,13 +165,6 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Linux/</loc>
-    <lastmod>2021-02-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/tags/Mac/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
@@ -186,6 +179,13 @@
   </url>
   
   <url>
+    <loc>https://xtvj.github.io/tags/Linux/</loc>
+    <lastmod>2021-02-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/tags/Root/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
@@ -193,14 +193,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
+    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -258,13 +258,6 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/Linux/</loc>
-    <lastmod>2021-02-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/categories/Mac/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
@@ -273,6 +266,13 @@
   
   <url>
     <loc>https://xtvj.github.io/categories/Windows/</loc>
+    <lastmod>2021-02-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/categories/Linux/</loc>
     <lastmod>2021-02-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
