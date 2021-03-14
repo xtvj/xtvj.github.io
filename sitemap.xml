@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://xtvj.github.io/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/</loc>
+    <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2021-03-14</lastmod>
     
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://xtvj.github.io/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/</loc>
     
-    <lastmod>2021-03-12</lastmod>
+    <lastmod>2021-03-14</lastmod>
     
   </url>
   
@@ -158,6 +158,13 @@
 
   
   <url>
+    <loc>https://xtvj.github.io/tags/android/</loc>
+    <lastmod>2021-03-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/tags/Hexo/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
@@ -221,13 +228,6 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/android/</loc>
-    <lastmod>2021-03-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/tags/others/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
@@ -255,14 +255,14 @@
     <priority>0.6</priority>
   </url>
   
+
+  
   <url>
-    <loc>https://xtvj.github.io/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/categories/android/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
-  
-
   
   <url>
     <loc>https://xtvj.github.io/categories/Hexo/</loc>
@@ -300,14 +300,7 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/android/</loc>
-    <lastmod>2021-03-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/categories/%E9%9A%8F%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
     <lastmod>2021-03-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
