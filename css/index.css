@@ -5453,41 +5453,41 @@ blockquote.pullquote.right {
   }
 }
 [data-theme='dark'] {
-  --global-bg: #0d0d0d;
+  --global-bg: #2f3440;
   --font-color: rgba(255,255,255,0.7);
   --hr-border: rgba(255,255,255,0.4);
   --hr-before-color: rgba(255,255,255,0.7);
-  --search-bg: #121212;
+  --search-bg: #333946;
   --search-input-color: rgba(255,255,255,0.7);
   --search-result-title: rgba(255,255,255,0.9);
-  --preloader-bg: #0d0d0d;
+  --preloader-bg: #2f3440;
   --preloader-color: rgba(255,255,255,0.7);
   --tab-border-color: #2c2c2c;
   --tab-botton-bg: #2c2c2c;
   --tab-botton-color: rgba(255,255,255,0.7);
-  --tab-button-hover-bg: #383838;
-  --tab-button-active-bg: #121212;
-  --card-bg: #121212;
-  --sidebar-bg: #121212;
-  --btn-hover-color: #787878;
+  --tab-button-hover-bg: #535d72;
+  --tab-button-active-bg: #333946;
+  --card-bg: #333946;
+  --sidebar-bg: #333946;
+  --btn-hover-color: #949db1;
   --btn-color: rgba(255,255,255,0.7);
-  --btn-bg: #1f1f1f;
-  --text-bg-hover: #383838;
+  --btn-bg: #3e4555;
+  --text-bg-hover: #535d72;
   --light-grey: rgba(255,255,255,0.7);
   --white: rgba(255,255,255,0.9);
   --text-highlight-color: rgba(255,255,255,0.9);
   --blockquote-color: rgba(255,255,255,0.7);
-  --blockquote-bg: #2c2c2c;
-  --reward-pop: #2c2c2c;
+  --blockquote-bg: #485164;
+  --reward-pop: #485164;
   --toc-link-color: rgba(255,255,255,0.6);
   --hl-color: rgba(255,255,255,0.7);
-  --hl-bg: #171717;
-  --hltools-bg: #1a1a1a;
+  --hl-bg: #373e4c;
+  --hltools-bg: #39404f;
   --hltools-color: #90a4ae;
-  --hlnumber-bg: #171717;
+  --hlnumber-bg: #373e4c;
   --hlnumber-color: rgba(255,255,255,0.4);
-  --hlscrollbar-bg: #1f1f1f;
-  --hlexpand-bg: linear-gradient(180deg, rgba(23,23,23,0.6), rgba(23,23,23,0.9));
+  --hlscrollbar-bg: #3e4555;
+  --hlexpand-bg: linear-gradient(180deg, rgba(55,62,76,0.6), rgba(55,62,76,0.9));
 }
 [data-theme='dark'] #web_bg:before,
 [data-theme='dark'] #footer:before,
@@ -5502,7 +5502,7 @@ blockquote.pullquote.right {
   background: #2c2c2c;
 }
 [data-theme='dark'] #article-container pre > code {
-  background: #171717;
+  background: #373e4c;
 }
 [data-theme='dark'] #article-container figure.highlight {
   -webkit-box-shadow: none;
@@ -5521,7 +5521,7 @@ blockquote.pullquote.right {
 }
 [data-theme='dark'] #page-header.nav-fixed > #nav,
 [data-theme='dark'] #page-header.not-top-img > #nav {
-  background: rgba(18,18,18,0.8);
+  background: rgba(51,57,70,0.8);
   -webkit-box-shadow: 0 5px 6px -5px rgba(133,133,133,0);
   box-shadow: 0 5px 6px -5px rgba(133,133,133,0);
 }
@@ -5562,7 +5562,7 @@ blockquote.pullquote.right {
   color: rgba(255,255,255,0.7);
 }
 [data-theme='dark'] #disqus_thread #dsqjs .dsqjs-order-label {
-  background-color: #1f1f1f;
+  background-color: #3e4555;
 }
 [data-theme='dark'] #disqus_thread #dsqjs .dsqjs-post-body {
   color: rgba(255,255,255,0.7);
@@ -5575,10 +5575,10 @@ blockquote.pullquote.right {
   color: rgba(255,255,255,0.7);
 }
 [data-theme='dark'] #artitalk_main #lazy {
-  background: #121212;
+  background: #333946;
 }
 [data-theme='dark'] #operare_artitalk .c2 {
-  background: #121212;
+  background: #333946;
 }
 .read-mode {
   --font-color: #4c4948;
