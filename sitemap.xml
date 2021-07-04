@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2021-07-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/2021/06/29/RedmiAC2100%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA%E5%8F%8A%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6/</loc>
     
     <lastmod>2021-06-30</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://xtvj.github.io/2020/10/29/Mac%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2021-06-26</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/2020/07/06/%E8%A7%82%E7%9C%8B%E7%94%B5%E5%BD%B1%E8%AE%B0%E5%BD%95/</loc>
-    
-    <lastmod>2021-06-24</lastmod>
     
   </url>
   
@@ -158,7 +158,7 @@
 
   <url>
     <loc>https://xtvj.github.io/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -166,105 +166,105 @@
   
   <url>
     <loc>https://xtvj.github.io/tags/android/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/tags/Linux/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Hexo/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Linux/</loc>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Mac/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Openwrt/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/tags/Root/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Root/</loc>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/IMDB/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/others/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Markdown/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/tags/Hilt/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -273,49 +273,49 @@
   
   <url>
     <loc>https://xtvj.github.io/categories/android/</loc>
-    <lastmod>2021-06-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/categories/Linux/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/Hexo/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/categories/Linux/</loc>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/Mac/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/Windows/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://xtvj.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
-    <lastmod>2021-06-30</lastmod>
+    <lastmod>2021-07-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
