@@ -165,13 +165,6 @@
 
   
   <url>
-    <loc>https://xtvj.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2021-08-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/tags/android/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
@@ -179,7 +172,7 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Hilt/</loc>
+    <loc>https://xtvj.github.io/tags/Linux/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -193,7 +186,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Linux/</loc>
+    <loc>https://xtvj.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2021-08-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Hilt/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -221,14 +221,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Root/</loc>
+    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/tags/Root/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -249,6 +249,13 @@
   </url>
   
   <url>
+    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
+    <lastmod>2021-08-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/tags/others/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
@@ -257,13 +264,6 @@
   
   <url>
     <loc>https://xtvj.github.io/tags/Markdown/</loc>
-    <lastmod>2021-08-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/tags/youtube-dl/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -279,14 +279,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/Hexo/</loc>
+    <loc>https://xtvj.github.io/categories/Linux/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/Linux/</loc>
+    <loc>https://xtvj.github.io/categories/Hexo/</loc>
     <lastmod>2021-08-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

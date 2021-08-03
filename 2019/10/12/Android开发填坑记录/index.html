@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Android开发填坑记录 | XTVJ</title><meta name="keywords" content="android"><meta name="author" content="xtvj"><meta name="copyright" content="xtvj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Android开发填坑记录 | XTVJ</title><meta name="keywords" content="android"><meta name="author" content="xtvj"><meta name="copyright" content="xtvj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型是Function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android开发填坑记录">
 <meta property="og:url" content="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="XTVJ">
-<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型">
+<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&gt; person.getName();  可以替换成 Person::getName  表达式 () -&gt; new HashMap&lt;&gt;();  可以替换成 HashMap::new  这种[方法引用]或者说[双冒号运算]对应的参数类型是Function">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://xtvj.github.io/images/android.png">
 <meta property="article:published_time" content="2019-10-12T14:31:45.000Z">
@@ -17,7 +17,7 @@
   localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
   noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -172,20 +172,20 @@
     }
     detectApple()
     })(window)</script><link rel="alternate" href="/atom.xml" title="XTVJ" type="application/atom+xml">
-</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://xtvj.github.io/images/android.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">XTVJ</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android开发填坑记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-10-12T14:31:45.000Z" title="发表于 2019-10-12 22:31:45">2019-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-12-24T15:21:11.519Z" title="更新于 2020-12-24 23:21:11">2020-12-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/android/">android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="Android开发填坑记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>双冒号运算</strong>就是Java中的[方法引用],[方法引用]的格式是 <strong>类名::方法名。</strong></p>
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://xtvj.github.io/images/android.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">XTVJ</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android开发填坑记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-10-12T14:31:45.000Z" title="发表于 2019-10-12 22:31:45">2019-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-12-24T15:21:11.519Z" title="更新于 2020-12-24 23:21:11">2020-12-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/android/">android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="Android开发填坑记录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>双冒号运算</strong>就是Java中的[方法引用],[方法引用]的格式是 <strong>类名::方法名。</strong></p>
 <p>一般是用作Lambda表达式</p>
 <p><strong>例如</strong></p>
 <p>表达式:</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">person -&gt; person.getName();</span><br></pre></td></tr></table></figure>
+<pre class="language-text" data-language="text"><code class="language-text">person -> person.getName();</code></pre>
 
 <p>可以替换成</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Person::getName</span><br></pre></td></tr></table></figure>
+<pre class="language-text" data-language="text"><code class="language-text">Person::getName</code></pre>
 
 <p>表达式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">() -&gt; new HashMap&lt;&gt;();</span><br></pre></td></tr></table></figure>
+<pre class="language-text" data-language="text"><code class="language-text">() -> new HashMap&lt;>();</code></pre>
 
 <p>可以替换成</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">HashMap::new</span><br></pre></td></tr></table></figure>
+<pre class="language-text" data-language="text"><code class="language-text">HashMap::new</code></pre>
 
 <p>这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。</p>
 <span id="more"></span>
@@ -246,49 +246,101 @@
 <p>问题重现：手机的 “设置” - “开发者选项” - 打开”不保留活动”(主要用于模拟Activity被及时回收) 。</p>
 <p>解决方法：</p>
 <p>一、通过注释掉这句话，这样主 Activity 因为种种原因被回收的时候就不会保存之前的 fragment state</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protectedvoidonSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">//如果用以下这种做法则不保存状态，再次进来的话会显示默认tab</span><br><span class="line">//总是执行这句代码来调用父类去保存视图层的状态</span><br><span class="line">//super.onSaveInstanceState(outState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">@Override
+protectedvoidonSaveInstanceState(Bundle outState) &#123;
+&#x2F;&#x2F;如果用以下这种做法则不保存状态，再次进来的话会显示默认tab
+&#x2F;&#x2F;总是执行这句代码来调用父类去保存视图层的状态
+&#x2F;&#x2F;super.onSaveInstanceState(outState);
+&#125;</code></pre>
 
 <p>二、阻止系统恢复Fragment state，在FragmentActivity保存所有Fragment状态前把Fragment从FragmentManager中移除掉。（不可取，开启新的Activity也可能触发onSaveInstanceState,如果没判空就会崩溃，判空的话，返回这个界面，就是空白，因为Fragment全部被移除了。除非自行判空，没验证。）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">protected void onSaveInstanceState(Bundle outState) &#123;</span><br><span class="line">       FragmentTransaction transaction = fm.beginTransaction();</span><br><span class="line">       transaction.remove(tab1);</span><br><span class="line">       transaction.remove(tab2);</span><br><span class="line">       transaction.remove(tab3);</span><br><span class="line">       transaction.remove(tab4);</span><br><span class="line">       transaction.commitAllowingStateLoss();</span><br><span class="line">       super.onSaveInstanceState(outState);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">protected void onSaveInstanceState(Bundle outState) &#123;
+       FragmentTransaction transaction &#x3D; fm.beginTransaction();
+       transaction.remove(tab1);
+       transaction.remove(tab2);
+       transaction.remove(tab3);
+       transaction.remove(tab4);
+       transaction.commitAllowingStateLoss();
+       super.onSaveInstanceState(outState);
+   &#125;</code></pre>
 
 <p>三、在onSaveInstanceState(outState)中去保存fragment，当activity被恢复时，取出这些fragment即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//onCreate方法中</span><br><span class="line">if (savedInstanceState != null) &#123;</span><br><span class="line">            /*获取保存的fragment  没有的话返回null*/</span><br><span class="line">            homeFragment = (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);</span><br><span class="line">            dashboardFragment = (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);</span><br><span class="line">            noticeFragment = (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);</span><br><span class="line">            addToList(homeFragment);</span><br><span class="line">            addToList(dashboardFragment);</span><br><span class="line">            addToList(noticeFragment);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            initFragment();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F;onCreate方法中
+if (savedInstanceState !&#x3D; null) &#123;
+            &#x2F;*获取保存的fragment  没有的话返回null*&#x2F;
+            homeFragment &#x3D; (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);
+            dashboardFragment &#x3D; (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);
+            noticeFragment &#x3D; (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);
+            addToList(homeFragment);
+            addToList(dashboardFragment);
+            addToList(noticeFragment);
+        &#125; else &#123;
+            initFragment();
+        &#125;</code></pre>
 
 <hr>
 <p>让APP重启自己的两种方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//重启应用</span><br><span class="line">Intent intent = new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F;重启应用
+Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+startActivity(intent);
+android.os.Process.killProcess(android.os.Process.myPid());</code></pre>
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Intent intent = new Intent(getApplicationContext(), MainActivity.class);</span><br><span class="line">       //重启应用，得使用PendingIntent</span><br><span class="line">       PendingIntent restartIntent = PendingIntent.getActivity(</span><br><span class="line">               getApplicationContext(), 0, intent,</span><br><span class="line">               PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">       //退出程序</span><br><span class="line">       AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);</span><br><span class="line">       mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,</span><br><span class="line">               restartIntent); // 100毫秒后重启应用</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">Intent intent &#x3D; new Intent(getApplicationContext(), MainActivity.class);
+       &#x2F;&#x2F;重启应用，得使用PendingIntent
+       PendingIntent restartIntent &#x3D; PendingIntent.getActivity(
+               getApplicationContext(), 0, intent,
+               PendingIntent.FLAG_UPDATE_CURRENT);
+       &#x2F;&#x2F;退出程序
+       AlarmManager mAlarmManager &#x3D; (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+       mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,
+               restartIntent); &#x2F;&#x2F; 100毫秒后重启应用
+       android.os.Process.killProcess(android.os.Process.myPid());
+</code></pre>
 
 
 
 <hr>
 <p>  Android 设置Edittext获取焦点并弹出软键盘</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">editText.setFocusable(true);</span><br><span class="line">      editText.setFocusableInTouchMode(true);</span><br><span class="line">      editText.requestFocus();</span><br><span class="line">      //显示软键盘</span><br><span class="line">  activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);</span><br><span class="line">      //如果上面的代码没有弹出软键盘 可以使用下面另一种方式</span><br><span class="line">      //InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);</span><br><span class="line">     // imm.showSoftInput(editText, 0); </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">editText.setFocusable(true);
+      editText.setFocusableInTouchMode(true);
+      editText.requestFocus();
+      &#x2F;&#x2F;显示软键盘
+  activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+      &#x2F;&#x2F;如果上面的代码没有弹出软键盘 可以使用下面另一种方式
+      &#x2F;&#x2F;InputMethodManager imm &#x3D; (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+     &#x2F;&#x2F; imm.showSoftInput(editText, 0); 
+</code></pre>
 
 <hr>
 <p>用命令行新建指定大小的文件</p>
 <p>在Linux环境下的实现方法</p>
 <p>  使用dd命令：功能是复制文件，并且可以通过选项指定复制方式。比如</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">dd if=/dev/zero of=test.txt bs=32 count=32</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">dd if&#x3D;&#x2F;dev&#x2F;zero of&#x3D;test.txt bs&#x3D;32 count&#x3D;32
+</code></pre>
 
 <p>（源文件是/dev/zero，目标文件是test.txt，也就是需要生成的文件。复制生成文件大小的是32*32=1024字节）</p>
 <p>在Windows环境下的实现方法</p>
 <p>  使用fsutil命令，在windows xp和win 7下应该都自带了这个命令。命令的格式是 fsutil file createnew 新文件名 文件大小。例如生成一个1K大小的文件，可以使用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fsutil file createnew test.txt 1024</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">fsutil file createnew test.txt 1024
+</code></pre>
 
 <hr>
 <p>在activity中调用 moveTaskToBack (boolean nonRoot)方法即可将activity 退到后台，注意不是finish()退出。<br>参数为false代表只有当前activity是task根，指应用启动的第一个activity时，才有效;<br>如果为true则忽略这个限制，任何activity都可以有效。  </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//android 应用退到后台，类似最小化</span><br><span class="line">moveTaskToBack(true);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F;android 应用退到后台，类似最小化
+moveTaskToBack(true);
+</code></pre>
 
 <hr>
 <p>ANR分析办法之一：traces.txt</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">adb pull /data/anr/traces.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">adb pull &#x2F;data&#x2F;anr&#x2F;traces.txt
+</code></pre>
 
 <p>在文件中使用 ctrl + F 查找包名可以快速定位相关代码。<br>通过log可以看出相关问题<br>产生新的ANR，原来的 traces.txt 文件会被覆盖</p>
 <hr>
 <p>BottomNavigationView切换时不显示图标颜色，需要取消导航栏图标着色。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">navigation.setItemIconTintList(null);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">navigation.setItemIconTintList(null);
+</code></pre>
 
 <hr>
 <p> <strong>JNI 数据类型映射</strong></p>
@@ -424,22 +476,83 @@
 </tbody></table>
 <hr>
 <p>沉浸式状态栏</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">	/*</span><br><span class="line">    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明</span><br><span class="line">     */</span><br><span class="line">    public static void setStatusBar(Activity context) &#123;</span><br><span class="line">        View decorView = context.getWindow().getDecorView();</span><br><span class="line">        int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        decorView.setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //设置白色状态栏 color用R.color.***</span><br><span class="line">    public static void setWhiteStatusBar(Activity context,int color) &#123;</span><br><span class="line">        int option = View.SYSTEM_UI_FLAG_IMMERSIVE</span><br><span class="line">                | View.SYSTEM_UI_FLAG_VISIBLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) &#123;</span><br><span class="line">            context.getWindow().setStatusBarColor(context.getColor(color));</span><br><span class="line">context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //设置暗色状态栏</span><br><span class="line">    public static void setDarkStatusBar(Activity context)&#123;</span><br><span class="line">        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN</span><br><span class="line">                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;</span><br><span class="line">        context.getWindow().getDecorView().setSystemUiVisibility(option);</span><br><span class="line">        context.getWindow().setStatusBarColor(Color.TRANSPARENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">	&#x2F;*
+    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明
+     *&#x2F;
+    public static void setStatusBar(Activity context) &#123;
+        View decorView &#x3D; context.getWindow().getDecorView();
+        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        context.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    &#125;
+
+    &#x2F;&#x2F;设置白色状态栏 color用R.color.***
+    public static void setWhiteStatusBar(Activity context,int color) &#123;
+        int option &#x3D; View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_VISIBLE;
+        context.getWindow().getDecorView().setSystemUiVisibility(option);
+        if (Build.VERSION.SDK_INT &gt;&#x3D; Build.VERSION_CODES.M) &#123;
+            context.getWindow().setStatusBarColor(context.getColor(color));
+context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F;设置暗色状态栏
+    public static void setDarkStatusBar(Activity context)&#123;
+        int option &#x3D; View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        context.getWindow().getDecorView().setSystemUiVisibility(option);
+        context.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    &#125;
+</code></pre>
 
 <hr>
 <p>P版本应用在sd卡根目录(getExternalCacheDir)保存的应用数据卸载时不会被清除，但是Q版本这部分数据实际保存的是应用的沙箱目录 下，卸载的时候回全部被清除；应用如果不想卸载的时候被删除数据，需要应用在manifest文件增加:，这样卸载应用的时候，系统弹出的对话框中才会有第二个勾选框出现(不增加该属性是不会有第二个勾选出现)，默认删除，勾选保留。</p>
 <hr>
 <p> 拍照、选择图片 适配7.0以上，从 Android 7.0 开始，禁止在您的应用外部公开 file:// URI</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> //指定Uri，拍照返回的data为空</span><br><span class="line">String tempImagePath = getFilesDir().getPath();</span><br><span class="line">tempImageFile = File.createTempFile(&quot;image_&quot;, &quot;.jpg&quot;, new File(tempImagePath));</span><br><span class="line">Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);</span><br><span class="line">if (Build.VERSION.SDK_INT &gt;= 24) &#123;</span><br><span class="line">  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT,</span><br><span class="line">  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,</span><br><span class="line">                                        &quot;com.huangyuanlove.adaptationhighversion.fileprovider&quot;, tempImageFile));</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));</span><br><span class="line">&#125;</span><br><span class="line">startActivityForResult(intent, TAKE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none"> &#x2F;&#x2F;指定Uri，拍照返回的data为空
+String tempImagePath &#x3D; getFilesDir().getPath();
+tempImageFile &#x3D; File.createTempFile(&quot;image_&quot;, &quot;.jpg&quot;, new File(tempImagePath));
+Intent intent &#x3D; new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+if (Build.VERSION.SDK_INT &gt;&#x3D; 24) &#123;
+  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+  intent.putExtra(MediaStore.EXTRA_OUTPUT,
+  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,
+                                        &quot;com.huangyuanlove.adaptationhighversion.fileprovider&quot;, tempImageFile));
+&#125; else &#123;
+  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));
+&#125;
+startActivityForResult(intent, TAKE_PHOTO_CODE);
+</code></pre>
 
 <p>当拍照返回之后</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bitmap = BitmapFactory.decodeFile(tempImageFile.getPath());</span><br><span class="line">showImage.setImageBitmap(bitmap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">bitmap &#x3D; BitmapFactory.decodeFile(tempImageFile.getPath());
+showImage.setImageBitmap(bitmap);
+</code></pre>
 
 <p>选择图片的时候：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Intent albumIntent = new Intent(Intent.ACTION_PICK);</span><br><span class="line">albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &quot;image/*&quot;);</span><br><span class="line">startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">Intent albumIntent &#x3D; new Intent(Intent.ACTION_PICK);
+albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &quot;image&#x2F;*&quot;);
+startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);
+</code></pre>
 
 <p>选择图片返回的时候</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if (data != null) &#123;</span><br><span class="line">  Uri selectedImage = data.getData();</span><br><span class="line">  String[] filePathColumn = &#123;MediaStore.Images.Media.DATA&#125;;</span><br><span class="line">  Cursor cursor = getContentResolver().query(selectedImage,</span><br><span class="line">                                             filePathColumn, null, null, null);</span><br><span class="line">  cursor.moveToFirst();</span><br><span class="line">  int columnIndex = cursor.getColumnIndex(filePathColumn[0]);</span><br><span class="line">  String picturePath = cursor.getString(columnIndex);</span><br><span class="line">  cursor.close();</span><br><span class="line">  bitmap = BitmapFactory.decodeFile(picturePath);</span><br><span class="line">  showImage.setImageBitmap(bitmap);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">if (data !&#x3D; null) &#123;
+  Uri selectedImage &#x3D; data.getData();
+  String[] filePathColumn &#x3D; &#123;MediaStore.Images.Media.DATA&#125;;
+  Cursor cursor &#x3D; getContentResolver().query(selectedImage,
+                                             filePathColumn, null, null, null);
+  cursor.moveToFirst();
+  int columnIndex &#x3D; cursor.getColumnIndex(filePathColumn[0]);
+  String picturePath &#x3D; cursor.getString(columnIndex);
+  cursor.close();
+  bitmap &#x3D; BitmapFactory.decodeFile(picturePath);
+  showImage.setImageBitmap(bitmap);
+&#125;
+</code></pre>
 
 <hr>
 <p>自定义View</p>
@@ -451,7 +564,10 @@
 <hr>
 <p>ROOM数据库使用填坑</p>
 <p>引入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//Room数据库</span><br><span class="line">implementation &quot;androidx.room:room-runtime:2.2.0-alpha01&quot;</span><br><span class="line">annotationProcessor &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">&#x2F;&#x2F;Room数据库
+implementation &quot;androidx.room:room-runtime:2.2.0-alpha01&quot;
+annotationProcessor &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;
+</code></pre>
 
 <p>如果多加一行implementation “androidx.room:room-compiler:2.2.0-alpha01”，会导致项目中多出很多没用的libs，包括com.ibm.icu:icu4j等，可能使得apk整整多出15M没用的文件。</p>
 <hr>
@@ -467,7 +583,10 @@
 <p>如果我们要兼容aip19以下版本的话，那么导入的包需要为v4包</p>
 <hr>
 <p>通过以下代码可以列出设备底层支持的编码格式</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">MediaCodecList codecList = new MediaCodecList(MediaCodecList.ALL_CODECS);</span><br><span class="line">for (int i = 0; i &lt; codecList.getCodecInfos().length; i++) &#123;  </span><br><span class="line">	Log.d(TAG, &quot;编解码器: &quot; + codecList.getCodecInfos()[i].getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">MediaCodecList codecList &#x3D; new MediaCodecList(MediaCodecList.ALL_CODECS);
+for (int i &#x3D; 0; i &lt; codecList.getCodecInfos().length; i++) &#123;  
+	Log.d(TAG, &quot;编解码器: &quot; + codecList.getCodecInfos()[i].getName());
+&#125;</code></pre>
 
 <hr>
 <p>如果遇到硬编H264等一些视频编码时，编出来的数据显示正常，但晃动摄像头时数据量变大，带宽占用很高，设置低一点的码率也不起作用时。很可能是系统的编码器支持的不够好，可用上面的方式获取系统支持的编解码器有哪些，在new MediaCodec的时候使用MediaCodec.createByCodecName(“OMX.google.h264.encoder”)等一些固定的编解码器，再查看效果。(OMX.google.h264.encoder为软编)</p>
@@ -481,7 +600,36 @@
 <hr>
 <p>Fork/Join 框架是java7中加入的一个并行任务框架，可以将任务分割成足够小的小任务，然后让不同的线程来做这些分割出来的小事情，然后完成之后再进行join，将小任务的结果组装成大任务的结果。 </p>
 <p>例如求一个文件夹的大小：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; &#123;</span><br><span class="line">        final File file;</span><br><span class="line">        public FileSizeFinder(final File theFile) &#123;</span><br><span class="line">            file = theFile;</span><br><span class="line">        &#125;</span><br><span class="line">        @Override</span><br><span class="line">        public Long compute() &#123;</span><br><span class="line">            long size = 0;</span><br><span class="line">            if (file.isFile()) &#123;</span><br><span class="line">                size = file.length();</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                final File[] children = file.listFiles();</span><br><span class="line">                if (children != null) &#123;</span><br><span class="line">                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks = new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();</span><br><span class="line">                    for (final File child : children) &#123;</span><br><span class="line">                        if (child.isFile()) &#123;</span><br><span class="line">                            size += child.length();</span><br><span class="line">                        &#125; else &#123;</span><br><span class="line">                            tasks.add(new FileSizeFinder(child));</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) &#123;</span><br><span class="line">                        size += task.join();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return size;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    long size = new ForkJoinPool().invoke(new FileSizeFinder(new File(&quot;/home&quot;)));</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; &#123;
+        final File file;
+        public FileSizeFinder(final File theFile) &#123;
+            file &#x3D; theFile;
+        &#125;
+        @Override
+        public Long compute() &#123;
+            long size &#x3D; 0;
+            if (file.isFile()) &#123;
+                size &#x3D; file.length();
+            &#125; else &#123;
+                final File[] children &#x3D; file.listFiles();
+                if (children !&#x3D; null) &#123;
+                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks &#x3D; new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();
+                    for (final File child : children) &#123;
+                        if (child.isFile()) &#123;
+                            size +&#x3D; child.length();
+                        &#125; else &#123;
+                            tasks.add(new FileSizeFinder(child));
+                        &#125;
+                    &#125;
+                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) &#123;
+                        size +&#x3D; task.join();
+                    &#125;
+                &#125;
+            &#125;
+            return size;
+        &#125;
+    &#125;
+    long size &#x3D; new ForkJoinPool().invoke(new FileSizeFinder(new File(&quot;&#x2F;home&quot;)));</code></pre>
 
 <hr>
 <p>Netty拆包：LengthFieldBasedFrameDecoder的使用</p>
@@ -500,14 +648,17 @@
 <p>1，var只能在<strong>方法内</strong>定义变量，不允许定义类的成员变量。<br>2，var 定义变量必须赋初始值。</p>
 <hr>
 <p>SQL语句中IN 操作符允许您在 WHERE 子句中规定多个值，比如选取 name 为 “Google” 或 “菜鸟” 的所有网站：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM Websites WHERE name IN (&#x27;Google&#x27;,&#x27;菜鸟&#x27;);</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">SELECT * FROM Websites WHERE name IN (&#39;Google&#39;,&#39;菜鸟&#39;);</code></pre>
 
 <p>LIKE的意思是搜索列中的指定模式。比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT * FROM Websites WHERE name LIKE &#x27;G%&#x27;;//选取 name 以字母 &quot;G&quot; 开始的所有客户</span><br><span class="line">SELECT * FROM Websites WHERE name LIKE &#x27;%oo%&#x27;;//选取 name 包含模式 &quot;oo&quot; 的所有客户</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">SELECT * FROM Websites WHERE name LIKE &#39;G%&#39;;&#x2F;&#x2F;选取 name 以字母 &quot;G&quot; 开始的所有客户
+SELECT * FROM Websites WHERE name LIKE &#39;%oo%&#39;;&#x2F;&#x2F;选取 name 包含模式 &quot;oo&quot; 的所有客户</code></pre>
 
 <hr>
 <p>ViewBinding使用时如果遇到include，可以给include加一个id，然后：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">binding = MainFragmentBinding.inflate(inflater, container, false);</span><br><span class="line">toolbarBinding = binding.toolbar;//include里的toolbar</span><br><span class="line">return binding.getRoot();</span><br></pre></td></tr></table></figure>
+<pre class="language-none"><code class="language-none">binding &#x3D; MainFragmentBinding.inflate(inflater, container, false);
+toolbarBinding &#x3D; binding.toolbar;&#x2F;&#x2F;include里的toolbar
+return binding.getRoot();</code></pre>
 
 <hr>
 <p>Room数据库使用记录</p>
@@ -540,7 +691,7 @@
 </tr>
 </tbody></table>
 <hr>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">xtvj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">https://xtvj.github.io/2019/10/12/Android开发填坑记录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xtvj.github.io" target="_blank">XTVJ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a></div><div class="post_share"><div class="social-share" data-image="https://xtvj.github.io/images/android.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">设计模式</div></div></a></div><div class="next-post pull-right"><a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">不Root手机禁用系统应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/11/15/Android中使用Hilt依赖注入，超赞的一个库/" title="Android中使用Hilt依赖注入，超赞的一个库"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-12-24</div><div class="title">Android中使用Hilt依赖注入，超赞的一个库</div></div></a></div><div><a href="/2017/05/01/Android6.0系统镜像编译/" title="Android6.0系统镜像编译"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2019-10-12</div><div class="title">Android6.0系统镜像编译</div></div></a></div><div><a href="/2018/06/23/温习知识点记录/" title="温习知识点记录"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-07-18</div><div class="title">温习知识点记录</div></div></a></div><div><a href="/2020/02/22/设计模式/" title="设计模式"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-11-08</div><div class="title">设计模式</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">xtvj</div><div class="author-info__description">探寻生活的多种意义</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xtvj" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zhangxu0922@gmail.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://xtvj.github.io/atom.xml" target="_blank" title><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">网站目的是给自己浏览，部分文章内容会不定期更新，如有新类型内容才会写新文章。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/29/RedmiAC2100%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA%E5%8F%8A%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6/" title="RedmiAC2100路由器刷机及在MacOS下编译相应固件"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/openwrt_ac2100.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RedmiAC2100路由器刷机及在MacOS下编译相应固件"></a><div class="content"><a class="title" href="/2021/06/29/RedmiAC2100%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA%E5%8F%8A%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6/" title="RedmiAC2100路由器刷机及在MacOS下编译相应固件">RedmiAC2100路由器刷机及在MacOS下编译相应固件</a><time datetime="2021-06-29T08:45:58.000Z" title="发表于 2021-06-29 16:45:58">2021-06-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="从IMDB官方数据库中查找评价数过百万的电影"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/imdb_top250.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从IMDB官方数据库中查找评价数过百万的电影"></a><div class="content"><a class="title" href="/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="从IMDB官方数据库中查找评价数过百万的电影">从IMDB官方数据库中查找评价数过百万的电影</a><time datetime="2021-03-14T10:50:43.000Z" title="发表于 2021-03-14 18:50:43">2021-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/youtube-dl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"></a><div class="content"><a class="title" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频">使用youtube-dl下载视频、音频、播放列表中的多个视频或音频</a><time datetime="2020-11-22T10:39:02.000Z" title="发表于 2020-11-22 18:39:02">2020-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android中使用Hilt依赖注入，超赞的一个库"></a><div class="content"><a class="title" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库">Android中使用Hilt依赖注入，超赞的一个库</a><time datetime="2020-11-15T11:12:02.000Z" title="发表于 2020-11-15 19:12:02">2020-11-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/五笔字根表.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="五笔拆字表"></a><div class="content"><a class="title" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表">五笔拆字表</a><time datetime="2020-11-04T06:58:56.000Z" title="发表于 2020-11-04 14:58:56">2020-11-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By xtvj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">xtvj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xtvj.github.io/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/">https://xtvj.github.io/2019/10/12/Android开发填坑记录/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xtvj.github.io" target="_blank">XTVJ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a></div><div class="post_share"><div class="social-share" data-image="https://xtvj.github.io/images/android.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">设计模式</div></div></a></div><div class="next-post pull-right"><a href="/2018/06/27/%E4%B8%8DRoot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">不Root手机禁用系统应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2017/05/01/Android6.0系统镜像编译/" title="Android6.0系统镜像编译"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2019-10-12</div><div class="title">Android6.0系统镜像编译</div></div></a></div><div><a href="/2020/11/15/Android中使用Hilt依赖注入，超赞的一个库/" title="Android中使用Hilt依赖注入，超赞的一个库"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-12-24</div><div class="title">Android中使用Hilt依赖注入，超赞的一个库</div></div></a></div><div><a href="/2018/06/23/温习知识点记录/" title="温习知识点记录"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-07-18</div><div class="title">温习知识点记录</div></div></a></div><div><a href="/2020/02/22/设计模式/" title="设计模式"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="fas fa-history fa-fw"></i> 2020-11-08</div><div class="title">设计模式</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">xtvj</div><div class="author-info__description">探寻生活的多种意义</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xtvj" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:zhangxu0922@gmail.com" target="_blank" title="Email" rel="external nofollow noopener noreferrer"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://xtvj.github.io/atom.xml" target="_blank" title><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">网站目的是给自己浏览，部分文章内容会不定期更新，如有新类型内容才会写新文章。</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/29/RedmiAC2100%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA%E5%8F%8A%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6/" title="RedmiAC2100路由器刷机及在MacOS下编译相应固件"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/openwrt_ac2100.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RedmiAC2100路由器刷机及在MacOS下编译相应固件"></a><div class="content"><a class="title" href="/2021/06/29/RedmiAC2100%E8%B7%AF%E7%94%B1%E5%99%A8%E5%88%B7%E6%9C%BA%E5%8F%8A%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6/" title="RedmiAC2100路由器刷机及在MacOS下编译相应固件">RedmiAC2100路由器刷机及在MacOS下编译相应固件</a><time datetime="2021-06-29T08:45:58.000Z" title="发表于 2021-06-29 16:45:58">2021-06-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="从IMDB官方数据库中查找评价数过百万的电影"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/imdb_top250.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从IMDB官方数据库中查找评价数过百万的电影"></a><div class="content"><a class="title" href="/2021/03/14/%E4%BB%8EIMDB%E5%AE%98%E6%96%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%9F%A5%E6%89%BE%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="从IMDB官方数据库中查找评价数过百万的电影">从IMDB官方数据库中查找评价数过百万的电影</a><time datetime="2021-03-14T10:50:43.000Z" title="发表于 2021-03-14 18:50:43">2021-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/youtube-dl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"></a><div class="content"><a class="title" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频">使用youtube-dl下载视频、音频、播放列表中的多个视频或音频</a><time datetime="2020-11-22T10:39:02.000Z" title="发表于 2020-11-22 18:39:02">2020-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android中使用Hilt依赖注入，超赞的一个库"></a><div class="content"><a class="title" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库">Android中使用Hilt依赖注入，超赞的一个库</a><time datetime="2020-11-15T11:12:02.000Z" title="发表于 2020-11-15 19:12:02">2020-11-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/五笔字根表.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="五笔拆字表"></a><div class="content"><a class="title" href="/2020/11/04/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" title="五笔拆字表">五笔拆字表</a><time datetime="2020-11-04T06:58:56.000Z" title="发表于 2020-11-04 14:58:56">2020-11-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By xtvj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function addGitalkSource () {
   const ele = document.createElement('link')
   ele.rel = 'stylesheet'
   ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
