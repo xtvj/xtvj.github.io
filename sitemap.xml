@@ -172,14 +172,21 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Hexo/</loc>
+    <loc>https://xtvj.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Linux/</loc>
+    <loc>https://xtvj.github.io/tags/Hilt/</loc>
+    <lastmod>2021-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Hexo/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -200,7 +207,7 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Mac/</loc>
+    <loc>https://xtvj.github.io/tags/Linux/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -208,6 +215,13 @@
   
   <url>
     <loc>https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2021-11-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Mac/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -255,20 +269,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://xtvj.github.io/tags/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2021-11-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/tags/Hilt/</loc>
-    <lastmod>2021-11-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   
   <url>
@@ -286,14 +286,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/Linux/</loc>
+    <loc>https://xtvj.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/categories/%E7%94%B5%E5%BD%B1/</loc>
+    <loc>https://xtvj.github.io/categories/Linux/</loc>
     <lastmod>2021-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
