@@ -1,11 +1,4 @@
-User-agent: Baiduspider
-Disallow: /
-User-agent: baiduspider
-Disallow: /
-User-agent: Googlebot-image
-Disallow: /
-
-User-agent: *
+User-agent: Googlebot
 Disallow: /resources/ 
 Disallow: /vendors/
 Disallow: /js/
@@ -17,5 +10,8 @@ Disallow: /images/
 Disallow: .jpg$
 Disallow: .png$
 Disallow: .gif$
+
+User-agent: *
+Disallow: /
 
 Sitemap: https://xtvj.github.io/sitemap.xml
