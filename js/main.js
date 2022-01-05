@@ -225,10 +225,11 @@ document.addEventListener('DOMContentLoaded', function () {
   function addPhotoFigcaption () {
     document.querySelectorAll('#article-container img').forEach(function (item) {
       const parentEle = item.parentNode
-      if (!parentEle.parentNode.classList.contains('justified-gallery')) {
+      const altValue = item.alt
+      if (altValue && !parentEle.parentNode.classList.contains('justified-gallery')) {
         const ele = document.createElement('div')
         ele.className = 'img-alt is-center'
-        ele.textContent = item.getAttribute('alt')
+        ele.textContent = altValue
         parentEle.insertBefore(ele, item.nextSibling)
       }
     })
@@ -294,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const addMediumZoom = () => {
-    const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a)>img'))
+    const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a):not(.flink-item-icon) > img'))
     zoom.on('open', e => {
       const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
       zoom.update({
@@ -305,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const jqLoadAndRun = () => {
     const $fancyboxEle = GLOBAL_CONFIG.lightbox === 'fancybox'
-      ? document.querySelectorAll('#article-container :not(a):not(.gallery-group) > img, #article-container > img')
+      ? document.querySelectorAll('#article-container :not(a):not(.gallery-group):not(.flink-item-icon) > img, #article-container > img')
       : []
     const fbLengthNoZero = $fancyboxEle.length > 0
     const $jgEle = document.querySelectorAll('#article-container .justified-gallery')
