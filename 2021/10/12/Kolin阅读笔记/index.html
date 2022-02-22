@@ -1,0 +1,396 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Kotlin阅读笔记 | XTVJ</title><meta name="keywords" content="android,Kotlin"><meta name="author" content="xtvj"><meta name="copyright" content="xtvj"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="如果会Java，那Kotlin就很简单，直接用Kotlin写项目就熟悉了。 硬关键字以下符号会始终解释为关键字，不能用作标识符：  as  用于类型转换 为导入指定一个别名   as? 用于安全类型转换  break 终止循环的执行  class 声明一个类  continue 继续最近层循环的下一步  do 开始一个 do&#x2F;while 循环（后置条件的循环）  else 定义一个 if 表达式条">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kotlin阅读笔记">
+<meta property="og:url" content="https://xtvj.github.io/2021/10/12/Kolin%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="XTVJ">
+<meta property="og:description" content="如果会Java，那Kotlin就很简单，直接用Kotlin写项目就熟悉了。 硬关键字以下符号会始终解释为关键字，不能用作标识符：  as  用于类型转换 为导入指定一个别名   as? 用于安全类型转换  break 终止循环的执行  class 声明一个类  continue 继续最近层循环的下一步  do 开始一个 do&#x2F;while 循环（后置条件的循环）  else 定义一个 if 表达式条">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xtvj.github.io/images/kotlin_note.png">
+<meta property="article:published_time" content="2021-10-12T00:49:03.000Z">
+<meta property="article:modified_time" content="2022-02-22T01:21:16.642Z">
+<meta property="article:author" content="xtvj">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="Kotlin">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xtvj.github.io/images/kotlin_note.png"><link rel="shortcut icon" href="/images/favicon.png"><link rel="canonical" href="https://xtvj.github.io/2021/10/12/Kolin%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="dpN29JcbmQ8KMTZvwNgIuSNspOJnxnHvw8Jq7x5MbHY"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Kotlin阅读笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-02-22 09:21:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="alternate" href="/atom.xml" title="XTVJ" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://xtvj.github.io/images/kotlin_note.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">XTVJ</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Kotlin阅读笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-12T00:49:03.000Z" title="发表于 2021-10-12 08:49:03">2021-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-02-22T01:21:16.642Z" title="更新于 2022-02-22 09:21:16">2022-02-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/android/">android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id data-flag-title="Kotlin阅读笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>如果会Java，那Kotlin就很简单，直接用Kotlin写项目就熟悉了。</p>
+<h4 id="硬关键字"><a href="#硬关键字" class="headerlink" title="硬关键字"></a>硬关键字</h4><p>以下符号会始终解释为关键字，不能用作标识符：</p>
+<ul>
+<li><p>as</p>
+<ul>
+<li>用于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/typecasts.html#%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%AC%A6">类型转换</a></li>
+<li>为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/packages.html#%E5%AF%BC%E5%85%A5">导入指定一个别名</a></li>
+</ul>
+</li>
+<li><p><code>as?</code> 用于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/typecasts.html#%E5%AE%89%E5%85%A8%E7%9A%84%E5%8F%AF%E7%A9%BA%E8%BD%AC%E6%8D%A2%E6%93%8D%E4%BD%9C%E7%AC%A6">安全类型转换</a></p>
+</li>
+<li><p><code>break</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/returns.html">终止循环的执行</a></p>
+</li>
+<li><p><code>class</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html">类</a></p>
+</li>
+<li><p><code>continue</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/returns.html">继续最近层循环的下一步</a></p>
+</li>
+<li><p><code>do</code> 开始一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#while-%E5%BE%AA%E7%8E%AF">do/while 循环</a>（后置条件的循环）</p>
+</li>
+<li><p><code>else</code> 定义一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#if-%E8%A1%A8%E8%BE%BE%E5%BC%8F">if 表达式</a>条件为 false 时执行的分支</p>
+</li>
+<li><p><code>false</code> 指定<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/basic-types.html#%E5%B8%83%E5%B0%94">布尔类型</a>的“假”值</p>
+</li>
+<li><p><code>for</code> 开始一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#for-%E5%BE%AA%E7%8E%AF">for 循环</a></p>
+</li>
+<li><p><code>fun</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/functions.html">函数</a></p>
+</li>
+<li><p><code>if</code> 开始一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#if-%E8%A1%A8%E8%BE%BE%E5%BC%8F">if 表达式</a></p>
+</li>
+<li><p>in</p>
+<ul>
+<li>指定在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#for-%E5%BE%AA%E7%8E%AF">for 循环</a>中迭代的对象</li>
+<li>用作中缀操作符以检测一个值属于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/ranges.html">一个区间</a>、 一个集合或者其他<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/operator-overloading.html#in">定义“contains”方法</a>的实体</li>
+<li>在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#when-%E8%A1%A8%E8%BE%BE%E5%BC%8F">when 表达式中</a>用于上述目的</li>
+<li>将一个类型参数标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/generics.html#%E5%A3%B0%E6%98%8E%E5%A4%84%E5%9E%8B%E5%8F%98">逆变</a></li>
+</ul>
+</li>
+<li><p>!in</p>
+<ul>
+<li>用作中缀操作符以检测一个值<strong>不</strong>属于<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/ranges.html">一个区间</a>、 一个集合或者其他<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/operator-overloading.html#in">定义“contains”方法</a>的实体</li>
+<li>在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#when-%E8%A1%A8%E8%BE%BE%E5%BC%8F">when 表达式中</a>用于上述目的</li>
+</ul>
+</li>
+<li><p><code>interface</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/interfaces.html">接口</a></p>
+</li>
+<li><p>is</p>
+<ul>
+<li>检测<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/typecasts.html#is-%E4%B8%8E-is-%E6%93%8D%E4%BD%9C%E7%AC%A6">一个值具有指定类型</a></li>
+<li>在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#when-%E8%A1%A8%E8%BE%BE%E5%BC%8F">when 表达式中</a>用于上述目的</li>
+</ul>
+</li>
+<li><p>!is</p>
+<ul>
+<li>检测<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/typecasts.html#is-%E4%B8%8E-is-%E6%93%8D%E4%BD%9C%E7%AC%A6">一个值<strong>不</strong>具有指定类型</a></li>
+<li>在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#when-%E8%A1%A8%E8%BE%BE%E5%BC%8F">when 表达式中</a>用于上述目的</li>
+</ul>
+</li>
+<li><p><code>null</code> 是表示不指向任何对象的对象引用的常量</p>
+</li>
+<li><p><code>object</code> 同时声明<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/object-declarations.html">一个类及其实例</a></p>
+</li>
+<li><p><code>package</code> 指定<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/packages.html">当前文件的包</a></p>
+</li>
+<li><p><code>return</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/returns.html">从最近层的函数或匿名函数返回</a></p>
+</li>
+<li><p>super</p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E8%B0%83%E7%94%A8%E8%B6%85%E7%B1%BB%E5%AE%9E%E7%8E%B0">引用一个方法或属性的超类实现</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E7%BB%A7%E6%89%BF">在次构造函数中调用超类构造函数</a></li>
+</ul>
+</li>
+<li><p>this</p>
+<ul>
+<li>引用<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/this-expressions.html">当前接收者</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">在次构造函数中调用同一个类的另一个构造函数</a></li>
+</ul>
+</li>
+<li><p><code>throw</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/exceptions.html">抛出一个异常</a></p>
+</li>
+<li><p><code>true</code> 指定<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/basic-types.html#%E5%B8%83%E5%B0%94">布尔类型</a>的“真”值</p>
+</li>
+<li><p><code>try</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/exceptions.html">开始一个异常处理块</a></p>
+</li>
+<li><p><code>typealias</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/type-aliases.html">类型别名</a></p>
+</li>
+<li><p><code>typeof</code> 保留以供未来使用</p>
+</li>
+<li><p><code>val</code> 声明一个只读<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html">属性</a>或<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/basic-syntax.html#defining-variables">局部变量</a></p>
+</li>
+<li><p><code>var</code> 声明一个可变<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html">属性</a>或<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/basic-syntax.html#defining-variables">局部变量</a></p>
+</li>
+<li><p><code>when</code> 开始一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#when-%E8%A1%A8%E8%BE%BE%E5%BC%8F">when 表达式</a>（执行其中一个给定分支）</p>
+</li>
+<li><p><code>while</code> 开始一个 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/control-flow.html#while-%E5%BE%AA%E7%8E%AF">while 循环</a>（前置条件的循环）</p>
+</li>
+</ul>
+<h4 id="软关键字"><a href="#软关键字" class="headerlink" title="软关键字"></a>软关键字</h4><p>以下符号在适用的上下文中充当关键字，而在其他上下文中可用作标识符：</p>
+<ul>
+<li><p>by</p>
+<ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/delegation.html">将接口的实现委托给另一个对象</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/delegated-properties.html">将属性访问器的实现委托给另一个对象</a></li>
+</ul>
+</li>
+<li><p><code>catch</code> 开始一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/exceptions.html">处理指定异常类型</a>的块</p>
+</li>
+<li><p><code>constructor</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">主构造函数或次构造函数</a></p>
+</li>
+<li><p><code>delegate</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>dynamic</code> 引用一个 Kotlin/JS 代码中的<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/dynamic-type.html">动态类型</a></p>
+</li>
+<li><p><code>field</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>file</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>finally</code> 开始一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/exceptions.html">当 try 块退出时总会执行的块</a></p>
+</li>
+<li><p>get</p>
+<ul>
+<li>声明<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html#getters-%E4%B8%8E-setters">属性的 getter</a></li>
+<li>用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></li>
+</ul>
+</li>
+<li><p><code>import</code> <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/packages.html">将另一个包中的声明导入当前文件</a></p>
+</li>
+<li><p><code>init</code> 开始一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0">初始化块</a></p>
+</li>
+<li><p><code>param</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>property</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>receiver</code>用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p>set</p>
+<ul>
+<li>声明<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html#getters-%E4%B8%8E-setters">属性的 setter</a></li>
+<li>用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></li>
+</ul>
+</li>
+<li><p><code>setparam</code> 用作<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html#%E6%B3%A8%E8%A7%A3%E4%BD%BF%E7%94%A8%E5%A4%84%E7%9B%AE%E6%A0%87">注解使用处目标</a></p>
+</li>
+<li><p><code>where</code> 指定<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/generics.html#%E4%B8%8A%E7%95%8C">泛型类型参数的约束</a></p>
+</li>
+</ul>
+<h4 id="修饰符关键字"><a href="#修饰符关键字" class="headerlink" title="修饰符关键字"></a>修饰符关键字</h4><p>以下符号作为声明中修饰符列表中的关键字，并可用作其他上下文中的标识符：</p>
+<ul>
+<li><code>actual</code> 表示<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/multiplatform.html">多平台项目</a>中的一个平台相关实现</li>
+<li><code>abstract</code> 将一个类或成员标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E6%8A%BD%E8%B1%A1%E7%B1%BB">抽象</a></li>
+<li><code>annotation</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/annotations.html">注解类</a></li>
+<li><code>companion</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/object-declarations.html#%E4%BC%B4%E7%94%9F%E5%AF%B9%E8%B1%A1">伴生对象</a></li>
+<li><code>const</code> 将属性标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html#%E7%BC%96%E8%AF%91%E6%9C%9F%E5%B8%B8%E9%87%8F">编译期常量</a></li>
+<li><code>crossinline</code> 禁止<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/inline-functions.html#%E9%9D%9E%E5%B1%80%E9%83%A8%E8%BF%94%E5%9B%9E">传递给内联函数的 lambda 中的非局部返回</a></li>
+<li><code>data</code> 指示编译器<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/data-classes.html">为类生成典型成员</a></li>
+<li><code>enum</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/enum-classes.html">枚举</a></li>
+<li><code>expect</code> 将一个声明标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/multiplatform.html">平台相关</a>，并期待在平台模块中实现。</li>
+<li><code>external</code> 将一个声明标记为不是在 Kotlin 中实现（通过 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/java-interop.html#%E5%9C%A8-kotlin-%E4%B8%AD%E4%BD%BF%E7%94%A8-jni">JNI</a> 访问或者在 <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/js-interop.html#external-%E4%BF%AE%E9%A5%B0%E7%AC%A6">JavaScript</a> 中实现）</li>
+<li><code>final</code> 禁止<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E8%A6%86%E7%9B%96%E6%96%B9%E6%B3%95">成员覆盖</a></li>
+<li><code>infix</code> 允许以<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/functions.html#%E4%B8%AD%E7%BC%80%E8%A1%A8%E7%A4%BA%E6%B3%95">中缀表示法</a>调用函数</li>
+<li><code>inline</code> 告诉编译器<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/inline-functions.html">在调用处内联传给它的函数和 lambda 表达式</a></li>
+<li><code>inner</code> 允许在<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/nested-classes.html">嵌套类</a>中引用外部类实例</li>
+<li><code>internal</code> 将一个声明标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/visibility-modifiers.html">在当前模块中可见</a></li>
+<li><code>lateinit</code> 允许<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/properties.html#%E5%BB%B6%E8%BF%9F%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B1%9E%E6%80%A7%E4%B8%8E%E5%8F%98%E9%87%8F">在构造函数之外初始化非空属性</a></li>
+<li><code>noinline</code> 关闭<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/inline-functions.html#%E7%A6%81%E7%94%A8%E5%86%85%E8%81%94">传给内联函数的 lambda 表达式的内联</a></li>
+<li><code>open</code> 允许<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E7%BB%A7%E6%89%BF">一个类子类化或覆盖成员</a></li>
+<li><code>operator</code> 将一个函数标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/operator-overloading.html">重载一个操作符或者实现一个约定</a></li>
+<li><code>out</code> 将类型参数标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/generics.html#%E5%A3%B0%E6%98%8E%E5%A4%84%E5%9E%8B%E5%8F%98">协变</a></li>
+<li><code>override</code> 将一个成员标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/classes.html#%E8%A6%86%E7%9B%96%E6%96%B9%E6%B3%95">超类成员的覆盖</a></li>
+<li><code>private</code> 将一个声明标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/visibility-modifiers.html">在当前类或文件中可见</a></li>
+<li><code>protected</code> 将一个声明标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/visibility-modifiers.html">在当前类及其子类中可见</a></li>
+<li><code>public</code> 将一个声明标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/visibility-modifiers.html">在任何地方可见</a></li>
+<li><code>reified</code> 将内联函数的类型参数标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/inline-functions.html#%E5%85%B7%E4%BD%93%E5%8C%96%E7%9A%84%E7%B1%BB%E5%9E%8B%E5%8F%82%E6%95%B0">在运行时可访问</a></li>
+<li><code>sealed</code> 声明一个<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/sealed-classes.html">密封类</a>（限制子类化的类）</li>
+<li><code>suspend</code> 将一个函数或 lambda 表达式标记为挂起式（可用做<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/coroutines.html">协程</a>）</li>
+<li><code>tailrec</code> 将一个函数标记为<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/functions.html#%E5%B0%BE%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0">尾递归</a>（允许编译器将递归替换为迭代）</li>
+<li><code>vararg</code> 允许<a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.kotlincn.net/docs/reference/functions.html#%E5%8F%AF%E5%8F%98%E6%95%B0%E9%87%8F%E7%9A%84%E5%8F%82%E6%95%B0varargs">一个参数传入可变数量的参数</a></li>
+</ul>
+<h4 id="takeIf代码"><a href="#takeIf代码" class="headerlink" title="takeIf代码"></a>takeIf代码</h4><pre class="language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">//原始代码</span>
+<span class="token keyword">if</span>（someObject！<span class="token operator">=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> someObject<span class="token punctuation">.</span>status）<span class="token punctuation">&#123;</span> 
+   doThis（）
+<span class="token punctuation">&#125;</span> 
+<span class="token comment">//更好的代码</span>
+<span class="token keyword">if</span>（someObject？<span class="token punctuation">.</span>status <span class="token operator">==</span> <span class="token boolean">true</span>）<span class="token punctuation">&#123;</span> 
+   doThis（）
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//改进的代码</span>
+someObject？<span class="token punctuation">.</span><span class="token function">takeIf</span> <span class="token punctuation">&#123;</span>it<span class="token punctuation">.</span>status<span class="token punctuation">&#125;</span> <span class="token operator">?</span><span class="token punctuation">.</span> apply <span class="token punctuation">&#123;</span>doThis（）<span class="token punctuation">&#125;</span></code></pre>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">xtvj</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xtvj.github.io/2021/10/12/Kolin%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">https://xtvj.github.io/2021/10/12/Kolin阅读笔记/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="external nofollow noopener noreferrer">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xtvj.github.io" target="_blank">XTVJ</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/android/">android</a><a class="post-meta__tags" href="/tags/Kotlin/">Kotlin</a></div><div class="post_share"><div class="social-share" data-image="https://xtvj.github.io/images/kotlin_note.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/06/29/RedmiAC2100%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/openwrt_ac2100.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">RedmiAC2100在MacOS下编译相应固件及一些使用记录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-15</div><div class="title">Android中使用Hilt依赖注入，超赞的一个库</div></div></a></div><div><a href="/2019/10/12/Android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="Android开发填坑记录"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-10-12</div><div class="title">Android开发填坑记录</div></div></a></div><div><a href="/2018/06/23/%E6%B8%A9%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" title="温习知识点记录"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-06-23</div><div class="title">温习知识点记录</div></div></a></div><div><a href="/2020/02/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-22</div><div class="title">设计模式</div></div></a></div><div><a href="/2017/05/01/Android6.0%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E7%BC%96%E8%AF%91/" title="Android6.0系统镜像编译"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2017-05-01</div><div class="title">Android6.0系统镜像编译</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/images/avatar.gif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"></div><div class="author-info__name">xtvj</div><div class="author-info__description">探寻生活的多种意义</div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">16</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/xtvj" target="_blank" title="Github" rel="external nofollow noopener noreferrer"><i class="fab fa-github"></i></a><a class="social-icon" href="https://xtvj.github.io/atom.xml" target="_blank" title><i class="fas fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">网站目的是给自己浏览，部分文章内容会不定期更新，如有新类型内容才会写新文章。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">1.</span> <span class="toc-text">硬关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">2.</span> <span class="toc-text">软关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E9%A5%B0%E7%AC%A6%E5%85%B3%E9%94%AE%E5%AD%97"><span class="toc-number">3.</span> <span class="toc-text">修饰符关键字</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#takeIf%E4%BB%A3%E7%A0%81"><span class="toc-number">4.</span> <span class="toc-text">takeIf代码</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/10/12/Kolin%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" title="Kotlin阅读笔记"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/kotlin_note.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kotlin阅读笔记"></a><div class="content"><a class="title" href="/2021/10/12/Kolin%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" title="Kotlin阅读笔记">Kotlin阅读笔记</a><time datetime="2021-10-12T00:49:03.000Z" title="发表于 2021-10-12 08:49:03">2021-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/29/RedmiAC2100%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" title="RedmiAC2100在MacOS下编译相应固件及一些使用记录"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/openwrt_ac2100.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RedmiAC2100在MacOS下编译相应固件及一些使用记录"></a><div class="content"><a class="title" href="/2021/06/29/RedmiAC2100%E5%9C%A8MacOS%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" title="RedmiAC2100在MacOS下编译相应固件及一些使用记录">RedmiAC2100在MacOS下编译相应固件及一些使用记录</a><time datetime="2021-06-29T08:45:58.000Z" title="发表于 2021-06-29 16:45:58">2021-06-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/14/IMDB%E4%B8%8A%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="IMDB上评价数过百万的电影"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/imdb_top250.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="IMDB上评价数过百万的电影"></a><div class="content"><a class="title" href="/2021/03/14/IMDB%E4%B8%8A%E8%AF%84%E4%BB%B7%E6%95%B0%E8%BF%87%E7%99%BE%E4%B8%87%E7%9A%84%E7%94%B5%E5%BD%B1/" title="IMDB上评价数过百万的电影">IMDB上评价数过百万的电影</a><time datetime="2021-03-14T10:50:43.000Z" title="发表于 2021-03-14 18:50:43">2021-03-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/youtube-dl.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频"></a><div class="content"><a class="title" href="/2020/11/22/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E3%80%81%E9%9F%B3%E9%A2%91%E3%80%81%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" title="使用youtube-dl下载视频、音频、播放列表中的多个视频或音频">使用youtube-dl下载视频、音频、播放列表中的多个视频或音频</a><time datetime="2020-11-22T10:39:02.000Z" title="发表于 2020-11-22 18:39:02">2020-11-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库"><img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/android.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Android中使用Hilt依赖注入，超赞的一个库"></a><div class="content"><a class="title" href="/2020/11/15/Android%E4%B8%AD%E4%BD%BF%E7%94%A8Hilt%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%8C%E8%B6%85%E8%B5%9E%E7%9A%84%E4%B8%80%E4%B8%AA%E5%BA%93/" title="Android中使用Hilt依赖注入，超赞的一个库">Android中使用Hilt依赖注入，超赞的一个库</a><time datetime="2020-11-15T11:12:02.000Z" title="发表于 2020-11-15 19:12:02">2020-11-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By xtvj</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '23f32929e0b2e2db8f94',
+      clientSecret: '932d8002c261472775eb5aee907c5296fe9e7c45',
+      repo: 'xtvj.github.io',
+      owner: 'xtvj',
+      admin: ['xtvj'],
+      id: 'b61be6cee40bb9ed742bbea2ff0d1c90',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
