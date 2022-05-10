@@ -6,7 +6,7 @@
   <link href="https://xtvj.github.io/atom.xml" rel="self"/>
   
   <link href="https://xtvj.github.io/"/>
-  <updated>2022-05-10T10:41:35.950Z</updated>
+  <updated>2022-05-10T11:05:12.391Z</updated>
   <id>https://xtvj.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://xtvj.github.io/2022/05/10/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8Git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
     <id>https://xtvj.github.io/2022/05/10/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8Git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
     <published>2022-05-10T10:22:37.000Z</published>
-    <updated>2022-05-10T10:41:35.950Z</updated>
+    <updated>2022-05-10T11:05:12.391Z</updated>
     
     <content type="html"><![CDATA[<p>命令行才是王道，尽量摈弃GUI的Git操作。</p><h3 id="git-pull：对下列文件的本地修改将被合并操作覆盖">git pull：对下列文件的本地修改将被合并操作覆盖</h3><p>这种情况是由于自己修改了文件未提交。</p><p>如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改</p><pre class="language-none"><code class="language-none"># 贮藏修改git stash</code></pre><p>然后</p><pre class="language-none"><code class="language-none">git pull</code></pre><p>最后</p><pre class="language-none"><code class="language-none">git stash pop</code></pre><p>这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用<code>git restore 文件</code>来恢复文件。</p>]]></content>
     
