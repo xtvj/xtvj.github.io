@@ -239,6 +239,20 @@
   </url>
   
   <url>
+    <loc>https://xtvj.github.io/tags/Hexo/</loc>
+    <lastmod>2022-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://xtvj.github.io/tags/Kotlin/</loc>
+    <lastmod>2022-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/tags/Linux/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -260,20 +274,6 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Kotlin/</loc>
-    <lastmod>2022-05-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/tags/Hexo/</loc>
-    <lastmod>2022-05-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://xtvj.github.io/tags/others/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -288,14 +288,14 @@
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
+    <loc>https://xtvj.github.io/tags/Root/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xtvj.github.io/tags/Root/</loc>
+    <loc>https://xtvj.github.io/tags/%E4%BA%94%E7%AC%94/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -339,6 +339,13 @@
   </url>
   
   <url>
+    <loc>https://xtvj.github.io/categories/Hexo/</loc>
+    <lastmod>2022-05-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://xtvj.github.io/categories/Linux/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -361,13 +368,6 @@
   
   <url>
     <loc>https://xtvj.github.io/categories/%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2022-05-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://xtvj.github.io/categories/Hexo/</loc>
     <lastmod>2022-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
