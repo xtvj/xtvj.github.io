@@ -6,7 +6,7 @@
   <link href="https://xtvj.github.io/atom.xml" rel="self"/>
   
   <link href="https://xtvj.github.io/"/>
-  <updated>2022-06-24T14:12:01.862Z</updated>
+  <updated>2022-06-26T11:19:54.822Z</updated>
   <id>https://xtvj.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://xtvj.github.io/2022/05/10/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8Git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/"/>
     <id>https://xtvj.github.io/2022/05/10/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8Git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
     <published>2022-05-10T10:22:37.000Z</published>
-    <updated>2022-06-24T14:12:01.862Z</updated>
+    <updated>2022-06-26T11:19:54.822Z</updated>
     
-    <content type="html"><![CDATA[<p>命令行才是王道，尽量摈弃GUI的Git操作。</p><hr><h3 id="git-pull：对下列文件的本地修改将被合并操作覆盖">git pull：对下列文件的本地修改将被合并操作覆盖</h3><p>这种情况是由于自己修改了文件未提交。</p><p>如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改</p><pre class="language-none"><code class="language-none"># 贮藏修改git stash</code></pre><p>然后</p><pre class="language-none"><code class="language-none">git pull</code></pre><p>最后</p><pre class="language-none"><code class="language-none">git stash pop</code></pre><p>这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用<code>git restore 文件</code>来恢复文件。</p><hr><h3 id="下载带有引用其他项目的代码">下载带有引用其他项目的代码</h3><p>如果要clone的项目有其它项目的引用，可使用以下代码下载</p><pre class="language-none"><code class="language-none">git clone --recurse-submodules  git:&#x2F;&#x2F;github.com&#x2F;***&#x2F;**.git</code></pre><p>或者在常规clone后执行</p><pre class="language-none"><code class="language-none">git submodule init git submodule update</code></pre><h3 id="引用">引用</h3><p>1、<a href="https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules">How to &quot;git clone&quot; including submodules? - Stack Overflow</a></p>]]></content>
+    <content type="html"><![CDATA[<p>命令行才是王道，尽量摈弃GUI的Git操作。</p><hr><h3 id="git-pull：对下列文件的本地修改将被合并操作覆盖">git pull：对下列文件的本地修改将被合并操作覆盖</h3><p>这种情况是由于自己修改了文件未提交。</p><p>如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改</p><pre class="language-none"><code class="language-none"># 贮藏修改git stash</code></pre><p>然后</p><pre class="language-none"><code class="language-none">git pull</code></pre><p>最后</p><pre class="language-none"><code class="language-none">git stash pop</code></pre><p>这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用<code>git restore 文件</code>来恢复文件。</p><hr><h3 id="下载带有引用其他项目的代码">下载带有引用其他项目的代码</h3><p>如果要clone的项目有其它项目的引用，可使用以下代码下载</p><pre class="language-none"><code class="language-none">git clone --recurse-submodules  git:&#x2F;&#x2F;github.com&#x2F;***&#x2F;**.git</code></pre><p>或者在常规clone后执行</p><pre class="language-none"><code class="language-none">git submodule init git submodule update</code></pre><hr><h3 id="项目A引用项目B的分支">项目A引用项目B的分支</h3><p>要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。</p><pre class="language-none"><code class="language-none">&#x2F;&#x2F;destination_folder为子模块的本地目录名，如果未提供，它将为远程存储库名git submodule add &lt;remote_url&gt; &lt;destination_folder&gt;</code></pre><p><strong>获取新的子模块提交</strong></p><p>请进入您的子模块文件夹并首先运行<code>git fetch</code>命令</p><p>现在，如果您再次运行“git log”命令，您将能够看到您希望集成的新提交。</p><pre class="language-none"><code class="language-none">git log --oneline origin&#x2F;master -393360a2 (origin&#x2F;master, origin&#x2F;HEAD) Second commit88db523 First commit43d0813 (HEAD -&gt; master) Initial commit</code></pre><p>为了让您的子模块与最新提交一致，您可以运行“git checkout”命令并指定要将子模块更新到的 SHA</p><pre class="language-none"><code class="language-none">git checkout -q 93360a2</code></pre><p><strong>删除 Git 子模块</strong></p><pre class="language-none"><code class="language-none">git submodule deinit &lt;submodule&gt; git rm &lt;submodule&gt;</code></pre><h3 id="引用">引用</h3><p>1、<a href="https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules">How to &quot;git clone&quot; including submodules? - Stack Overflow</a></p><p>2、<a href="https://devconnected.com/how-to-add-and-update-git-submodules/#Add_a_Git_Submodule">How To Add and Update Git Submodules – devconnected</a></p>]]></content>
     
     
       
