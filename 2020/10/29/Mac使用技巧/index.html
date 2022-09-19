@@ -434,24 +434,24 @@ table th:nth-of-type(2) {
 </blockquote>
 <p>测试驱动，下载解压后在文件夹内执行以下命令</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 给驱动分配执行权限</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> -R root:wheel itlwm.kext
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> root:wheel itlwm.kext
 <span class="token comment"># 加载驱动</span>
-<span class="token function">sudo</span> kextload -v itlwm.kext</code></pre>
+<span class="token function">sudo</span> kextload <span class="token parameter variable">-v</span> itlwm.kext</code></pre>
 <p>加载驱动后还看不到效果，要使用WiFi工具<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/OpenIntelWireless/HeliPort">HeliPort</a>查看。安装HeliPort后查看到有WiFi列表就代表此驱动适合设备。将测试没有问题的驱动放到 CLOVER - kexts - Other 目录下即可，下次开机会自动加载。</p>
 <img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/heliport_wifi.png" style="zoom: 100%; margin: 0px auto;" /> 
 <p><strong>蓝牙驱动项目地址</strong>：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://github.com/OpenIntelWireless/IntelBluetoothFirmware">https://github.com/OpenIntelWireless/IntelBluetoothFirmware</a></p>
 <p>下载后可执行以下命令测试：</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 驱动程序上传固件</span>
 <span class="token comment"># 给驱动分配执行权限</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> -R root:wheel IntelBluetoothFirmware.kext
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> root:wheel IntelBluetoothFirmware.kext
 <span class="token comment"># 加载驱动</span>
-<span class="token function">sudo</span> kextload -v IntelBluetoothFirmware.kext
+<span class="token function">sudo</span> kextload <span class="token parameter variable">-v</span> IntelBluetoothFirmware.kext
 
 <span class="token comment">#设置面板上启用打开/关闭开关</span>
 <span class="token comment"># 给驱动分配执行权限</span>
-<span class="token function">sudo</span> <span class="token function">chown</span> -R root:wheel IntelBluetoothInjector.kext
+<span class="token function">sudo</span> <span class="token function">chown</span> <span class="token parameter variable">-R</span> root:wheel IntelBluetoothInjector.kext
 <span class="token comment"># 加载驱动</span>
-<span class="token function">sudo</span> kextload -v IntelBluetoothInjector.kext</code></pre>
+<span class="token function">sudo</span> kextload <span class="token parameter variable">-v</span> IntelBluetoothInjector.kext</code></pre>
 <p>同样放在CLOVER - kexts - Other 目录下即可（我测试时没效果，由于蓝牙设备型号在项目上有列出，放在目录后重启还是成功加载蓝牙了。）。</p>
 <img src= "/img/loading.gif" data-lazy-src="https://xtvj.github.io/images/mac_bluetooth.png" style="zoom: 100%; margin: 0px auto;" /> 
 <h3 id="OpenCore工具添加驱动">OpenCore工具添加驱动</h3>
