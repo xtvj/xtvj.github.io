@@ -6,7 +6,7 @@
   <link href="https://xtvj.github.io/atom.xml" rel="self"/>
   
   <link href="https://xtvj.github.io/"/>
-  <updated>2023-04-09T06:34:52.450Z</updated>
+  <updated>2023-04-09T06:35:46.258Z</updated>
   <id>https://xtvj.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://xtvj.github.io/2023/04/09/Gigabyte-Z790-Aorus-Elite-AX%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/"/>
     <id>https://xtvj.github.io/2023/04/09/Gigabyte-Z790-Aorus-Elite-AX%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</id>
     <published>2023-04-09T05:18:01.000Z</published>
-    <updated>2023-04-09T06:34:52.450Z</updated>
+    <updated>2023-04-09T06:35:46.258Z</updated>
     
     <content type="html"><![CDATA[<h3 id="我的硬件">我的硬件</h3><ul><li>主板：Gigabyte Z790 Aorus Elite ax</li><li>CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以）</li><li>GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该都适用)</li><li>macOS：Ventura 13.3.1（Ventura所有版本都适用，Monterey、Big Sur没测试过）</li></ul><h3 id="EFI制作过程">EFI制作过程</h3><p>按照官方教程<a href="https://dortania.github.io/OpenCore-Install-Guide/">OpenCore-Install-Guide/</a>操作就行。</p><p>大致可分为</p><img src="../images/黑苹果EFI制作流程.svg" alt="黑苹果EFI制作流程" style="zoom:75%;" /><h5 id="这些流程基本都很简单，我只记录自己当初卡壳的流程">这些流程基本都很简单，我只记录自己当初卡壳的流程</h5><ul><li><a href="https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime">制作ACPI</a>：是使用<a href="https://github.com/corpnewt/SSDTTime">SSDTTime</a>工具在Windows下生成的，操作很简单，只是当初看英文文档的时候先看的手动制作，以为很难，其实用工具在Windows下选择几个选项就自动生成了。</li><li>制作macOS启动盘：我之前用的笔记本用别人的EFI做了黑苹果，就在macOS下用<a href="https://github.com/balena-io/etcher">etcher</a>制作黑果启动盘，但这个etcher工具有一个很大的坑就是EFI分区没标记，引导时不正常，我用它制作启动盘时切换了多个EFI引导都是找不到启动Mac的选项，一度以为全是EFI不配置我的主板。直到在远景上看到别人讨论才知道是这原因。如果你网速快的话用官方的方式制作在线恢复盘<a href="https://dortania.github.io/OpenCore-Install-Guide/installer-guide/windows-install.html#rufus-method">rufus-method</a>安装就行。想离线安装就用分区工具把EFI分区标记成活动引导分区之类的（自己没验证过）。</li></ul><h3 id="BIOS设定">BIOS设定</h3><ul><li><strong>Secure Boot : Disabled</strong></li><li>Internal Graphics : Disabled</li><li><strong>Above 4G Decoding : Enabled</strong></li><li><strong>Above 4GB MMIO BIOS assignment : Enabled</strong></li><li>Re-Size BAR Support : Disabled</li><li><strong>Hyper-Threading : Enabled</strong></li><li><strong>CFG Lock : Disabled</strong></li></ul><p>其实就一个是最重要的，<strong>Secure Boot : Disabled</strong>，别的都不太重要。</p><p>Hyper-Threading：打开是超线程技术，只是Opencore支持的还不太好，还要对自己的CPU做驱动才支持，而<a href="https://github.com/acidanthera/CPUFriend">CPUFriend</a>之类的工具还对13代CPU支持的不太好。</p><p>CFG Lock：可以在Opencore里设置启动和关闭，不是必需在BIOS里设定。</p><p>Internal Graphics：核显开启也没关系，没影响</p><p>4G Decoding之类的：看别人贴子是影响睡眠唤醒之类的，我不玩电脑都是直接关机，没用唤醒睡眠功能，这个不影响我。再说这个看别人的说法还跟BIOS版本有关。</p><h3 id="增量更新">增量更新</h3><p>禁用BlueToolFixup.kext 再检查更新安装即可增量更新</p><p>我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBluetoothFirmware.kext、IntelBTPatcher.kext）都禁用增量更新成功了。</p><h3 id="安装过程">安装过程</h3><p>安装过程中<strong>启动Apple Logo后会有一段较长时间的屏幕熄灭</strong>，我第一次安装的时候有好几分钟的黑屏时间，目前正常使用时启动有几秒的黑屏时间，黑屏时间过后才会出现设置界面或登录界面。</p><h3 id="推荐的软件">推荐的软件</h3><ul><li><a href="https://github.com/MonitorControl/MonitorControl">MonitorControl</a> ：用来调整屏幕亮度。</li><li><a href="https://github.com/ic005k/OCAuxiliaryTools/releases">OCAT</a> ：用来修改EFI文件</li></ul><h3 id="EFI文件分享">EFI文件分享</h3><p><a href="https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh">Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh</a></p>]]></content>
     
