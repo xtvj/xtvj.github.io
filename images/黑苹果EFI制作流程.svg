@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="239 -727 386 805" width="386" height="805">
+  <defs/>
+  <g id="Canvas_1" stroke-dasharray="none" fill="none" stroke="none" stroke-opacity="1" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Line_20">
+        <line x1="431.5" y1="-.25" x2="431.5" y2="36.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_18">
+        <line x1="431.5" y1="-77.25" x2="431.5" y2="-40.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_16">
+        <line x1="431.5" y1="-154.25" x2="431.5" y2="-117.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_14">
+        <line x1="431.5" y1="-231.25" x2="431.5" y2="-194.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_12">
+        <line x1="431.74406" y1="-308" x2="431.58747" y2="-271.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_8">
+        <line x1="431.5" y1="-594.25" x2="431.5" y2="-558.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_4">
+        <line x1="431.8552" y1="-678" x2="431.6448" y2="-642.75" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_3">
+        <rect x="346.5" y="-726.5" width="171" height="48.5" fill="white"/>
+        <rect x="346.5" y="-726.5" width="171" height="48.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(351.5 -713.25)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="4.34" y="17">下载官方Opencore包</tspan>
+        </text>
+      </g>
+      <g id="Graphic_10">
+        <rect x="239.5" y="-426.5" width="385" height="118.5" fill="white"/>
+        <rect x="239.5" y="-426.5" width="385" height="118.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(244.5 -400.25)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="115.5" y="17">添加必要的驱动文件</tspan>
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="20.972" y="39">https://dortania.github.io/OpenCore-Install-</tspan>
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="58.268" y="61">Guide/ktext.html#firmware-drivers</tspan>
+        </text>
+      </g>
+      <g id="Graphic_5">
+        <rect x="303.5" y="-642.75" width="256" height="48.5" fill="white"/>
+        <rect x="303.5" y="-642.75" width="256" height="48.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(308.5 -640.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="1.272" y="17">在EFI文件夹（Drivers、Tools）里</tspan>
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="59" y="39">删除不必要的文件</tspan>
+        </text>
+      </g>
+      <g id="Graphic_9">
+        <rect x="300.25" y="-558.25" width="262.5" height="95.5" fill="white"/>
+        <rect x="300.25" y="-558.25" width="262.5" height="95.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(305.25 -543.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="7.418" y="17">向Resources里添加媒体文件（一</tspan>
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="2.642" y="39">般可以直接从别人的EFI里复制这个</tspan>
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="6.25" y="61">文件夹过来，里面的内容都一样）</tspan>
+        </text>
+      </g>
+      <g id="Line_11">
+        <line x1="431.66667" y1="-462.75" x2="431.7932" y2="-426.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_13">
+        <rect x="362" y="-271.75" width="139" height="40.5" fill="white"/>
+        <rect x="362" y="-271.75" width="139" height="40.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(367 -262.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="14.388" y="17">制作ACPI文件</tspan>
+        </text>
+      </g>
+      <g id="Graphic_15">
+        <rect x="362" y="-194.75" width="139" height="40.5" fill="white"/>
+        <rect x="362" y="-194.75" width="139" height="40.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(367 -185.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="20.892" y="17">整理EFI文件</tspan>
+        </text>
+      </g>
+      <g id="Graphic_17">
+        <rect x="316.75" y="-117.75" width="229.5" height="40.5" fill="white"/>
+        <rect x="316.75" y="-117.75" width="229.5" height="40.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(321.75 -108.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="10.782" y="17">选择机型生成自己的UUID等</tspan>
+        </text>
+      </g>
+      <g id="Graphic_19">
+        <rect x="316.75" y="-40.75" width="229.5" height="40.5" fill="white"/>
+        <rect x="316.75" y="-40.75" width="229.5" height="40.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(321.75 -31.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="42.87" y="17">制作macOS启动盘</tspan>
+        </text>
+      </g>
+      <g id="Graphic_21">
+        <rect x="316.75" y="36.25" width="229.5" height="40.5" fill="white"/>
+        <rect x="316.75" y="36.25" width="229.5" height="40.5" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(321.75 45.5)" fill="black">
+          <tspan font-family="PingFang SC" font-size="16" fill="black" x="45.75" y="17">调试启动安装系统</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
