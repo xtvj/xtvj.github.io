@@ -2,16 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://xtvj.github.io/archives/</loc>
-    <lastmod>2023-08-12T15:59:16+08:00</lastmod>
+    <loc>https://example.org/archives/</loc>
   </url><url>
-    <loc>https://xtvj.github.io/categories/</loc>
+    <loc>https://example.org/categories/</loc>
   </url><url>
-    <loc>https://xtvj.github.io/search/</loc>
-    <lastmod>2023-08-12T15:59:16+08:00</lastmod>
+    <loc>https://example.org/</loc>
   </url><url>
-    <loc>https://xtvj.github.io/tags/</loc>
+    <loc>https://example.org/search/</loc>
   </url><url>
-    <loc>https://xtvj.github.io/</loc>
+    <loc>https://example.org/tags/</loc>
   </url>
 </urlset>
