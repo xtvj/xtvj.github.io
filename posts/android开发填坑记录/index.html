@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#">
+    <meta charset="UTF-8" />
+
+    <meta name="generator" content="Hugo 0.122.0"><meta name="theme-color" content="#fff" />
+    <meta name="color-scheme" content="light dark">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <title>Android开发填坑记录 | XTVJ的博客</title>
+
+    <link rel="stylesheet" href="/css/meme.min.d1c20b4e0c80af647d4eaa406f26f20067fb18949229542fa52069311066c7e1.css"/>
+
+    
+    
+        
+            <script src="/js/meme.min.93caf51ca41a6ed5e468d2ac73c7cdfe253a756a2192255cf28aaa8da5ea4209.js"></script>
+
+        
+    
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB&#43;Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB&#43;Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" /></noscript>
+
+    <meta name="author" content="xtvj" /><meta name="description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1 person -&gt; person.getName(); 可以替换成 1 Person::getName 表达式 1 () -&gt; new HashMap&lt;&gt;(); 可以替换成 1 HashMap::new 这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。 Android studio快捷键 按键 说明 Shift &#43; F2 定位到错误行 Ctrl(Command)&#43;Shift&#43; - / &#43; 折叠/展开全部代码 Ctrl(Command)&#43;F12 显示当前文件的结构 Shift &#43; F11 查看书签 F11 添加书签 Ctrl &#43; Alt &#43; M 快速抽取方法 一、启动app adb shell am start 包名/MainActivity 二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据 adb shell pm clear com.xxx.xxx 这种方法不仅会停止A……" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#2a6df4" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="XTVJ的博客" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="XTVJ的博客" />
+    <meta name="msapplication-starturl" content="../../" />
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="../../icons/mstile-150x150.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    
+    
+
+    
+        <link rel="canonical" href="https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" />
+    
+
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "datePublished": "2024-01-24T21:48:08+08:00",
+        "dateModified": "2024-01-30T23:38:43+08:00",
+        "url": "https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/",
+        "headline": "Android开发填坑记录",
+        "description": "双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1 person -\u003e person.getName(); 可以替换成 1 Person::getName 表达式 1 () -\u003e new HashMap\u003c\u003e(); 可以替换成 1 HashMap::new 这种[方法引用]或者说[双冒号运算]对应的参数类型是Function\u003cT,R\u003e T表示传入类型，R表示返回类型。 Android studio快捷键 按键 说明 Shift + F2 定位到错误行 Ctrl(Command)+Shift+ - / + 折叠/展开全部代码 Ctrl(Command)+F12 显示当前文件的结构 Shift + F11 查看书签 F11 添加书签 Ctrl + Alt + M 快速抽取方法 一、启动app adb shell am start 包名/MainActivity 二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据 adb shell pm clear com.xxx.xxx 这种方法不仅会停止A……",
+        "inLanguage" : "zh-CN",
+        "articleSection": "posts",
+        "wordCount":  7253 ,
+        "image": "https://xtvj.github.io/images/favicon.png",
+        "author": {
+            "@type": "Person",
+            "description": "blablabla",
+            "image": "https://xtvj.github.io/images/favicon.png",
+            "url": "https://xtvj.github.io/",
+            "name": "xtvj"
+        },
+        "license": "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)",
+        "publisher": {
+            "@type": "Organization",
+            "name": "XTVJ的博客",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://xtvj.github.io/images/favicon.png"
+            },
+            "url": "https://xtvj.github.io/"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebSite",
+            "@id": "https://xtvj.github.io/"
+        }
+    }
+</script>
+
+    
+
+<meta name="twitter:card" content="summary" />
+
+
+    
+
+
+
+<meta property="og:title" content="Android开发填坑记录" />
+<meta property="og:description" content="双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1 person -&gt; person.getName(); 可以替换成 1 Person::getName 表达式 1 () -&gt; new HashMap&lt;&gt;(); 可以替换成 1 HashMap::new 这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。 Android studio快捷键 按键 说明 Shift &#43; F2 定位到错误行 Ctrl(Command)&#43;Shift&#43; - / &#43; 折叠/展开全部代码 Ctrl(Command)&#43;F12 显示当前文件的结构 Shift &#43; F11 查看书签 F11 添加书签 Ctrl &#43; Alt &#43; M 快速抽取方法 一、启动app adb shell am start 包名/MainActivity 二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据 adb shell pm clear com.xxx.xxx 这种方法不仅会停止A……" />
+<meta property="og:url" content="https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" />
+<meta property="og:site_name" content="XTVJ的博客" />
+<meta property="og:locale" content="zh" /><meta property="og:image" content="https://xtvj.github.io/images/favicon.png" />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2024-01-24T21:48:08&#43;08:00" />
+    <meta property="article:modified_time" content="2024-01-30T23:38:43&#43;08:00" />
+    
+    <meta property="article:section" content="posts" />
+
+
+
+    
+    
+
+    
+</head>
+
+    <body>
+        <div class="container">
+            
+    <header class="header">
+        
+            <div class="header-wrapper">
+                <div class="header-inner single">
+                    
+    <div class="site-brand">
+        
+            <a href="/" class="brand">XTVJ的博客</a>
+        
+    </div>
+
+                    <nav class="nav">
+    <ul class="menu" id="menu">
+        
+            
+        
+        
+        
+        
+            
+                <li class="menu-item active"><a href="/posts/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon archive"><path d="M32 448c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32V160H32v288zm160-212c0-6.6 5.4-12 12-12h104c6.6 0 12 5.4 12 12v8c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-8zM480 32H32C14.3 32 0 46.3 0 64v48c0 8.8 7.2 16 16 16h480c8.8 0 16-7.2 16-16V64c0-17.7-14.3-32-32-32z"/></svg><span class="menu-item-name">文章</span></a>
+                </li>
+            
+        
+            
+                <li class="menu-item"><a href="/categories/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon th"><path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"/></svg><span class="menu-item-name">分类</span></a>
+                </li>
+            
+        
+            
+                <li class="menu-item"><a href="/tags/"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="icon tags"><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg><span class="menu-item-name">标签</span></a>
+                </li>
+            
+        
+            
+                <li class="menu-item"><a href=""><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="icon user-circle"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"/></svg><span class="menu-item-name">关于</span></a>
+                </li>
+            
+        
+            
+                
+                    
+                    
+                        <li class="menu-item">
+                            <a id="theme-switcher" href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon theme-icon-light"><path d="M193.2 104.5l48.8-97.5a18 18 0 0128 0l48.8 97.5 103.4 -34.5a18 18 0 0119.8 19.8l-34.5 103.4l97.5 48.8a18 18 0 010 28l-97.5 48.8 34.5 103.4a18 18 0 01-19.8 19.8l-103.4-34.5-48.8 97.5a18 18 0 01-28 0l-48.8-97.5l-103.4 34.5a18 18 0 01-19.8-19.8l34.5-103.4-97.5-48.8a18 18 0 010-28l97.5-48.8-34.5-103.4a18 18 0 0119.8-19.8zM256 128a128 128 0 10.01 0M256 160a96 96 0 10.01 0"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon theme-icon-dark"><path d="M27 412a256 256 0 10154-407a11.5 11.5 0 00-5 20a201.5 201.5 0 01-134 374a11.5 11.5 0 00-15 13"/></svg></a>
+                        </li>
+                    
+                
+            
+        
+            
+                
+            
+        
+    </ul>
+</nav>
+
+                    
+                </div>
+            </div>
+            
+    <input type="checkbox" id="nav-toggle" aria-hidden="true" />
+    <label for="nav-toggle" class="nav-toggle"></label>
+    <label for="nav-toggle" class="nav-curtain"></label>
+
+
+        
+    </header>
+
+
+
+
+            
+            
+    <main class="main single" id="main">
+    <div class="main-inner">
+
+        
+
+        <article class="content post h-entry" data-align="justify" data-type="posts" data-toc-num="true">
+
+            <h1 class="post-title p-name">Android开发填坑记录</h1>
+
+            
+
+            
+                
+            
+
+            
+                
+
+<div class="post-meta">
+    
+        
+        <time datetime="2024-01-24T21:48:08&#43;08:00" class="post-meta-item published dt-published"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon"><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;2024.1.24</time>
+    
+    
+        
+        <time datetime="2024-01-30T23:38:43&#43;08:00" class="post-meta-item modified dt-updated"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon post-meta-icon"><path d="M400 64h-48V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H160V12c0-6.627-5.373-12-12-12h-40c-6.627 0-12 5.373-12 12v52H48C21.49 64 0 85.49 0 112v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm-6 400H54a6 6 0 0 1-6-6V160h352v298a6 6 0 0 1-6 6zm-52.849-200.65L198.842 404.519c-4.705 4.667-12.303 4.637-16.971-.068l-75.091-75.699c-4.667-4.705-4.637-12.303.068-16.971l22.719-22.536c4.705-4.667 12.303-4.637 16.97.069l44.104 44.461 111.072-110.181c4.705-4.667 12.303-4.637 16.971.068l22.536 22.718c4.667 4.705 4.636 12.303-.069 16.97z"/></svg>&nbsp;2024.1.30</time>
+    
+    
+    
+        
+        
+        
+            
+        
+    
+    
+        
+        <span class="post-meta-item wordcount"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon post-meta-icon"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;7253</span>
+    
+    
+        
+        <span class="post-meta-item reading-time"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon post-meta-icon"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;15&nbsp;分钟</span>
+    
+    
+    
+</div>
+
+            
+
+            <div class="post-body e-content">
+                <p><strong>双冒号运算</strong>就是Java中的[方法引用],[方法引用]的格式是 <strong>类名::方法名。</strong></p>
+<p>一般是用作Lambda表达式</p>
+<p><strong>例如</strong></p>
+<p>表达式:</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">person -&gt; person.getName();
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>可以替换成</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Person::getName
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>表达式</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">() -&gt; new HashMap&lt;&gt;();
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>可以替换成</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">HashMap::new
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&lt;T,R&gt; T表示传入类型，R表示返回类型。</p>
+<!-- more -->
+<hr>
+<p><strong>Android studio快捷键</strong></p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th><strong>按键</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Shift + F2</td>
+<td>定位到错误行</td>
+</tr>
+<tr>
+<td>Ctrl(Command)+Shift+ - / +</td>
+<td>折叠/展开全部代码</td>
+</tr>
+<tr>
+<td>Ctrl(Command)+F12</td>
+<td>显示当前文件的结构</td>
+</tr>
+<tr>
+<td>Shift + F11</td>
+<td>查看书签</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>添加书签</td>
+</tr>
+<tr>
+<td>Ctrl + Alt + M</td>
+<td>快速抽取方法</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<p>一、启动app adb shell am start 包名/MainActivity</p>
+<p>二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据</p>
+<p>adb shell pm clear com.xxx.xxx 这种方法不仅会停止APP进程，而且会清除这个APP进程产生的所有数据</p>
+<hr>
+<p>ffmpeg 卡顿问题</p>
+<p>ffmpeg 转码H.264 High Profile的输入做直播时会有卡顿的现象；而且设定的帧率也达不到； 是因为解码H.264 HP的速度达不到造成的。 将编译时的“--disable-optimizations”去掉就可以了；</p>
+<hr>
+<p>使用Properties做本地储存时，读取的中文为乱码，可以在android studio中进入File &gt; Settings &gt; Editor &gt; File Encodings 里Project Encoding（如果右下角<Transparent native-to-ascii conversion >为打对勾，则需要勾选上）</p>
+<hr>
+<p>指定device来执行adb shell</p>
+<p>adb -s devicename shell</p>
+<hr>
+<p>AtomicBoolean是java.util.concurrent.atomic包下的原子变量，这个包里面提供了一组原子类。其基本的特性就是在多线程环境下，当有多个线程同时执行这些类的实例包含的方法时，具有排他性，即当某个线程进入方法，执行其中的指令时，不会被其他线程打断，而别的线程就像自旋锁一样，一直等到该方法执行完成。</p>
+<p>CAS，在Java并发应用中通常指CompareAndSwap或CompareAndSet，即比较并交换。CAS是一个原子操作，它比较一个内存位置的值并且只有相等时修改这个内存位置的值为新的值，保证了新的值总是基于最新的信息计算的，如果有其他线程在这期间修改了这个值则CAS失败。CAS返回是否成功或者内存位置原来的值用于判断是否CAS成功。</p>
+<p>可以粗暴地认为是个线程锁功能。</p>
+<hr>
+<p>Fragment重叠问题</p>
+<p>出现这种问题的原因是：当我们旋转屏幕的时候，activity会被销毁并重新创建，并且在销毁之前执行了onSaveInstanceState(Bundle outState)这个方法。这个方法会保存activity的一些信息，其中就包括添加过的fragment，当activity被重新创建时，会初始化其中的变量，这个时候点击底部导航的话会重新去添加fragment，也就导致了重叠的问题。</p>
+<p>问题重现：手机的 “设置” - “开发者选项” - 打开”不保留活动”(主要用于模拟Activity被及时回收) 。</p>
+<p>解决方法：</p>
+<p>一、通过注释掉这句话，这样主 Activity 因为种种原因被回收的时候就不会保存之前的 fragment state</p>
+<pre tabindex="0"><code>@Override
+protectedvoidonSaveInstanceState(Bundle outState) {
+//如果用以下这种做法则不保存状态，再次进来的话会显示默认tab
+//总是执行这句代码来调用父类去保存视图层的状态
+//super.onSaveInstanceState(outState);
+}
+</code></pre><p>二、阻止系统恢复Fragment state，在FragmentActivity保存所有Fragment状态前把Fragment从FragmentManager中移除掉。（不可取，开启新的Activity也可能触发onSaveInstanceState,如果没判空就会崩溃，判空的话，返回这个界面，就是空白，因为Fragment全部被移除了。除非自行判空，没验证。）</p>
+<pre tabindex="0"><code> protected void onSaveInstanceState(Bundle outState) {
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.remove(tab1);
+        transaction.remove(tab2);
+        transaction.remove(tab3);
+        transaction.remove(tab4);
+        transaction.commitAllowingStateLoss();
+        super.onSaveInstanceState(outState);
+    }
+</code></pre><p>三、在onSaveInstanceState(outState)中去保存fragment，当activity被恢复时，取出这些fragment即可。</p>
+<pre tabindex="0"><code>//onCreate方法中
+if (savedInstanceState != null) {
+            /*获取保存的fragment  没有的话返回null*/
+            homeFragment = (HomeFragment) getSupportFragmentManager().getFragment(savedInstanceState, HOME_FRAGMENT_KEY);
+            dashboardFragment = (DashboardFragment) getSupportFragmentManager().getFragment(savedInstanceState, DASHBOARD_FRAGMENT_KEY);
+            noticeFragment = (NoticeFragment) getSupportFragmentManager().getFragment(savedInstanceState, NOTICE_FRAGMENT_KEY);
+            addToList(homeFragment);
+            addToList(dashboardFragment);
+            addToList(noticeFragment);
+        } else {
+            initFragment();
+        }
+</code></pre><hr>
+<p>让APP重启自己的两种方法</p>
+<pre tabindex="0"><code>//重启应用
+Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+startActivity(intent);
+android.os.Process.killProcess(android.os.Process.myPid());
+</code></pre><pre tabindex="0"><code> Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        //重启应用，得使用PendingIntent
+        PendingIntent restartIntent = PendingIntent.getActivity(
+                getApplicationContext(), 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        //退出程序
+        AlarmManager mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mAlarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100,
+                restartIntent); // 100毫秒后重启应用
+        android.os.Process.killProcess(android.os.Process.myPid());
+</code></pre><hr>
+<p>Android 设置Edittext获取焦点并弹出软键盘</p>
+<pre tabindex="0"><code>        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        //显示软键盘
+    activity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        //如果上面的代码没有弹出软键盘 可以使用下面另一种方式
+        //InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+       // imm.showSoftInput(editText, 0); 
+</code></pre><hr>
+<p>用命令行新建指定大小的文件</p>
+<p>在Linux环境下的实现方法</p>
+<p>使用dd命令：功能是复制文件，并且可以通过选项指定复制方式。比如</p>
+<pre tabindex="0"><code>dd if=/dev/zero of=test.txt bs=32 count=32
+</code></pre><p>（源文件是/dev/zero，目标文件是test.txt，也就是需要生成的文件。复制生成文件大小的是32*32=1024字节）</p>
+<p>在Windows环境下的实现方法</p>
+<p>使用fsutil命令，在windows xp和win 7下应该都自带了这个命令。命令的格式是 fsutil file createnew 新文件名 文件大小。例如生成一个1K大小的文件，可以使用</p>
+<pre tabindex="0"><code> fsutil file createnew test.txt 1024
+</code></pre><hr>
+<p>在activity中调用 moveTaskToBack (boolean nonRoot)方法即可将activity 退到后台，注意不是finish()退出。
+参数为false代表只有当前activity是task根，指应用启动的第一个activity时，才有效;
+如果为true则忽略这个限制，任何activity都可以有效。</p>
+<pre tabindex="0"><code>//android 应用退到后台，类似最小化
+moveTaskToBack(true);
+</code></pre><hr>
+<p>ANR分析办法之一：traces.txt</p>
+<pre tabindex="0"><code>adb pull /data/anr/traces.txt
+</code></pre><p>在文件中使用 ctrl + F 查找包名可以快速定位相关代码。
+通过log可以看出相关问题
+产生新的ANR，原来的 traces.txt 文件会被覆盖</p>
+<hr>
+<p>BottomNavigationView切换时不显示图标颜色，需要取消导航栏图标着色。</p>
+<pre tabindex="0"><code>navigation.setItemIconTintList(null);
+</code></pre><hr>
+<p><strong>JNI 数据类型映射</strong></p>
+<ul>
+<li>基本数据类型：</li>
+</ul>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>本地类型（Native Type）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boolean</td>
+<td>jboolean</td>
+<td>C/C++无符号8位整型 （unsigned char）</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>jbyte</td>
+<td>C/C++带符号8位整型 （char）</td>
+</tr>
+<tr>
+<td>char</td>
+<td>jchar</td>
+<td>C/C+无符号16位整型 （unsigned short）</td>
+</tr>
+<tr>
+<td>short</td>
+<td>jshort</td>
+<td>C/C++带符号16位整型 （short）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>jint</td>
+<td>C/C++带符号32位整型 （int）</td>
+</tr>
+<tr>
+<td>long</td>
+<td>jlong</td>
+<td>C/C++带符号64位整型 （long）</td>
+</tr>
+<tr>
+<td>float</td>
+<td>jfloat</td>
+<td>C/C++32位浮点型 （float）</td>
+</tr>
+<tr>
+<td>double</td>
+<td>jdouble</td>
+<td>C/C++64位浮点型 （double）</td>
+</tr>
+</tbody>
+</table></div>
+<p>基本数据类型的映射即在Java的基本数据类型前面添加 j 就是本地类型的基本数据类型</p>
+<ul>
+<li>引用数据类型：</li>
+</ul>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>Java类型</th>
+<th>本地类型（Native Type）</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Object</td>
+<td>jobject</td>
+<td>任何java对象</td>
+</tr>
+<tr>
+<td>Class</td>
+<td>jclass</td>
+<td>Class类对象</td>
+</tr>
+<tr>
+<td>String</td>
+<td>jstring</td>
+<td>字符串对象</td>
+</tr>
+<tr>
+<td>Object[]</td>
+<td>jobjectArray</td>
+<td>任何对象的数组</td>
+</tr>
+<tr>
+<td>boolean[]</td>
+<td>jbooleanArray</td>
+<td>布尔型数组</td>
+</tr>
+<tr>
+<td>byte[]</td>
+<td>jbyteArray</td>
+<td>比特型数组</td>
+</tr>
+<tr>
+<td>char[]</td>
+<td>jcahrArray</td>
+<td>字符型数组</td>
+</tr>
+<tr>
+<td>short[]</td>
+<td>jshortArray</td>
+<td>短整型数组</td>
+</tr>
+<tr>
+<td>int[]</td>
+<td>jintArray</td>
+<td>整型数组</td>
+</tr>
+<tr>
+<td>long[]</td>
+<td>jlongArray</td>
+<td>长整形数组</td>
+</tr>
+<tr>
+<td>float[]</td>
+<td>jfloatArray</td>
+<td>浮点型数组</td>
+</tr>
+<tr>
+<td>double[]</td>
+<td>jdoubleArray</td>
+<td>双浮点型数组</td>
+</tr>
+<tr>
+<td>void</td>
+<td>void</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<p>沉浸式状态栏</p>
+<pre tabindex="0"><code>    /*
+    设置沉浸式状态栏sdk&gt;21，虚拟导航栏也透明
+     */
+    public static void setStatusBar(Activity context) {
+        View decorView = context.getWindow().getDecorView();
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        context.getWindow().setNavigationBarColor(Color.TRANSPARENT);
+        context.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    //设置白色状态栏 color用R.color.***
+    public static void setWhiteStatusBar(Activity context,int color) {
+        int option = View.SYSTEM_UI_FLAG_IMMERSIVE
+                | View.SYSTEM_UI_FLAG_VISIBLE;
+        context.getWindow().getDecorView().setSystemUiVisibility(option);
+        if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.M) {
+            context.getWindow().setStatusBarColor(context.getColor(color));
+context.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+    }
+
+    //设置暗色状态栏
+    public static void setDarkStatusBar(Activity context){
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        context.getWindow().getDecorView().setSystemUiVisibility(option);
+        context.getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+</code></pre><hr>
+<p>P版本应用在sd卡根目录(getExternalCacheDir)保存的应用数据卸载时不会被清除，但是Q版本这部分数据实际保存的是应用的沙箱目录 下，卸载的时候回全部被清除；应用如果不想卸载的时候被删除数据，需要应用在manifest文件增加:，这样卸载应用的时候，系统弹出的对话框中才会有第二个勾选框出现(不增加该属性是不会有第二个勾选出现)，默认删除，勾选保留。</p>
+<hr>
+<p>拍照、选择图片 适配7.0以上，从 Android 7.0 开始，禁止在您的应用外部公开 file:// URI</p>
+<pre tabindex="0"><code> //指定Uri，拍照返回的data为空
+String tempImagePath = getFilesDir().getPath();
+tempImageFile = File.createTempFile(&#34;image_&#34;, &#34;.jpg&#34;, new File(tempImagePath));
+Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+if (Build.VERSION.SDK_INT &gt;= 24) {
+  intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+  intent.putExtra(MediaStore.EXTRA_OUTPUT,
+  FileProvider.getUriForFile(TakePhotoOrChoosePhotoActivity.this,
+                                        &#34;com.huangyuanlove.adaptationhighversion.fileprovider&#34;, tempImageFile));
+} else {
+  intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempImageFile));
+}
+startActivityForResult(intent, TAKE_PHOTO_CODE);
+</code></pre><p>当拍照返回之后</p>
+<pre tabindex="0"><code>bitmap = BitmapFactory.decodeFile(tempImageFile.getPath());
+showImage.setImageBitmap(bitmap);
+</code></pre><p>选择图片的时候：</p>
+<pre tabindex="0"><code>Intent albumIntent = new Intent(Intent.ACTION_PICK);
+albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, &#34;image/*&#34;);
+startActivityForResult(albumIntent, CHOOSE_PHOTO_CODE);
+</code></pre><p>选择图片返回的时候</p>
+<pre tabindex="0"><code>if (data != null) {
+  Uri selectedImage = data.getData();
+  String[] filePathColumn = {MediaStore.Images.Media.DATA};
+  Cursor cursor = getContentResolver().query(selectedImage,
+                                             filePathColumn, null, null, null);
+  cursor.moveToFirst();
+  int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+  String picturePath = cursor.getString(columnIndex);
+  cursor.close();
+  bitmap = BitmapFactory.decodeFile(picturePath);
+  showImage.setImageBitmap(bitmap);
+}
+</code></pre><hr>
+<p>自定义View</p>
+<p><a href="https://www.gcssloop.com/category/customview" target="_blank" rel="noopener">https://www.gcssloop.com/category/customview</a></p>
+<hr>
+<p>google flexboxlayout</p>
+<p>layout_wrapBefore：这个属性使得子 View 可以强制换行，该属性在 flex_wrap 属性值 为 nowrap（不换行）的时候是无效的。 该属性结束 boolean 变量，默认 false，即不强制换行。</p>
+<p>layout_flexGrow：这个属性类似于 LinearLayout 中的 layout_weight 属性，如果没有指定，则将 0 设置为默认值。如果果同一 flex 行中的多个子 View 有正的 layout_flexGrow 值，那么剩余的空闲空间将根据它们声明的 layout_flexGrow 值的比例分布。</p>
+<hr>
+<p>ROOM数据库使用填坑</p>
+<p>引入：</p>
+<pre tabindex="0"><code>//Room数据库
+implementation &#34;androidx.room:room-runtime:2.2.0-alpha01&#34;
+annotationProcessor &#34;androidx.room:room-compiler:2.2.0-alpha01&#34;
+</code></pre><p>如果多加一行implementation &quot;androidx.room:room-compiler:2.2.0-alpha01&quot;，会导致项目中多出很多没用的libs，包括com.ibm.icu:icu4j等，可能使得apk整整多出15M没用的文件。</p>
+<hr>
+<p><a href="https://blog.csdn.net/wangliblog/article/details/56834439" target="_blank" rel="noopener">让APK只包含指定平台的so库（abi）</a></p>
+<p>第一种：对每个要生成的渠道包进行分别配置（在app下的build.gradle文件中配置）
+第二种：全局配置（这种需求比较多，同样是在app下的build.gradle下配置）</p>
+<hr>
+<p>PriorityBlockingQueue：</p>
+<p>PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.util.PriorityQueue 一样的排序规则。你无法向这个队列中插入 null 值。所有插入到 PriorityBlockingQueue 的元素必须实现 java.lang.Comparable 接口。因此该队列中元素的排序就取决于你自己的 Comparable 实现</p>
+<hr>
+<p>使用SparseArray和ArrayMap代替HashMap</p>
+<p>1、如果key的类型已经确定为int类型，那么使用SparseArray，因为它避免了自动装箱的过程，如果key为long类型，它还提供了一个LongSparseArray来确保key为long类型时的使用</p>
+<p>2、如果key类型为其它的类型，则可使用ArrayMap</p>
+<p>如果我们要兼容aip19以下版本的话，那么导入的包需要为v4包</p>
+<hr>
+<p>通过以下代码可以列出设备底层支持的编码格式</p>
+<pre tabindex="0"><code>MediaCodecList codecList = new MediaCodecList(MediaCodecList.ALL_CODECS);
+for (int i = 0; i &lt; codecList.getCodecInfos().length; i++) {  
+    Log.d(TAG, &#34;编解码器: &#34; + codecList.getCodecInfos()[i].getName());
+}
+</code></pre><hr>
+<p>如果遇到硬编H264等一些视频编码时，编出来的数据显示正常，但晃动摄像头时数据量变大，带宽占用很高，设置低一点的码率也不起作用时。很可能是系统的编码器支持的不够好，可用上面的方式获取系统支持的编解码器有哪些，在new MediaCodec的时候使用MediaCodec.createByCodecName(“OMX.google.h264.encoder”)等一些固定的编解码器，再查看效果。(OMX.google.h264.encoder为软编)</p>
+<hr>
+<p>getChildFragmentManager()是fragment中的方法， 返回的是管理当前fragment内部子fragments的manager。
+getFragmentManager()在activity和fragment中都有。getChildFragmentManager在fragment内嵌套fragment时使用。</p>
+<hr>
+<p>DataBinding中notifyPropertyChanged(int *)只会更新一个字段的数据，notifyChange()会更新所有字段数据。
+DataBinding资源引用只限于控件本身，比如button的paddingLeft里可以用三元表达，因为paddingLeft是控件自带的，但是margin就不行，因为margin是控件组里的属性，不能使用dataBinding的功能，不然会报找不到ActivityBindingBindingImpl的错。</p>
+<hr>
+<p>Integer类取值和 int 类型取值一致，取值范围是从-2147483648 至 2147483647 ，包括-2147483648 和 2147483647，即-$$2^{31}$$ ~$$2^{31}$$ -1。</p>
+<p>但是对于Integer类，java为了提高效率，初始化了-128--127之间的整数对象，因此Integer类取值-128--127的时候效率最高。</p>
+<hr>
+<p>Fork/Join 框架是java7中加入的一个并行任务框架，可以将任务分割成足够小的小任务，然后让不同的线程来做这些分割出来的小事情，然后完成之后再进行join，将小任务的结果组装成大任务的结果。</p>
+<p>例如求一个文件夹的大小：</p>
+<pre tabindex="0"><code>private static class FileSizeFinder extends RecursiveTask&lt;Long&gt; {
+        final File file;
+        public FileSizeFinder(final File theFile) {
+            file = theFile;
+        }
+        @Override
+        public Long compute() {
+            long size = 0;
+            if (file.isFile()) {
+                size = file.length();
+            } else {
+                final File[] children = file.listFiles();
+                if (children != null) {
+                    List&lt;ForkJoinTask&lt;Long&gt;&gt; tasks = new ArrayList&lt;ForkJoinTask&lt;Long&gt;&gt;();
+                    for (final File child : children) {
+                        if (child.isFile()) {
+                            size += child.length();
+                        } else {
+                            tasks.add(new FileSizeFinder(child));
+                        }
+                    }
+                    for (final ForkJoinTask&lt;Long&gt; task : invokeAll(tasks)) {
+                        size += task.join();
+                    }
+                }
+            }
+            return size;
+        }
+    }
+    long size = new ForkJoinPool().invoke(new FileSizeFinder(new File(&#34;/home&#34;)));
+</code></pre><hr>
+<p>Netty拆包：LengthFieldBasedFrameDecoder的使用</p>
+<p>发送数据包长度 = 长度域的值 + lengthFieldOffset + lengthFieldLength + lengthAdjustment</p>
+<p>lengthAdjustment： 长度域的值的补偿，长度域的值加上这个值之后的值是这个长度域后面还需要读取的字节数</p>
+<p>使用LengthFieldBasedFrameDecoder时注意设置ByteOrder.LITTLE_ENDIAN或ByteOrder BIG_ENDIAN（默认值）</p>
+<hr>
+<p>在ConstraintLayout中设置控件的宽高时，尽量不在比例前加W或H，这样可以在横竖屏下都可以在屏内保持宽高比，不然控件边界可能会超出屏幕。</p>
+<hr>
+<p>Android Studio 在WiFi中启用adb工具</p>
+<p>adb tcpip 5555 //端口设置，手机必须通过USB与电脑连接，之后可不用USB连接，也不用再次执行此命令
+adb connect 192.168.1.1 //改成手机本地IP地址</p>
+<p>在Terminal里输入即可。</p>
+<p>从android11开始支持下面连接方式进行wifi调试：</p>
+<p><a href="https://wiki.lineageos.org/how-to/adb-over-wifi" target="_blank" rel="noopener">https://wiki.lineageos.org/how-to/adb-over-wifi</a></p>
+<ul>
+<li><strong>On your phone</strong></li>
+</ul>
+<ol>
+<li>Go to the developer settings</li>
+<li>Press <code>Enable Wireless debugging</code></li>
+<li>Select <code>Pair device with pairing code</code></li>
+</ol>
+<p>You will see a dialog showing you IP address, port and a code.</p>
+<ul>
+<li><strong>On your computer</strong></li>
+</ul>
+<ol>
+<li>
+<p>Open a command line window</p>
+</li>
+<li>
+<p>Type <code>adb pair &lt;ip&gt;:&lt;port&gt;</code> and replace <code>&lt;ip&gt;</code> and <code>port</code> with the data seen on the phone</p>
+</li>
+<li>
+<p>You will be asked for the pairing code. Type it in and hit Enter</p>
+</li>
+<li>
+<p>You will now see an output similar to <code>Successfully paired to &lt;ip&gt;:&lt;port&gt;</code></p>
+<p>测试发现此方式只需连接一次，下次再连接时直接在手机上打开wifi调试就能自动连接电脑，重启手机后也是如此。</p>
+</li>
+</ol>
+<hr>
+<p>var是Java10里面的特性。用来定义局部变量</p>
+<p>语法： <strong>var 变量名 = 初始值；</strong></p>
+<p>1，var只能在<strong>方法内</strong>定义变量，不允许定义类的成员变量。
+2，var 定义变量必须赋初始值。</p>
+<hr>
+<p>SQL语句中IN 操作符允许您在 WHERE 子句中规定多个值，比如选取 name 为 &quot;Google&quot; 或 &quot;菜鸟&quot; 的所有网站：</p>
+<pre tabindex="0"><code>SELECT * FROM Websites WHERE name IN (&#39;Google&#39;,&#39;菜鸟&#39;);
+</code></pre><p>LIKE的意思是搜索列中的指定模式。比如：</p>
+<pre tabindex="0"><code>SELECT * FROM Websites WHERE name LIKE &#39;G%&#39;;//选取 name 以字母 &#34;G&#34; 开始的所有客户
+SELECT * FROM Websites WHERE name LIKE &#39;%oo%&#39;;//选取 name 包含模式 &#34;oo&#34; 的所有客户
+</code></pre><hr>
+<p>ViewBinding使用时如果遇到include，可以给include加一个id，然后：</p>
+<pre tabindex="0"><code> binding = MainFragmentBinding.inflate(inflater, container, false);
+ toolbarBinding = binding.toolbar;//include里的toolbar
+ return binding.getRoot();
+</code></pre><hr>
+<p>Room数据库使用记录</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>OnConflictStrategy</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnConflictStrategy.REPLACE</td>
+<td>冲突策略是取代旧数据同时继续事务</td>
+</tr>
+<tr>
+<td>OnConflictStrategy.ROLLBACK</td>
+<td>冲突策略是回滚事务</td>
+</tr>
+<tr>
+<td>OnConflictStrategy.ABORT</td>
+<td>冲突策略是终止事务</td>
+</tr>
+<tr>
+<td>OnConflictStrategy.FAIL</td>
+<td>冲突策略是事务失败</td>
+</tr>
+<tr>
+<td>OnConflictStrategy.IGNORE</td>
+<td>冲突策略是忽略冲突</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<p>TextView添加可点击网址时在String文件中加入：</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-perl" data-lang="perl"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s">&#34;http://www.google.com&#34;</span><span class="o">&gt;</span><span class="n">Google</span><span class="sr">&lt;/a&gt;</span>
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>而不是用:</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&#34;http://www.google.com&#34;</span><span class="nt">&gt;</span>Google<span class="nt">&lt;/a&gt;</span>
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>layout中的TextView添加</p>
+<div class="highlight"><div class="chroma">
+<div class="table-container"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">android:linksClickable<span class="o">=</span><span class="s2">&#34;true&#34;</span>
+</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>代码中设置</p>
+<pre tabindex="0"><code>textView.text = HtmlCompat.fromHtml(getString(R.string.requestrootmessage),HtmlCompat.FROM_HTML_MODE_LEGACY)
+textView.movementMethod = LinkMovementMethod.getInstance()
+</code></pre><hr>
+<p>通过在 <code>&lt;service&gt;</code> 标签里将 <code>android:exported</code> 设置为 <code>false</code>。可以防止其他的程序来启动你的 Service。</p>
+<hr>
+<p>前台服务</p>
+<p>新建一个服务。</p>
+<pre tabindex="0"><code class="language-none" data-lang="none">public class ForegroundService extends Service {
+
+  private static final int RESULT_CODE = 0;
+  private static final int ID = 1;
+
+  public ForegroundService() { }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    Intent intent = new Intent(this, MainActivity.class);
+    PendingIntent pendingIntent = PendingIntent.getActivity(this, RESULT_CODE, 
+                              intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    NotificationCompat.Builder builder;
+    // 兼容 Android 8.0
+    if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.O) {
+      String channelId = &#34;foreground_service&#34;;
+      NotificationChannel channel = new NotificationChannel(channelId, 
+                              &#34;channel_1&#34;, NotificationManager.IMPORTANCE_HIGH);
+      channel.enableLights(true);
+      channel.setLightColor(Color.GREEN);
+      channel.setShowBadge(true);
+      NotificationManager notificationManager = 
+                                                    getSystemService(NotificationManager.class);
+      notificationManager.createNotificationChannel(channel);
+      builder = new NotificationCompat.Builder(this, channelId);
+    } else {
+      builder = new NotificationCompat.Builder(this);
+    }
+    builder.setContentIntent(pendingIntent)
+      .setContentTitle(&#34;这是前台通知标题&#34;)
+      .setContentText(&#34;这是内容&#34;)
+      .setWhen(System.currentTimeMillis())
+      .setSmallIcon(R.mipmap.ic_launcher_round)
+      .setLargeIcon(BitmapFactory.decodeResource(getResources(), 
+                                                 R.mipmap.ic_launcher))
+      .setPriority(NotificationManager.IMPORTANCE_HIGH)
+      .setDefaults(Notification.DEFAULT_SOUND);
+
+    startForeground(ID, builder.build());
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags,
+                            int startId) {
+    return super.onStartCommand(intent, flags, startId);
+  }
+
+  @Override
+  public IBinder onBind(Intent intent) {
+    return super.onBind(intent);
+  }
+}
+</code></pre><p>启动与停止前台服务</p>
+<pre tabindex="0"><code class="language-none" data-lang="none">Intent foregroundIntent = new Intent(this, ForegroundService.class);
+startService(foregroundIntent); // 启动前台服务
+stopService(foregroundIntent); // 停止前台服务
+</code></pre><hr>
+<p><strong>黑白屏产生原因</strong>:当我们在启动一个应用时，系统会去检查是否已经存在这样一个进程，如果不存在，系统的服务会先检查startActivity中 息，然后在去创建进程，最后启动Acitivy，即冷启动。而启动出现白黑屏的问题，就是在这段时间内产生的。系统在绘制页面加载布局之 初始化窗口(Window)，而在进行这一步操作时，系统会根据我们设置的Theme来指定它的Theme 主题颜色，我们在Style中的设置就决定是白屏还是黑屏。</p>
+<p>windowIsTranslucent和windowNoTitle，将这两个属性都设置成true (会有明显的卡顿体验，不推荐) 如果启动页只是是一张图片，那么为启动页专一设置一个新的主题，设置主题的android:windowBackground属性为启动页背景图即可 使用layer-list制作一张图片launcher_layer.xml，将其设置为启动页专一主题的背景，并将其设置为启动页布局的背景。</p>
+<hr>
+<p>String、StringBuffer、StringBuilder区别</p>
+<p>String:字符串常量 不适用于经常要改变值得情况，每次改变相当于生成一个新的对象 StringBuffer:字符串变量 (线程安全)<br>
+StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率略高于StringBuffer</p>
+<hr>
+<p>Handler的原理</p>
+<p>Android中主线程是不能进行耗时操作的，子线程是不能进行更新UI的。所以就有了handler，它的作用就是实现线程之间的通信。 handler整个流程中，主要有四个对象，handler，Message,MessageQueue,Looper。当应用创建的时候，就会在主线程中创建handler对象， 我们通过要传送的消息保存到Message中，handler通过调用sendMessage方法将Message发送到MessageQueue中，Looper对象就会不断的调用loop不断的从MessageQueue中取出Message交给handler进行处理。从而实现线程之间的通信。</p>
+<hr>
+<p>Flow收集数据需要放在单独协程中，因为flow.collect或collectLatest是挂起函数，执行完这个函数后后面的代码才能执行。</p>
+<hr>
+<p>使用paging3的时候，如果对本地数据库数据修改后，列表失效并重载，表现为闪烁后跳到第一项，可尝试修改为<code>enablePlaceholders = true</code></p>
+<hr>
+<p>为CardView添加阴影时不起作用，可能需要添加margin才能显示。</p>
+<hr>
+<p>执行<code>adb kill-server</code></p>
+<p>出现错误：<code>cannot connect to daemon at tcp:5037: Connection refused</code></p>
+<p>可以执行<code>adb reconnect</code>来解决。</p>
+<hr>
+
+            </div>
+
+            
+    
+    
+        <ul class="post-copyright">
+            <li class="copyright-item author"><span class="copyright-item-text">作者</span>：<a href="https://xtvj.github.io/" class="p-author h-card" target="_blank" rel="noopener">xtvj</a></li>
+            
+                
+                
+                
+                
+                <li class="copyright-item link"><span class="copyright-item-text">链接</span>：<a href="/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" target="_blank" rel="noopener">https://xtvj.github.io/posts/android开发填坑记录/</a></li>
+            
+            <li class="copyright-item license"><span class="copyright-item-text">许可</span>：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></li>
+            
+        </ul>
+    
+
+
+
+        </article>
+
+        
+
+        
+    <div class="updated-badge-container">
+        <span title="Updated @ 2024-01-30 23:38:43 CST" style="cursor:help">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="20" class="updated-badge"><linearGradient id="b" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient><clipPath id="a"><rect width="130" height="20" rx="3" fill="#fff"/></clipPath><g clip-path="url(#a)"><path class="updated-badge-left" d="M0 0h55v20H0z"/><path class="updated-badge-right" d="M55 0h75v20H55z"/><path fill="url(#b)" d="M0 0h130v20H0z"/></g><g fill="#fff" text-anchor="middle" font-size="110"><text x="285" y="150" fill="#010101" fill-opacity=".3" textLength="450" transform="scale(.1)">updated</text><text x="285" y="140" textLength="450" transform="scale(.1)">updated</text><text x="915" y="150" fill="#010101" fill-opacity=".3" textLength="650" transform="scale(.1)">2024-01-30</text><text x="915" y="140" textLength="650" transform="scale(.1)">2024-01-30</text></g></svg>
+        </span></div>
+
+
+
+        
+
+
+        <div class="post-share">
+
+        
+
+        <div class="share-items">
+
+            
+            
+                
+                    <div class="share-item facebook">
+                        
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;hashtag=%23" title="分享到「Facebook」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon facebook-icon"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item mastodon">
+                            <a href="/fedishare.html#title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;description=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6&amp;url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="分享到「Mastodon」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon mastodon-icon"><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg></a>
+                        </div>
+                    
+            
+                
+                    <div class="share-item fediverse">
+                            <a href="/fedishare.html#title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;description=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6&amp;url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="分享到「Fediverse」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="64 163 873 873" class="icon fediverse-icon"><defs><linearGradient id="fediverse-gradient"><stop offset="0%" stop-color="#ff0101"/><stop offset="10%" stop-color="#9501ff"/><stop offset="50%" stop-color="#ffca01"/><stop offset="75%" stop-color="#01a3ff"/><stop offset="100%" stop-color="#65ff01"/></linearGradient></defs><path d="M539 176q-32 0 -55 22t-25 55t20.5 58t56 27t58.5 -20.5t27 -56t-20.5 -59t-56.5 -26.5h-5zM452 271l-232 118q20 20 25 48l231 -118q-19 -20 -24 -48zM619 298q-13 25 -38 38l183 184q13 -25 39 -38zM477 320l-135 265l40 40l143 -280q-28 -5 -48 -25zM581 336 q-22 11 -46 10l-8 -1l21 132l56 9zM155 370q-32 0 -55 22.5t-25 55t20.5 58t56.5 27t59 -21t26.5 -56t-21 -58.5t-55.5 -27h-6zM245 438q1 9 1 18q-1 19 -10 35l132 21l26 -50zM470 474l-26 51l311 49q-1 -8 -1 -17q1 -19 10 -36zM842 480q-32 1 -55 23t-24.5 55t21 58 t56 27t58.5 -20.5t27 -56.5t-20.5 -59t-56.5 -27h-6zM236 493q-13 25 -39 38l210 210l51 -25zM196 531q-21 11 -44 10l-9 -1l40 256q21 -10 45 -9l8 1zM560 553l48 311q21 -10 44 -9l10 1l-46 -294zM755 576l-118 60l8 56l135 -68q-20 -20 -25 -48zM781 625l-119 231 q28 5 48 25l119 -231q-28 -5 -48 -25zM306 654l-68 134q28 5 48 25l60 -119zM568 671l-281 143q19 20 24 48l265 -135zM513 771l-51 25l106 107q13 -25 39 -38zM222 795q-32 0 -55.5 22.5t-25 55t21 57.5t56 27t58.5 -20.5t27 -56t-20.5 -58.5t-56.5 -27h-5zM311 863 q2 9 1 18q-1 19 -9 35l256 41q-1 -9 -1 -18q1 -18 10 -35zM646 863q-32 0 -55 22.5t-24.5 55t20.5 58t56 27t59 -21t27 -56t-20.5 -58.5t-56.5 -27h-6z"/></svg></a>
+                        </div>
+                    
+            
+                
+                    <div class="share-item twitter">
+                        
+                        <a href="https://twitter.com/share?url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;text=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;hashtags=&amp;via=" title="分享到「Twitter」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon twitter-icon"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item linkedin">
+                        
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;summary=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6&amp;source=XTVJ%e7%9a%84%e5%8d%9a%e5%ae%a2" title="分享到「LinkedIn」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon linkedin-icon"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item telegram">
+                        
+                        <a href="https://t.me/share/url?url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;text=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95" title="分享到「Telegram」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="icon telegram-icon"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item weibo">
+                        
+                        <a href="https://service.weibo.com/share/share.php?&amp;url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;pic=https://xtvj.github.io/images/favicon.png&amp;searchPic=false" title="分享到「新浪微博」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon weibo-icon"><path d="M407 177.6c7.6-24-13.4-46.8-37.4-41.7-22 4.8-28.8-28.1-7.1-32.8 50.1-10.9 92.3 37.1 76.5 84.8-6.8 21.2-38.8 10.8-32-10.3zM214.8 446.7C108.5 446.7 0 395.3 0 310.4c0-44.3 28-95.4 76.3-143.7C176 67 279.5 65.8 249.9 161c-4 13.1 12.3 5.7 12.3 6 79.5-33.6 140.5-16.8 114 51.4-3.7 9.4 1.1 10.9 8.3 13.1 135.7 42.3 34.8 215.2-169.7 215.2zm143.7-146.3c-5.4-55.7-78.5-94-163.4-85.7-84.8 8.6-148.8 60.3-143.4 116s78.5 94 163.4 85.7c84.8-8.6 148.8-60.3 143.4-116zM347.9 35.1c-25.9 5.6-16.8 43.7 8.3 38.3 72.3-15.2 134.8 52.8 111.7 124-7.4 24.2 29.1 37 37.4 12 31.9-99.8-55.1-195.9-157.4-174.3zm-78.5 311c-17.1 38.8-66.8 60-109.1 46.3-40.8-13.1-58-53.4-40.3-89.7 17.7-35.4 63.1-55.4 103.4-45.1 42 10.8 63.1 50.2 46 88.5zm-86.3-30c-12.9-5.4-30 .3-38 12.9-8.3 12.9-4.3 28 8.6 34 13.1 6 30.8.3 39.1-12.9 8-13.1 3.7-28.3-9.7-34zm32.6-13.4c-5.1-1.7-11.4.6-14.3 5.4-2.9 5.1-1.4 10.6 3.7 12.9 5.1 2 11.7-.3 14.6-5.4 2.8-5.2 1.1-10.9-4-12.9z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item douban">
+                        
+                        <a href="https://www.douban.com/share/service?href=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;name=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;text=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6" title="分享到「豆瓣」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon douban-icon"><path d="M.643.92v2.412h22.714V.92H.643zm1.974 4.926v9.42h18.764v-9.42H2.617zm2.72 2.408H18.69v4.605H5.338V8.254zm1.657 7.412l-2.512.938c1.037 1.461 1.87 2.825 2.512 4.091H0v2.385h24v-2.385h-6.678c.818-1.176 1.589-2.543 2.303-4.091l-2.73-.938a29.952 29.952 0 01-2.479 5.03h-4.75c-.786-1.962-1.677-3.641-2.672-5.03Z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item qq">
+                        
+                        <a href="https://connect.qq.com/widget/shareqq/index.html?url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;summary=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6&amp;pics=https://xtvj.github.io/images/favicon.png&amp;site=XTVJ%e7%9a%84%e5%8d%9a%e5%ae%a2" title="分享到「QQ」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon qq-icon"><path d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item qzone">
+                        
+                        <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;title=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;summary=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6&amp;pics=https://xtvj.github.io/images/favicon.png&amp;site=XTVJ%e7%9a%84%e5%8d%9a%e5%ae%a2" title="分享到「QQ 空间」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon qzone-icon"><path d="M23.985 9.202c-.032-.099-.127-.223-.334-.258-.207-.036-7.351-1.406-7.351-1.406s-.105-.022-.198-.07c-.092-.047-.127-.167-.127-.167S12.447.956 12.349.77C12.25.583 12.104.532 12 .532c-.104 0-.251.051-.349.238-.098.186-3.626 6.531-3.626 6.531s-.035.12-.128.167c-.092.047-.197.07-.197.07S.556 8.908.348 8.943c-.208.036-.302.16-.333.258a.477.477 0 0 0 .125.449l5.362 5.49s.072.08.119.172c.016.104.005.21.005.21s-1.189 7.242-1.22 7.45.075.369.159.43c.083.062.233.106.421.013.189-.093 6.812-3.261 6.812-3.261s.098-.044.201-.061c.103-.017.201.061.201.061s6.623 3.168 6.812 3.261c.188.094.338.049.421-.013a.463.463 0 0 0 .159-.43c-.021-.14-.93-5.677-.93-5.677.876-.54 1.425-1.039 1.849-1.747-2.594.969-6.006 1.717-9.415 1.866-.915.041-2.41.097-3.473-.015-.678-.071-1.17-.144-1.243-.438-.053-.215.054-.46.545-.831a2640.5 2640.5 0 0 1 2.861-2.155c1.285-.968 3.559-2.47 3.559-2.731 0-.285-2.144-.781-4.037-.781-1.945 0-2.275.132-2.811.168-.488.034-.769.005-.804-.138-.06-.248.183-.389.588-.568.709-.314 1.86-.594 1.984-.626.194-.052 3.082-.805 5.618-.535 1.318.14 3.244.668 3.244 1.276 0 .342-1.721 1.494-3.225 2.597-1.149.843-2.217 1.561-2.217 1.688 0 .342 3.533 1.241 6.689 1.01l.003-.022c.048-.092.119-.172.119-.172l5.362-5.49a.477.477 0 0 0 .127-.449z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item pocket">
+                        
+                        <a href="https://getpocket.com/edit.php?url=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="分享到「Pocket」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon pocket-icon"><path d="M407.6 64h-367C18.5 64 0 82.5 0 104.6v135.2C0 364.5 99.7 464 224.2 464c124 0 223.8-99.5 223.8-224.2V104.6c0-22.4-17.7-40.6-40.4-40.6zm-162 268.5c-12.4 11.8-31.4 11.1-42.4 0C89.5 223.6 88.3 227.4 88.3 209.3c0-16.9 13.8-30.7 30.7-30.7 17 0 16.1 3.8 105.2 89.3 90.6-86.9 88.6-89.3 105.5-89.3 16.9 0 30.7 13.8 30.7 30.7 0 17.8-2.9 15.7-114.8 123.2z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item hackernews">
+                        
+                        <a href="https://news.ycombinator.com/submitlink?u=https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/&amp;t=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95" title="分享到Hacker News" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon hackernews-icon"><path d="M0 32v448h448V32H0zm21.2 197.2H21c.1-.1.2-.3.3-.4 0 .1 0 .3-.1.4zm218 53.9V384h-31.4V281.3L128 128h37.3c52.5 98.3 49.2 101.2 59.3 125.6 12.3-27 5.8-24.4 60.6-125.6H320l-80.8 155.1z"/></svg></a>
+                    </div>
+                
+            
+                
+                    <div class="share-item qrcode">
+                        <div class="qrcode-container" title="通过「二维码」"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon qrcode-icon"><path d="M0 224h192V32H0v192zM64 96h64v64H64V96zm192-64v192h192V32H256zm128 128h-64V96h64v64zM0 480h192V288H0v192zm64-128h64v64H64v-64zm352-64h32v128h-96v-32h-32v96h-64V288h96v32h64v-32zm0 160h32v32h-32v-32zm-64 0h32v32h-32v-32z"/></svg><div id="qrcode-img"></div>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+<script>
+    const typeNumber = 0;
+    const errorCorrectionLevel = 'L';
+    const qr = qrcode(typeNumber, errorCorrectionLevel);
+    qr.addData('https:\/\/xtvj.github.io\/posts\/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95\/');
+    qr.make();
+    document.getElementById('qrcode-img').innerHTML = qr.createImgTag();
+</script>
+
+                    </div>
+                
+            
+                
+                    <div class="share-item email">
+                        
+                        <a href="mailto:?subject=Android%e5%bc%80%e5%8f%91%e5%a1%ab%e5%9d%91%e8%ae%b0%e5%bd%95&amp;body=%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97%e5%b0%b1%e6%98%afJava%e4%b8%ad%e7%9a%84[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8],[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e7%9a%84%e6%a0%bc%e5%bc%8f%e6%98%af%20%e7%b1%bb%e5%90%8d::%e6%96%b9%e6%b3%95%e5%90%8d%e3%80%82%20%e4%b8%80%e8%88%ac%e6%98%af%e7%94%a8%e4%bd%9cLambda%e8%a1%a8%e8%be%be%e5%bc%8f%20%e4%be%8b%e5%a6%82%20%e8%a1%a8%e8%be%be%e5%bc%8f:%201%20person%20-%3e%20person.getName%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20Person::getName%20%e8%a1%a8%e8%be%be%e5%bc%8f%201%20%28%29%20-%3e%20new%20HashMap%3c%3e%28%29;%20%e5%8f%af%e4%bb%a5%e6%9b%bf%e6%8d%a2%e6%88%90%201%20HashMap::new%20%e8%bf%99%e7%a7%8d[%e6%96%b9%e6%b3%95%e5%bc%95%e7%94%a8]%e6%88%96%e8%80%85%e8%af%b4[%e5%8f%8c%e5%86%92%e5%8f%b7%e8%bf%90%e7%ae%97]%e5%af%b9%e5%ba%94%e7%9a%84%e5%8f%82%e6%95%b0%e7%b1%bb%e5%9e%8b%e6%98%afFunction%3cT,R%3e%20T%e8%a1%a8%e7%a4%ba%e4%bc%a0%e5%85%a5%e7%b1%bb%e5%9e%8b%ef%bc%8cR%e8%a1%a8%e7%a4%ba%e8%bf%94%e5%9b%9e%e7%b1%bb%e5%9e%8b%e3%80%82%20Android%20studio%e5%bf%ab%e6%8d%b7%e9%94%ae%20%e6%8c%89%e9%94%ae%20%e8%af%b4%e6%98%8e%20Shift%20&#43;%20F2%20%e5%ae%9a%e4%bd%8d%e5%88%b0%e9%94%99%e8%af%af%e8%a1%8c%20Ctrl%28Command%29&#43;Shift&#43;%20-%20/%20&#43;%20%e6%8a%98%e5%8f%a0/%e5%b1%95%e5%bc%80%e5%85%a8%e9%83%a8%e4%bb%a3%e7%a0%81%20Ctrl%28Command%29&#43;F12%20%e6%98%be%e7%a4%ba%e5%bd%93%e5%89%8d%e6%96%87%e4%bb%b6%e7%9a%84%e7%bb%93%e6%9e%84%20Shift%20&#43;%20F11%20%e6%9f%a5%e7%9c%8b%e4%b9%a6%e7%ad%be%20F11%20%e6%b7%bb%e5%8a%a0%e4%b9%a6%e7%ad%be%20Ctrl%20&#43;%20Alt%20&#43;%20M%20%e5%bf%ab%e9%80%9f%e6%8a%bd%e5%8f%96%e6%96%b9%e6%b3%95%20%e4%b8%80%e3%80%81%e5%90%af%e5%8a%a8app%20adb%20shell%20am%20start%20%e5%8c%85%e5%90%8d/MainActivity%20%e4%ba%8c%e3%80%81%e5%81%9c%e6%ad%a2app%20adb%20shell%20am%20force-stop%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%bc%9a%e5%bc%ba%e5%88%b6%e5%81%9c%e6%ad%a2APP%e8%bf%9b%e7%a8%8b%ef%bc%8c%e4%b8%8d%e4%bc%9a%e6%b8%85%e9%99%a4APP%e8%bf%9b%e7%a8%8b%e5%9c%a8%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%ba%a7%e7%94%9f%e7%9a%84%e6%95%b0%e6%8d%ae%20adb%20shell%20pm%20clear%20com.xxx.xxx%20%e8%bf%99%e7%a7%8d%e6%96%b9%e6%b3%95%e4%b8%8d%e4%bb%85%e4%bc%9a%e5%81%9c%e6%ad%a2A%e2%80%a6%e2%80%a6%0Ahttps://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" title="通过「电子邮件」" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon email-icon"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></svg></a>
+                    </div>
+                
+            
+        </div>
+
+    </div>
+
+
+
+
+        
+    
+    
+
+
+
+        
+    
+
+
+
+        
+
+
+        
+
+
+        
+    
+        
+        
+    
+    
+    
+    
+        <ul class="post-nav">
+            
+                <li class="post-nav-prev">
+                    <a href="/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" rel="prev">&lt; Gigabyte Z790 Aorus Elite AX黑苹果记录</a>
+                </li>
+            
+            
+        </ul>
+    
+
+
+
+        
+
+
+    </div>
+</main>
+
+
+            
+    <div id="back-to-top" class="back-to-top">
+        <a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon arrow-up"><path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/></svg></a>
+    </div>
+
+
+            
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="site-info">©&nbsp;2017–2024&nbsp;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon footer-icon"><path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>&nbsp;xtvj</div><div class="powered-by">Powered by <a href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener">Hugo</a> | Theme is <a href="https://github.com/reuixiy/hugo-theme-meme" target="_blank" rel="noopener">MemE</a></div><div class="site-copyright"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></div>
+
+            
+    
+        <ul class="socials"><li class="socials-item">
+                    <a href="/rss.xml" target="_blank" rel="external noopener" title="RSS"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon social-icon"><path d="M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z"/></svg></a>
+                </li><li class="socials-item">
+                    <a href="mailto:reuixiy@gmail.com" target="_blank" rel="external noopener" title="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon social-icon"><path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/></svg></a>
+                </li><li class="socials-item">
+                    <a href="https://github.com/reuixiy" target="_blank" rel="external noopener" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon social-icon"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                </li><li class="socials-item">
+                    <a href="https://twitter.com/reuixiy" target="_blank" rel="external noopener" title="Twitter"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon social-icon"><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg></a>
+                </li><li class="socials-item">
+                    <a href="https://t.me/yixiuer" target="_blank" rel="external noopener" title="Telegram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="icon social-icon"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm121.8 169.9l-40.7 191.8c-3 13.6-11.1 16.9-22.4 10.5l-62-45.7-29.9 28.8c-3.3 3.3-6.1 6.1-12.5 6.1l4.4-63.1 114.9-103.8c5-4.4-1.1-6.9-7.7-2.5l-142 89.4-61.2-19.1c-13.3-4.2-13.6-13.3 2.8-19.7l239.1-92.2c11.1-4 20.8 2.7 17.2 19.5z"/></svg></a>
+                </li></ul>
+    
+
+
+
+            
+        </div>
+    </footer>
+
+
+        </div>
+        
+
+        
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/medium-zoom@latest/dist/medium-zoom.min.js"></script>
+
+<script>
+    let imgNodes = document.querySelectorAll('div.post-body img');
+    imgNodes = Array.from(imgNodes).filter(node => node.parentNode.tagName !== "A");
+
+    mediumZoom(imgNodes, {
+        background: 'hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.95)'
+    })
+</script>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/instant.page@5.1.0/instantpage.min.js" type="module" defer></script>
+
+
+
+
+
+
+    </body>
+</html>
