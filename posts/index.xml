@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on XTVJ的博客</title>
+    <link>https://xtvj.github.io/posts/</link>
+    <description>Recent content in Posts on XTVJ的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+    <lastBuildDate>Wed, 24 Jan 2024 21:50:39 +0800</lastBuildDate>
+    <atom:link href="https://xtvj.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>影视观后记录</title>
+      <link>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 24 Jan 2024 21:50:39 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</guid>
+      <description>看过的电影太多了，好多都想不起来当初观看时的印象，2020年4月萌生记录日常的想法，随写下此文。记录只是写下记录的那一个时间点的个人想法，存</description>
+    </item>
+    <item>
+      <title>命令行中使用Git的教程记录</title>
+      <link>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 24 Jan 2024 21:50:27 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</guid>
+      <description>命令行才是王道，尽量摈弃GUI的Git操作。 git pull：对下列文件的本地修改将被合并操作覆盖 这种情况是由于自己修改了文件未提交。 如果不想舍弃</description>
+    </item>
+    <item>
+      <title>使用youtube Dl下载视频、音频、播放列表中的多个视频或音频</title>
+      <link>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</link>
+      <pubDate>Wed, 24 Jan 2024 21:50:17 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</guid>
+      <description>​ 以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么</description>
+    </item>
+    <item>
+      <title>五笔拆字表</title>
+      <link>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</link>
+      <pubDate>Wed, 24 Jan 2024 21:50:08 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</guid>
+      <description>记录时常想不起怎么编码、拆解的汉字。 汉字 拼音 五笔编码 五笔拆分图解 缺 que rmn 颜 yan utem 爬 pa rhyc 辣 la ugk 即 ji vcb 鹿 lù ynjx 庸 yong yveh 谣 yao yer 瓣 ban ur 刻 ke ynt 曳 ye jxe 舟 zhou tei 凹</description>
+    </item>
+    <item>
+      <title>不Root手机禁用系统应用</title>
+      <link>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Wed, 24 Jan 2024 21:49:55 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</guid>
+      <description>用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用</description>
+    </item>
+    <item>
+      <title>一些有道理的话</title>
+      <link>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</link>
+      <pubDate>Wed, 24 Jan 2024 21:49:44 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</guid>
+      <description>人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面</description>
+    </item>
+    <item>
+      <title>RedmiAC2100在MacOS下编译相应固件及一些使用记录</title>
+      <link>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 24 Jan 2024 21:49:29 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</guid>
+      <description>坏块和刷机教程 在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个ESMT闪存没坏块的。 检测和刷机教程网上一大堆，我用的</description>
+    </item>
+    <item>
+      <title>PC使用技巧</title>
+      <link>https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Wed, 24 Jan 2024 21:49:20 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+      <description>Excel移动列 选中列，按住shift键，当鼠标变成十字型时候，可以拖拽到任意指定列 Win10设置右键打开cmd https://blog.csdn.net/mooneve/article/details/78821843 https://blog.csdn.net/hiudawn/article/details/80701935 ffmpeg提取字幕流 /</description>
+    </item>
+    <item>
+      <title>Mac使用技巧</title>
+      <link>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Wed, 24 Jan 2024 21:49:10 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+      <description>由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash</description>
+    </item>
+    <item>
+      <title>Mac上好用又漂亮的终端</title>
+      <link>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Wed, 24 Jan 2024 21:48:59 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</guid>
+      <description>由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash</description>
+    </item>
+    <item>
+      <title>Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
+      <link>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 24 Jan 2024 21:48:25 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</guid>
+      <description>我的软、硬件 Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0 CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist</description>
+    </item>
+    <item>
+      <title>Android开发填坑记录</title>
+      <link>https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</link>
+      <pubDate>Wed, 24 Jan 2024 21:48:08 +0800</pubDate>
+      <guid>https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</guid>
+      <description>双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: person -&amp;gt; person.getName(); 可以替换成 Person::getName 表达式</description>
+    </item>
+  </channel>
+</rss>
