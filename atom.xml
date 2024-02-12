@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">XTVJ的博客</title>
     <subtitle type="html">XTVJ博客</subtitle>
-    <updated>2024-01-31T22:09:55&#43;08:00</updated>
+    <updated>2024-02-12T17:48:35&#43;08:00</updated>
     <id>https://xtvj.github.io/</id>
     <link rel="alternate" type="text/html" href="https://xtvj.github.io/" />
     <link rel="self" type="application/atom&#43;xml" href="https://xtvj.github.io/atom.xml" />
@@ -15,11 +15,921 @@
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
     <generator uri="https://gohugo.io/" version="0.122.0">Hugo</generator>
         <entry>
+            <title type="text">Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" />
+            <id>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</id>
+            <updated>2024-02-12T17:25:01&#43;08:00</updated>
+            <published>2023-04-09T13:18:01&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">我的软、硬件 Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0 CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以） GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该适用) macOS：Ventura 13.5beta（Ventura所有版本都适用，Monterey、Big Sur没测试过） OpenCore ： 0.9.2 Bios：F6d 官方地址 警告！！！ 目前增量更新时卡进度条，不知道怎么解决。不建议用此EFI进行更新系统。 关于增量更新 禁用BlueToolFixup.kext 再更新即可增量更新 我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBlue……</summary>
+            
+                <content type="html">&lt;h3 id=&#34;我的软硬件&#34;&gt;我的软、硬件&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0&lt;/li&gt;
+&lt;li&gt;CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以）&lt;/li&gt;
+&lt;li&gt;GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该适用)&lt;/li&gt;
+&lt;li&gt;macOS：Ventura 13.5beta（Ventura所有版本都适用，Monterey、Big Sur没测试过）&lt;/li&gt;
+&lt;li&gt;OpenCore ： 0.9.2&lt;/li&gt;
+&lt;li&gt;Bios：F6d &lt;a href=&#34;https://www.aorus.com/motherboards/Z790-AORUS-ELITE-AX-rev-10/Support&#34;&gt;官方地址&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;警告&#34;&gt;&lt;del&gt;警告！！！&lt;/del&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;&lt;del&gt;目前增量更新时卡进度条，不知道怎么解决。不建议用此EFI进行更新系统。&lt;/del&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;关于增量更新&#34;&gt;关于增量更新&lt;/h1&gt;
+&lt;p&gt;禁用BlueToolFixup.kext 再更新即可增量更新&lt;/p&gt;
+&lt;p&gt;我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBluetoothFirmware.kext、IntelBTPatcher.kext）都禁用增量更新成功了。&lt;/p&gt;
+&lt;h1 id=&#34;请生成自己的smbios&#34;&gt;请生成自己的SMBIOS&lt;/h1&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://github.com/ic005k/OCAuxiliaryTools/releases&#34;&gt;OCAT&lt;/a&gt;随机生成自己的UUID等再使用。&lt;/p&gt;
+&lt;p&gt;生成的SystemSerialNumber可以检查一下能否在官网查的到，如果提示不正常则是可用的，如果查到有保修期之类的信息，说明这个号码是苹果官方售卖的硬件使用的ID，不要用，使用后有封号风险。&lt;/p&gt;
+&lt;p&gt;一般随机生成的很大概率是查不到信息，可以使用的。&lt;/p&gt;
+&lt;h1 id=&#34;关于制作efi启动盘&#34;&gt;关于制作EFI启动盘&lt;/h1&gt;
+&lt;p&gt;按照官方教程&lt;a href=&#34;https://dortania.github.io/OpenCore-Install-Guide/&#34;&gt;OpenCore-Install-Guide/&lt;/a&gt;操作就行。&lt;/p&gt;
+&lt;p&gt;大致可分为&lt;/p&gt;
+   &lt;img src=&#34;https://xtvj.github.io/images/黑苹果EFI制作流程.svg&#34; alt=&#34;黑苹果EFI制作流程&#34; style=&#34;zoom:75%;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h4 id=&#34;制作acpihttpsdortaniagithubiogetting-started-with-acpissdt-methodsssdt-easyhtmlrunning-ssdttime&#34;&gt;&lt;a href=&#34;https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime&#34;&gt;制作ACPI&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;我是使用&lt;a href=&#34;https://github.com/corpnewt/SSDTTime&#34;&gt;SSDTTime&lt;/a&gt;工具在Windows下生成的，操作很简单，只是当初看英文文档的时候先看的手动制作，以为很难，其实用工具在Windows下选择几个选项就自动生成了。&lt;/p&gt;
+&lt;h4 id=&#34;定制自己机箱的usb驱动&#34;&gt;定制自己机箱的USB驱动&lt;/h4&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://github.com/USBToolBox/tool/releases&#34;&gt;USBToolBox&lt;/a&gt;在Windows下制作驱动，替换EFI里的UTBMap.kext就可以。&lt;/p&gt;
+&lt;p&gt;如果不定制也可以使用主板上的USB接口，只是机箱上的可能识别不到。&lt;/p&gt;
+&lt;h4 id=&#34;u盘启动盘&#34;&gt;U盘启动盘&lt;/h4&gt;
+&lt;p&gt;&lt;del&gt;之前是下载完整的MacOS镜像，再使用&lt;a href=&#34;https://github.com/balena-io/etcher&#34;&gt;etcher&lt;/a&gt;刷入U盘，之后把EFI放入U盘的EFI分区中，这样启动时总是找不到MacOS的选项。原因大概是etcher把EFI分区没有标记，用分区工具将放EFI的分区改为引导分区应该就行，自己没有测试过。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;之前制作U盘启动盘我是用官方建议的方式：&lt;a href=&#34;https://dortania.github.io/OpenCore-Install-Guide/installer-guide/windows-install.html#rufus-method&#34;&gt;rufus-method&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;现在的启动U盘制作过程（macOS系统、参考了：https://post.smzdm.com/p/a785e48l/ )&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://github.com/munki/macadmin-scripts&#34;&gt;macadmin-scripts&lt;/a&gt;下载相应的离线安装镜像，下载后会自动换成DMG的文件。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/scheblein/macadmin-scripts&#34;&gt;scheblein/macadmin-scripts&lt;/a&gt;分支修复了macos13上使用问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;加载DMG镜像文件到系统&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;sudo /Volumes/下载的镜像名/Contents/Resources/createinstallmedia --volume /Volumes/新建的空白镜像名/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;再挂载新建的镜像文件，并挂载其EFI文件夹，把EFI复制进去&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://github.com/balena-io/etcher&#34;&gt;etcher&lt;/a&gt;写入U盘&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;或使用&lt;a href=&#34;https://github.com/corpnewt/gibMacOS&#34;&gt;gibMacOS&lt;/a&gt;下载PKG文件安装到系统，再用&lt;a href=&#34;https://support.apple.com/en-us/HT201372&#34;&gt;官方的方法&lt;/a&gt;制作U盘也很方便&lt;/p&gt;
+&lt;h1 id=&#34;关于安装&#34;&gt;关于安装&lt;/h1&gt;
+&lt;p&gt;安装过程中&lt;strong&gt;启动Apple Logo后会有一段较长时间的屏幕熄灭&lt;/strong&gt;，我第一次安装的时候有好几分钟的黑屏时间，目前使用有十几秒的黑屏时间，黑屏时间过后才会出现设置界面或登录界面。&lt;/p&gt;
+&lt;h1 id=&#34;关于efi&#34;&gt;关于EFI&lt;/h1&gt;
+&lt;p&gt;EFI会长期更新&lt;/p&gt;
+&lt;p&gt;机型改为iMac pro1,1可以提高单核性能&lt;/p&gt;
+&lt;h1 id=&#34;关于bios&#34;&gt;关于BIOS&lt;/h1&gt;
+&lt;p&gt;并不是非要按我的设置来做，你能启动并成功安装使用的话就不用动它了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Secure Boot : Disabled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Internal Graphics : Disabled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Above 4G Decoding : Enabled&lt;/li&gt;
+&lt;li&gt;Above 4GB MMIO BIOS assignment : Enabled&lt;/li&gt;
+&lt;li&gt;Re-Size BAR Support : Disabled&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Intel Platform Trust Technology(PTT): Disabled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hyper-Threading : Enabled&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CFG Lock : Disabled&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0390.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0391.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0392.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0393.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0394.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0395.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0396.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0397.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;关于功能&#34;&gt;关于功能&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;能正常开机使用&lt;/li&gt;
+&lt;li&gt;能登录AppStore下载软件&lt;/li&gt;
+&lt;li&gt;睡眠未测试，我都是直接关机后断电&lt;/li&gt;
+&lt;li&gt;iCloud、Message等未测试，这些功能我没用到。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;关于跑分&#34;&gt;关于跑分&lt;/h1&gt;
+&lt;p&gt;R23跑分与Windows下的跑分几乎相同&lt;/p&gt;
+&lt;p&gt;如果你使用单条内存，Geekbench的跑分可能会低于预期&lt;/p&gt;
+&lt;p&gt;跑分不能说明一切，实用时软件能调用满荷CPU与GPU就行。&lt;/p&gt;
+&lt;h1 id=&#34;推荐的软件&#34;&gt;推荐的软件&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/MonitorControl/MonitorControl&#34;&gt;MonitorControl&lt;/a&gt; ：用来调整屏幕亮度。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ic005k/OCAuxiliaryTools/releases&#34;&gt;OCAT&lt;/a&gt; ：用来修改EFI文件&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/exelban/stats&#34;&gt;Stats&lt;/a&gt;：状态栏的系统监测工具&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;efi文件分享&#34;&gt;EFI文件分享&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh&#34;&gt;Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;更新记录&#34;&gt;更新记录&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.06.13&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;更新OpenCore 0.9.3&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.06.12&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;更改UIScale值为1，以修复开机时随机的不显示或启动不起来的问题。参考远景一贴子，说是可以设置为-1或1&lt;/li&gt;
+&lt;li&gt;目前EFI算是稳定了，暂时没有发现BUG，如有欢迎提Issues，虽说不一定能解决，但一起讨论还有可能帮到我自己呢。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.06.10&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;升级部分kext，删除三个无用的ACPI文件&lt;/li&gt;
+&lt;li&gt;未修复任何BUG，只是更新了点驱动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.06.05&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在13.4以上的系统下，蓝牙不能用，可以通过在NVRAM的7C436110-AB2A-4BBB-A880-FE41995C9F82下添加两个参数来修复&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bluetoothExternalDongleFailed Data 00
+
+bluetoothInternalControllerInfo Data 0000000000000000000000000000
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.06.01&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;添加&lt;a href=&#34;https://github.com/OpenIntelWireless/itlwm&#34;&gt;AirportItlwm.kext&lt;/a&gt;驱动，现在WiFi可以正常使用了。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.05.20&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;禁用EnableVectorAcceleration，以修复显卡为Rx6600或Rx6600XT时，开机过程中的随机重启问题，参考地址：https://bbs.pcbeta.com/viewthread-1967636-1-2.html 。我已经开机二十来次，除第一次重启外都没重启。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.05.09&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;更新到OpenCore0.9.2&lt;/li&gt;
+&lt;li&gt;禁用了WiFi驱动，本来启用时WiFi也不能用。&lt;/li&gt;
+&lt;li&gt;添加提示USB驱动制作&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;2023.05.03 ：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;添加CleanNvram工具，并在启动时显示系统外的工具类选项，如需隐藏可&lt;strong&gt;勾选&lt;/strong&gt;Misc→Boot→HideAuxiliary&lt;/li&gt;
+&lt;li&gt;更新自己的Bios为F6a，并更新Bios设置截图&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/hackintosh/" term="Hackintosh" label="Hackintosh" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">命令行中使用Git的教程记录</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/" />
+            <id>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
+            <updated>2024-02-12T17:27:48&#43;08:00</updated>
+            <published>2022-05-10T18:22:37&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">命令行才是王道，尽量摈弃GUI的Git操作。 git pull：对下列文件的本地修改将被合并操作覆盖 这种情况是由于自己修改了文件未提交。 如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改 # 贮藏修改 git stash 然后 git pull 最后 git stash pop 这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用git restore 文件来恢复文件。 下载带有引用其他项目的代码 如果要clone的项目有其它项目的引用，可使用以下代码下载 git clone --recurse-submodules git://github.com/***/**.git 或者在常规clone后执行 git submodule init git submodule update 项目A引用项目B的分支 要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。 //dest……</summary>
+            
+                <content type="html">&lt;p&gt;命令行才是王道，尽量摈弃GUI的Git操作。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;git-pull对下列文件的本地修改将被合并操作覆盖&#34;&gt;git pull：对下列文件的本地修改将被合并操作覆盖&lt;/h3&gt;
+&lt;p&gt;这种情况是由于自己修改了文件未提交。&lt;/p&gt;
+&lt;p&gt;如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 贮藏修改
+git stash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git pull
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git stash pop
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用&lt;code&gt;git restore 文件&lt;/code&gt;来恢复文件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;下载带有引用其他项目的代码&#34;&gt;下载带有引用其他项目的代码&lt;/h3&gt;
+&lt;p&gt;如果要clone的项目有其它项目的引用，可使用以下代码下载&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone --recurse-submodules  git://github.com/***/**.git
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者在常规clone后执行&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git submodule init 
+git submodule update
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h3 id=&#34;项目a引用项目b的分支&#34;&gt;项目A引用项目B的分支&lt;/h3&gt;
+&lt;p&gt;要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//destination_folder为子模块的本地目录名，如果未提供，它将为远程存储库名
+git submodule add &amp;lt;remote_url&amp;gt; &amp;lt;destination_folder&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;获取新的子模块提交&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;请进入您的子模块文件夹并首先运行&lt;code&gt;git fetch&lt;/code&gt;命令&lt;/p&gt;
+&lt;p&gt;现在，如果您再次运行“git log”命令，您将能够看到您希望集成的新提交。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git log --oneline origin/master -3
+
+93360a2 (origin/master, origin/HEAD) Second commit
+88db523 First commit
+43d0813 (HEAD -&amp;gt; master) Initial commit
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了让您的子模块与最新提交一致，您可以运行“git checkout”命令并指定要将子模块更新到的 SHA&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git checkout -q 93360a2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;删除 Git 子模块&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git submodule deinit &amp;lt;submodule&amp;gt; 
+git rm &amp;lt;submodule&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;强制git-pull覆盖本地文件&#34;&gt;强制“git pull”覆盖本地文件&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git reset --hard HEAD
+git pull
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;更新并覆盖本地版本&#34;&gt;更新并覆盖本地版本&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git fetch --all
+git reset --hard origin/abranch
+git checkout abranch   
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;引用&#34;&gt;引用&lt;/h3&gt;
+&lt;p&gt;1、&lt;a href=&#34;https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules&#34;&gt;How to &amp;quot;git clone&amp;quot; including submodules? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;2、&lt;a href=&#34;https://devconnected.com/how-to-add-and-update-git-submodules/#Add_a_Git_Submodule&#34;&gt;How To Add and Update Git Submodules – devconnected&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;3、&lt;a href=&#34;https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files&#34;&gt;version control - How do I force &amp;quot;git pull&amp;quot; to overwrite local files? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;4、&lt;a href=&#34;https://stackoverflow.com/questions/18487089/git-command-to-checkout-any-branch-and-overwrite-local-changes&#34;&gt;deployment - Git command to checkout any branch and overwrite local changes - Stack Overflow&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">RedmiAC2100在MacOS下编译相应固件及一些使用记录</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" />
+            <id>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</id>
+            <updated>2024-02-12T17:28:23&#43;08:00</updated>
+            <published>2021-06-29T16:45:58&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">坏块和刷机教程 在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个ESMT闪存没坏块的。 检测和刷机教程网上一大堆，我用的是：红米(小米)AC2100无需Telnet刷入Breed和Padavan固件教程。 使用终端连接路由器 ssh root@192.168.1.1 终端与路由器之间传文件 scp命令是在没连ssh状态下操作的。输入后要输入路由器的密码。 //复制当前目录下本地文件1到路由器tmp目录下并保存为文件2。 scp 文件1 root@192.168.1.1:/tmp/文件2 //复制路由器tmp目录下文件2到当前目录并保存为文件1 scp root@192.168.1.1:/tmp/文件2 文件1 如果出现：ash: /usr/libexec/sftp-server: not found 在scp……</summary>
+            
+                <content type="html">&lt;h4 id=&#34;坏块和刷机教程&#34;&gt;坏块和刷机教程&lt;/h4&gt;
+&lt;p&gt;在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个&lt;strong&gt;ESMT闪存没坏块&lt;/strong&gt;的。&lt;/p&gt;
+&lt;p&gt;检测和刷机教程网上一大堆，我用的是：&lt;a href=&#34;https://www.right.com.cn/forum/thread-4054150-1-1.html&#34;&gt;红米(小米)AC2100无需Telnet刷入Breed和Padavan固件教程&lt;/a&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;使用终端连接路由器&#34;&gt;使用终端连接路由器&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh root@192.168.1.1
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;终端与路由器之间传文件&#34;&gt;终端与路由器之间传文件&lt;/h4&gt;
+&lt;p&gt;scp命令是在没连ssh状态下操作的。输入后要输入路由器的密码。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//复制当前目录下本地文件1到路由器tmp目录下并保存为文件2。
+scp 文件1 root@192.168.1.1:/tmp/文件2
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//复制路由器tmp目录下文件2到当前目录并保存为文件1
+scp root@192.168.1.1:/tmp/文件2 文件1
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果出现：ash: /usr/libexec/sftp-server: not found&lt;/p&gt;
+&lt;p&gt;在scp等命令后加-O，如&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scp -O root@192.168.2.1:/opt/accelerated-domains.china.conf.txt ac.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;openwrt官方固件&#34;&gt;Openwrt官方固件&lt;/h4&gt;
+&lt;p&gt;RedmiAC2100(&lt;strong&gt;架构ramips、处理器mt7621&lt;/strong&gt;)：https://downloads.openwrt.org/&lt;/p&gt;
+&lt;h4 id=&#34;luci&#34;&gt;Luci&lt;/h4&gt;
+&lt;p&gt;有无Luci的区别就是能不能在浏览器输入192.168.1.1来操作路由器&lt;/p&gt;
+&lt;p&gt;在终端里刷入&lt;strong&gt;squashfs-kernel1.bin和squashfs-rootfs0.bin&lt;/strong&gt;的则&lt;strong&gt;没有Luci&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;使用Breed刷入&lt;strong&gt;initramfs-kernel.bin&lt;/strong&gt;的，则&lt;strong&gt;有Luci&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;如果没有Luci又不会使用终端配置拨号上网的话，要用别的路由拨号正常上网，AC2100用网线连接介于正常路由与电脑之间后，再用ssh连接ac2100通过&lt;code&gt;opkg update &amp;amp;&amp;amp; opkg install luci&lt;/code&gt;来安装Luci。&lt;/p&gt;
+&lt;h4 id=&#34;mac环境编译openwrt&#34;&gt;Mac环境编译Openwrt&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;官网目前没把MacOS放在支持的列表中&lt;/strong&gt;。但自己喜欢这系统，决定试试，换到MacOS环境编译(11.4)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;使用&lt;strong&gt;磁盘工具&lt;/strong&gt;创建一个&lt;strong&gt;区分大小写&lt;/strong&gt;的虚拟盘&lt;/li&gt;
+&lt;li&gt;clone代码&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;make工具换成GNU的make&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;执行&lt;code&gt;./scripts/feeds update -a&lt;/code&gt;后会在终端提示配置环境缺少哪些工具，我目前环境提示少了四个，使用brew search搜索这四个工具再安装就行了。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;./scripts/feeds install -a&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make menuconfig&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h5 id=&#34;报错一&#34;&gt;报错一：&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;No rule to make target `.config&amp;#39;,blablablabla. Stop.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;找到一个&lt;a href=&#34;https://www.right.com.cn/forum/thread-742118-1-1.html&#34;&gt;说是依赖的东西没成功&lt;/a&gt;下载。&lt;/p&gt;
+&lt;p&gt;在最后一步之前&lt;strong&gt;执行&lt;code&gt;make download V=s&lt;/code&gt;等待下载完依赖&lt;/strong&gt;，再执行make就能~~&lt;em&gt;成功编译&lt;/em&gt;~~了。&lt;/p&gt;
+&lt;h5 id=&#34;报错二&#34;&gt;报错二：&lt;/h5&gt;
+&lt;p&gt;使用make -j1 V=sc来编译并查看log发现提示说&lt;strong&gt;与VMware Fusion的环境变量冲突&lt;/strong&gt;，期间还看到有人几年前用&lt;a href=&#34;https://p3terx.com/archives/compiling-openwrt-with-macos.html&#34;&gt;MacOS编译&lt;/a&gt;过，于是卸载了虚拟机再试着~~&lt;em&gt;编译成功了。&lt;/em&gt;~~&lt;/p&gt;
+&lt;h5 id=&#34;报错三&#34;&gt;报错三：&lt;/h5&gt;
+&lt;p&gt;看了下生成的文件是默认的ath79架构，没有生成我需要的固件。&lt;/p&gt;
+&lt;p&gt;重新下载重新配置并编译，报错如图&lt;/p&gt;
+&lt;img title=&#34;&#34; src=&#34;https://xtvj.github.io/images/toplevel_error.jpg&#34; alt=&#34;&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34;&gt;
+&lt;p&gt;根据&lt;a href=&#34;https://github.com/coolsnowwolf/lede/issues/4815&#34;&gt;网友的方法&lt;/a&gt;，试了下。成功编译并生成相应的固件了。&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/ac2100_success.png&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34; /&gt;
+&lt;h4 id=&#34;安装adguard-home&#34;&gt;安装Adguard Home：&lt;/h4&gt;
+&lt;p&gt;由于luci-app-adguard长时间不更新，使用时经常出问题，切换使用官方包安装，不再使用图形界面。&lt;/p&gt;
+&lt;p&gt;官方下载地址：https://github.com/AdguardTeam/AdGuardHome/releases&lt;/p&gt;
+&lt;p&gt;英文安装教程地址：https://forum.openwrt.org/t/howto-running-adguard-home-on-openwrt/51678&lt;/p&gt;
+&lt;p&gt;下载版本为： AdGuardHome_linux_mipsle_softfloat.tar.gz&lt;/p&gt;
+&lt;h5 id=&#34;备忘添加自定义防火墙&#34;&gt;备忘：添加自定义防火墙&lt;/h5&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables -t nat -A PREROUTING -i br-lan -p udp --dport 53 -j DNAT --to 192.168.1.1:5353
+iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 53 -j DNAT --to 192.168.1.1:5353
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;openwrt设置web管理页面的ip地址&#34;&gt;OpenWrt设置web管理页面的ip地址&lt;/h4&gt;
+&lt;p&gt;web管理地址也就是输入地址在浏览器中管理路由器的那个ip地址，一般为192.168.1.1&lt;/p&gt;
+&lt;p&gt;但是如果光猫是&lt;strong&gt;自动拨号&lt;/strong&gt;的话，&lt;strong&gt;路由器就不用拨号&lt;/strong&gt;，需要改成&lt;strong&gt;dhcp协议&lt;/strong&gt;连接网络，此时，路由器的管理ip与光猫的管理ip就相同了，会有冲突。&lt;/p&gt;
+&lt;p&gt;配置文件位置为 /etc/config/network ，改字段ipaddr的地址为你想要的地址，然后重启路由器即可。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-#&#34; data-lang=&#34;#&#34;&gt;# vim /etc/config/network
+config interface &amp;#39;lan&amp;#39;
+        option ifname &amp;#39;eth0.1&amp;#39;
+        option type &amp;#39;bridge&amp;#39;
+        option force_link &amp;#39;1&amp;#39;
+        option proto &amp;#39;static&amp;#39;
+        option netmask &amp;#39;255.255.255.0&amp;#39;
+        option ipaddr &amp;#39;192.168.2.1&amp;#39;
+        option ip6assign &amp;#39;60&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参考地址：https://www.openwrt.pro/post-618.html&lt;/p&gt;
+&lt;h4 id=&#34;开启160mhz带宽&#34;&gt;开启160MHz带宽&lt;/h4&gt;
+&lt;p&gt;国家代码改为：US&lt;/p&gt;
+&lt;p&gt;信道改为36-44或之间的值&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">使用youtube dl下载视频、音频、播放列表中的多个视频或音频</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" />
+            <id>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</id>
+            <updated>2024-02-12T17:22:43&#43;08:00</updated>
+            <published>2020-11-22T18:39:02&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">​ 以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么个开源的命令行工具。使用了下感觉很好，打算当成日常使用工具特此记录下使用技巧。 ​ 官网：https://github.com/ytdl-org/youtube-dl 提示：以下代码是在MacOS环境测试，Windows下可能需要换单引号为双引号 安装 //安装 brew install youtube-dl 常用视频下载步骤 默认下载方式 //直接使用youtube-dl+网址的方式执行 //会默认下载分辨率最高的视频和音频，下载完成后会自动合并 youtube-dl 网址 自定义下载视频质量 列中视频可用音/视频格式 //两种方式 youtube-dl -F 网址……</summary>
+            
+                <content type="html">&lt;p&gt;​		以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么个开源的命令行工具。使用了下感觉很好，打算当成日常使用工具特此记录下使用技巧。&lt;/p&gt;
+&lt;p&gt;​        官网：https://github.com/ytdl-org/youtube-dl&lt;/p&gt;
+&lt;p&gt;提示：以下代码是在MacOS环境测试，Windows下可能需要换单引号为双引号&lt;/p&gt;
+&lt;h3 id=&#34;安装&#34;&gt;&lt;strong&gt;安装&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//安装
+brew install youtube-dl 
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;常用视频下载步骤&#34;&gt;&lt;strong&gt;常用视频下载步骤&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4 id=&#34;默认下载方式&#34;&gt;默认下载方式&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//直接使用youtube-dl+网址的方式执行
+//会默认下载分辨率最高的视频和音频，下载完成后会自动合并
+youtube-dl 网址
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;自定义下载视频质量&#34;&gt;自定义下载视频质量&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;列中视频可用音/视频格式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//两种方式
+youtube-dl -F 网址
+youtube-dl --list-formats  网址
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;选择要下载的格式&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//选择编号为136的格式
+youtube-dl -f 136 网址
+&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youtube-dl常用下载步骤.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
+&lt;h3 id=&#34;以最优格式下载视频&#34;&gt;&lt;strong&gt;以最优格式下载视频&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//以最优格式下载youtube视频，其它网站暂未测试，官方说Windows下换单引号为双引号
+youtube-dl -f &amp;#39;bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best&amp;#39; 网址
+
+//或者直接使用默认设置，一般会下载两个webm文件，分别为视频和音频，
+//再自动合并成附带音轨的webm格式视频，测试发现也是最高分辨率，有4K就下4K版本
+youtube-dl 网址
+&lt;/code&gt;&lt;/pre&gt;&lt;!-- more --&gt;
+&lt;h3 id=&#34;以最优格式下载音频&#34;&gt;&lt;strong&gt;以最优格式下载音频&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//默认下载音频为opus格式
+youtube-dl -x 网址
+
+//下载mp3格式的音频
+youtube-dl -x --audio-format mp3 网址
+
+//最优格式下载音频
+youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 网址
+&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youttube-dl下载最优音频.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
+&lt;h3 id=&#34;下载播放列表中的视频&#34;&gt;&lt;strong&gt;下载播放列表中的视频&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//使用默认，与下载单个视频格式一样
+youtbue-dl 播放列表网址
+
+//可以使用选项--playlist-start, --playlist-end或者指定某个视频 --playlist-items
+//--playlist-items 可设置多个值.如：&amp;#34;--playlist-items 1,2,5 下载1、2、5项
+
+//下载列表第二个及以后的所有视频
+youtube-dl --playstart-start 2 播放列表网址
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;限定分辨率下载播放列表中的视频&#34;&gt;&lt;strong&gt;限定分辨率下载播放列表中的视频&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//以最高480P下载列表第22个及以后的所有视频
+youtube-dl --playlist-start 22 -f &amp;#39;bestvideo[height&amp;lt;=480]+bestaudio/best[height&amp;lt;=480]&amp;#39; 播放列表网址
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;下载播放列表中视频的音轨&#34;&gt;&lt;strong&gt;下载播放列表中视频的音轨&lt;/strong&gt;&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//使用--playlist-start、--playlist-end、--playlist-items来限定
+
+//最优格式下载播放列表中3-6这四个视频的音频文件，并转换成mp3格式
+youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --playlist-start 3 --playlist-end 6 播放列表网址
+&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youtube-dl下载3-6音频.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
+&lt;h3 id=&#34;update20210220&#34;&gt;Update:2021/02/20&lt;/h3&gt;
+&lt;p&gt;调用aria2加速下载&lt;/p&gt;
+&lt;p&gt;​        解决使用youtube-dl默认下载时常常断开连接的问题。前提是已经安装好aria2&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;youtube-dl https://www.youtube.com/*** --external-downloader aria2c --external-downloader-args &amp;quot;-x 16 -k 1M&amp;quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;参数说明&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;--external-downloader aria2c //调用外部下载工具
+--external-downloader-args //外部下载工具指定参数
+-x 16 //启用aria2 16个线程，最多就支持16线程
+-K 1M //指定块的大小&lt;/p&gt;
+&lt;h3 id=&#34;update20211102&#34;&gt;Update:2021/11/02&lt;/h3&gt;
+&lt;p&gt;下载速度慢的最新解决方式&lt;/p&gt;
+&lt;p&gt;发现在YouTube-dl的官方Issues里有非常多关于下载速度慢的提问&lt;/p&gt;
+&lt;h4 id=&#34;解决方式&#34;&gt;解决方式：&lt;/h4&gt;
+&lt;p&gt;网友推荐解决方式之一：使用youtube-dl的二次开发工具&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;安装方式&#34;&gt;安装方式：&lt;/h4&gt;
+&lt;p&gt;MacOS  &lt;code&gt;brew install yt-dlp/taps/yt-dlp&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;官方包发布地址：https://github.com/yt-dlp/yt-dlp/releases&lt;/p&gt;
+&lt;h4 id=&#34;使用方式&#34;&gt;使用方式&lt;/h4&gt;
+&lt;p&gt;和YouTube-dl基本一样，只是把参数&lt;code&gt;YouTube-dl 网址&lt;/code&gt;换成&lt;code&gt;yt-dlp 网址&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;update20220413&#34;&gt;Update:2022/04/13&lt;/h3&gt;
+&lt;p&gt;youtube-dl已死&lt;/p&gt;
+&lt;p&gt;youtube-dl从2021.12.17到现在没发布新版本，只是提交了少许仓库代码，看很多人评价也是youtube-dl已死，推荐使用&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.sysgeek.cn/youtube-dl-examples/&#34;&gt;Youtube 专业下载工具，Youtube-dl 详细使用教程与初学上手示例&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u014389734/article/details/86751840&#34;&gt;Youtube-dl调用外部Aria2多线程加速下载&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/" term="技巧" label="技巧" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">五笔拆字表</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" />
+            <id>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</id>
+            <updated>2024-02-12T17:25:56&#43;08:00</updated>
+            <published>2020-11-04T14:58:56&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">记录时常想不起怎么编码、拆解的汉字。 汉字 拼音 五笔编码 五笔拆分图解 缺 que rmn 颜 yan utem 爬 pa rhyc 辣 la ugk 即 ji vcb 鹿 lù ynjx 庸 yong yveh 谣 yao yer 瓣 ban ur 刻 ke ynt 曳 ye jxe 舟 zhou tei 凹 ao mmgd 凸 tu hgm 戈 ge agnt 戒 jie aak 某 mou afs 浅 qian igt 晓 xiao jat 套 tao ddu 善 shan uduk 卫 wei bg 巴 ba cnh 识别码表，打完编码输入识别码确定左右型 、上下型、杂合型。 参考 https://www.52wubi.com/wbbmcx/search.php https://wubizhijia.com/zigenbiao/66.html https://www.dazima.cn/jiaocheng/20110410271.html https://www.hanzi5.com/</summary>
+            
+                <content type="html">&lt;p&gt;记录时常想不起怎么编码、拆解的汉字。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;汉字&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;拼音&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;五笔编码&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;五笔拆分图解&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;缺&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;que&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;rmn&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E7%BC%BA.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;颜&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;yan&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;utem&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E9%A2%9C.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;爬&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;pa&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;rhyc&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E7%88%AC.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;辣&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;la&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ugk&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%BE%A3.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;即&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ji&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;vcb&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%8D%B3.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;鹿&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;lù&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ynjx&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E9%B9%BF.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;庸&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;yong&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;yveh&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%BA%B8.gif&#34; alt=&#34;&#34;&gt;&lt;br/&gt;&lt;img src=&#34;https://xtvj.github.io/images/庸笔画顺序.png&#34; style=&#34;zoom: 33%;margin: 0 auto;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;谣&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;yao&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;yer&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%B0%A3.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;瓣&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ban&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ur&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/瓣.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;刻&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ke&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ynt&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%88%BB.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;曳&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ye&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;jxe&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%9B%B3.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;舟&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;zhou&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;tei&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%88%9F.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;凹&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ao&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;mmgd&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%87%B9.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;凸&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;tu&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;hgm&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%87%B8.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;戈&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ge&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;agnt&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%88%88.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;戒&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;jie&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;aak&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%88%92.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;某&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;mou&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;afs&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%9F%90.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;浅&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;qian&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;igt&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%B5%85.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;晓&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;xiao&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;jat&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%99%93.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;套&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;tao&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ddu&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%A5%97.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;善&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;shan&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;uduk&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%96%84.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;卫&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;wei&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;bg&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%8D%AB.gif&#34;/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;巴&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;ba&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;cnh&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/巴.gif&#34;/&gt; &lt;br/&gt;  &lt;img src=&#34;https://xtvj.github.io/images/ba_bihua.png&#34; style=&#34;zoom: 33%;margin: 0 auto;&#34; /&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;p&gt;识别码表，打完编码输入识别码确定&lt;strong&gt;左右型&lt;/strong&gt; 、&lt;strong&gt;上下型&lt;/strong&gt;、&lt;strong&gt;杂合型&lt;/strong&gt;。&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/五笔识别码表.gif&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
+&lt;hr&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/五笔字根表.jpg&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
+&lt;p&gt;参考&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.52wubi.com/wbbmcx/search.php&#34;&gt;https://www.52wubi.com/wbbmcx/search.php&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://wubizhijia.com/zigenbiao/66.html&#34;&gt;https://wubizhijia.com/zigenbiao/66.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.dazima.cn/jiaocheng/20110410271.html&#34;&gt;https://www.dazima.cn/jiaocheng/20110410271.html&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hanzi5.com/&#34;&gt;https://www.hanzi5.com/&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">Mac使用技巧</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
+            <id>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
+            <updated>2024-02-12T17:27:12&#43;08:00</updated>
+            <published>2020-10-29T10:09:51&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34; 安装iTerm2： brew install iterm2 或去官网下载安装：https://iterm2.com/downloads.html 代码配色 使用 iTerm2-Color-Schemes 的配色合集 mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2 git clone https://github.com/mbadolato/iTerm2-Color-Schemes 导入配色方案 Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。 导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula 字体 如果不装字体……</summary>
+            
+                <content type="html">&lt;p&gt;由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/Iterm2.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
+&lt;h4 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h4&gt;
+&lt;p&gt;安装brew：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装iTerm2：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install iterm2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或去官网下载安装：https://iterm2.com/downloads.html&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;代码配色&#34;&gt;代码配色&lt;/h4&gt;
+&lt;p&gt;使用 &lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34;&gt;iTerm2-Color-Schemes&lt;/a&gt; 的配色合集&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;导入配色方案&#34;&gt;导入配色方案&lt;/h4&gt;
+&lt;p&gt;Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。&lt;/p&gt;
+&lt;p&gt;导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula&lt;/p&gt;
+&lt;h4 id=&#34;字体&#34;&gt;字体&lt;/h4&gt;
+&lt;p&gt;如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# git clone
+cd ~/.iterm2
+git clone https://github.com/powerline/fonts.git
+
+# install
+cd fonts
+./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后按照下面的设置（记得选一个名字后面有for Powerline的字体）&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/字体.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
+&lt;h4 id=&#34;设置默认窗口大小&#34;&gt;设置默认窗口大小：&lt;/h4&gt;
+&lt;p&gt;Preferences...→Profiles→Window→Settings for New Windows ：120：30&lt;/p&gt;
+&lt;h4 id=&#34;安装zsh&#34;&gt;安装zsh&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install zsh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认的 shell 是 bash，需要修改为 zsh：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sh -c &amp;#34;echo $(which zsh) &amp;gt;&amp;gt; /etc/shells&amp;#34;
+chsh -s $(which zsh)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;配置zsh&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 &lt;code&gt;.zshrc&lt;/code&gt; 的配置文件，以后主要就是修改它了。&lt;/p&gt;
+&lt;h4 id=&#34;配置主题&#34;&gt;配置主题&lt;/h4&gt;
+&lt;p&gt;主题文件存储在 &lt;code&gt;~/.oh-my-zsh/themes&lt;/code&gt; 目录下，你也可以使用其他的。&lt;/p&gt;
+&lt;p&gt;推荐 &lt;a href=&#34;https://github.com/bhilburn/powerlevel9k&#34;&gt;powerlevel9k&lt;/a&gt; 的高颜值主题&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改 &lt;code&gt;zsh&lt;/code&gt; 主题配置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//修改.zshrc文件（在Mac用户根目录）
+ZSH_THEME=&amp;#34;powerlevel9k/powerlevel9k&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改配置文件后一定要记得让配置生效，使用 &lt;code&gt;source&lt;/code&gt; 命令：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;zsh-插件&#34;&gt;zsh 插件&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开&lt;/strong&gt;&lt;/p&gt;
+&lt;h5 id=&#34;extract&#34;&gt;extract&lt;/h5&gt;
+&lt;p&gt;用于解压，不用另行安装，直接在plugins中加就行 &lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract&#34;&gt;官方说明&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;autojump&#34;&gt;autojump&lt;/h5&gt;
+&lt;p&gt;自动跳转目录，只能当使用cd命令进入文件夹后，才能使用&lt;code&gt;j 文件夹名&lt;/code&gt;进入文件夹&lt;/p&gt;
+&lt;p&gt;安装：&lt;code&gt;brew install autojump&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;再执行一句命令：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; . $(brew --prefix)/etc/profile.d/autojump.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-syntax-highlighting&#34;&gt;zsh-syntax-highlighting&lt;/h5&gt;
+&lt;p&gt;亮亮功能，安装&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-autosuggestions&#34;&gt;zsh-autosuggestions&lt;/h5&gt;
+&lt;p&gt;安装：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自动提示。历史记录可在用户根目录.zsh_history文件内查看到。&lt;/p&gt;
+&lt;h5 id=&#34;macos&#34;&gt;macos&lt;/h5&gt;
+&lt;p&gt;Mac下快捷命令应用，参考&lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos&#34;&gt;官方说明&lt;/a&gt;，可实现在终端快速定位到访达目录等操作。&lt;/p&gt;
+&lt;p&gt;自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)&lt;/p&gt;
+&lt;p&gt;最后再执行一次&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h4 id=&#34;完成上面设置后终端会提示&#34;&gt;&lt;del&gt;完成上面设置后终端会提示&lt;/del&gt;：&lt;/h4&gt;
+&lt;p&gt;目前已无此提示&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[oh-my-zsh] Insecure completion-dependent directories detected:
+drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
+drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
+
+[oh-my-zsh] For safety, we will not load completions from these directories until
+[oh-my-zsh] you fix their permissions and ownership and restart zsh.
+[oh-my-zsh] See the above list for directories with group or other writability.
+
+[oh-my-zsh] To fix your permissions you can do so by disabling
+[oh-my-zsh] the write permission of &amp;#34;group&amp;#34; and &amp;#34;others&amp;#34; and making sure that the
+[oh-my-zsh] owner of these directories is either root or your current user.
+[oh-my-zsh] The following command may help:
+[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
+
+[oh-my-zsh] If the above didn&amp;#39;t help or you want to skip the verification of
+[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
+[oh-my-zsh] &amp;#34;true&amp;#34; before oh-my-zsh is sourced in your zshrc file.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;按照说明在.zshrc文件&lt;strong&gt;第一行&lt;/strong&gt;中添加 ZSH_DISABLE_COMPFIX=true即可。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html&#34;&gt;打造 Mac 下高颜值好用的终端环境&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/gggg989898/article/details/108882880&#34;&gt;Mac terminal终端或iterm2出现问号解决方案&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">Mac上好用又漂亮的终端</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/" />
+            <id>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</id>
+            <updated>2024-02-12T17:20:01&#43;08:00</updated>
+            <published>2020-10-19T19:45:27&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34; 安装iTerm2： brew install iterm2 或去官网下载安装：https://iterm2.com/downloads.html 代码配色 使用 iTerm2-Color-Schemes 的配色合集 mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2 git clone https://github.com/mbadolato/iTerm2-Color-Schemes 导入配色方案 Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。 导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula 字体 如果不装字体……</summary>
+            
+                <content type="html">&lt;p&gt;由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/Iterm2.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
+&lt;h4 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h4&gt;
+&lt;p&gt;安装brew：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装iTerm2：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install iterm2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或去官网下载安装：https://iterm2.com/downloads.html&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;h4 id=&#34;代码配色&#34;&gt;代码配色&lt;/h4&gt;
+&lt;p&gt;使用 &lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34;&gt;iTerm2-Color-Schemes&lt;/a&gt; 的配色合集&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;导入配色方案&#34;&gt;导入配色方案&lt;/h4&gt;
+&lt;p&gt;Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。&lt;/p&gt;
+&lt;p&gt;导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula&lt;/p&gt;
+&lt;h4 id=&#34;字体&#34;&gt;字体&lt;/h4&gt;
+&lt;p&gt;如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# git clone
+cd ~/.iterm2
+git clone https://github.com/powerline/fonts.git
+
+# install
+cd fonts
+./install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后按照下面的设置（记得选一个名字后面有for Powerline的字体）&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/字体.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
+&lt;h4 id=&#34;设置默认窗口大小&#34;&gt;设置默认窗口大小：&lt;/h4&gt;
+&lt;p&gt;Preferences...→Profiles→Window→Settings for New Windows ：120：30&lt;/p&gt;
+&lt;h4 id=&#34;安装zsh&#34;&gt;安装zsh&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install zsh
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认的 shell 是 bash，需要修改为 zsh：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sh -c &amp;#34;echo $(which zsh) &amp;gt;&amp;gt; /etc/shells&amp;#34;
+chsh -s $(which zsh)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;配置zsh&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 &lt;code&gt;.zshrc&lt;/code&gt; 的配置文件，以后主要就是修改它了。&lt;/p&gt;
+&lt;h4 id=&#34;配置主题&#34;&gt;配置主题&lt;/h4&gt;
+&lt;p&gt;主题文件存储在 &lt;code&gt;~/.oh-my-zsh/themes&lt;/code&gt; 目录下，你也可以使用其他的。&lt;/p&gt;
+&lt;p&gt;推荐 &lt;a href=&#34;https://github.com/bhilburn/powerlevel9k&#34;&gt;powerlevel9k&lt;/a&gt; 的高颜值主题&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改 &lt;code&gt;zsh&lt;/code&gt; 主题配置：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//修改.zshrc文件（在Mac用户根目录）
+ZSH_THEME=&amp;#34;powerlevel9k/powerlevel9k&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改配置文件后一定要记得让配置生效，使用 &lt;code&gt;source&lt;/code&gt; 命令：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;zsh-插件&#34;&gt;zsh 插件&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开&lt;/strong&gt;&lt;/p&gt;
+&lt;h5 id=&#34;extract&#34;&gt;extract&lt;/h5&gt;
+&lt;p&gt;用于解压，不用另行安装，直接在plugins中加就行 &lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract&#34;&gt;官方说明&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;autojump&#34;&gt;autojump&lt;/h5&gt;
+&lt;p&gt;自动跳转目录，只能当使用cd命令进入文件夹后，才能使用&lt;code&gt;j 文件夹名&lt;/code&gt;进入文件夹&lt;/p&gt;
+&lt;p&gt;安装：&lt;code&gt;brew install autojump&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;再执行一句命令：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; . $(brew --prefix)/etc/profile.d/autojump.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-syntax-highlighting&#34;&gt;zsh-syntax-highlighting&lt;/h5&gt;
+&lt;p&gt;亮亮功能，安装&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-autosuggestions&#34;&gt;zsh-autosuggestions&lt;/h5&gt;
+&lt;p&gt;安装：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自动提示。历史记录可在用户根目录.zsh_history文件内查看到。&lt;/p&gt;
+&lt;h5 id=&#34;macos&#34;&gt;macos&lt;/h5&gt;
+&lt;p&gt;Mac下快捷命令应用，参考&lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos&#34;&gt;官方说明&lt;/a&gt;，可实现在终端快速定位到访达目录等操作。&lt;/p&gt;
+&lt;p&gt;自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)&lt;/p&gt;
+&lt;p&gt;最后再执行一次&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h4 id=&#34;完成上面设置后终端会提示&#34;&gt;&lt;del&gt;完成上面设置后终端会提示&lt;/del&gt;：&lt;/h4&gt;
+&lt;p&gt;目前已无此提示&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[oh-my-zsh] Insecure completion-dependent directories detected:
+drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
+drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
+
+[oh-my-zsh] For safety, we will not load completions from these directories until
+[oh-my-zsh] you fix their permissions and ownership and restart zsh.
+[oh-my-zsh] See the above list for directories with group or other writability.
+
+[oh-my-zsh] To fix your permissions you can do so by disabling
+[oh-my-zsh] the write permission of &amp;#34;group&amp;#34; and &amp;#34;others&amp;#34; and making sure that the
+[oh-my-zsh] owner of these directories is either root or your current user.
+[oh-my-zsh] The following command may help:
+[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
+
+[oh-my-zsh] If the above didn&amp;#39;t help or you want to skip the verification of
+[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
+[oh-my-zsh] &amp;#34;true&amp;#34; before oh-my-zsh is sourced in your zshrc file.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;按照说明在.zshrc文件&lt;strong&gt;第一行&lt;/strong&gt;中添加 ZSH_DISABLE_COMPFIX=true即可。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html&#34;&gt;打造 Mac 下高颜值好用的终端环境&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/gggg989898/article/details/108882880&#34;&gt;Mac terminal终端或iterm2出现问号解决方案&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/mac/" term="Mac" label="Mac" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
             <title type="text">影视观后记录</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/" />
             <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-01-30T23:39:38&#43;08:00</updated>
-            <published>2024-01-24T21:50:39&#43;08:00</published>
+            <updated>2024-02-12T17:29:06&#43;08:00</updated>
+            <published>2020-07-06T16:20:22&#43;08:00</published>
             <author>
                     <name>xtvj</name>
                     <uri>https://xtvj.github.io/</uri>
@@ -2042,680 +2952,11 @@
         </entry>
     
         <entry>
-            <title type="text">命令行中使用Git的教程记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-01-30T23:39:21&#43;08:00</updated>
-            <published>2024-01-24T21:50:27&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">命令行才是王道，尽量摈弃GUI的Git操作。 git pull：对下列文件的本地修改将被合并操作覆盖 这种情况是由于自己修改了文件未提交。 如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改 # 贮藏修改 git stash 然后 git pull 最后 git stash pop 这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用git restore 文件来恢复文件。 下载带有引用其他项目的代码 如果要clone的项目有其它项目的引用，可使用以下代码下载 git clone --recurse-submodules git://github.com/***/**.git 或者在常规clone后执行 git submodule init git submodule update 项目A引用项目B的分支 要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。 //dest……</summary>
-            
-                <content type="html">&lt;p&gt;命令行才是王道，尽量摈弃GUI的Git操作。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;git-pull对下列文件的本地修改将被合并操作覆盖&#34;&gt;git pull：对下列文件的本地修改将被合并操作覆盖&lt;/h3&gt;
-&lt;p&gt;这种情况是由于自己修改了文件未提交。&lt;/p&gt;
-&lt;p&gt;如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 贮藏修改
-git stash
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git pull
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;最后&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git stash pop
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用&lt;code&gt;git restore 文件&lt;/code&gt;来恢复文件。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;下载带有引用其他项目的代码&#34;&gt;下载带有引用其他项目的代码&lt;/h3&gt;
-&lt;p&gt;如果要clone的项目有其它项目的引用，可使用以下代码下载&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone --recurse-submodules  git://github.com/***/**.git
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或者在常规clone后执行&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git submodule init 
-git submodule update
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h3 id=&#34;项目a引用项目b的分支&#34;&gt;项目A引用项目B的分支&lt;/h3&gt;
-&lt;p&gt;要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//destination_folder为子模块的本地目录名，如果未提供，它将为远程存储库名
-git submodule add &amp;lt;remote_url&amp;gt; &amp;lt;destination_folder&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;获取新的子模块提交&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;请进入您的子模块文件夹并首先运行&lt;code&gt;git fetch&lt;/code&gt;命令&lt;/p&gt;
-&lt;p&gt;现在，如果您再次运行“git log”命令，您将能够看到您希望集成的新提交。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git log --oneline origin/master -3
-
-93360a2 (origin/master, origin/HEAD) Second commit
-88db523 First commit
-43d0813 (HEAD -&amp;gt; master) Initial commit
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;为了让您的子模块与最新提交一致，您可以运行“git checkout”命令并指定要将子模块更新到的 SHA&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git checkout -q 93360a2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;删除 Git 子模块&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git submodule deinit &amp;lt;submodule&amp;gt; 
-git rm &amp;lt;submodule&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;强制git-pull覆盖本地文件&#34;&gt;强制“git pull”覆盖本地文件&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git reset --hard HEAD
-git pull
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;更新并覆盖本地版本&#34;&gt;更新并覆盖本地版本&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git fetch --all
-git reset --hard origin/abranch
-git checkout abranch   
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;引用&#34;&gt;引用&lt;/h3&gt;
-&lt;p&gt;1、&lt;a href=&#34;https://stackoverflow.com/questions/3796927/how-to-git-clone-including-submodules&#34;&gt;How to &amp;quot;git clone&amp;quot; including submodules? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2、&lt;a href=&#34;https://devconnected.com/how-to-add-and-update-git-submodules/#Add_a_Git_Submodule&#34;&gt;How To Add and Update Git Submodules – devconnected&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;3、&lt;a href=&#34;https://stackoverflow.com/questions/1125968/how-do-i-force-git-pull-to-overwrite-local-files&#34;&gt;version control - How do I force &amp;quot;git pull&amp;quot; to overwrite local files? - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;4、&lt;a href=&#34;https://stackoverflow.com/questions/18487089/git-command-to-checkout-any-branch-and-overwrite-local-changes&#34;&gt;deployment - Git command to checkout any branch and overwrite local changes - Stack Overflow&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">使用youtube Dl下载视频、音频、播放列表中的多个视频或音频</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" />
-            <id>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</id>
-            <updated>2024-01-30T23:38:50&#43;08:00</updated>
-            <published>2024-01-24T21:50:17&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">​ 以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么个开源的命令行工具。使用了下感觉很好，打算当成日常使用工具特此记录下使用技巧。 ​ 官网：https://github.com/ytdl-org/youtube-dl 提示：以下代码是在MacOS环境测试，Windows下可能需要换单引号为双引号 安装 //安装 brew install youtube-dl 常用视频下载步骤 默认下载方式 //直接使用youtube-dl+网址的方式执行 //会默认下载分辨率最高的视频和音频，下载完成后会自动合并 youtube-dl 网址 自定义下载视频质量 列中视频可用音/视频格式 //两种方式 youtube-dl -F 网址……</summary>
-            
-                <content type="html">&lt;p&gt;​		以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么个开源的命令行工具。使用了下感觉很好，打算当成日常使用工具特此记录下使用技巧。&lt;/p&gt;
-&lt;p&gt;​        官网：https://github.com/ytdl-org/youtube-dl&lt;/p&gt;
-&lt;p&gt;提示：以下代码是在MacOS环境测试，Windows下可能需要换单引号为双引号&lt;/p&gt;
-&lt;h3 id=&#34;安装&#34;&gt;&lt;strong&gt;安装&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//安装
-brew install youtube-dl 
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;常用视频下载步骤&#34;&gt;&lt;strong&gt;常用视频下载步骤&lt;/strong&gt;&lt;/h3&gt;
-&lt;h4 id=&#34;默认下载方式&#34;&gt;默认下载方式&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//直接使用youtube-dl+网址的方式执行
-//会默认下载分辨率最高的视频和音频，下载完成后会自动合并
-youtube-dl 网址
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;自定义下载视频质量&#34;&gt;自定义下载视频质量&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;列中视频可用音/视频格式&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//两种方式
-youtube-dl -F 网址
-youtube-dl --list-formats  网址
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;选择要下载的格式&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//选择编号为136的格式
-youtube-dl -f 136 网址
-&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youtube-dl常用下载步骤.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
-&lt;h3 id=&#34;以最优格式下载视频&#34;&gt;&lt;strong&gt;以最优格式下载视频&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//以最优格式下载youtube视频，其它网站暂未测试，官方说Windows下换单引号为双引号
-youtube-dl -f &amp;#39;bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best&amp;#39; 网址
-
-//或者直接使用默认设置，一般会下载两个webm文件，分别为视频和音频，
-//再自动合并成附带音轨的webm格式视频，测试发现也是最高分辨率，有4K就下4K版本
-youtube-dl 网址
-&lt;/code&gt;&lt;/pre&gt;&lt;!-- more --&gt;
-&lt;h3 id=&#34;以最优格式下载音频&#34;&gt;&lt;strong&gt;以最优格式下载音频&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//默认下载音频为opus格式
-youtube-dl -x 网址
-
-//下载mp3格式的音频
-youtube-dl -x --audio-format mp3 网址
-
-//最优格式下载音频
-youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 网址
-&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youttube-dl下载最优音频.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
-&lt;h3 id=&#34;下载播放列表中的视频&#34;&gt;&lt;strong&gt;下载播放列表中的视频&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//使用默认，与下载单个视频格式一样
-youtbue-dl 播放列表网址
-
-//可以使用选项--playlist-start, --playlist-end或者指定某个视频 --playlist-items
-//--playlist-items 可设置多个值.如：&amp;#34;--playlist-items 1,2,5 下载1、2、5项
-
-//下载列表第二个及以后的所有视频
-youtube-dl --playstart-start 2 播放列表网址
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;限定分辨率下载播放列表中的视频&#34;&gt;&lt;strong&gt;限定分辨率下载播放列表中的视频&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//以最高480P下载列表第22个及以后的所有视频
-youtube-dl --playlist-start 22 -f &amp;#39;bestvideo[height&amp;lt;=480]+bestaudio/best[height&amp;lt;=480]&amp;#39; 播放列表网址
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;下载播放列表中视频的音轨&#34;&gt;&lt;strong&gt;下载播放列表中视频的音轨&lt;/strong&gt;&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//使用--playlist-start、--playlist-end、--playlist-items来限定
-
-//最优格式下载播放列表中3-6这四个视频的音频文件，并转换成mp3格式
-youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --playlist-start 3 --playlist-end 6 播放列表网址
-&lt;/code&gt;&lt;/pre&gt;&lt;img src=&#34;https://xtvj.github.io/images/youtube-dl下载3-6音频.png&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
-&lt;h3 id=&#34;update20210220&#34;&gt;Update:2021/02/20&lt;/h3&gt;
-&lt;p&gt;调用aria2加速下载&lt;/p&gt;
-&lt;p&gt;​        解决使用youtube-dl默认下载时常常断开连接的问题。前提是已经安装好aria2&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;youtube-dl https://www.youtube.com/*** --external-downloader aria2c --external-downloader-args &amp;quot;-x 16 -k 1M&amp;quot;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;参数说明&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;--external-downloader aria2c //调用外部下载工具
---external-downloader-args //外部下载工具指定参数
--x 16 //启用aria2 16个线程，最多就支持16线程
--K 1M //指定块的大小&lt;/p&gt;
-&lt;h3 id=&#34;update20211102&#34;&gt;Update:2021/11/02&lt;/h3&gt;
-&lt;p&gt;下载速度慢的最新解决方式&lt;/p&gt;
-&lt;p&gt;发现在YouTube-dl的官方Issues里有非常多关于下载速度慢的提问&lt;/p&gt;
-&lt;h4 id=&#34;解决方式&#34;&gt;解决方式：&lt;/h4&gt;
-&lt;p&gt;网友推荐解决方式之一：使用youtube-dl的二次开发工具&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h4 id=&#34;安装方式&#34;&gt;安装方式：&lt;/h4&gt;
-&lt;p&gt;MacOS  &lt;code&gt;brew install yt-dlp/taps/yt-dlp&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;官方包发布地址：https://github.com/yt-dlp/yt-dlp/releases&lt;/p&gt;
-&lt;h4 id=&#34;使用方式&#34;&gt;使用方式&lt;/h4&gt;
-&lt;p&gt;和YouTube-dl基本一样，只是把参数&lt;code&gt;YouTube-dl 网址&lt;/code&gt;换成&lt;code&gt;yt-dlp 网址&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&#34;update20220413&#34;&gt;Update:2022/04/13&lt;/h3&gt;
-&lt;p&gt;youtube-dl已死&lt;/p&gt;
-&lt;p&gt;youtube-dl从2021.12.17到现在没发布新版本，只是提交了少许仓库代码，看很多人评价也是youtube-dl已死，推荐使用&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.sysgeek.cn/youtube-dl-examples/&#34;&gt;Youtube 专业下载工具，Youtube-dl 详细使用教程与初学上手示例&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u014389734/article/details/86751840&#34;&gt;Youtube-dl调用外部Aria2多线程加速下载&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">五笔拆字表</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" />
-            <id>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</id>
-            <updated>2024-01-30T23:39:03&#43;08:00</updated>
-            <published>2024-01-24T21:50:08&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">记录时常想不起怎么编码、拆解的汉字。 汉字 拼音 五笔编码 五笔拆分图解 缺 que rmn 颜 yan utem 爬 pa rhyc 辣 la ugk 即 ji vcb 鹿 lù ynjx 庸 yong yveh 谣 yao yer 瓣 ban ur 刻 ke ynt 曳 ye jxe 舟 zhou tei 凹 ao mmgd 凸 tu hgm 戈 ge agnt 戒 jie aak 某 mou afs 浅 qian igt 晓 xiao jat 套 tao ddu 善 shan uduk 卫 wei bg 巴 ba cnh 识别码表，打完编码输入识别码确定左右型 、上下型、杂合型。 参考 https://www.52wubi.com/wbbmcx/search.php https://wubizhijia.com/zigenbiao/66.html https://www.dazima.cn/jiaocheng/20110410271.html https://www.hanzi5.com/</summary>
-            
-                <content type="html">&lt;p&gt;记录时常想不起怎么编码、拆解的汉字。&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;汉字&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;拼音&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;五笔编码&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;五笔拆分图解&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;缺&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;que&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;rmn&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E7%BC%BA.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;颜&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;yan&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;utem&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E9%A2%9C.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;爬&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;pa&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;rhyc&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E7%88%AC.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;辣&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;la&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ugk&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%BE%A3.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;即&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ji&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;vcb&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%8D%B3.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;鹿&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;lù&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ynjx&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E9%B9%BF.gif&#34; alt=&#34;&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;庸&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;yong&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;yveh&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%BA%B8.gif&#34; alt=&#34;&#34;&gt;&lt;br/&gt;&lt;img src=&#34;https://xtvj.github.io/images/庸笔画顺序.png&#34; style=&#34;zoom: 33%;margin: 0 auto;&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;谣&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;yao&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;yer&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%B0%A3.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;瓣&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ban&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ur&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/瓣.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;刻&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ke&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ynt&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%88%BB.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;曳&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ye&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;jxe&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%9B%B3.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;舟&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;zhou&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;tei&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E8%88%9F.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;凹&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ao&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;mmgd&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%87%B9.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;凸&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;tu&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;hgm&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%87%B8.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;戈&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ge&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;agnt&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%88%88.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;戒&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;jie&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;aak&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%88%92.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;某&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;mou&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;afs&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%9F%90.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;浅&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;qian&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;igt&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%B5%85.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;晓&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;xiao&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;jat&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E6%99%93.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;套&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;tao&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ddu&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%A5%97.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;善&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;shan&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;uduk&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%96%84.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;卫&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;wei&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;bg&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/%E5%8D%AB.gif&#34;/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;巴&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;ba&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;cnh&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;img src=&#34;https://xtvj.github.io/images/巴.gif&#34;/&gt; &lt;br/&gt;  &lt;img src=&#34;https://xtvj.github.io/images/ba_bihua.png&#34; style=&#34;zoom: 33%;margin: 0 auto;&#34; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;hr&gt;
-&lt;p&gt;识别码表，打完编码输入识别码确定&lt;strong&gt;左右型&lt;/strong&gt; 、&lt;strong&gt;上下型&lt;/strong&gt;、&lt;strong&gt;杂合型&lt;/strong&gt;。&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/五笔识别码表.gif&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
-&lt;hr&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/五笔字根表.jpg&#34; style=&#34;zoom: 100%;margin: 0 auto;&#34; /&gt;
-&lt;p&gt;参考&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.52wubi.com/wbbmcx/search.php&#34;&gt;https://www.52wubi.com/wbbmcx/search.php&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://wubizhijia.com/zigenbiao/66.html&#34;&gt;https://wubizhijia.com/zigenbiao/66.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.dazima.cn/jiaocheng/20110410271.html&#34;&gt;https://www.dazima.cn/jiaocheng/20110410271.html&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.hanzi5.com/&#34;&gt;https://www.hanzi5.com/&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">不Root手机禁用系统应用</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" />
-            <id>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</id>
-            <updated>2024-01-30T23:39:50&#43;08:00</updated>
-            <published>2024-01-24T21:49:55&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。 手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。 执行以下命令 （注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。） adb shell pm disable-user com.mobeam.barcodeService pm disable-user com.sec.android.widgetapp.samsungapps pm disable-user com.samsung.android.app.galaxyfinder pm disable-user com.samsung.android.themestore pm disable-user com.samsung.android.app.cocktailbarservice pm disable-user com.samsung.svoice.sync pm disable-user com.osp.app.signin pm disable-user com.google.android.onetimeinitializer pm disable-user com.google.android.ext.shared pm disable-user com.android.wallpapercropper pm disable-user com.samsung.android.app.withtv pm disable-user com.samsung.android.smartmirroring pm disable-user org.simalliance.openmobileapi.service pm disable-user com.samsung.android.easysetup pm disable-user com.sec.android.easyonehand pm disable-user com.sec.factory pm disable-user com.samsung.android.app.sbrowseredge pm disable-user com.samsung.android.wechatwifiservice pm disable-user com.sec.android.easyMover.Agent pm disable-user com.samsung.faceservice pm disable-user com.sec.android.widgetapp.easymodecontactswidget pm disable-user com.sec.android.app.samsungapps pm disable-user com.oupeng.max.sdk pm disable-user com.google.android.configupdater pm disable-user com.sec.android.app.billing pm disable-user com.sec.android.daemonapp pm disable-user com.sec.sve pm disable-user com.dsi.ant.service.socket pm disable-user com.sec.android.AutoPreconfig pm disable-user com.sec.android.app.soundalive pm……</summary>
-            
-                <content type="html">&lt;p&gt;用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。&lt;/p&gt;
-&lt;p&gt;手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。
-执行以下命令
-（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;adb shell
-pm disable-user com.mobeam.barcodeService
-pm disable-user com.sec.android.widgetapp.samsungapps
-pm disable-user com.samsung.android.app.galaxyfinder
-pm disable-user com.samsung.android.themestore
-pm disable-user com.samsung.android.app.cocktailbarservice
-pm disable-user com.samsung.svoice.sync
-pm disable-user com.osp.app.signin
-pm disable-user com.google.android.onetimeinitializer
-pm disable-user com.google.android.ext.shared
-pm disable-user com.android.wallpapercropper
-pm disable-user com.samsung.android.app.withtv
-pm disable-user com.samsung.android.smartmirroring
-pm disable-user org.simalliance.openmobileapi.service
-pm disable-user com.samsung.android.easysetup
-pm disable-user com.sec.android.easyonehand
-pm disable-user com.sec.factory
-pm disable-user com.samsung.android.app.sbrowseredge
-pm disable-user com.samsung.android.wechatwifiservice
-pm disable-user com.sec.android.easyMover.Agent
-pm disable-user com.samsung.faceservice
-pm disable-user com.sec.android.widgetapp.easymodecontactswidget
-pm disable-user com.sec.android.app.samsungapps
-pm disable-user com.oupeng.max.sdk
-pm disable-user com.google.android.configupdater
-pm disable-user com.sec.android.app.billing
-pm disable-user com.sec.android.daemonapp
-pm disable-user com.sec.sve
-pm disable-user com.dsi.ant.service.socket
-pm disable-user com.sec.android.AutoPreconfig
-pm disable-user com.sec.android.app.soundalive
-pm disable-user com.samsung.android.securitylogagent
-pm disable-user com.samsung.SMT
-pm disable-user com.samsung.android.drivelink.stub
-pm disable-user com.samsung.hongbaoassistant
-pm disable-user com.dsi.ant.sample.acquirechannels
-pm disable-user com.android.backupconfirm
-pm disable-user com.sec.android.app.SecSetupWizard
-pm disable-user com.sec.bcservice
-pm disable-user com.sec.android.uibcvirtualsoftkey
-pm disable-user com.samsung.android.sdk.professionalaudio.utility.jammonitor
-pm disable-user com.android.sharedstoragebackup
-pm disable-user com.android.printspooler
-pm disable-user com.samsung.android.hmt.vrsvc
-pm disable-user com.samsung.storyservice
-pm disable-user com.android.dreams.basic
-pm disable-user com.sec.android.app.dictionary
-pm disable-user com.samsung.android.app.talkback
-pm disable-user com.android.bips
-pm disable-user com.samsung.android.game.gametools
-pm disable-user com.samsung.android.app.simplesharing
-pm disable-user com.samsung.android.service.peoplestripe
-pm disable-user com.samsung.app.slowmotion
-pm disable-user com.sec.enterprise.mdm.vpn
-pm disable-user com.samsung.android.weather
-pm disable-user com.dsi.ant.plugins.antplus
-pm disable-user com.samsung.android.personalpage.service
-pm disable-user com.samsung.android.app.taskedge
-pm disable-user com.samsung.advp.imssettings
-pm disable-user com.sec.android.inputmethod
-pm disable-user com.samsung.android.app.advsounddetector
-pm disable-user com.samsung.android.app.mirrorlink
-pm disable-user com.samsung.android.opencalendar
-pm disable-user com.samsung.android.sm
-pm disable-user com.google.android.partnersetup
-pm disable-user com.sec.android.diagmonagent
-pm disable-user com.trustonic.tuiservice
-pm disable-user com.samsung.hidden.china
-pm disable-user com.sec.spp.push
-pm disable-user com.dsi.ant.server
-pm disable-user com.sec.android.app.myfiles
-pm disable-user com.samsung.android.allshare.service.fileshare
-pm disable-user com.sec.android.app.apex
-pm disable-user com.google.android.syncadapters.calendar
-pm disable-user com.sec.android.app.sbrowser
-pm disable-user com.android.dreams.phototable
-pm disable-user com.sec.android.service.health
-pm disable-user com.samsung.safetyinformation
-pm disable-user com.samsung.app.highlightplayer
-pm disable-user com.sec.android.app.vepreload
-pm disable-user com.samsung.android.keyguardwallpaperupdator
-pm disable-user com.android.wallpaper.livepicker
-pm disable-user com.samsung.android.beaconmanager
-pm disable-user com.sec.enterprise.mdm.services.simpin
-pm disable-user com.android.apps.tag
-pm disable-user com.samsung.networkui
-pm disable-user com.sec.android.soagent
-pm disable-user com.sec.android.app.quicktool
-pm disable-user com.samsung.android.fmm
-pm disable-user com.samsung.android.mdm
-pm disable-user com.baidu.map.location
-pm disable-user com.mobilesrepublic.sohu.launcher
-pm disable-user com.google.android.backuptransport
-pm disable-user com.sec.android.yellowpage
-pm disable-user com.samsung.android.scloud
-pm disable-user com.sec.app.RilErrorNotifier
-pm disable-user com.samsung.android.spayfw
-pm disable-user com.samsung.android.svoice
-pm disable-user com.android.bookmarkprovider
-pm disable-user com.samsung.app.newtrim
-pm disable-user com.samsung.android.spay
-pm disable-user com.samsung.android.bluelightfilter
-pm disable-user com.samsung.android.bbc.bbcagent
-pm disable-user com.samsung.android.voicewakeup
-pm disable-user com.sec.android.splitsound
-pm disable-user com.samsung.android.productsearch
-pm disable-user com.wssnps
-pm disable-user com.samsung.android.app.watchmanagerstub
-pm disable-user com.policydm
-pm disable-user com.samsung.android.svoiceime
-pm disable-user com.samsung.android.mateagent
-pm disable-user com.google.android.apps.pdfviewer
-pm disable-user com.samsung.android.widgetapp.briefing
-pm disable-user com.android.wallpaperbackup
-pm disable-user com.sec.enterprise.knox.cloudmdm.smdms
-pm disable-user com.samsung.android.app.camera.sticker.stamp.preload
-pm disable-user com.android.emergency
-pm disable-user com.sec.svoice.lang.en_US
-pm disable-user com.wssyncmldm
-pm disable-user com.sec.svoice.lang.zh_CN
-pm disable-user com.samsung.android.app.appsedge
-pm disable-user com.samsung.voiceserviceplatform
-pm disable-user com.samsung.aasaservice
-pm disable-user com.samsung.android.allshare.service.mediashare
-pm disable-user com.android.bluetooth
-pm disable-user com.samsung.android.app.clipboardedge
-pm disable-user com.sec.android.app.magnifier
-pm disable-user com.sec.android.widgetapp.webmanual
-pm disable-user com.samsung.android.coreapps
-pm disable-user com.samsung.android.video
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果想重新启用某个软件，找到软件的包名，执行“pm enable 包名”就可以启用软件了。
-如：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;adb shell pm enable com.sec.android.inputmethod
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;把包名换成你想恢复的包名就行了。&lt;/p&gt;
-&lt;p&gt;如果你的手机是安卓7.0以前的版本，在禁用手机应用的时候用pm disable，如果是7.0或7.0以上，就用pm disable-user。&lt;/p&gt;
-&lt;p&gt;附：ADB和Fastboot for Windows 工具下载
-&lt;a href=&#34;https://dl.google.com/android/repository/platform-tools-latest-windows.zip&#34;&gt;https://dl.google.com/android/repository/platform-tools-latest-windows.zip&lt;/a&gt;
-可以直接解压，在得到的文件夹内按shift+ 右键。选“在此处打开命令窗口”，打开cmd执行代码。
-也可参考网上的教程：
-&lt;a href=&#34;https://blog.csdn.net/u013250071/article/details/78416274&#34;&gt;https://blog.csdn.net/u013250071/article/details/78416274&lt;/a&gt;
-&lt;a href=&#34;https://blog.csdn.net/class_brick/article/details/72512982&#34;&gt;https://blog.csdn.net/class_brick/article/details/72512982&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">一些有道理的话</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/" />
-            <id>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</id>
-            <updated>2024-01-30T23:39:44&#43;08:00</updated>
-            <published>2024-01-24T21:49:44&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。</summary>
-            
-                <content type="html">&lt;ul&gt;
-&lt;li&gt;人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。&lt;/li&gt;
-&lt;/ul&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">RedmiAC2100在MacOS下编译相应固件及一些使用记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-01-30T23:39:27&#43;08:00</updated>
-            <published>2024-01-24T21:49:29&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">坏块和刷机教程 在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个ESMT闪存没坏块的。 检测和刷机教程网上一大堆，我用的是：红米(小米)AC2100无需Telnet刷入Breed和Padavan固件教程。 使用终端连接路由器 ssh root@192.168.1.1 终端与路由器之间传文件 scp命令是在没连ssh状态下操作的。输入后要输入路由器的密码。 //复制当前目录下本地文件1到路由器tmp目录下并保存为文件2。 scp 文件1 root@192.168.1.1:/tmp/文件2 //复制路由器tmp目录下文件2到当前目录并保存为文件1 scp root@192.168.1.1:/tmp/文件2 文件1 如果出现：ash: /usr/libexec/sftp-server: not found 在scp……</summary>
-            
-                <content type="html">&lt;h4 id=&#34;坏块和刷机教程&#34;&gt;坏块和刷机教程&lt;/h4&gt;
-&lt;p&gt;在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个&lt;strong&gt;ESMT闪存没坏块&lt;/strong&gt;的。&lt;/p&gt;
-&lt;p&gt;检测和刷机教程网上一大堆，我用的是：&lt;a href=&#34;https://www.right.com.cn/forum/thread-4054150-1-1.html&#34;&gt;红米(小米)AC2100无需Telnet刷入Breed和Padavan固件教程&lt;/a&gt;。&lt;/p&gt;
-&lt;h4 id=&#34;使用终端连接路由器&#34;&gt;使用终端连接路由器&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh root@192.168.1.1
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;终端与路由器之间传文件&#34;&gt;终端与路由器之间传文件&lt;/h4&gt;
-&lt;p&gt;scp命令是在没连ssh状态下操作的。输入后要输入路由器的密码。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//复制当前目录下本地文件1到路由器tmp目录下并保存为文件2。
-scp 文件1 root@192.168.1.1:/tmp/文件2
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//复制路由器tmp目录下文件2到当前目录并保存为文件1
-scp root@192.168.1.1:/tmp/文件2 文件1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果出现：ash: /usr/libexec/sftp-server: not found&lt;/p&gt;
-&lt;p&gt;在scp等命令后加-O，如&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scp -O root@192.168.2.1:/opt/accelerated-domains.china.conf.txt ac.txt
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;openwrt官方固件&#34;&gt;Openwrt官方固件&lt;/h4&gt;
-&lt;p&gt;RedmiAC2100(&lt;strong&gt;架构ramips、处理器mt7621&lt;/strong&gt;)：https://downloads.openwrt.org/&lt;/p&gt;
-&lt;h4 id=&#34;luci&#34;&gt;Luci&lt;/h4&gt;
-&lt;p&gt;有无Luci的区别就是能不能在浏览器输入192.168.1.1来操作路由器&lt;/p&gt;
-&lt;p&gt;在终端里刷入&lt;strong&gt;squashfs-kernel1.bin和squashfs-rootfs0.bin&lt;/strong&gt;的则&lt;strong&gt;没有Luci&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;使用Breed刷入&lt;strong&gt;initramfs-kernel.bin&lt;/strong&gt;的，则&lt;strong&gt;有Luci&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;如果没有Luci又不会使用终端配置拨号上网的话，要用别的路由拨号正常上网，AC2100用网线连接介于正常路由与电脑之间后，再用ssh连接ac2100通过&lt;code&gt;opkg update &amp;amp;&amp;amp; opkg install luci&lt;/code&gt;来安装Luci。&lt;/p&gt;
-&lt;h4 id=&#34;mac环境编译openwrt&#34;&gt;Mac环境编译Openwrt&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;官网目前没把MacOS放在支持的列表中&lt;/strong&gt;。但自己喜欢这系统，决定试试，换到MacOS环境编译(11.4)&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;使用&lt;strong&gt;磁盘工具&lt;/strong&gt;创建一个&lt;strong&gt;区分大小写&lt;/strong&gt;的虚拟盘&lt;/li&gt;
-&lt;li&gt;clone代码&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;make工具换成GNU的make&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;执行&lt;code&gt;./scripts/feeds update -a&lt;/code&gt;后会在终端提示配置环境缺少哪些工具，我目前环境提示少了四个，使用brew search搜索这四个工具再安装就行了。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;./scripts/feeds install -a&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make menuconfig&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;make&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h5 id=&#34;报错一&#34;&gt;报错一：&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;No rule to make target `.config&amp;#39;,blablablabla. Stop.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;找到一个&lt;a href=&#34;https://www.right.com.cn/forum/thread-742118-1-1.html&#34;&gt;说是依赖的东西没成功&lt;/a&gt;下载。&lt;/p&gt;
-&lt;p&gt;在最后一步之前&lt;strong&gt;执行&lt;code&gt;make download V=s&lt;/code&gt;等待下载完依赖&lt;/strong&gt;，再执行make就能~~&lt;em&gt;成功编译&lt;/em&gt;~~了。&lt;/p&gt;
-&lt;h5 id=&#34;报错二&#34;&gt;报错二：&lt;/h5&gt;
-&lt;p&gt;使用make -j1 V=sc来编译并查看log发现提示说&lt;strong&gt;与VMware Fusion的环境变量冲突&lt;/strong&gt;，期间还看到有人几年前用&lt;a href=&#34;https://p3terx.com/archives/compiling-openwrt-with-macos.html&#34;&gt;MacOS编译&lt;/a&gt;过，于是卸载了虚拟机再试着~~&lt;em&gt;编译成功了。&lt;/em&gt;~~&lt;/p&gt;
-&lt;h5 id=&#34;报错三&#34;&gt;报错三：&lt;/h5&gt;
-&lt;p&gt;看了下生成的文件是默认的ath79架构，没有生成我需要的固件。&lt;/p&gt;
-&lt;p&gt;重新下载重新配置并编译，报错如图&lt;/p&gt;
-&lt;img title=&#34;&#34; src=&#34;https://xtvj.github.io/images/toplevel_error.jpg&#34; alt=&#34;&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34;&gt;
-&lt;p&gt;根据&lt;a href=&#34;https://github.com/coolsnowwolf/lede/issues/4815&#34;&gt;网友的方法&lt;/a&gt;，试了下。成功编译并生成相应的固件了。&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/ac2100_success.png&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34; /&gt;
-&lt;h4 id=&#34;安装adguard-home&#34;&gt;安装Adguard Home：&lt;/h4&gt;
-&lt;p&gt;由于luci-app-adguard长时间不更新，使用时经常出问题，切换使用官方包安装，不再使用图形界面。&lt;/p&gt;
-&lt;p&gt;官方下载地址：https://github.com/AdguardTeam/AdGuardHome/releases&lt;/p&gt;
-&lt;p&gt;英文安装教程地址：https://forum.openwrt.org/t/howto-running-adguard-home-on-openwrt/51678&lt;/p&gt;
-&lt;p&gt;下载版本为： AdGuardHome_linux_mipsle_softfloat.tar.gz&lt;/p&gt;
-&lt;h5 id=&#34;备忘添加自定义防火墙&#34;&gt;备忘：添加自定义防火墙&lt;/h5&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables -t nat -A PREROUTING -i br-lan -p udp --dport 53 -j DNAT --to 192.168.1.1:5353
-iptables -t nat -A PREROUTING -i br-lan -p tcp --dport 53 -j DNAT --to 192.168.1.1:5353
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;openwrt设置web管理页面的ip地址&#34;&gt;OpenWrt设置web管理页面的ip地址&lt;/h4&gt;
-&lt;p&gt;web管理地址也就是输入地址在浏览器中管理路由器的那个ip地址，一般为192.168.1.1&lt;/p&gt;
-&lt;p&gt;但是如果光猫是&lt;strong&gt;自动拨号&lt;/strong&gt;的话，&lt;strong&gt;路由器就不用拨号&lt;/strong&gt;，需要改成&lt;strong&gt;dhcp协议&lt;/strong&gt;连接网络，此时，路由器的管理ip与光猫的管理ip就相同了，会有冲突。&lt;/p&gt;
-&lt;p&gt;配置文件位置为 /etc/config/network ，改字段ipaddr的地址为你想要的地址，然后重启路由器即可。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-#&#34; data-lang=&#34;#&#34;&gt;# vim /etc/config/network
-config interface &amp;#39;lan&amp;#39;
-        option ifname &amp;#39;eth0.1&amp;#39;
-        option type &amp;#39;bridge&amp;#39;
-        option force_link &amp;#39;1&amp;#39;
-        option proto &amp;#39;static&amp;#39;
-        option netmask &amp;#39;255.255.255.0&amp;#39;
-        option ipaddr &amp;#39;192.168.2.1&amp;#39;
-        option ip6assign &amp;#39;60&amp;#39;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;参考地址：https://www.openwrt.pro/post-618.html&lt;/p&gt;
-&lt;h4 id=&#34;开启160mhz带宽&#34;&gt;开启160MHz带宽&lt;/h4&gt;
-&lt;p&gt;国家代码改为：US&lt;/p&gt;
-&lt;p&gt;信道改为36-44或之间的值&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
             <title type="text">PC使用技巧</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
             <id>https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
-            <updated>2024-01-30T23:39:09&#43;08:00</updated>
-            <published>2024-01-24T21:49:20&#43;08:00</published>
+            <updated>2024-02-12T17:26:31&#43;08:00</updated>
+            <published>2020-04-08T05:41:58&#43;08:00</published>
             <author>
                     <name>xtvj</name>
                     <uri>https://xtvj.github.io/</uri>
@@ -2768,428 +3009,11 @@ certutil -hashfile  3.mp4 SHA256
         </entry>
     
         <entry>
-            <title type="text">Mac使用技巧</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
-            <id>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
-            <updated>2024-01-30T23:39:15&#43;08:00</updated>
-            <published>2024-01-24T21:49:10&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34; 安装iTerm2： brew install iterm2 或去官网下载安装：https://iterm2.com/downloads.html 代码配色 使用 iTerm2-Color-Schemes 的配色合集 mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2 git clone https://github.com/mbadolato/iTerm2-Color-Schemes 导入配色方案 Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。 导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula 字体 如果不装字体……</summary>
-            
-                <content type="html">&lt;p&gt;由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/Iterm2.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h4&gt;
-&lt;p&gt;安装brew：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装iTerm2：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install iterm2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或去官网下载安装：https://iterm2.com/downloads.html&lt;/p&gt;
-&lt;!-- more --&gt;
-&lt;h4 id=&#34;代码配色&#34;&gt;代码配色&lt;/h4&gt;
-&lt;p&gt;使用 &lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34;&gt;iTerm2-Color-Schemes&lt;/a&gt; 的配色合集&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;导入配色方案&#34;&gt;导入配色方案&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。&lt;/p&gt;
-&lt;p&gt;导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula&lt;/p&gt;
-&lt;h4 id=&#34;字体&#34;&gt;字体&lt;/h4&gt;
-&lt;p&gt;如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# git clone
-cd ~/.iterm2
-git clone https://github.com/powerline/fonts.git
-
-# install
-cd fonts
-./install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后按照下面的设置（记得选一个名字后面有for Powerline的字体）&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/字体.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;设置默认窗口大小&#34;&gt;设置默认窗口大小：&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Window→Settings for New Windows ：120：30&lt;/p&gt;
-&lt;h4 id=&#34;安装zsh&#34;&gt;安装zsh&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install zsh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认的 shell 是 bash，需要修改为 zsh：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sh -c &amp;#34;echo $(which zsh) &amp;gt;&amp;gt; /etc/shells&amp;#34;
-chsh -s $(which zsh)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;配置zsh&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 &lt;code&gt;.zshrc&lt;/code&gt; 的配置文件，以后主要就是修改它了。&lt;/p&gt;
-&lt;h4 id=&#34;配置主题&#34;&gt;配置主题&lt;/h4&gt;
-&lt;p&gt;主题文件存储在 &lt;code&gt;~/.oh-my-zsh/themes&lt;/code&gt; 目录下，你也可以使用其他的。&lt;/p&gt;
-&lt;p&gt;推荐 &lt;a href=&#34;https://github.com/bhilburn/powerlevel9k&#34;&gt;powerlevel9k&lt;/a&gt; 的高颜值主题&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改 &lt;code&gt;zsh&lt;/code&gt; 主题配置：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//修改.zshrc文件（在Mac用户根目录）
-ZSH_THEME=&amp;#34;powerlevel9k/powerlevel9k&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改配置文件后一定要记得让配置生效，使用 &lt;code&gt;source&lt;/code&gt; 命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;zsh-插件&#34;&gt;zsh 插件&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开&lt;/strong&gt;&lt;/p&gt;
-&lt;h5 id=&#34;extract&#34;&gt;extract&lt;/h5&gt;
-&lt;p&gt;用于解压，不用另行安装，直接在plugins中加就行 &lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract&#34;&gt;官方说明&lt;/a&gt;&lt;/p&gt;
-&lt;h5 id=&#34;autojump&#34;&gt;autojump&lt;/h5&gt;
-&lt;p&gt;自动跳转目录，只能当使用cd命令进入文件夹后，才能使用&lt;code&gt;j 文件夹名&lt;/code&gt;进入文件夹&lt;/p&gt;
-&lt;p&gt;安装：&lt;code&gt;brew install autojump&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;再执行一句命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; . $(brew --prefix)/etc/profile.d/autojump.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-syntax-highlighting&#34;&gt;zsh-syntax-highlighting&lt;/h5&gt;
-&lt;p&gt;亮亮功能，安装&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-autosuggestions&#34;&gt;zsh-autosuggestions&lt;/h5&gt;
-&lt;p&gt;安装：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自动提示。历史记录可在用户根目录.zsh_history文件内查看到。&lt;/p&gt;
-&lt;h5 id=&#34;macos&#34;&gt;macos&lt;/h5&gt;
-&lt;p&gt;Mac下快捷命令应用，参考&lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos&#34;&gt;官方说明&lt;/a&gt;，可实现在终端快速定位到访达目录等操作。&lt;/p&gt;
-&lt;p&gt;自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)&lt;/p&gt;
-&lt;p&gt;最后再执行一次&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h4 id=&#34;完成上面设置后终端会提示&#34;&gt;&lt;del&gt;完成上面设置后终端会提示&lt;/del&gt;：&lt;/h4&gt;
-&lt;p&gt;目前已无此提示&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[oh-my-zsh] Insecure completion-dependent directories detected:
-drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
-drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
-
-[oh-my-zsh] For safety, we will not load completions from these directories until
-[oh-my-zsh] you fix their permissions and ownership and restart zsh.
-[oh-my-zsh] See the above list for directories with group or other writability.
-
-[oh-my-zsh] To fix your permissions you can do so by disabling
-[oh-my-zsh] the write permission of &amp;#34;group&amp;#34; and &amp;#34;others&amp;#34; and making sure that the
-[oh-my-zsh] owner of these directories is either root or your current user.
-[oh-my-zsh] The following command may help:
-[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
-
-[oh-my-zsh] If the above didn&amp;#39;t help or you want to skip the verification of
-[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
-[oh-my-zsh] &amp;#34;true&amp;#34; before oh-my-zsh is sourced in your zshrc file.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;按照说明在.zshrc文件&lt;strong&gt;第一行&lt;/strong&gt;中添加 ZSH_DISABLE_COMPFIX=true即可。&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;参考文章：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html&#34;&gt;打造 Mac 下高颜值好用的终端环境&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/gggg989898/article/details/108882880&#34;&gt;Mac terminal终端或iterm2出现问号解决方案&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">Mac上好用又漂亮的终端</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/" />
-            <id>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</id>
-            <updated>2024-01-30T23:37:52&#43;08:00</updated>
-            <published>2024-01-24T21:48:59&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34; 安装iTerm2： brew install iterm2 或去官网下载安装：https://iterm2.com/downloads.html 代码配色 使用 iTerm2-Color-Schemes 的配色合集 mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2 git clone https://github.com/mbadolato/iTerm2-Color-Schemes 导入配色方案 Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。 导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula 字体 如果不装字体……</summary>
-            
-                <content type="html">&lt;p&gt;由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/Iterm2.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h4&gt;
-&lt;p&gt;安装brew：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装iTerm2：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install iterm2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或去官网下载安装：https://iterm2.com/downloads.html&lt;/p&gt;
-&lt;!-- more --&gt;
-&lt;h4 id=&#34;代码配色&#34;&gt;代码配色&lt;/h4&gt;
-&lt;p&gt;使用 &lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34;&gt;iTerm2-Color-Schemes&lt;/a&gt; 的配色合集&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;导入配色方案&#34;&gt;导入配色方案&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。&lt;/p&gt;
-&lt;p&gt;导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula&lt;/p&gt;
-&lt;h4 id=&#34;字体&#34;&gt;字体&lt;/h4&gt;
-&lt;p&gt;如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# git clone
-cd ~/.iterm2
-git clone https://github.com/powerline/fonts.git
-
-# install
-cd fonts
-./install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后按照下面的设置（记得选一个名字后面有for Powerline的字体）&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/字体.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;设置默认窗口大小&#34;&gt;设置默认窗口大小：&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Window→Settings for New Windows ：120：30&lt;/p&gt;
-&lt;h4 id=&#34;安装zsh&#34;&gt;安装zsh&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install zsh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认的 shell 是 bash，需要修改为 zsh：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sh -c &amp;#34;echo $(which zsh) &amp;gt;&amp;gt; /etc/shells&amp;#34;
-chsh -s $(which zsh)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;配置zsh&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 &lt;code&gt;.zshrc&lt;/code&gt; 的配置文件，以后主要就是修改它了。&lt;/p&gt;
-&lt;h4 id=&#34;配置主题&#34;&gt;配置主题&lt;/h4&gt;
-&lt;p&gt;主题文件存储在 &lt;code&gt;~/.oh-my-zsh/themes&lt;/code&gt; 目录下，你也可以使用其他的。&lt;/p&gt;
-&lt;p&gt;推荐 &lt;a href=&#34;https://github.com/bhilburn/powerlevel9k&#34;&gt;powerlevel9k&lt;/a&gt; 的高颜值主题&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改 &lt;code&gt;zsh&lt;/code&gt; 主题配置：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//修改.zshrc文件（在Mac用户根目录）
-ZSH_THEME=&amp;#34;powerlevel9k/powerlevel9k&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改配置文件后一定要记得让配置生效，使用 &lt;code&gt;source&lt;/code&gt; 命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;zsh-插件&#34;&gt;zsh 插件&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开&lt;/strong&gt;&lt;/p&gt;
-&lt;h5 id=&#34;extract&#34;&gt;extract&lt;/h5&gt;
-&lt;p&gt;用于解压，不用另行安装，直接在plugins中加就行 &lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract&#34;&gt;官方说明&lt;/a&gt;&lt;/p&gt;
-&lt;h5 id=&#34;autojump&#34;&gt;autojump&lt;/h5&gt;
-&lt;p&gt;自动跳转目录，只能当使用cd命令进入文件夹后，才能使用&lt;code&gt;j 文件夹名&lt;/code&gt;进入文件夹&lt;/p&gt;
-&lt;p&gt;安装：&lt;code&gt;brew install autojump&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;再执行一句命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; . $(brew --prefix)/etc/profile.d/autojump.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-syntax-highlighting&#34;&gt;zsh-syntax-highlighting&lt;/h5&gt;
-&lt;p&gt;亮亮功能，安装&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-autosuggestions&#34;&gt;zsh-autosuggestions&lt;/h5&gt;
-&lt;p&gt;安装：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自动提示。历史记录可在用户根目录.zsh_history文件内查看到。&lt;/p&gt;
-&lt;h5 id=&#34;macos&#34;&gt;macos&lt;/h5&gt;
-&lt;p&gt;Mac下快捷命令应用，参考&lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos&#34;&gt;官方说明&lt;/a&gt;，可实现在终端快速定位到访达目录等操作。&lt;/p&gt;
-&lt;p&gt;自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)&lt;/p&gt;
-&lt;p&gt;最后再执行一次&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h4 id=&#34;完成上面设置后终端会提示&#34;&gt;&lt;del&gt;完成上面设置后终端会提示&lt;/del&gt;：&lt;/h4&gt;
-&lt;p&gt;目前已无此提示&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[oh-my-zsh] Insecure completion-dependent directories detected:
-drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
-drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
-
-[oh-my-zsh] For safety, we will not load completions from these directories until
-[oh-my-zsh] you fix their permissions and ownership and restart zsh.
-[oh-my-zsh] See the above list for directories with group or other writability.
-
-[oh-my-zsh] To fix your permissions you can do so by disabling
-[oh-my-zsh] the write permission of &amp;#34;group&amp;#34; and &amp;#34;others&amp;#34; and making sure that the
-[oh-my-zsh] owner of these directories is either root or your current user.
-[oh-my-zsh] The following command may help:
-[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
-
-[oh-my-zsh] If the above didn&amp;#39;t help or you want to skip the verification of
-[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
-[oh-my-zsh] &amp;#34;true&amp;#34; before oh-my-zsh is sourced in your zshrc file.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;按照说明在.zshrc文件&lt;strong&gt;第一行&lt;/strong&gt;中添加 ZSH_DISABLE_COMPFIX=true即可。&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;参考文章：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html&#34;&gt;打造 Mac 下高颜值好用的终端环境&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/gggg989898/article/details/108882880&#34;&gt;Mac terminal终端或iterm2出现问号解决方案&lt;/a&gt;&lt;/p&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
-            <title type="text">Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-01-30T23:38:56&#43;08:00</updated>
-            <published>2024-01-24T21:48:25&#43;08:00</published>
-            <author>
-                    <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
-                    </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">我的软、硬件 Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0 CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以） GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该适用) macOS：Ventura 13.5beta（Ventura所有版本都适用，Monterey、Big Sur没测试过） OpenCore ： 0.9.2 Bios：F6d 官方地址 警告！！！ 目前增量更新时卡进度条，不知道怎么解决。不建议用此EFI进行更新系统。 关于增量更新 禁用BlueToolFixup.kext 再更新即可增量更新 我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBlue……</summary>
-            
-                <content type="html">&lt;h3 id=&#34;我的软硬件&#34;&gt;我的软、硬件&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0&lt;/li&gt;
-&lt;li&gt;CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以）&lt;/li&gt;
-&lt;li&gt;GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该适用)&lt;/li&gt;
-&lt;li&gt;macOS：Ventura 13.5beta（Ventura所有版本都适用，Monterey、Big Sur没测试过）&lt;/li&gt;
-&lt;li&gt;OpenCore ： 0.9.2&lt;/li&gt;
-&lt;li&gt;Bios：F6d &lt;a href=&#34;https://www.aorus.com/motherboards/Z790-AORUS-ELITE-AX-rev-10/Support&#34;&gt;官方地址&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;警告&#34;&gt;&lt;del&gt;警告！！！&lt;/del&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;&lt;del&gt;目前增量更新时卡进度条，不知道怎么解决。不建议用此EFI进行更新系统。&lt;/del&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&#34;关于增量更新&#34;&gt;关于增量更新&lt;/h1&gt;
-&lt;p&gt;禁用BlueToolFixup.kext 再更新即可增量更新&lt;/p&gt;
-&lt;p&gt;我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBluetoothFirmware.kext、IntelBTPatcher.kext）都禁用增量更新成功了。&lt;/p&gt;
-&lt;h1 id=&#34;请生成自己的smbios&#34;&gt;请生成自己的SMBIOS&lt;/h1&gt;
-&lt;p&gt;使用&lt;a href=&#34;https://github.com/ic005k/OCAuxiliaryTools/releases&#34;&gt;OCAT&lt;/a&gt;随机生成自己的UUID等再使用。&lt;/p&gt;
-&lt;p&gt;生成的SystemSerialNumber可以检查一下能否在官网查的到，如果提示不正常则是可用的，如果查到有保修期之类的信息，说明这个号码是苹果官方售卖的硬件使用的ID，不要用，使用后有封号风险。&lt;/p&gt;
-&lt;p&gt;一般随机生成的很大概率是查不到信息，可以使用的。&lt;/p&gt;
-&lt;h1 id=&#34;关于制作efi启动盘&#34;&gt;关于制作EFI启动盘&lt;/h1&gt;
-&lt;p&gt;按照官方教程&lt;a href=&#34;https://dortania.github.io/OpenCore-Install-Guide/&#34;&gt;OpenCore-Install-Guide/&lt;/a&gt;操作就行。&lt;/p&gt;
-&lt;p&gt;大致可分为&lt;/p&gt;
-   &lt;img src=&#34;https://xtvj.github.io/images/黑苹果EFI制作流程.svg&#34; alt=&#34;黑苹果EFI制作流程&#34; style=&#34;zoom:75%;&#34; /&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;h4 id=&#34;制作acpihttpsdortaniagithubiogetting-started-with-acpissdt-methodsssdt-easyhtmlrunning-ssdttime&#34;&gt;&lt;a href=&#34;https://dortania.github.io/Getting-Started-With-ACPI/ssdt-methods/ssdt-easy.html#running-ssdttime&#34;&gt;制作ACPI&lt;/a&gt;&lt;/h4&gt;
-&lt;p&gt;我是使用&lt;a href=&#34;https://github.com/corpnewt/SSDTTime&#34;&gt;SSDTTime&lt;/a&gt;工具在Windows下生成的，操作很简单，只是当初看英文文档的时候先看的手动制作，以为很难，其实用工具在Windows下选择几个选项就自动生成了。&lt;/p&gt;
-&lt;h4 id=&#34;定制自己机箱的usb驱动&#34;&gt;定制自己机箱的USB驱动&lt;/h4&gt;
-&lt;p&gt;使用&lt;a href=&#34;https://github.com/USBToolBox/tool/releases&#34;&gt;USBToolBox&lt;/a&gt;在Windows下制作驱动，替换EFI里的UTBMap.kext就可以。&lt;/p&gt;
-&lt;p&gt;如果不定制也可以使用主板上的USB接口，只是机箱上的可能识别不到。&lt;/p&gt;
-&lt;h4 id=&#34;u盘启动盘&#34;&gt;U盘启动盘&lt;/h4&gt;
-&lt;p&gt;&lt;del&gt;之前是下载完整的MacOS镜像，再使用&lt;a href=&#34;https://github.com/balena-io/etcher&#34;&gt;etcher&lt;/a&gt;刷入U盘，之后把EFI放入U盘的EFI分区中，这样启动时总是找不到MacOS的选项。原因大概是etcher把EFI分区没有标记，用分区工具将放EFI的分区改为引导分区应该就行，自己没有测试过。&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;之前制作U盘启动盘我是用官方建议的方式：&lt;a href=&#34;https://dortania.github.io/OpenCore-Install-Guide/installer-guide/windows-install.html#rufus-method&#34;&gt;rufus-method&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;现在的启动U盘制作过程（macOS系统、参考了：https://post.smzdm.com/p/a785e48l/ )&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;使用&lt;a href=&#34;https://github.com/munki/macadmin-scripts&#34;&gt;macadmin-scripts&lt;/a&gt;下载相应的离线安装镜像，下载后会自动换成DMG的文件。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/scheblein/macadmin-scripts&#34;&gt;scheblein/macadmin-scripts&lt;/a&gt;分支修复了macos13上使用问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;加载DMG镜像文件到系统&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;sudo /Volumes/下载的镜像名/Contents/Resources/createinstallmedia --volume /Volumes/新建的空白镜像名/&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;再挂载新建的镜像文件，并挂载其EFI文件夹，把EFI复制进去&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;使用&lt;a href=&#34;https://github.com/balena-io/etcher&#34;&gt;etcher&lt;/a&gt;写入U盘&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;或使用&lt;a href=&#34;https://github.com/corpnewt/gibMacOS&#34;&gt;gibMacOS&lt;/a&gt;下载PKG文件安装到系统，再用&lt;a href=&#34;https://support.apple.com/en-us/HT201372&#34;&gt;官方的方法&lt;/a&gt;制作U盘也很方便&lt;/p&gt;
-&lt;h1 id=&#34;关于安装&#34;&gt;关于安装&lt;/h1&gt;
-&lt;p&gt;安装过程中&lt;strong&gt;启动Apple Logo后会有一段较长时间的屏幕熄灭&lt;/strong&gt;，我第一次安装的时候有好几分钟的黑屏时间，目前使用有十几秒的黑屏时间，黑屏时间过后才会出现设置界面或登录界面。&lt;/p&gt;
-&lt;h1 id=&#34;关于efi&#34;&gt;关于EFI&lt;/h1&gt;
-&lt;p&gt;EFI会长期更新&lt;/p&gt;
-&lt;p&gt;机型改为iMac pro1,1可以提高单核性能&lt;/p&gt;
-&lt;h1 id=&#34;关于bios&#34;&gt;关于BIOS&lt;/h1&gt;
-&lt;p&gt;并不是非要按我的设置来做，你能启动并成功安装使用的话就不用动它了。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Secure Boot : Disabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Internal Graphics : Disabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Above 4G Decoding : Enabled&lt;/li&gt;
-&lt;li&gt;Above 4GB MMIO BIOS assignment : Enabled&lt;/li&gt;
-&lt;li&gt;Re-Size BAR Support : Disabled&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Intel Platform Trust Technology(PTT): Disabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hyper-Threading : Enabled&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CFG Lock : Disabled&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0390.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0391.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0392.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0393.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0394.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0395.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0396.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh/raw/main/img/IMG_0397.avif&#34; alt=&#34;image info&#34;&gt;&lt;/p&gt;
-&lt;h1 id=&#34;关于功能&#34;&gt;关于功能&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;能正常开机使用&lt;/li&gt;
-&lt;li&gt;能登录AppStore下载软件&lt;/li&gt;
-&lt;li&gt;睡眠未测试，我都是直接关机后断电&lt;/li&gt;
-&lt;li&gt;iCloud、Message等未测试，这些功能我没用到。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;关于跑分&#34;&gt;关于跑分&lt;/h1&gt;
-&lt;p&gt;R23跑分与Windows下的跑分几乎相同&lt;/p&gt;
-&lt;p&gt;如果你使用单条内存，Geekbench的跑分可能会低于预期&lt;/p&gt;
-&lt;p&gt;跑分不能说明一切，实用时软件能调用满荷CPU与GPU就行。&lt;/p&gt;
-&lt;h1 id=&#34;推荐的软件&#34;&gt;推荐的软件&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/MonitorControl/MonitorControl&#34;&gt;MonitorControl&lt;/a&gt; ：用来调整屏幕亮度。&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/ic005k/OCAuxiliaryTools/releases&#34;&gt;OCAT&lt;/a&gt; ：用来修改EFI文件&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/exelban/stats&#34;&gt;Stats&lt;/a&gt;：状态栏的系统监测工具&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;efi文件分享&#34;&gt;EFI文件分享&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/xtvj/Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh&#34;&gt;Gigabyte-Z790-Aorus-Elite-AX-13700K-OpenCore-Hackintosh&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;更新记录&#34;&gt;更新记录&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.06.13&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;更新OpenCore 0.9.3&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.06.12&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;更改UIScale值为1，以修复开机时随机的不显示或启动不起来的问题。参考远景一贴子，说是可以设置为-1或1&lt;/li&gt;
-&lt;li&gt;目前EFI算是稳定了，暂时没有发现BUG，如有欢迎提Issues，虽说不一定能解决，但一起讨论还有可能帮到我自己呢。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.06.10&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;升级部分kext，删除三个无用的ACPI文件&lt;/li&gt;
-&lt;li&gt;未修复任何BUG，只是更新了点驱动&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.06.05&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;在13.4以上的系统下，蓝牙不能用，可以通过在NVRAM的7C436110-AB2A-4BBB-A880-FE41995C9F82下添加两个参数来修复&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;bluetoothExternalDongleFailed Data 00
-
-bluetoothInternalControllerInfo Data 0000000000000000000000000000
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.06.01&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;添加&lt;a href=&#34;https://github.com/OpenIntelWireless/itlwm&#34;&gt;AirportItlwm.kext&lt;/a&gt;驱动，现在WiFi可以正常使用了。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.05.20&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;禁用EnableVectorAcceleration，以修复显卡为Rx6600或Rx6600XT时，开机过程中的随机重启问题，参考地址：https://bbs.pcbeta.com/viewthread-1967636-1-2.html 。我已经开机二十来次，除第一次重启外都没重启。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.05.09&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;更新到OpenCore0.9.2&lt;/li&gt;
-&lt;li&gt;禁用了WiFi驱动，本来启用时WiFi也不能用。&lt;/li&gt;
-&lt;li&gt;添加提示USB驱动制作&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;2023.05.03 ：&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;添加CleanNvram工具，并在启动时显示系统外的工具类选项，如需隐藏可&lt;strong&gt;勾选&lt;/strong&gt;Misc→Boot→HideAuxiliary&lt;/li&gt;
-&lt;li&gt;更新自己的Bios为F6a，并更新Bios设置截图&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-            
-            
-            
-            
-            
-                
-                    
-                
-                    
-                
-            
-        </entry>
-    
-        <entry>
             <title type="text">Android开发填坑记录</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" />
             <id>https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-01-30T23:38:43&#43;08:00</updated>
-            <published>2024-01-24T21:48:08&#43;08:00</published>
+            <updated>2024-02-12T17:21:05&#43;08:00</updated>
+            <published>2019-10-12T22:31:45&#43;08:00</published>
             <author>
                     <name>xtvj</name>
                     <uri>https://xtvj.github.io/</uri>
@@ -3860,6 +3684,214 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
 &lt;p&gt;出现错误：&lt;code&gt;cannot connect to daemon at tcp:5037: Connection refused&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;可以执行&lt;code&gt;adb reconnect&lt;/code&gt;来解决。&lt;/p&gt;
 &lt;hr&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/android/" term="Android" label="Android" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">不Root手机禁用系统应用</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" />
+            <id>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</id>
+            <updated>2024-02-12T17:30:22&#43;08:00</updated>
+            <published>2018-06-27T20:23:52&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。 手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。 执行以下命令 （注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。） adb shell pm disable-user com.mobeam.barcodeService pm disable-user com.sec.android.widgetapp.samsungapps pm disable-user com.samsung.android.app.galaxyfinder pm disable-user com.samsung.android.themestore pm disable-user com.samsung.android.app.cocktailbarservice pm disable-user com.samsung.svoice.sync pm disable-user com.osp.app.signin pm disable-user com.google.android.onetimeinitializer pm disable-user com.google.android.ext.shared pm disable-user com.android.wallpapercropper pm disable-user com.samsung.android.app.withtv pm disable-user com.samsung.android.smartmirroring pm disable-user org.simalliance.openmobileapi.service pm disable-user com.samsung.android.easysetup pm disable-user com.sec.android.easyonehand pm disable-user com.sec.factory pm disable-user com.samsung.android.app.sbrowseredge pm disable-user com.samsung.android.wechatwifiservice pm disable-user com.sec.android.easyMover.Agent pm disable-user com.samsung.faceservice pm disable-user com.sec.android.widgetapp.easymodecontactswidget pm disable-user com.sec.android.app.samsungapps pm disable-user com.oupeng.max.sdk pm disable-user com.google.android.configupdater pm disable-user com.sec.android.app.billing pm disable-user com.sec.android.daemonapp pm disable-user com.sec.sve pm disable-user com.dsi.ant.service.socket pm disable-user com.sec.android.AutoPreconfig pm disable-user com.sec.android.app.soundalive pm……</summary>
+            
+                <content type="html">&lt;p&gt;用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。&lt;/p&gt;
+&lt;p&gt;手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。
+执行以下命令
+（注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。）&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;adb shell
+pm disable-user com.mobeam.barcodeService
+pm disable-user com.sec.android.widgetapp.samsungapps
+pm disable-user com.samsung.android.app.galaxyfinder
+pm disable-user com.samsung.android.themestore
+pm disable-user com.samsung.android.app.cocktailbarservice
+pm disable-user com.samsung.svoice.sync
+pm disable-user com.osp.app.signin
+pm disable-user com.google.android.onetimeinitializer
+pm disable-user com.google.android.ext.shared
+pm disable-user com.android.wallpapercropper
+pm disable-user com.samsung.android.app.withtv
+pm disable-user com.samsung.android.smartmirroring
+pm disable-user org.simalliance.openmobileapi.service
+pm disable-user com.samsung.android.easysetup
+pm disable-user com.sec.android.easyonehand
+pm disable-user com.sec.factory
+pm disable-user com.samsung.android.app.sbrowseredge
+pm disable-user com.samsung.android.wechatwifiservice
+pm disable-user com.sec.android.easyMover.Agent
+pm disable-user com.samsung.faceservice
+pm disable-user com.sec.android.widgetapp.easymodecontactswidget
+pm disable-user com.sec.android.app.samsungapps
+pm disable-user com.oupeng.max.sdk
+pm disable-user com.google.android.configupdater
+pm disable-user com.sec.android.app.billing
+pm disable-user com.sec.android.daemonapp
+pm disable-user com.sec.sve
+pm disable-user com.dsi.ant.service.socket
+pm disable-user com.sec.android.AutoPreconfig
+pm disable-user com.sec.android.app.soundalive
+pm disable-user com.samsung.android.securitylogagent
+pm disable-user com.samsung.SMT
+pm disable-user com.samsung.android.drivelink.stub
+pm disable-user com.samsung.hongbaoassistant
+pm disable-user com.dsi.ant.sample.acquirechannels
+pm disable-user com.android.backupconfirm
+pm disable-user com.sec.android.app.SecSetupWizard
+pm disable-user com.sec.bcservice
+pm disable-user com.sec.android.uibcvirtualsoftkey
+pm disable-user com.samsung.android.sdk.professionalaudio.utility.jammonitor
+pm disable-user com.android.sharedstoragebackup
+pm disable-user com.android.printspooler
+pm disable-user com.samsung.android.hmt.vrsvc
+pm disable-user com.samsung.storyservice
+pm disable-user com.android.dreams.basic
+pm disable-user com.sec.android.app.dictionary
+pm disable-user com.samsung.android.app.talkback
+pm disable-user com.android.bips
+pm disable-user com.samsung.android.game.gametools
+pm disable-user com.samsung.android.app.simplesharing
+pm disable-user com.samsung.android.service.peoplestripe
+pm disable-user com.samsung.app.slowmotion
+pm disable-user com.sec.enterprise.mdm.vpn
+pm disable-user com.samsung.android.weather
+pm disable-user com.dsi.ant.plugins.antplus
+pm disable-user com.samsung.android.personalpage.service
+pm disable-user com.samsung.android.app.taskedge
+pm disable-user com.samsung.advp.imssettings
+pm disable-user com.sec.android.inputmethod
+pm disable-user com.samsung.android.app.advsounddetector
+pm disable-user com.samsung.android.app.mirrorlink
+pm disable-user com.samsung.android.opencalendar
+pm disable-user com.samsung.android.sm
+pm disable-user com.google.android.partnersetup
+pm disable-user com.sec.android.diagmonagent
+pm disable-user com.trustonic.tuiservice
+pm disable-user com.samsung.hidden.china
+pm disable-user com.sec.spp.push
+pm disable-user com.dsi.ant.server
+pm disable-user com.sec.android.app.myfiles
+pm disable-user com.samsung.android.allshare.service.fileshare
+pm disable-user com.sec.android.app.apex
+pm disable-user com.google.android.syncadapters.calendar
+pm disable-user com.sec.android.app.sbrowser
+pm disable-user com.android.dreams.phototable
+pm disable-user com.sec.android.service.health
+pm disable-user com.samsung.safetyinformation
+pm disable-user com.samsung.app.highlightplayer
+pm disable-user com.sec.android.app.vepreload
+pm disable-user com.samsung.android.keyguardwallpaperupdator
+pm disable-user com.android.wallpaper.livepicker
+pm disable-user com.samsung.android.beaconmanager
+pm disable-user com.sec.enterprise.mdm.services.simpin
+pm disable-user com.android.apps.tag
+pm disable-user com.samsung.networkui
+pm disable-user com.sec.android.soagent
+pm disable-user com.sec.android.app.quicktool
+pm disable-user com.samsung.android.fmm
+pm disable-user com.samsung.android.mdm
+pm disable-user com.baidu.map.location
+pm disable-user com.mobilesrepublic.sohu.launcher
+pm disable-user com.google.android.backuptransport
+pm disable-user com.sec.android.yellowpage
+pm disable-user com.samsung.android.scloud
+pm disable-user com.sec.app.RilErrorNotifier
+pm disable-user com.samsung.android.spayfw
+pm disable-user com.samsung.android.svoice
+pm disable-user com.android.bookmarkprovider
+pm disable-user com.samsung.app.newtrim
+pm disable-user com.samsung.android.spay
+pm disable-user com.samsung.android.bluelightfilter
+pm disable-user com.samsung.android.bbc.bbcagent
+pm disable-user com.samsung.android.voicewakeup
+pm disable-user com.sec.android.splitsound
+pm disable-user com.samsung.android.productsearch
+pm disable-user com.wssnps
+pm disable-user com.samsung.android.app.watchmanagerstub
+pm disable-user com.policydm
+pm disable-user com.samsung.android.svoiceime
+pm disable-user com.samsung.android.mateagent
+pm disable-user com.google.android.apps.pdfviewer
+pm disable-user com.samsung.android.widgetapp.briefing
+pm disable-user com.android.wallpaperbackup
+pm disable-user com.sec.enterprise.knox.cloudmdm.smdms
+pm disable-user com.samsung.android.app.camera.sticker.stamp.preload
+pm disable-user com.android.emergency
+pm disable-user com.sec.svoice.lang.en_US
+pm disable-user com.wssyncmldm
+pm disable-user com.sec.svoice.lang.zh_CN
+pm disable-user com.samsung.android.app.appsedge
+pm disable-user com.samsung.voiceserviceplatform
+pm disable-user com.samsung.aasaservice
+pm disable-user com.samsung.android.allshare.service.mediashare
+pm disable-user com.android.bluetooth
+pm disable-user com.samsung.android.app.clipboardedge
+pm disable-user com.sec.android.app.magnifier
+pm disable-user com.sec.android.widgetapp.webmanual
+pm disable-user com.samsung.android.coreapps
+pm disable-user com.samsung.android.video
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果想重新启用某个软件，找到软件的包名，执行“pm enable 包名”就可以启用软件了。
+如：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;adb shell pm enable com.sec.android.inputmethod
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;把包名换成你想恢复的包名就行了。&lt;/p&gt;
+&lt;p&gt;如果你的手机是安卓7.0以前的版本，在禁用手机应用的时候用pm disable，如果是7.0或7.0以上，就用pm disable-user。&lt;/p&gt;
+&lt;p&gt;附：ADB和Fastboot for Windows 工具下载
+&lt;a href=&#34;https://dl.google.com/android/repository/platform-tools-latest-windows.zip&#34;&gt;https://dl.google.com/android/repository/platform-tools-latest-windows.zip&lt;/a&gt;
+可以直接解压，在得到的文件夹内按shift+ 右键。选“在此处打开命令窗口”，打开cmd执行代码。
+也可参考网上的教程：
+&lt;a href=&#34;https://blog.csdn.net/u013250071/article/details/78416274&#34;&gt;https://blog.csdn.net/u013250071/article/details/78416274&lt;/a&gt;
+&lt;a href=&#34;https://blog.csdn.net/class_brick/article/details/72512982&#34;&gt;https://blog.csdn.net/class_brick/article/details/72512982&lt;/a&gt;&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
+        <entry>
+            <title type="text">一些有道理的话</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/" />
+            <id>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</id>
+            <updated>2024-02-12T17:29:44&#43;08:00</updated>
+            <published>2018-05-19T16:06:49&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。</summary>
+            
+                <content type="html">&lt;ul&gt;
+&lt;li&gt;人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。&lt;/li&gt;
+&lt;/ul&gt;
 </content>
             
             
