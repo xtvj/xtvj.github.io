@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">XTVJ的博客</title>
     <subtitle type="html">XTVJ博客</subtitle>
-    <updated>2024-02-16T21:10:08&#43;08:00</updated>
+    <updated>2024-02-16T21:43:07&#43;08:00</updated>
     <id>https://xtvj.github.io/</id>
     <link rel="alternate" type="text/html" href="https://xtvj.github.io/" />
     <link rel="self" type="application/atom&#43;xml" href="https://xtvj.github.io/atom.xml" />
@@ -56,8 +56,6 @@
             
             
             
-                
-                    
                 
                     
                 
@@ -259,8 +257,6 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                     
                 
                     
-                
-                    
                         
                             
                             
@@ -340,8 +336,6 @@ git checkout abranch
             
             
             
-                
-                    
                 
                     
                 
@@ -437,8 +431,6 @@ config interface &amp;#39;lan&amp;#39;
             
             
             
-                
-                    
                 
                     
                 
@@ -551,8 +543,6 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
             
             
             
-                
-                    
                 
                     
                 
@@ -753,8 +743,6 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                 
                     
                 
-                    
-                
             
         </entry>
     
@@ -872,8 +860,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                 
                     
                 
-                    
-                
             
         </entry>
     
@@ -986,8 +972,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
             
             
             
-                
-                    
                 
                     
                 
@@ -3013,8 +2997,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                     
                 
                     
-                
-                    
                         
                             
                             
@@ -3082,8 +3064,6 @@ certutil -hashfile  3.mp4 SHA256
             
             
             
-                
-                    
                 
                     
                 
@@ -3778,8 +3758,6 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                     
                 
                     
-                
-                    
                         
                             
                             
@@ -3960,8 +3938,6 @@ pm disable-user com.samsung.android.video
                 
                     
                 
-                    
-                
             
         </entry>
     
@@ -3986,8 +3962,6 @@ pm disable-user com.samsung.android.video
             
             
             
-                
-                    
                 
                     
                 

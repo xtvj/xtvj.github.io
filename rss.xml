@@ -19,7 +19,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Fri, 16 Feb 2024 21:10:08 &#43;0800</lastBuildDate>
+        <lastBuildDate>Fri, 16 Feb 2024 21:43:07 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://xtvj.github.io/rss.xml" />
         
@@ -62,8 +62,6 @@
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -261,8 +259,6 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                         
                     
                         
-                    
-                        
                             
                                 
                                 
@@ -338,8 +334,6 @@ git checkout abranch
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -431,8 +425,6 @@ config interface &amp;#39;lan&amp;#39;
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -541,8 +533,6 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -739,8 +729,6 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                     
                         
                     
-                        
-                    
                 
             </item>
         
@@ -854,8 +842,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                     
                         
                     
-                        
-                    
                 
             </item>
         
@@ -964,8 +950,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -2987,8 +2971,6 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                         
                     
                         
-                    
-                        
                             
                                 
                                 
@@ -3052,8 +3034,6 @@ certutil -hashfile  3.mp4 SHA256
                 
                 
                 
-                    
-                        
                     
                         
                     
@@ -3744,8 +3724,6 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                         
                     
                         
-                    
-                        
                             
                                 
                                 
@@ -3922,8 +3900,6 @@ pm disable-user com.samsung.android.video
                     
                         
                     
-                        
-                    
                 
             </item>
         
@@ -3944,8 +3920,6 @@ pm disable-user com.samsung.android.video
                 
                 
                 
-                    
-                        
                     
                         
                     
