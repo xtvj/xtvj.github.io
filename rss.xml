@@ -19,10 +19,72 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Mon, 12 Feb 2024 17:48:35 &#43;0800</lastBuildDate>
+        <lastBuildDate>Fri, 16 Feb 2024 21:05:07 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://xtvj.github.io/rss.xml" />
         
+        
+            <item>
+                <title>影视观后记录2</title>
+                <link>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</link>
+                <guid isPermaLink="true">https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</guid>
+                <pubDate>Fri, 16 Feb 2024 20:36:53 &#43;0800</pubDate>
+                
+                <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
+                
+                    <description>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;影片名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;中文名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;年代&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;观看日期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
+&lt;th&gt;观后记录&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;目中无人2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;目中无人2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/02/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;武侠&lt;/td&gt;
+&lt;td&gt;先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+                
+                
+                
+                
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                                
+                                
+                                
+                                    <category domain="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/">电影</category>
+                                
+                            
+                                
+                                
+                                
+                                    <category domain="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</category>
+                                
+                            
+                        
+                    
+                
+            </item>
         
             <item>
                 <title>Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
@@ -199,6 +261,8 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                         
                     
                         
+                    
+                        
                             
                                 
                                 
@@ -274,6 +338,8 @@ git checkout abranch
                 
                 
                 
+                    
+                        
                     
                         
                     
@@ -365,6 +431,8 @@ config interface &amp;#39;lan&amp;#39;
                 
                 
                 
+                    
+                        
                     
                         
                     
@@ -473,6 +541,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                 
                 
                 
+                    
+                        
                     
                         
                     
@@ -669,6 +739,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                     
                         
                     
+                        
+                    
                 
             </item>
         
@@ -782,6 +854,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                     
                         
                     
+                        
+                    
                 
             </item>
         
@@ -890,6 +964,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                 
                 
                 
+                    
+                        
                     
                         
                     
@@ -2463,9 +2539,9 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
 &lt;td style=&#34;text-align:center&#34;&gt;目中无人&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;目中无人&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;2022&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2022/06/06&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2022/06/06&lt;br/&gt;2024/02/11&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;武侠&lt;/td&gt;
-&lt;td&gt;很久没看国产电影的，这次是看电影网站上很多留言说这电影好看，才尝试去看的。电影确实不拖拉，没有什么没用的剧情，剧情进展很好合理，也没那种凑时间的片段，整个电影才七十来分钟也就在这吧，如果按一般国产电影来拍这电影非得两个小时不可。看的过程没什么出戏的感觉，电影本身还是挺好的，只是整个电影的剧情没什么深意，就是一个伸张正义的过程，回头想想还有那么一丢丢俗套。&lt;/td&gt;
+&lt;td&gt;很久没看国产电影的，这次是看电影网站上很多留言说这电影好看，才尝试去看的。电影确实不拖拉，没有什么没用的剧情，剧情进展很好合理，也没那种凑时间的片段，整个电影才七十来分钟也就在这吧，如果按一般国产电影来拍这电影非得两个小时不可。看的过程没什么出戏的感觉，电影本身还是挺好的，只是整个电影的剧情没什么深意，就是一个伸张正义的过程，回头想想还有那么一丢丢俗套。&lt;br/&gt;2024/02/11（第二遍）：以为下的是第二部，结果看了几分钟才发现是第一部，不过看的挺顺畅，就一直看下去了。&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;172&lt;/td&gt;
@@ -2911,6 +2987,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                         
                     
                         
+                    
+                        
                             
                                 
                                 
@@ -2974,6 +3052,8 @@ certutil -hashfile  3.mp4 SHA256
                 
                 
                 
+                    
+                        
                     
                         
                     
@@ -3664,6 +3744,8 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                         
                     
                         
+                    
+                        
                             
                                 
                                 
@@ -3840,6 +3922,8 @@ pm disable-user com.samsung.android.video
                     
                         
                     
+                        
+                    
                 
             </item>
         
@@ -3860,6 +3944,8 @@ pm disable-user com.samsung.android.video
                 
                 
                 
+                    
+                        
                     
                         
                     

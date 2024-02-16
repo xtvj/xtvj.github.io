@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">XTVJ的博客</title>
     <subtitle type="html">XTVJ博客</subtitle>
-    <updated>2024-02-12T17:48:35&#43;08:00</updated>
+    <updated>2024-02-16T21:05:07&#43;08:00</updated>
     <id>https://xtvj.github.io/</id>
     <link rel="alternate" type="text/html" href="https://xtvj.github.io/" />
     <link rel="self" type="application/atom&#43;xml" href="https://xtvj.github.io/atom.xml" />
@@ -14,6 +14,72 @@
             </author>
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
     <generator uri="https://gohugo.io/" version="0.122.0">Hugo</generator>
+        <entry>
+            <title type="text">影视观后记录2</title>
+            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/" />
+            <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</id>
+            <updated>2024-02-16T20:47:56&#43;08:00</updated>
+            <published>2024-02-16T20:36:53&#43;08:00</published>
+            <author>
+                    <name>xtvj</name>
+                    <uri>https://xtvj.github.io/</uri>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">影片名 中文名 年代 观看日期 类型 观后记录 1 目中无人2 目中无人2 2024 2024/02/12 武侠 先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。</summary>
+            
+                <content type="html">&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;影片名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;中文名&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;年代&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;观看日期&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;类型&lt;/th&gt;
+&lt;th&gt;观后记录&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;目中无人2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;目中无人2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/02/12&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;武侠&lt;/td&gt;
+&lt;td&gt;先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/" term="电影" label="电影" />
+                            
+                        
+                            
+                            
+                            
+                                <category scheme="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/" term="生活" label="生活" />
+                            
+                        
+                    
+                
+            
+        </entry>
+    
         <entry>
             <title type="text">Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" />
@@ -193,6 +259,8 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                     
                 
                     
+                
+                    
                         
                             
                             
@@ -272,6 +340,8 @@ git checkout abranch
             
             
             
+                
+                    
                 
                     
                 
@@ -367,6 +437,8 @@ config interface &amp;#39;lan&amp;#39;
             
             
             
+                
+                    
                 
                     
                 
@@ -479,6 +551,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
             
             
             
+                
+                    
                 
                     
                 
@@ -679,6 +753,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                 
                     
                 
+                    
+                
             
         </entry>
     
@@ -791,6 +867,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
             
             
             
+                
+                    
                 
                     
                 
@@ -912,6 +990,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                     
                 
                     
+                
+                    
                         
                             
                             
@@ -928,7 +1008,7 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
             <title type="text">影视观后记录</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/" />
             <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</id>
-            <updated>2024-02-12T17:29:06&#43;08:00</updated>
+            <updated>2024-02-16T20:45:32&#43;08:00</updated>
             <published>2020-07-06T16:20:22&#43;08:00</published>
             <author>
                     <name>xtvj</name>
@@ -2485,9 +2565,9 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
 &lt;td style=&#34;text-align:center&#34;&gt;目中无人&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;目中无人&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;2022&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;2022/06/06&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2022/06/06&lt;br/&gt;2024/02/11&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;武侠&lt;/td&gt;
-&lt;td&gt;很久没看国产电影的，这次是看电影网站上很多留言说这电影好看，才尝试去看的。电影确实不拖拉，没有什么没用的剧情，剧情进展很好合理，也没那种凑时间的片段，整个电影才七十来分钟也就在这吧，如果按一般国产电影来拍这电影非得两个小时不可。看的过程没什么出戏的感觉，电影本身还是挺好的，只是整个电影的剧情没什么深意，就是一个伸张正义的过程，回头想想还有那么一丢丢俗套。&lt;/td&gt;
+&lt;td&gt;很久没看国产电影的，这次是看电影网站上很多留言说这电影好看，才尝试去看的。电影确实不拖拉，没有什么没用的剧情，剧情进展很好合理，也没那种凑时间的片段，整个电影才七十来分钟也就在这吧，如果按一般国产电影来拍这电影非得两个小时不可。看的过程没什么出戏的感觉，电影本身还是挺好的，只是整个电影的剧情没什么深意，就是一个伸张正义的过程，回头想想还有那么一丢丢俗套。&lt;br/&gt;2024/02/11（第二遍）：以为下的是第二部，结果看了几分钟才发现是第一部，不过看的挺顺畅，就一直看下去了。&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;172&lt;/td&gt;
@@ -2933,6 +3013,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                     
                 
                     
+                
+                    
                         
                             
                             
@@ -3000,6 +3082,8 @@ certutil -hashfile  3.mp4 SHA256
             
             
             
+                
+                    
                 
                     
                 
@@ -3694,6 +3778,8 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                     
                 
                     
+                
+                    
                         
                             
                             
@@ -3874,6 +3960,8 @@ pm disable-user com.samsung.android.video
                 
                     
                 
+                    
+                
             
         </entry>
     
@@ -3898,6 +3986,8 @@ pm disable-user com.samsung.android.video
             
             
             
+                
+                    
                 
                     
                 
