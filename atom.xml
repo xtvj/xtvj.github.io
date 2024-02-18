@@ -4,7 +4,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">XTVJ的博客</title>
     <subtitle type="html">XTVJ博客</subtitle>
-    <updated>2024-02-16T21:43:07&#43;08:00</updated>
+    <updated>2024-02-18T22:52:17&#43;08:00</updated>
     <id>https://xtvj.github.io/</id>
     <link rel="alternate" type="text/html" href="https://xtvj.github.io/" />
     <link rel="self" type="application/atom&#43;xml" href="https://xtvj.github.io/atom.xml" />
@@ -18,13 +18,13 @@
             <title type="text">影视观后记录2</title>
             <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/" />
             <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</id>
-            <updated>2024-02-16T20:47:56&#43;08:00</updated>
+            <updated>2024-02-18T22:51:54&#43;08:00</updated>
             <published>2024-02-16T20:36:53&#43;08:00</published>
             <author>
                     <name>xtvj</name>
                     <uri>https://xtvj.github.io/</uri>
                     </author>
-            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">影片名 中文名 年代 观看日期 类型 观后记录 1 目中无人2 目中无人2 2024 2024/02/12 武侠 先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。</summary>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">影片名 中文名 年代 观看日期 类型 观后记录 1 目中无人2 目中无人2 2024 2024/02/12 武侠 先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。 2 百円の恋 百元之恋 2014 2024/02/18 剧情 本来国内有个翻拍的电影，听别人说就是翻的这部电影，我也没看国内的那电影，直接无视了，但以前看过这电影的解说，貌似拍的还行，就下载下来看下。剧情很朴实，也没太多煽情的内容。看着还行。</summary>
             
                 <content type="html">&lt;table&gt;
 &lt;thead&gt;
@@ -47,6 +47,15 @@
 &lt;td style=&#34;text-align:center&#34;&gt;2024/02/12&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;武侠&lt;/td&gt;
 &lt;td&gt;先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;百円の恋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;百元之恋&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2014&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/02/18&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;本来国内有个翻拍的电影，听别人说就是翻的这部电影，我也没看国内的那电影，直接无视了，但以前看过这电影的解说，貌似拍的还行，就下载下来看下。剧情很朴实，也没太多煽情的内容。看着还行。&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
