@@ -10,7 +10,7 @@
         <title>XTVJ的博客</title>
         <link>https://xtvj.github.io/</link>
         <description>XTVJ博客</description>
-        <generator>Hugo 0.123.7 https://gohugo.io/</generator>
+        <generator>Hugo 0.124.0 https://gohugo.io/</generator>
         
             <language>zh-CN</language>
         
@@ -19,7 +19,7 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sun, 03 Mar 2024 20:21:08 &#43;0800</lastBuildDate>
+        <lastBuildDate>Sun, 24 Mar 2024 13:02:06 &#43;0800</lastBuildDate>
         
             <atom:link rel="self" type="application/rss&#43;xml" href="https://xtvj.github.io/rss.xml" />
         
@@ -71,6 +71,15 @@
 &lt;td style=&#34;text-align:center&#34;&gt;2024/03/03&lt;/td&gt;
 &lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
 &lt;td&gt;还凑合吧，网上的评价特别好，应该是这几天这电影刚在内地上映，有水军的原因。整体上电影故事讲的很连贯，看着还行，但隐喻上面的东西，我可能就看不太懂了，看油管上别人的影评，说隐喻这隐喻那的，我没感觉到多少。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;4&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Psycho&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Psycho&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;1960&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/03/09&lt;br&gt;国语配音&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;六十多年前的电影了，拍的很不错了，至少能一直看下去，不会有卡壳的情况，只是反转的剧情比较短，前面铺垫90%的长度，电影剩下几分钟把合理的一面展现出来，而且这几分钟的剧情又不是特别的稀奇。电影太久远了，能拍这样已经很好了，但，放在现在去看这电影可能也没多大吸引力，只是刚好今天网络有问题，又有国语配音的，就看完了。不建议看第二次。&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -758,97 +767,338 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
                 
-                    <description>&lt;p&gt;由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/Iterm2.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;iterm2&#34;&gt;iTerm2&lt;/h4&gt;
-&lt;p&gt;安装brew：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装iTerm2：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install iterm2
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;或去官网下载安装：https://iterm2.com/downloads.html&lt;/p&gt;
-&lt;!-- more --&gt;
-&lt;h4 id=&#34;代码配色&#34;&gt;代码配色&lt;/h4&gt;
-&lt;p&gt;使用 &lt;a href=&#34;https://github.com/mbadolato/iTerm2-Color-Schemes&#34;&gt;iTerm2-Color-Schemes&lt;/a&gt; 的配色合集&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;导入配色方案&#34;&gt;导入配色方案&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。&lt;/p&gt;
-&lt;p&gt;导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula&lt;/p&gt;
-&lt;h4 id=&#34;字体&#34;&gt;字体&lt;/h4&gt;
-&lt;p&gt;如果不装字体，配置中有非ascii字符编码，会显示问号乱码，这两个问号本来是好看的箭头，但是箭头在当前字体中是不会被显示的……所以解决方法是重新下载一个支持非ascii编码的字体。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# git clone
-cd ~/.iterm2
-git clone https://github.com/powerline/fonts.git
+                    <description>&lt;p&gt;之前很多东西都懒得记录，现在发现改的东西多了，很多细节很容易就忘，故做此流水记录。&lt;/p&gt;
+&lt;p&gt;首选AppStore  &amp;gt;次选Brew  &amp;gt;再者Dmg  &amp;gt;最后PKG。&lt;/p&gt;
+&lt;p&gt;由于我不用appstore安装应用，固能用brew方式安装的应用&lt;strong&gt;尽量用brew安装&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;软件&#34;&gt;软件：&lt;/h3&gt;
+&lt;p&gt;注：软件名带删除线的为备用软件，需要时再安装。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;软件&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Homebrew&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://brew.sh/&#34;&gt;https://brew.sh/&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Chrome&lt;/td&gt;
+&lt;td&gt;下载Chrome使用&lt;a href=&#34;https://www.google.com/intl/zh-CN/chrome/&#34;&gt;国外地址&lt;/a&gt;，国内地址下来的是国内版，已经与国际版有区别。&lt;br/&gt;1、在同步设置使用自定义同步，关闭同步“打开的标签页”，可以取消右键的“发送页面到XX设备”。&lt;br/&gt;2、DOH设置自定义：https://94.140.14.140/dns-query&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ungoogled Chromium&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install --cask eloston-chromium&lt;/code&gt;&lt;br&gt;&lt;a href=&#34;https://github.com/Eloston/ungoogled-chromium&#34;&gt;开源&lt;/a&gt;去谷歌化的Chromium&lt;br&gt;需要安装&lt;a href=&#34;https://github.com/NeverDecaf/chromium-web-store&#34;&gt;chromium-web-store&lt;/a&gt;&lt;br&gt;并且&lt;code&gt;chrome://flags/#extension-mime-request-handling&lt;/code&gt; 改为 &lt;code&gt;Always prompt for install&lt;/code&gt;&lt;br&gt;才能安装谷歌商店里的插件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;扩展uBlacklist&lt;/td&gt;
+&lt;td&gt;订阅中导入：&lt;br/&gt;&lt;a href=&#34;https://github.com/xtvj/uBlocklist-additional-settings/raw/master/uBlacklist_sub.txt&#34;&gt;uBlacklist_sub&lt;/a&gt; 列表仅自用&lt;br&gt;常规中添加通配符&lt;br&gt;&lt;a href=&#34;https://github.com/xtvj/uBlocklist-additional-settings&#34;&gt;https://github.com/xtvj/uBlocklist-additional-settings&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;扩展Tampermonkey&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/the1812/Bilibili-Evolved&#34;&gt;Bilibili Evolved&lt;/a&gt;&lt;br/&gt;&lt;a href=&#34;https://greasyfork.org/zh-CN/scripts/402808-%E7%9F%A5%E4%B9%8E%E7%BE%8E%E5%8C%96&#34;&gt;知乎美化&lt;/a&gt;&lt;br/&gt;&lt;a href=&#34;https://greasyfork.org/scripts/416338&#34;&gt;redirect 外链跳转&lt;/a&gt;&lt;br/&gt;&lt;a href=&#34;https://greasyfork.org/zh-CN/scripts/419081-%E7%9F%A5%E4%B9%8E%E5%A2%9E%E5%BC%BA&#34;&gt;知乎增强&lt;/a&gt;&lt;br/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;Rime&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;&lt;del&gt;&lt;a href=&#34;https://rime.im/download/&#34;&gt;https://rime.im/download/&lt;/a&gt; 、&lt;a href=&#34;https://segmentfault.com/a/1190000018344603&#34;&gt;五笔设置教程&lt;/a&gt;、&lt;a href=&#34;https://www.xiebruce.top/1235.html&#34;&gt;macOS安装配置RIME&lt;/a&gt;、&lt;a href=&#34;https://github.com/rime/weasel/issues/20&#34;&gt;设置默认英文输入&lt;/a&gt;&lt;/del&gt; 已切换为系统自带五笔输入法。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;终端iTerm&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://xtvj.github.io/2020/10/19/Mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/&#34;&gt;Mac上好用又漂亮的终端&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;Sublime Text 4&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install sublime-text&lt;/code&gt;&lt;br/&gt;&lt;a href=&#34;https://www.sublimetext.com/download&#34;&gt;官网&lt;/a&gt; &lt;br/&gt;&lt;a href=&#34;https://blog.csdn.net/zhanglong_4444/article/details/104464070&#34;&gt;使用GBK编码中文乱码问题&lt;/a&gt; &lt;br/&gt;&lt;a href=&#34;https://www.jianshu.com/p/426745ad9fed&#34;&gt;在命令行中打开Sublime Text 3&lt;/a&gt;&lt;br&gt;注册码太难找，Mac版本一直也有小问题。弃用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;vscode&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;https://code.visualstudio.com/&lt;/a&gt; &lt;br&gt;替代文本编辑器，不用来当IDE。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;科学上网&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/yichengchen/clashX/releases&#34;&gt;ClashX&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;NeatDownloadManager&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;http://neatdownloadmanager.com/index.php/en/&#34;&gt;http://neatdownloadmanager.com/index.php/en/&lt;/a&gt; &lt;br/&gt; 下载工具，非常简洁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Dopamine&lt;/td&gt;
+&lt;td&gt;开源跨平台的音乐播放器&lt;br&gt;&lt;a href=&#34;https://github.com/digimezzo/dopamine/releases&#34;&gt;https://github.com/digimezzo/dopamine/releases&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;LyricsX&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/ddddxxx/LyricsX&#34;&gt;https://github.com/ddddxxx/LyricsX&lt;/a&gt; &lt;br/&gt;目前使用体验不好&lt;br/&gt;总是自动优先匹配质量很差且不对版的酷狗歌词&lt;br/&gt;&lt;code&gt;brew install lyricsx&lt;/code&gt;&lt;br/&gt;歌词显示&lt;br/&gt; LyricsX偏好设置--通用--跟随播放器启动和退出&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;AndroidStudio&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://developer.android.com/studio&#34;&gt;https://developer.android.com/studio&lt;/a&gt; &lt;br/&gt;或使用cn地址访问，下载后的SHA-256值相同&lt;br&gt;安装后点击Help &amp;gt; Edit Custom VM Options来修改默认最大内存占用，6G（6144m）以上。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;IINA&lt;/td&gt;
+&lt;td&gt;视频播放器，由于IINA是&lt;a href=&#34;https://github.com/iina/iina&#34;&gt;开源免费&lt;/a&gt;的，方便&lt;a href=&#34;https://iina.io/download/&#34;&gt;下载安装&lt;/a&gt;。4K播放稍弱。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Office&lt;/td&gt;
+&lt;td&gt;MicroSoft Office，别的不考虑。&lt;br/&gt;官方下载地址集合贴：&lt;a href=&#34;https://macadmins.software/&#34;&gt;https://macadmins.software/&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PhotoShop&lt;/td&gt;
+&lt;td&gt;目前使用Adobe_Zii激活。&lt;br/&gt;Adobe_Zii没有官方网址。&lt;br/&gt;使用&lt;a href=&#34;https://github.com/Drovosek01/adobe-packager&#34;&gt;开源工具&lt;/a&gt;可以从Adobe官方下载特定版本的程序。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;MarkDown编辑&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/marktext/marktext&#34;&gt;MarkText&lt;/a&gt;&lt;br/&gt;目前凑合用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;qbittorrent&lt;/td&gt;
+&lt;td&gt;使用&lt;a href=&#34;https://www.qbittorrent.org/download.php&#34;&gt;官方原版&lt;/a&gt;下载，可手动添加&lt;a href=&#34;https://trackerslist.com/all.txt&#34;&gt;trackers&lt;/a&gt;或&lt;a href=&#34;https://cdn.jsdelivr.net/gh/ngosang/trackerslist@master/trackers_all_ip.txt&#34;&gt;trackers_all_ip&lt;/a&gt;&lt;br/&gt;或&lt;a href=&#34;https://github.com/c0re100/qBittorrent-Enhanced-Edition&#34;&gt;增强版&lt;/a&gt;&lt;br/&gt;记得打开&lt;br/&gt;首选项-连接-IP过滤-勾选匹配tracker&lt;br/&gt;首选项-高级-启用内置Tracker-勾选&lt;br/&gt;首选项-高级-总是向同级的所有Tracker汇报、总是向所有等级的Tracker汇报-勾选&lt;br/&gt;如果经过以上设置后，下载速度还是很慢或无速度，可能原因有三：&lt;br/&gt;1、冷门资源无上传者分享(换个种子)。&lt;br/&gt;2、Tracker列表不合适此网络环境(更换Tracker列表)&lt;br/&gt;3、运营商屏蔽了bt(可在设置-连接中使用代理服务器连接tracker，不用代理连接用户)。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rectangle&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install cask rectangle&lt;/code&gt;&lt;br/&gt;&lt;a href=&#34;https://github.com/rxhanson/Rectangle&#34;&gt;https://github.com/rxhanson/Rectangle&lt;/a&gt;&lt;br/&gt;窗口管理工具&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;Loopback&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://rogueamoeba.com/loopback/&#34;&gt;https://rogueamoeba.com/loopback/&lt;/a&gt;&lt;br/&gt;音频管理工具，配合command + shift + 5等热键可录屏，附带系统和外部麦克的声音。付费应用。&lt;br/&gt;&lt;a href=&#34;https://www.bilibili.com/video/BV1LJ411E7cm&#34;&gt;B站视频教程&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Nodejs + Hexo&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install node&lt;/code&gt;&lt;br/&gt;&lt;code&gt;sudo npm install hexo-cli -g&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;scrcpy&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;安卓手机投屏工具&lt;br/&gt;&lt;a href=&#34;https://github.com/Genymobile/scrcpy&#34;&gt;开源地址&lt;/a&gt;&lt;br/&gt;&lt;code&gt;brew install scrcpy&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;adb&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install --cask android-platform-tools&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Meld&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install meld&lt;/code&gt;&lt;br/&gt;文件比对工具&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yt-dlp&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install yt-dlp/taps/yt-dlp &lt;/code&gt;&lt;br/&gt;&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;命令行工具&lt;/a&gt;，无GUI视图。下载命令&lt;code&gt;yt-dlp 视频网址&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;insomnia&lt;/td&gt;
+&lt;td&gt;免费好看接口调试工具&lt;br/&gt;&lt;a href=&#34;https://github.com/Kong/insomnia&#34;&gt;https://github.com/Kong/insomnia&lt;/a&gt;&lt;br/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OBS Studio&lt;/td&gt;
+&lt;td&gt;屏幕录像&lt;br/&gt;&lt;a href=&#34;https://github.com/obsproject/obs-studio&#34;&gt;https://github.com/obsproject/obs-studio&lt;/a&gt;&lt;br/&gt;开源工具，性能很好，录制视频质量很高。&lt;br/&gt;可使用窗口采集，在采集栏右键后选择“&lt;strong&gt;调整输出大小（到源大小）&lt;/strong&gt;”录制单个窗口。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;del&gt;Android File Transfer&lt;/del&gt;&lt;/td&gt;
+&lt;td&gt;&lt;del&gt;&lt;a href=&#34;https://www.android.com/filetransfer/&#34;&gt;https://www.android.com/filetransfer/&lt;/a&gt; &lt;br/&gt;Android与Mac之间文件传输（不使用工具的话可以用adb push或adb pull来操作，不过感觉有点麻烦）&lt;/del&gt;&lt;br/&gt;使用adb操作替代&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Keka&lt;/td&gt;
+&lt;td&gt;开源解压工具&lt;br/&gt;&lt;a href=&#34;https://github.com/aonez/Keka&#34;&gt;https://github.com/aonez/Keka&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;python3&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install python&lt;/code&gt;&lt;br/&gt;.zshrc文件中添加&lt;br/&gt;&lt;code&gt;alias python=/usr/local/bin/python3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;OmniGraffle&lt;/td&gt;
+&lt;td&gt;思维导图&lt;br/&gt;&lt;a href=&#34;https://www.omnigroup.com/omnigraffle&#34;&gt;https://www.omnigroup.com/omnigraffle&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Calibre&lt;/td&gt;
+&lt;td&gt;书籍管理&lt;br/&gt;&lt;a href=&#34;https://github.com/kovidgoyal/calibre/releases&#34;&gt;https://github.com/kovidgoyal/calibre/releases&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;App Cleaner &amp;amp; Uninstaller Pro&lt;/td&gt;
+&lt;td&gt;卸载清理App，付费应用。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;VMware Fusion&lt;/td&gt;
+&lt;td&gt;虚拟机&lt;br/&gt;官方下载地址：&lt;br/&gt;&lt;a href=&#34;https://www.vmware.com/go/getfusion&#34;&gt;https://www.vmware.com/go/getfusion&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ffmpeg&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;brew install ffmpeg&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Joplin&lt;/td&gt;
+&lt;td&gt;开源支持Markdown的笔记应用。&lt;br&gt;&lt;a href=&#34;https://github.com/laurent22/joplin&#34;&gt;https://github.com/laurent22/joplin&lt;/a&gt; &lt;br&gt;替代OneNote&lt;br&gt;支持使用OneDrive同步数据&lt;br&gt;支持端到端加密&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FileZilla&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://filezilla-project.org/download.php?type=client&#34;&gt;https://filezilla-project.org/download.php?type=client&lt;/a&gt; &lt;br&gt;结合iPhone上的Foobar2000从Mac传大量文件到手机&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Github&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://desktop.github.com&#34;&gt;https://desktop.github.com&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;localsend&lt;/td&gt;
+&lt;td&gt;&lt;a href=&#34;https://github.com/localsend/localsend&#34;&gt;localsend&lt;/a&gt;开源局域网文件传速&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;git设置代理及配置&#34;&gt;GIt设置代理及配置&lt;/h3&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ssh-keygen -t rsa -C &amp;#34;xtvj@users.noreply.github.com&amp;#34;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;代理在终端中：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git config --global http.proxy &amp;#39;socks5://127.0.0.1:7890&amp;#39;
+git config --global --unset http.proxy
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;如果使用的是Github Desktop，在设置用户根目录下的**.gitconfig**文件&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[https]
+    proxy = http:/127.0.0.1:7890
+[http]
+    proxy = http://127.0.0.1:7890
+[git]
+    proxy = socks5://127.0.0.1:7890
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;快捷键&#34;&gt;快捷键&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;快捷键&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;⌃（control）+ ⌘（command）+ 空格键&lt;/td&gt;
+&lt;td&gt;调出“显示表情与符号”窗口，快速输入Emoji表情或符号&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;⌃（control）+ ⌘（command）+ Esc&lt;/td&gt;
+&lt;td&gt;停止录制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;⌘（command）+ u&lt;/td&gt;
+&lt;td&gt;终端中快速删除当前行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;⌘（command）+ Tab&lt;/td&gt;
+&lt;td&gt;程序切换窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;⌘（command）+ `&lt;/td&gt;
+&lt;td&gt;在当前应用程序内切换窗口&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Option + ↑，即 Alt + ↑&lt;/td&gt;
+&lt;td&gt;选中当前光标位置内容，或扩大选中内容，Option +  ↓为缩小选中内容&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;mac自动隐藏显示程序坞是默认有1s延迟&#34;&gt;Mac自动隐藏/显示程序坞是默认有1s延迟&lt;/h3&gt;
+&lt;p&gt;终端输入：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;defaults write com.apple.Dock autohide-delay -float 0 &amp;amp;&amp;amp; killall Dock
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;恢复默认：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;defaults delete com.apple.Dock autohide-delay &amp;amp;&amp;amp; killall Dock
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;命令行技巧记录&#34;&gt;命令行技巧记录&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;问题&lt;/th&gt;
+&lt;th&gt;方案&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;终端中文件名太长&lt;/td&gt;
+&lt;td&gt;用&lt;strong&gt;Tab键&lt;/strong&gt;选择，不用把文件名全部输入。甚至不用输入文件名，输入cd或vim等命令后空格再按Tab就可以选择文件夹或文件了。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;curl&lt;/td&gt;
+&lt;td&gt;curl -o 文件名 https://***/1.zip 下载并保存文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;计算sha256&lt;/td&gt;
+&lt;td&gt;shasum -a 256 文件名&lt;br/&gt;或者sha256sum 文件名&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;使用终端下载mac原版系统&#34;&gt;使用终端下载Mac原版系统&lt;/h3&gt;
+&lt;p&gt;使用开源项目&lt;a href=&#34;https://github.com/munki/macadmin-scripts&#34;&gt;macadmin-scripts&lt;/a&gt;下载原版系统，使用&lt;a href=&#34;https://github.com/notpeter/apple-installer-checksums&#34;&gt;apple-installer-checksums&lt;/a&gt;里的信息来验证下载内容的SHA1值。&lt;/p&gt;
+&lt;p&gt;使用 &lt;strong&gt;/Users/Shared或子目录&lt;/strong&gt;作为此工具的工作空间，使用Python在终端运行macadmin-scripts里的installinstallmacos.py脚本，如图&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/运行脚本.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
+&lt;p&gt;然后选择要下载的版本&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/选择下载工版本.png&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34; /&gt;
+&lt;p&gt;下载完成后等待转换&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/下载转换完成.png&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34; /&gt;
+&lt;p&gt;然后到脚本的目录里找下载的文件和&lt;a href=&#34;https://github.com/notpeter/apple-installer-checksums&#34;&gt;apple-installer-checksums&lt;/a&gt;比对SHA1值，比对正确说明可用转换成功的镜像了。&lt;/p&gt;
+&lt;img src=&#34;https://xtvj.github.io/images/比对SHA值.png&#34; style=&#34;zoom: 50%; margin: 0px auto;&#34; /&gt;
+&lt;h3 id=&#34;删除系统自带的abc输入法&#34;&gt;删除系统自带的ABC输入法&lt;/h3&gt;
+&lt;p&gt;使用&lt;a href=&#34;https://www.fatcatsoftware.com/plisteditpro/&#34;&gt;PlistEditPro&lt;/a&gt;工具打开com.apple.HIToolbox.plist文件&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo open ~/Library/Preferences/com.apple.HIToolbox.plist
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;找到选中“ Root ”—“ AppleEnabledInputSources ”下面有 0，1，2 等文件夹，找到第1个文件夹，待找到出现“ ABC ”关键字样的文件夹时，删除整个以数字命名的文件。&lt;/p&gt;
+&lt;h3 id=&#34;不使用第三方工具从iphone传文件到mac&#34;&gt;不使用第三方工具从iPhone传文件到Mac&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;从Apple菜单中，打开&lt;font color=#4169E1&gt;系统偏好设置&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;单击&lt;font color=#4169E1&gt;共享&lt;/font&gt;选项卡。&lt;/li&gt;
+&lt;li&gt;找到&lt;font color=#4169E1&gt;文件共享&lt;/font&gt;列，打开&lt;font color=#4169E1&gt;文件共享&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;在iPhone&lt;font color=#4169E1&gt;文件&lt;/font&gt;中点击右上角的三点图标&lt;font color=#4169E1&gt;打开菜单&lt;/font&gt;。&lt;/li&gt;
+&lt;li&gt;点击&lt;font color=#4169E1&gt;连接服务器&lt;/font&gt;，输入Mac上显示的共享地址。&lt;/li&gt;
+&lt;li&gt;在iPhone中输入Mac电脑的账号密码进行连接。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;adobe-genuine-message-版权弹窗&#34;&gt;Adobe genuine message 版权弹窗&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;关闭所有 Adobe 软件&lt;/li&gt;
+&lt;li&gt;sudo rm /Library/Application\ Support/Adobe/AdobeGCClient/AdobeGCClient.app/Contents/MacOS/AdobeGCClient&lt;/li&gt;
+&lt;li&gt;sudo chmod 0444 /Library/Application\ Support/Adobe/AdobeGCClient&lt;/li&gt;
+&lt;li&gt;上一行代码如果提示找不到文件夹可新建一个&lt;/li&gt;
+&lt;li&gt;mkdir /Library/Application\ Support/Adobe/AdobeGCClient&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;使用android-studio自带jdk设置java_home&#34;&gt;使用Android Studio自带JDK设置JAVA_HOME&lt;/h3&gt;
+&lt;p&gt;适用版本：Android Studio Flamingo | 2022.2.1 Patch 1&lt;/p&gt;
+&lt;p&gt;如果使用zsh则在.zshrc文件中添加：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;export JAVA_HOME=/Applications/Android\ Studio.app/Contents/jbr/Contents/Home
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;全局添加ds_store文件到gitignore&#34;&gt;全局添加.DS_Store文件到.gitignore&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;touch ~/.gitignore_global
+vim ~/.gitignore_global
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;添加以下内容（可自选部分需要的）&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
 
-# install
-cd fonts
-./install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后按照下面的设置（记得选一个名字后面有for Powerline的字体）&lt;/p&gt;
-&lt;img src=&#34;https://xtvj.github.io/images/字体.png&#34; style=&#34;zoom: 50%;margin: 0 auto;&#34; /&gt;
-&lt;h4 id=&#34;设置默认窗口大小&#34;&gt;设置默认窗口大小：&lt;/h4&gt;
-&lt;p&gt;Preferences...→Profiles→Window→Settings for New Windows ：120：30&lt;/p&gt;
-&lt;h4 id=&#34;安装zsh&#34;&gt;安装zsh&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;brew install zsh
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;默认的 shell 是 bash，需要修改为 zsh：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sh -c &amp;#34;echo $(which zsh) &amp;gt;&amp;gt; /etc/shells&amp;#34;
-chsh -s $(which zsh)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;使用&lt;a href=&#34;https://github.com/robbyrussell/oh-my-zsh&#34;&gt;oh-my-zsh&lt;/a&gt;配置zsh&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装好后可以看到界面发生了变化，同时会在用户根目录下面产生一个名为 &lt;code&gt;.zshrc&lt;/code&gt; 的配置文件，以后主要就是修改它了。&lt;/p&gt;
-&lt;h4 id=&#34;配置主题&#34;&gt;配置主题&lt;/h4&gt;
-&lt;p&gt;主题文件存储在 &lt;code&gt;~/.oh-my-zsh/themes&lt;/code&gt; 目录下，你也可以使用其他的。&lt;/p&gt;
-&lt;p&gt;推荐 &lt;a href=&#34;https://github.com/bhilburn/powerlevel9k&#34;&gt;powerlevel9k&lt;/a&gt; 的高颜值主题&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;然后修改 &lt;code&gt;zsh&lt;/code&gt; 主题配置：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;//修改.zshrc文件（在Mac用户根目录）
-ZSH_THEME=&amp;#34;powerlevel9k/powerlevel9k&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;修改配置文件后一定要记得让配置生效，使用 &lt;code&gt;source&lt;/code&gt; 命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;zsh-插件&#34;&gt;zsh 插件&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;插件使用方式：编辑.zshrc文件，文件中有一行plugins=(git)，在括号中添加想使用的插件名，记得加空格分开&lt;/strong&gt;&lt;/p&gt;
-&lt;h5 id=&#34;extract&#34;&gt;extract&lt;/h5&gt;
-&lt;p&gt;用于解压，不用另行安装，直接在plugins中加就行 &lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract&#34;&gt;官方说明&lt;/a&gt;&lt;/p&gt;
-&lt;h5 id=&#34;autojump&#34;&gt;autojump&lt;/h5&gt;
-&lt;p&gt;自动跳转目录，只能当使用cd命令进入文件夹后，才能使用&lt;code&gt;j 文件夹名&lt;/code&gt;进入文件夹&lt;/p&gt;
-&lt;p&gt;安装：&lt;code&gt;brew install autojump&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;再执行一句命令：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] &amp;amp;&amp;amp; . $(brew --prefix)/etc/profile.d/autojump.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-syntax-highlighting&#34;&gt;zsh-syntax-highlighting&lt;/h5&gt;
-&lt;p&gt;亮亮功能，安装&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-&lt;/code&gt;&lt;/pre&gt;&lt;h5 id=&#34;zsh-autosuggestions&#34;&gt;zsh-autosuggestions&lt;/h5&gt;
-&lt;p&gt;安装：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;自动提示。历史记录可在用户根目录.zsh_history文件内查看到。&lt;/p&gt;
-&lt;h5 id=&#34;macos&#34;&gt;macos&lt;/h5&gt;
-&lt;p&gt;Mac下快捷命令应用，参考&lt;a href=&#34;https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos&#34;&gt;官方说明&lt;/a&gt;，可实现在终端快速定位到访达目录等操作。&lt;/p&gt;
-&lt;p&gt;自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)&lt;/p&gt;
-&lt;p&gt;最后再执行一次&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;source ~/.zshrc
-&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
-&lt;h4 id=&#34;完成上面设置后终端会提示&#34;&gt;&lt;del&gt;完成上面设置后终端会提示&lt;/del&gt;：&lt;/h4&gt;
-&lt;p&gt;目前已无此提示&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;[oh-my-zsh] Insecure completion-dependent directories detected:
-drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
-drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
-
-[oh-my-zsh] For safety, we will not load completions from these directories until
-[oh-my-zsh] you fix their permissions and ownership and restart zsh.
-[oh-my-zsh] See the above list for directories with group or other writability.
-
-[oh-my-zsh] To fix your permissions you can do so by disabling
-[oh-my-zsh] the write permission of &amp;#34;group&amp;#34; and &amp;#34;others&amp;#34; and making sure that the
-[oh-my-zsh] owner of these directories is either root or your current user.
-[oh-my-zsh] The following command may help:
-[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
-
-[oh-my-zsh] If the above didn&amp;#39;t help or you want to skip the verification of
-[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
-[oh-my-zsh] &amp;#34;true&amp;#34; before oh-my-zsh is sourced in your zshrc file.
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;del&gt;按照说明在.zshrc文件&lt;strong&gt;第一行&lt;/strong&gt;中添加 ZSH_DISABLE_COMPFIX=true即可。&lt;/del&gt;&lt;/p&gt;
-&lt;p&gt;参考文章：&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.biezhi.me/2018/11/build-a-beautiful-mac-terminal-environment.html&#34;&gt;打造 Mac 下高颜值好用的终端环境&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/gggg989898/article/details/108882880&#34;&gt;Mac terminal终端或iterm2出现问号解决方案&lt;/a&gt;&lt;/p&gt;
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之后将文件配置到git&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git config --global core.excludesfile ~/.gitignore_global
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;macos开机iterm2--oh-my-zsh会显示xcodebuild&#34;&gt;macOS开机iterm2 + oh my zsh会显示xcodebuild&lt;/h3&gt;
+&lt;p&gt;终端延迟三四秒才正常显示，通过查看Git版本发现Git被换成了Apple的Git，可能是安装了Xcode的原因。可通过&lt;code&gt;brew install git&lt;/code&gt;重新安装Git，然后退出终端再打开就可以了。&lt;/p&gt;
+&lt;h3 id=&#34;去掉截图的阴影&#34;&gt;去掉截图的阴影&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;defaults write com.apple.screencapture disable-shadow -bool TRUE
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;设置不自动挂载ntfs盘&#34;&gt;设置不自动挂载NTFS盘&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;执行命令查找不需要挂载的磁盘信息&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\\列出电脑磁盘的列表
+diskutil list
+\\显示不需要挂载的磁盘具体信息，主要看UUID，disk0s3换为具体要看的磁盘
+diskutil info disk0s3
+\\如果没有fstab这个文件就新建一个
+touch /etc/fstab
+sudo vim /etc/fstab
+\\编辑此文件加入，记得更换UUID为自己不想显示的那个磁盘的UUID
+UUID=3B87FF76-C6DA-49BF-B911-61DE2331E9F5 none ntfs noauto 0 0
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;参考&#34;&gt;参考：&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sqlsec.com/2020/08/xps15.html&#34;&gt;XPS15 9550 黑苹果折腾记录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/zhangvalue/article/details/89736604&#34;&gt;删除自带ABC输入法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/AdobeZii/comments/ga47c1/guide_to_disable_adobe_genuine_message_on_macos/&#34;&gt;Guide to disable adobe genuine message on macos&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/a/43237101&#34;&gt;Using JDK that is bundled inside Android Studio as JAVA_HOME on Mac&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.csdn.net/lxyoucan/article/details/116259842&#34;&gt;macOS开机iterm2 + oh my zsh会显示xcodebuild&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
 </description>
                 
                 
