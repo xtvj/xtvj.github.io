@@ -8,9 +8,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>XTVJ的博客</title>
-        <link>https://xtvj.github.io/</link>
+        <link>http://localhost:1313/</link>
         <description>XTVJ博客</description>
-        <generator>Hugo 0.124.0 https://gohugo.io/</generator>
+        <generator>Hugo 0.125.5 https://gohugo.io/</generator>
         
             <language>zh-CN</language>
         
@@ -19,15 +19,15 @@
         
             <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
         
-        <lastBuildDate>Sun, 24 Mar 2024 13:02:06 &#43;0800</lastBuildDate>
+        <lastBuildDate>Fri, 03 May 2024 00:59:55 &#43;0800</lastBuildDate>
         
-            <atom:link rel="self" type="application/rss&#43;xml" href="https://xtvj.github.io/rss.xml" />
+            <atom:link rel="self" type="application/rss&#43;xml" href="http://localhost:1313/rss.xml" />
         
         
             <item>
                 <title>影视观后记录2</title>
-                <link>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</guid>
+                <link>http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</guid>
                 <pubDate>Fri, 16 Feb 2024 20:36:53 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -81,6 +81,42 @@
 &lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
 &lt;td&gt;六十多年前的电影了，拍的很不错了，至少能一直看下去，不会有卡壳的情况，只是反转的剧情比较短，前面铺垫90%的长度，电影剩下几分钟把合理的一面展现出来，而且这几分钟的剧情又不是特别的稀奇。电影太久远了，能拍这样已经很好了，但，放在现在去看这电影可能也没多大吸引力，只是刚好今天网络有问题，又有国语配音的，就看完了。不建议看第二次。&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3 Body Problem&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;三体&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/03/24&lt;br&gt;-25&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;这是NF拍的，看的国语配音版，共8集，前面几集有点科幻意思，后面几集大多是感情戏，不好看。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;君たちはどう生きるか&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;你想活出怎样的人生&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2023&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/04/04&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;没看太懂，但看的挺流畅。再看影评吧。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Godzilla x Kong: The New Empire&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;哥斯拉2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/04/05&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;科幻片&lt;/td&gt;
+&lt;td&gt;在电影院看睡着了。感觉没意思。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不夠善良的我們&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不够善良的我们&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/05/01&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;基本是一口气看完的，第一集的大半是前些天看的，看完后感觉这剧情真的很好。之前还看过台湾的《天选之人-造浪者》、《我们与恶的距离》等等很多好剧集，看完这部后突然有一个念头，如果台湾拍再多拍一些好剧，流行的剧集在内地占大半，这样就能把内地那些不良的风气扭转一些，再回过头一想，有些剧很容易就封了。&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 </description>
@@ -97,13 +133,13 @@
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/">电影</category>
+                                    <category domain="http://localhost:1313/tags/%E7%94%B5%E5%BD%B1/">电影</category>
                                 
                             
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</category>
+                                    <category domain="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/">生活</category>
                                 
                             
                         
@@ -113,8 +149,8 @@
         
             <item>
                 <title>Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
-                <link>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</guid>
+                <link>http://localhost:1313/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</guid>
                 <pubDate>Sun, 09 Apr 2023 13:18:01 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -290,7 +326,7 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/hackintosh/">Hackintosh</category>
+                                    <category domain="http://localhost:1313/tags/hackintosh/">Hackintosh</category>
                                 
                             
                         
@@ -300,8 +336,8 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
         
             <item>
                 <title>命令行中使用Git的教程记录</title>
-                <link>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</guid>
+                <link>http://localhost:1313/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</guid>
                 <pubDate>Tue, 10 May 2022 18:22:37 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -371,8 +407,8 @@ git checkout abranch
         
             <item>
                 <title>RedmiAC2100在MacOS下编译相应固件及一些使用记录</title>
-                <link>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</guid>
+                <link>http://localhost:1313/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</guid>
                 <pubDate>Tue, 29 Jun 2021 16:45:58 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -462,8 +498,8 @@ config interface &amp;#39;lan&amp;#39;
         
             <item>
                 <title>使用youtube dl下载视频、音频、播放列表中的多个视频或音频</title>
-                <link>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</guid>
+                <link>http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</guid>
                 <pubDate>Sun, 22 Nov 2020 18:39:02 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -551,7 +587,7 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
 &lt;p&gt;youtube-dl已死&lt;/p&gt;
 &lt;p&gt;youtube-dl从2021.12.17到现在没发布新版本，只是提交了少许仓库代码，看很多人评价也是youtube-dl已死，推荐使用&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.sysgeek.cn/youtube-dl-examples/&#34;&gt;Youtube 专业下载工具，Youtube-dl 详细使用教程与初学上手示例&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u014389734/article/details/86751840&#34;&gt;Youtube-dl调用外部Aria2多线程加速下载&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -568,7 +604,7 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/">技巧</category>
+                                    <category domain="http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/">技巧</category>
                                 
                             
                         
@@ -578,8 +614,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
         
             <item>
                 <title>五笔拆字表</title>
-                <link>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</guid>
+                <link>http://localhost:1313/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</guid>
                 <pubDate>Wed, 04 Nov 2020 14:58:56 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -761,8 +797,8 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
         
             <item>
                 <title>Mac使用技巧</title>
-                <link>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+                <link>http://localhost:1313/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
                 <pubDate>Thu, 29 Oct 2020 10:09:51 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -1115,8 +1151,8 @@ UUID=3B87FF76-C6DA-49BF-B911-61DE2331E9F5 none ntfs noauto 0 0
         
             <item>
                 <title>Mac上好用又漂亮的终端</title>
-                <link>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</guid>
+                <link>http://localhost:1313/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</guid>
                 <pubDate>Mon, 19 Oct 2020 19:45:27 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -1226,7 +1262,7 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/mac/">Mac</category>
+                                    <category domain="http://localhost:1313/tags/mac/">Mac</category>
                                 
                             
                         
@@ -1236,8 +1272,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
         
             <item>
                 <title>影视观后记录</title>
-                <link>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</guid>
+                <link>http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</guid>
                 <pubDate>Mon, 06 Jul 2020 16:20:22 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -3243,13 +3279,13 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/">电影</category>
+                                    <category domain="http://localhost:1313/tags/%E7%94%B5%E5%BD%B1/">电影</category>
                                 
                             
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/">生活</category>
+                                    <category domain="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/">生活</category>
                                 
                             
                         
@@ -3259,8 +3295,8 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
         
             <item>
                 <title>PC使用技巧</title>
-                <link>https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
+                <link>http://localhost:1313/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</guid>
                 <pubDate>Wed, 08 Apr 2020 05:41:58 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -3312,8 +3348,8 @@ certutil -hashfile  3.mp4 SHA256
         
             <item>
                 <title>Android开发填坑记录</title>
-                <link>https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</guid>
+                <link>http://localhost:1313/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</guid>
                 <pubDate>Sat, 12 Oct 2019 22:31:45 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -3996,7 +4032,7 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                                 
                                 
                                 
-                                    <category domain="https://xtvj.github.io/tags/android/">Android</category>
+                                    <category domain="http://localhost:1313/tags/android/">Android</category>
                                 
                             
                         
@@ -4006,8 +4042,8 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
         
             <item>
                 <title>不Root手机禁用系统应用</title>
-                <link>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</guid>
+                <link>http://localhost:1313/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</guid>
                 <pubDate>Wed, 27 Jun 2018 20:23:52 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>
@@ -4173,8 +4209,8 @@ pm disable-user com.samsung.android.video
         
             <item>
                 <title>一些有道理的话</title>
-                <link>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</link>
-                <guid isPermaLink="true">https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</guid>
+                <link>http://localhost:1313/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</link>
+                <guid isPermaLink="true">http://localhost:1313/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</guid>
                 <pubDate>Sat, 19 May 2018 16:06:49 &#43;0800</pubDate>
                 
                 <copyright>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</copyright>

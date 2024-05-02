@@ -4,25 +4,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN">
     <title type="text">XTVJ的博客</title>
     <subtitle type="html">XTVJ博客</subtitle>
-    <updated>2024-03-24T13:02:06&#43;08:00</updated>
-    <id>https://xtvj.github.io/</id>
-    <link rel="alternate" type="text/html" href="https://xtvj.github.io/" />
-    <link rel="self" type="application/atom&#43;xml" href="https://xtvj.github.io/atom.xml" />
+    <updated>2024-05-03T00:59:55&#43;08:00</updated>
+    <id>http://localhost:1313/</id>
+    <link rel="alternate" type="text/html" href="http://localhost:1313/" />
+    <link rel="self" type="application/atom&#43;xml" href="http://localhost:1313/atom.xml" />
     <author>
             <name>xtvj</name>
-            <uri>https://xtvj.github.io/</uri>
+            <uri>http://localhost:1313/</uri>
             </author>
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights>
-    <generator uri="https://gohugo.io/" version="0.124.0">Hugo</generator>
+    <generator uri="https://gohugo.io/" version="0.125.5">Hugo</generator>
         <entry>
             <title type="text">影视观后记录2</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/" />
-            <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</id>
-            <updated>2024-03-09T13:31:43&#43;08:00</updated>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/" />
+            <id>http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%952/</id>
+            <updated>2024-05-03T00:55:36&#43;08:00</updated>
             <published>2024-02-16T20:36:53&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">影片名 中文名 年代 观看日期 类型 观后记录 1 目中无人2 目中无人2 2024 2024/02/12 武侠 先看的第一部，然后看了第二部出来了就看看，结果还算凑合，没有第一部合理，没有第一部耐看。 2 百円の恋 百元之恋 2014 2024/02/18 剧情 本来国内有个翻拍的电影，听别人说就是翻的这部电影，我也没看国内的那电影，直接无视了，但以前看过这电影的解说，貌似拍的还行，就下载下来看下。剧情很朴实，也没太多煽情的内容。看着还行。 3 周處除三害 周处除三害 2023 2024/03/03 剧情 还凑合吧，网上的评价特别好，应该是这几天这电影刚在内地上映，有水军的原因。整体上电影故事讲的很连贯，看着还行，但隐喻上面的东西，我可能就看不太懂了，看油管上别人的影评，说隐喻这隐喻那的，我没感觉到多少。 4 Psycho Psycho 1960……</summary>
             
@@ -75,6 +75,42 @@
 &lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
 &lt;td&gt;六十多年前的电影了，拍的很不错了，至少能一直看下去，不会有卡壳的情况，只是反转的剧情比较短，前面铺垫90%的长度，电影剩下几分钟把合理的一面展现出来，而且这几分钟的剧情又不是特别的稀奇。电影太久远了，能拍这样已经很好了，但，放在现在去看这电影可能也没多大吸引力，只是刚好今天网络有问题，又有国语配音的，就看完了。不建议看第二次。&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;5&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;3 Body Problem&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;三体&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/03/24&lt;br&gt;-25&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;这是NF拍的，看的国语配音版，共8集，前面几集有点科幻意思，后面几集大多是感情戏，不好看。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;6&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;君たちはどう生きるか&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;你想活出怎样的人生&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2023&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/04/04&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;没看太懂，但看的挺流畅。再看影评吧。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;7&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Godzilla x Kong: The New Empire&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;哥斯拉2&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/04/05&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;科幻片&lt;/td&gt;
+&lt;td&gt;在电影院看睡着了。感觉没意思。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;8&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不夠善良的我們&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;不够善良的我们&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;2024/05/01&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;剧情&lt;/td&gt;
+&lt;td&gt;基本是一口气看完的，第一集的大半是前些天看的，看完后感觉这剧情真的很好。之前还看过台湾的《天选之人-造浪者》、《我们与恶的距离》等等很多好剧集，看完这部后突然有一个念头，如果台湾拍再多拍一些好剧，流行的剧集在内地占大半，这样就能把内地那些不良的风气扭转一些，再回过头一想，有些剧很容易就封了。&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 </content>
@@ -91,13 +127,13 @@
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/" term="电影" label="电影" />
+                                <category scheme="http://localhost:1313/tags/%E7%94%B5%E5%BD%B1/" term="电影" label="电影" />
                             
                         
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/" term="生活" label="生活" />
+                                <category scheme="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/" term="生活" label="生活" />
                             
                         
                     
@@ -107,13 +143,13 @@
     
         <entry>
             <title type="text">Gigabyte Z790 Aorus Elite AX黑苹果记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/" />
+            <id>http://localhost:1313/posts/gigabyte-z790-aorus-elite-ax%E9%BB%91%E8%8B%B9%E6%9E%9C%E8%AE%B0%E5%BD%95/</id>
             <updated>2024-02-12T17:25:01&#43;08:00</updated>
             <published>2023-04-09T13:18:01&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">我的软、硬件 Motherboard：Gigabyte Z790 Aorus Elite ax DDR5 Ver1.0 CPU：I7 13700K （对CPU没特别要求，别的CPU只需在config.plist中更改显示名就可以） GPU：Gigabyte RX6600 EAGLE 8G (只要是免驱的显卡都应该适用) macOS：Ventura 13.5beta（Ventura所有版本都适用，Monterey、Big Sur没测试过） OpenCore ： 0.9.2 Bios：F6d 官方地址 警告！！！ 目前增量更新时卡进度条，不知道怎么解决。不建议用此EFI进行更新系统。 关于增量更新 禁用BlueToolFixup.kext 再更新即可增量更新 我是把蓝牙相关的三个kext（BlueToolFixup.kext、IntelBlue……</summary>
             
@@ -288,7 +324,7 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/hackintosh/" term="Hackintosh" label="Hackintosh" />
+                                <category scheme="http://localhost:1313/tags/hackintosh/" term="Hackintosh" label="Hackintosh" />
                             
                         
                     
@@ -298,13 +334,13 @@ bluetoothInternalControllerInfo Data 0000000000000000000000000000
     
         <entry>
             <title type="text">命令行中使用Git的教程记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/" />
+            <id>http://localhost:1313/posts/%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%BD%BF%E7%94%A8git%E7%9A%84%E6%95%99%E7%A8%8B%E8%AE%B0%E5%BD%95/</id>
             <updated>2024-02-12T17:27:48&#43;08:00</updated>
             <published>2022-05-10T18:22:37&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">命令行才是王道，尽量摈弃GUI的Git操作。 git pull：对下列文件的本地修改将被合并操作覆盖 这种情况是由于自己修改了文件未提交。 如果不想舍弃对本地的修改，请在合并前提交或贮藏您的修改 # 贮藏修改 git stash 然后 git pull 最后 git stash pop 这个过程自动合并。如果成功，则自动此备分从git stash中删除。如果有冲突，则你需要手动解决冲突。一般可用git restore 文件来恢复文件。 下载带有引用其他项目的代码 如果要clone的项目有其它项目的引用，可使用以下代码下载 git clone --recurse-submodules git://github.com/***/**.git 或者在常规clone后执行 git submodule init git submodule update 项目A引用项目B的分支 要添加 Git 子模块，请使用“git submodule add”命令并指定要作为子模块包含的 Git 远程存储库的 URL。 //dest……</summary>
             
@@ -373,13 +409,13 @@ git checkout abranch
     
         <entry>
             <title type="text">RedmiAC2100在MacOS下编译相应固件及一些使用记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" />
+            <id>http://localhost:1313/posts/redmiac2100%E5%9C%A8macos%E4%B8%8B%E7%BC%96%E8%AF%91%E7%9B%B8%E5%BA%94%E5%9B%BA%E4%BB%B6%E5%8F%8A%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/</id>
             <updated>2024-02-12T17:28:23&#43;08:00</updated>
             <published>2021-06-29T16:45:58&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">坏块和刷机教程 在淘宝上买的，到手后检测是东芝的闪存有三个坏块，直接找客服换货才发来一个ESMT闪存没坏块的。 检测和刷机教程网上一大堆，我用的是：红米(小米)AC2100无需Telnet刷入Breed和Padavan固件教程。 使用终端连接路由器 ssh root@192.168.1.1 终端与路由器之间传文件 scp命令是在没连ssh状态下操作的。输入后要输入路由器的密码。 //复制当前目录下本地文件1到路由器tmp目录下并保存为文件2。 scp 文件1 root@192.168.1.1:/tmp/文件2 //复制路由器tmp目录下文件2到当前目录并保存为文件1 scp root@192.168.1.1:/tmp/文件2 文件1 如果出现：ash: /usr/libexec/sftp-server: not found 在scp……</summary>
             
@@ -468,13 +504,13 @@ config interface &amp;#39;lan&amp;#39;
     
         <entry>
             <title type="text">使用youtube dl下载视频、音频、播放列表中的多个视频或音频</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" />
-            <id>https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/" />
+            <id>http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/</id>
             <updated>2024-02-12T17:22:43&#43;08:00</updated>
             <published>2020-11-22T18:39:02&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">​ 以前找某个歌曲的音频文件找不到的时候就用网页版的工具下载过Youtube上的音乐。前几天Github封杀了youtbe-dl我才知道有这么个开源的命令行工具。使用了下感觉很好，打算当成日常使用工具特此记录下使用技巧。 ​ 官网：https://github.com/ytdl-org/youtube-dl 提示：以下代码是在MacOS环境测试，Windows下可能需要换单引号为双引号 安装 //安装 brew install youtube-dl 常用视频下载步骤 默认下载方式 //直接使用youtube-dl+网址的方式执行 //会默认下载分辨率最高的视频和音频，下载完成后会自动合并 youtube-dl 网址 自定义下载视频质量 列中视频可用音/视频格式 //两种方式 youtube-dl -F 网址……</summary>
             
@@ -561,7 +597,7 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
 &lt;p&gt;youtube-dl已死&lt;/p&gt;
 &lt;p&gt;youtube-dl从2021.12.17到现在没发布新版本，只是提交了少许仓库代码，看很多人评价也是youtube-dl已死，推荐使用&lt;a href=&#34;https://github.com/yt-dlp/yt-dlp&#34;&gt;&lt;strong&gt;yt-dlp&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;参考&#34;&gt;参考&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://xtvj.github.io/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://localhost:1313/posts/%E4%BD%BF%E7%94%A8youtube-dl%E4%B8%8B%E8%BD%BD%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91%E6%92%AD%E6%94%BE%E5%88%97%E8%A1%A8%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%B8%AA%E8%A7%86%E9%A2%91%E6%88%96%E9%9F%B3%E9%A2%91/#%E4%BB%A5%E6%9C%80%E4%BC%98%E6%A0%BC%E5%BC%8F%E4%B8%8B%E8%BD%BD%E9%9F%B3%E9%A2%91&#34;&gt;以最优格式下载音频&lt;/a&gt; &lt;a href=&#34;https://askubuntu.com/questions/634584/how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&#34;&gt;how-to-download-youtube-videos-as-a-best-quality-audio-mp3-using-youtube-dl&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.sysgeek.cn/youtube-dl-examples/&#34;&gt;Youtube 专业下载工具，Youtube-dl 详细使用教程与初学上手示例&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://blog.csdn.net/u014389734/article/details/86751840&#34;&gt;Youtube-dl调用外部Aria2多线程加速下载&lt;/a&gt;&lt;/p&gt;
 </content>
@@ -578,7 +614,7 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/%E6%8A%80%E5%B7%A7/" term="技巧" label="技巧" />
+                                <category scheme="http://localhost:1313/tags/%E6%8A%80%E5%B7%A7/" term="技巧" label="技巧" />
                             
                         
                     
@@ -588,13 +624,13 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
     
         <entry>
             <title type="text">五笔拆字表</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" />
-            <id>https://xtvj.github.io/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/" />
+            <id>http://localhost:1313/posts/%E4%BA%94%E7%AC%94%E6%8B%86%E5%AD%97%E8%A1%A8/</id>
             <updated>2024-02-12T17:25:56&#43;08:00</updated>
             <published>2020-11-04T14:58:56&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">记录时常想不起怎么编码、拆解的汉字。 汉字 拼音 五笔编码 五笔拆分图解 缺 que rmn 颜 yan utem 爬 pa rhyc 辣 la ugk 即 ji vcb 鹿 lù ynjx 庸 yong yveh 谣 yao yer 瓣 ban ur 刻 ke ynt 曳 ye jxe 舟 zhou tei 凹 ao mmgd 凸 tu hgm 戈 ge agnt 戒 jie aak 某 mou afs 浅 qian igt 晓 xiao jat 套 tao ddu 善 shan uduk 卫 wei bg 巴 ba cnh 识别码表，打完编码输入识别码确定左右型 、上下型、杂合型。 参考 https://www.52wubi.com/wbbmcx/search.php https://wubizhijia.com/zigenbiao/66.html https://www.dazima.cn/jiaocheng/20110410271.html https://www.hanzi5.com/</summary>
             
@@ -775,13 +811,13 @@ youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --p
     
         <entry>
             <title type="text">Mac使用技巧</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
-            <id>https://xtvj.github.io/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
+            <id>http://localhost:1313/posts/mac%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
             <updated>2024-03-24T12:29:05&#43;08:00</updated>
             <published>2020-10-29T10:09:51&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">之前很多东西都懒得记录，现在发现改的东西多了，很多细节很容易就忘，故做此流水记录。 首选AppStore &amp;gt;次选Brew &amp;gt;再者Dmg &amp;gt;最后PKG。 由于我不用appstore安装应用，固能用brew方式安装的应用尽量用brew安装。 软件： 注：软件名带删除线的为备用软件，需要时再安装。 软件 说明 Homebrew https://brew.sh/ Chrome 下载Chrome使用国外地址，国内地址下来的是国内版，已经与国际版有区别。1、在同步设置使用自定义同步，关闭同步“打开的标签页”，可以取消右键的“发送页面到XX设备”。2、DOH设置自定义：https://94.140.14.140/dns-query Ungoogled Chromium brew install --cask eloston-chromium 开源去谷歌化的Chromi……</summary>
             
@@ -1133,13 +1169,13 @@ UUID=3B87FF76-C6DA-49BF-B911-61DE2331E9F5 none ntfs noauto 0 0
     
         <entry>
             <title type="text">Mac上好用又漂亮的终端</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/" />
-            <id>https://xtvj.github.io/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/" />
+            <id>http://localhost:1313/posts/mac%E4%B8%8A%E5%A5%BD%E7%94%A8%E5%8F%88%E6%BC%82%E4%BA%AE%E7%9A%84%E7%BB%88%E7%AB%AF/</id>
             <updated>2024-02-12T17:20:01&#43;08:00</updated>
             <published>2020-10-19T19:45:27&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">由于zsh可使用插件，并且Github上有很多搭配iTerm的开源项目，由此iTerm + zsh是Mac 终端利器一点不为过。 iTerm2 安装brew： /bin/bash -c &amp;#34;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)&amp;#34; 安装iTerm2： brew install iterm2 或去官网下载安装：https://iterm2.com/downloads.html 代码配色 使用 iTerm2-Color-Schemes 的配色合集 mkdir ~/.iterm2 &amp;amp;&amp;amp; cd ~/.iterm2 git clone https://github.com/mbadolato/iTerm2-Color-Schemes 导入配色方案 Preferences...→Profiles→Colors→Color Presets...→Import...→选择刚才.iterm2的子文件夹schemes下的所有文件。 导入后重新打开iTerm2再在Colors Presets中选择想用的配色。上图所用配色为Dracula 字体 如果不装字体……</summary>
             
@@ -1248,7 +1284,7 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/mac/" term="Mac" label="Mac" />
+                                <category scheme="http://localhost:1313/tags/mac/" term="Mac" label="Mac" />
                             
                         
                     
@@ -1258,13 +1294,13 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
     
         <entry>
             <title type="text">影视观后记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/" />
+            <id>http://localhost:1313/posts/%E5%BD%B1%E8%A7%86%E8%A7%82%E5%90%8E%E8%AE%B0%E5%BD%95/</id>
             <updated>2024-02-16T20:45:32&#43;08:00</updated>
             <published>2020-07-06T16:20:22&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">看过的电影太多了，好多都想不起来当初观看时的印象，2020年4月萌生记录日常的想法，随写下此文。记录只是写下记录的那一个时间点的个人想法，存到自己风烛残年之时用来回忆。 影片名 中文名 年代 观看日期 类型 观后记录 1 Just Mercy 正义的慈悲 2019 2020/4/8 剧情，真实事件改编 讲一位黑人律师为贫困罪犯洗冤的故事。电影没有大的波澜，主要是伸张正义，有抨击美国种族歧视的味道。和《白皮书》差不多。电影一般般，主要是以真实事件为背景的故事，真实事件才动人。不会看第二遍。 2 Bad Boys 绝地战警 1995 2020/4/9 动作片，警察与毒贩 毒贩偷了警局里的毒品，然后警察破案的过程。电影1小时58分，只有开头十几分钟和结尾二十来分钟动作好看，中间大部分时间很拖，看的我连按快……</summary>
             
@@ -3269,13 +3305,13 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/%E7%94%B5%E5%BD%B1/" term="电影" label="电影" />
+                                <category scheme="http://localhost:1313/tags/%E7%94%B5%E5%BD%B1/" term="电影" label="电影" />
                             
                         
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/%E7%94%9F%E6%B4%BB/" term="生活" label="生活" />
+                                <category scheme="http://localhost:1313/tags/%E7%94%9F%E6%B4%BB/" term="生活" label="生活" />
                             
                         
                     
@@ -3285,13 +3321,13 @@ drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
     
         <entry>
             <title type="text">PC使用技巧</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
-            <id>https://xtvj.github.io/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/" />
+            <id>http://localhost:1313/posts/pc%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/</id>
             <updated>2024-02-12T17:26:31&#43;08:00</updated>
             <published>2020-04-08T05:41:58&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">Excel移动列 选中列，按住shift键，当鼠标变成十字型时候，可以拖拽到任意指定列 Win10设置右键打开cmd https://blog.csdn.net/mooneve/article/details/78821843 https://blog.csdn.net/hiudawn/article/details/80701935 ffmpeg提取字幕流 //原始文本输出 ffmpeg -i output.mkv -an -vn -bsf:s mov2textsub -scodec copy -f rawvideo sub.txt ffmpeg -i output.mkv -an -vn -c:s copy -f rawvideo -map 0:s sub2.txt //ass格式输出 ffmpeg -i output.mkv -an -vn -scodec copy sub3.ass Windows自带MD5、SHA1、SHA256命令 //certutil -hashfile &amp;lt;文件名&amp;gt; &amp;lt;hash类型&amp;gt; certutil -hashfile 3.mp4 SHA256 ffmpeg合并音频和视频 ffmpeg -i video.mp4 -i audio.wav -c:v copy -c:a aac -strict experimental output.mp4 复制音频而无需重新编码，如果您的输出容器可以（几乎）处理任何编解码器（例如MKV），那么您只需复制音频和视频流即可： ffmpeg -i video.mp4 -i audio.wav -c copy output.mkv</summary>
             
@@ -3342,13 +3378,13 @@ certutil -hashfile  3.mp4 SHA256
     
         <entry>
             <title type="text">Android开发填坑记录</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" />
-            <id>https://xtvj.github.io/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/" />
+            <id>http://localhost:1313/posts/android%E5%BC%80%E5%8F%91%E5%A1%AB%E5%9D%91%E8%AE%B0%E5%BD%95/</id>
             <updated>2024-02-12T17:21:05&#43;08:00</updated>
             <published>2019-10-12T22:31:45&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">双冒号运算就是Java中的[方法引用],[方法引用]的格式是 类名::方法名。 一般是用作Lambda表达式 例如 表达式: 1 person -&amp;gt; person.getName(); 可以替换成 1 Person::getName 表达式 1 () -&amp;gt; new HashMap&amp;lt;&amp;gt;(); 可以替换成 1 HashMap::new 这种[方法引用]或者说[双冒号运算]对应的参数类型是Function&amp;lt;T,R&amp;gt; T表示传入类型，R表示返回类型。 Android studio快捷键 按键 说明 Shift + F2 定位到错误行 Ctrl(Command)+Shift+ - / + 折叠/展开全部代码 Ctrl(Command)+F12 显示当前文件的结构 Shift + F11 查看书签 F11 添加书签 Ctrl + Alt + M 快速抽取方法 一、启动app adb shell am start 包名/MainActivity 二、停止app adb shell am force-stop com.xxx.xxx 这种方法会强制停止APP进程，不会清除APP进程在系统中产生的数据 adb shell pm clear com.xxx.xxx 这种方法不仅会停止A……</summary>
             
@@ -4030,7 +4066,7 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
                             
                             
                             
-                                <category scheme="https://xtvj.github.io/tags/android/" term="Android" label="Android" />
+                                <category scheme="http://localhost:1313/tags/android/" term="Android" label="Android" />
                             
                         
                     
@@ -4040,13 +4076,13 @@ StringBuilder:字符串变量(线程不安全) 确保单线程下可用，效率
     
         <entry>
             <title type="text">不Root手机禁用系统应用</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" />
-            <id>https://xtvj.github.io/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/" />
+            <id>http://localhost:1313/posts/%E4%B8%8Droot%E6%89%8B%E6%9C%BA%E7%A6%81%E7%94%A8%E7%B3%BB%E7%BB%9F%E5%BA%94%E7%94%A8/</id>
             <updated>2024-02-12T17:30:22&#43;08:00</updated>
             <published>2018-06-27T20:23:52&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">用的三星S7edge升级到了官方的Android8.0系统，更新后原来的Packages disabler pro不能用了，现在又没有Root的方案，想要禁用那些臃肿的系统软件就只能用adb方式了。 手机打开开发者模式，打开usb调试，手机连接电脑，电脑上配置好ADB环境。 执行以下命令 （注:由于禁用了系统自带的文件夹浏览器和网络浏览器，禁用前请先安装一个浏览器或文件管理器，以方便以后安装应用。也可用adb install安装应用。） adb shell pm disable-user com.mobeam.barcodeService pm disable-user com.sec.android.widgetapp.samsungapps pm disable-user com.samsung.android.app.galaxyfinder pm disable-user com.samsung.android.themestore pm disable-user com.samsung.android.app.cocktailbarservice pm disable-user com.samsung.svoice.sync pm disable-user com.osp.app.signin pm disable-user com.google.android.onetimeinitializer pm disable-user com.google.android.ext.shared pm disable-user com.android.wallpapercropper pm disable-user com.samsung.android.app.withtv pm disable-user com.samsung.android.smartmirroring pm disable-user org.simalliance.openmobileapi.service pm disable-user com.samsung.android.easysetup pm disable-user com.sec.android.easyonehand pm disable-user com.sec.factory pm disable-user com.samsung.android.app.sbrowseredge pm disable-user com.samsung.android.wechatwifiservice pm disable-user com.sec.android.easyMover.Agent pm disable-user com.samsung.faceservice pm disable-user com.sec.android.widgetapp.easymodecontactswidget pm disable-user com.sec.android.app.samsungapps pm disable-user com.oupeng.max.sdk pm disable-user com.google.android.configupdater pm disable-user com.sec.android.app.billing pm disable-user com.sec.android.daemonapp pm disable-user com.sec.sve pm disable-user com.dsi.ant.service.socket pm disable-user com.sec.android.AutoPreconfig pm disable-user com.sec.android.app.soundalive pm……</summary>
             
@@ -4211,13 +4247,13 @@ pm disable-user com.samsung.android.video
     
         <entry>
             <title type="text">一些有道理的话</title>
-            <link rel="alternate" type="text/html" href="https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/" />
-            <id>https://xtvj.github.io/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</id>
+            <link rel="alternate" type="text/html" href="http://localhost:1313/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/" />
+            <id>http://localhost:1313/posts/%E4%B8%80%E4%BA%9B%E6%9C%89%E9%81%93%E7%90%86%E7%9A%84%E8%AF%9D/</id>
             <updated>2024-02-12T17:29:44&#43;08:00</updated>
             <published>2018-05-19T16:06:49&#43;08:00</published>
             <author>
                     <name>xtvj</name>
-                    <uri>https://xtvj.github.io/</uri>
+                    <uri>http://localhost:1313/</uri>
                     </author>
             <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)</rights><summary type="html">人类容易拥有一个心理偏见，就是【喜好扭曲】，包括格外喜欢自己、自己这类人、自己的知识架构、以及非常容易被自己喜欢的人误导的倾向。以及另一方面的，【厌恶扭曲】，即不愿意从不喜欢的人那里学习的一种倾向。</summary>
             
