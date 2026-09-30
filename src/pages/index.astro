@@ -1,0 +1,25 @@
+---
+import { getPosts } from '../lib/posts';
+import PostCard from '../components/PostCard.astro';
+import Pagination from '../components/Pagination.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { sortPosts } from '../lib/site';
+
+const posts = sortPosts(await getPosts());
+const pageSize = 10;
+const totalPages = Math.ceil(posts.length / pageSize);
+const visiblePosts = posts.slice(0, pageSize);
+---
+
+<SiteLayout description="XTVJ 的个人博客，记录电影、软件、电脑与日常使用技巧。">
+  <section class="intro intro-compact" aria-label="博客概况">
+    <div class="intro-meta"><span>{posts.length} 篇文章</span></div>
+  </section>
+
+  <section class="post-list" aria-label="文章列表">
+    <div class="section-heading"><h2>最近的记录</h2><span>按发布时间排列</span></div>
+    {visiblePosts.map((post) => <PostCard post={post} />)}
+    {visiblePosts.length === 0 && <p class="empty-state">还没有文章。</p>}
+    <Pagination current={1} total={totalPages} />
+  </section>
+</SiteLayout>

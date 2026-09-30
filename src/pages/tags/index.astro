@@ -1,0 +1,25 @@
+---
+import { getPosts } from '../../lib/posts';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { tagHref } from '../../lib/site';
+
+const posts = await getPosts();
+const counts = new Map<string, number>();
+for (const post of posts) {
+  for (const tag of post.data.tags) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+}
+const tags = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'zh-CN'));
+---
+
+<SiteLayout title="标签">
+  <section class="archive-heading">
+    <p class="eyebrow">TOPICS</p>
+    <h1>标签</h1>
+    <p>按主题浏览这些记录。</p>
+  </section>
+  <section class="tag-cloud">
+    {tags.map(([tag, count]) => (
+      <a class="tag-item" href={tagHref(tag)}><span>{tag}</span><small>{count}</small></a>
+    ))}
+  </section>
+</SiteLayout>

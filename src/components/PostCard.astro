@@ -1,0 +1,28 @@
+---
+import type { Post } from '../lib/site';
+import { formatDate, postHref, tagHref } from '../lib/site';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { data } = post;
+---
+
+<article class="post-card">
+  <div class="post-card-date">{formatDate(data.date)}</div>
+  <div class="post-card-content">
+    <h2><a href={postHref(data.slug)}>{data.title}</a></h2>
+    <div class="post-card-footer">
+      <div class="post-tags">
+        {data.tags.slice(0, 3).map((tag) => <a class="tag" href={tagHref(tag)}>{tag}</a>)}
+      </div>
+      <div class="post-stats">
+        {data.updated && <span>更新于 {formatDate(data.updated)}</span>}
+        {typeof data.views === 'number' && <span>{data.views.toLocaleString('zh-CN')} 次阅读</span>}
+        {typeof data.readMinutes === 'number' && <span>{data.readMinutes} 分钟</span>}
+      </div>
+    </div>
+  </div>
+</article>

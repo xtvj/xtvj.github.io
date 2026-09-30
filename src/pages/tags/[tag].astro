@@ -1,0 +1,28 @@
+---
+import { getPosts } from '../../lib/posts';
+import PostCard from '../../components/PostCard.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { sortPosts } from '../../lib/site';
+
+const posts = sortPosts(await getPosts());
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({ params: { tag }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const taggedPosts = posts.filter((post) => post.data.tags.includes(tag));
+---
+
+<SiteLayout title={`标签：${tag}`}>
+  <section class="archive-heading">
+    <p class="eyebrow">TAG ARCHIVE</p>
+    <h1>{tag}</h1>
+    <p>{taggedPosts.length} 篇相关记录</p>
+  </section>
+  <section class="post-list">
+    {taggedPosts.map((post) => <PostCard post={post} />)}
+  </section>
+</SiteLayout>

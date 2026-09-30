@@ -1,0 +1,36 @@
+---
+import { getPosts } from '../../lib/posts';
+import PostCard from '../../components/PostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { sortPosts } from '../../lib/site';
+
+const pageSize = 10;
+const posts = sortPosts(await getPosts());
+const totalPages = Math.ceil(posts.length / pageSize);
+
+export async function getStaticPaths() {
+  const pageSize = 10;
+  const posts = sortPosts(await getPosts());
+  const count = Math.ceil(posts.length / pageSize);
+  return Array.from({ length: Math.max(0, count - 1) }, (_, index) => ({
+    params: { page: String(index + 2) },
+    props: { page: index + 2 },
+  }));
+}
+
+const { page } = Astro.props;
+const visiblePosts = posts.slice((page - 1) * pageSize, page * pageSize);
+---
+
+<SiteLayout title={`文章 · 第 ${page} 页`}>
+  <section class="archive-heading">
+    <p class="eyebrow">ARCHIVE</p>
+    <h1>文章</h1>
+    <p>第 {page} 页，共 {posts.length} 篇记录</p>
+  </section>
+  <section class="post-list" aria-label="文章列表">
+    {visiblePosts.map((post) => <PostCard post={post} />)}
+    <Pagination current={page} total={totalPages} />
+  </section>
+</SiteLayout>

@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'XTVJ的博客', description = '个人记录与技术笔记' } = Astro.props;
+const home = import.meta.env.BASE_URL;
+const currentPath = Astro.url.pathname;
+const active = currentPath.includes('/tags/') ? 'tags' : currentPath.includes('/about') ? 'about' : 'posts';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f6f5f1" />
+    <link rel="icon" href={`${home}favicon.ico`} sizes="16x16 32x32 48x48" />
+    <link rel="icon" href={`${home}favicon.png`} type="image/png" sizes="203x203" />
+    <link rel="icon" href={`${home}favicon.svg`} type="image/svg+xml" sizes="any" />
+    <link rel="apple-touch-icon" href={`${home}icons/apple-touch-icon.png`} sizes="180x180" />
+    <link rel="mask-icon" href={`${home}icons/safari-pinned-tab.svg`} color="#005678" />
+    <link rel="manifest" href={`${home}manifest.json`} />
+    <title>{title === 'XTVJ的博客' ? title : `${title} · XTVJ的博客`}</title>
+    <script is:inline>
+      try {
+        const saved = JSON.parse(localStorage.getItem('xtvj-display-settings') || '{}');
+        const root = document.documentElement;
+        root.dataset.theme = ['system', 'light', 'dark'].includes(saved.theme) ? saved.theme : 'system';
+        root.dataset.width = ['normal', 'wide'].includes(saved.width) ? saved.width : 'normal';
+        const fontSize = Number(saved.fontSize);
+        root.style.fontSize = `${Number.isFinite(fontSize) && fontSize >= 15 && fontSize <= 23 ? fontSize : 17}px`;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={home} aria-label="XTVJ的博客首页">
+          <img class="brand-mark" src={`${home}favicon.svg`} width="32" height="32" alt="" />
+          <span>XTVJ<span class="brand-subtitle">的博客</span></span>
+        </a>
+        <nav class="main-nav" aria-label="主导航">
+          <a class:list={[{ active: active === 'posts' }]} href={home}>文章</a>
+          <a class:list={[{ active: active === 'tags' }]} href={`${home}tags/`}>标签</a>
+          <a class:list={[{ active: active === 'about' }]} href={`${home}about/`}>关于</a>
+        </nav>
+        <div class="header-actions">
+          <form class="header-search" action={`${home}search/`} method="get" role="search">
+            <label class="sr-only" for="site-search">搜索文章</label>
+            <input id="site-search" type="search" name="q" placeholder="搜索文章" />
+            <button aria-label="搜索" type="submit">⌕</button>
+          </form>
+          <button class="settings-button" id="settings-button" type="button" aria-label="显示设置" aria-controls="settings-panel" aria-expanded="false" title="显示设置">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9m4 0h3M4 17h3m4 0h9M13 4v6M7 14v6" /></svg>
+          </button>
+          <dialog class="settings-panel" id="settings-panel" aria-labelledby="settings-title">
+            <div class="settings-heading">
+              <h2 id="settings-title">显示设置</h2>
+              <button class="settings-close" type="button" aria-label="关闭设置" data-close-settings>×</button>
+            </div>
+            <fieldset class="setting-group">
+              <legend>页面宽度</legend>
+              <div class="setting-options">
+                <button type="button" data-pref="width" data-value="normal">标准</button>
+                <button type="button" data-pref="width" data-value="wide">宽屏</button>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend>字体大小 <output id="font-size-output">17 px</output></legend>
+              <div class="font-size-control">
+                <button type="button" id="font-smaller" aria-label="减小字体">A−</button>
+                <input id="font-size-slider" type="range" min="15" max="23" step="1" value="17" aria-label="字体大小" />
+                <button type="button" id="font-larger" aria-label="增大字体">A+</button>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend>颜色主题</legend>
+              <div class="setting-options theme-options">
+                <button type="button" data-pref="theme" data-value="system">系统</button>
+                <button type="button" data-pref="theme" data-value="light">日间</button>
+                <button type="button" data-pref="theme" data-value="dark">夜间</button>
+              </div>
+            </fieldset>
+          </dialog>
+        </div>
+      </div>
+    </header>
+    <main class="site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <span>© 2017–2024 xtvj</span>
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license">CC BY-NC-SA 4.0</a>
+    </footer>
+    <script>
+      import '../scripts/display-settings.ts';
+    </script>
+  </body>
+</html>
