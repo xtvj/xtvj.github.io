@@ -1,10 +1,36 @@
-﻿const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+const apiUrl = process.env.PUBLIC_INSTAGRAM_API_URL;
 const version = process.env.INSTAGRAM_API_VERSION || 'v25.0';
 const output = new URL('../public/instagram/posts.json', import.meta.url);
 const mediaDir = new URL('../public/instagram/media/', import.meta.url);
 if (!token) {
-  console.log('Instagram sync skipped: INSTAGRAM_ACCESS_TOKEN is not set.');
-  process.exit(0);
+  if (!apiUrl) {
+    console.log('Instagram sync skipped: neither INSTAGRAM_ACCESS_TOKEN nor PUBLIC_INSTAGRAM_API_URL is set.');
+    process.exit(0);
+  }
+  try {
+    const endpoint = new URL(apiUrl);
+    endpoint.pathname = endpoint.pathname.replace(/\/+$/, '');
+    if (!endpoint.pathname || endpoint.pathname === '/') endpoint.pathname = '/api/instagram';
+    const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, signal: AbortSignal.timeout(15000) });
+    const feed = await response.json();
+    if (!response.ok || feed.error) throw new Error(feed.error || 'Instagram API HTTP ' + response.status);
+    if (!Array.isArray(feed.posts) || feed.posts.length === 0) {
+      throw new Error('Cloudflare Worker returned 0 Instagram posts. Check its token and Instagram permissions.');
+    }
+    const { mkdir, writeFile } = await import('node:fs/promises');
+    await mkdir(new URL('../public/instagram/', import.meta.url), { recursive: true });
+    const cachedFeed = {
+      ...feed,
+      posts: feed.posts.map(({ imageUrl, ...post }) => ({ ...post, image: imageUrl || post.image || null })),
+    };
+    await writeFile(output, JSON.stringify(cachedFeed, null, 2) + '\n');
+    console.log('Instagram sync complete from Cloudflare Worker: ' + feed.posts.length + ' posts saved.');
+  } catch (error) {
+    console.error('Instagram Worker sync failed: ' + error.message);
+    process.exitCode = 1;
+  }
+  process.exit();
 }
 const fields = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count';
 async function getJson(url) {

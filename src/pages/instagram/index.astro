@@ -27,7 +27,7 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
   <div class="ig-feed" id="ig-feed" data-api-url={apiUrl}>
     {posts.map((post, index) => <article class="ig-post">
       <a class="post-visual" href={post.permalink} target="_blank" rel="noopener noreferrer" aria-label="在 Instagram 查看这篇帖子">
-        {post.image ? <img src={base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
+        {post.image ? <img src={/^https?:\/\//.test(post.image) ? post.image : base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
         <span class="media-badge">{mediaLabel(post.mediaType)}</span>
       </a>
       <div class="post-detail">
@@ -121,7 +121,9 @@ if (root && apiUrl) {
     article.append(link, detail);
     return article;
   };
-  fetch(apiUrl, { headers: { Accept: 'application/json' }, cache: 'no-store' })
+  const apiController = new AbortController();
+  const apiTimeout = window.setTimeout(() => apiController.abort(), 15000);
+  fetch(apiUrl, { headers: { Accept: 'application/json' }, cache: 'no-store', signal: apiController.signal })
     .then(async (response) => {
       const feed = await response.json();
       if (!response.ok || feed.error) throw new Error(feed.error || 'Instagram API HTTP ' + response.status);
@@ -141,13 +143,14 @@ if (root && apiUrl) {
     })
     .catch((error) => {
       console.error('Instagram feed request failed:', error);
-      const message = error.message || '\u8bf7\u68c0\u67e5 Worker \u914d\u7f6e';
+      const message = error.name === 'AbortError' ? '\u8bf7\u6c42\u8d85\u65f6\uff0c\u8bf7\u68c0\u67e5 Worker \u548c Instagram API' : (error.message || '\u8bf7\u68c0\u67e5 Worker \u914d\u7f6e');
       status.textContent = posts.length ? '\u5b9e\u65f6\u8bfb\u53d6\u5931\u8d25\uff0c\u663e\u793a\u6700\u8fd1\u7f13\u5b58' : '\u8bfb\u53d6\u5931\u8d25\uff1a' + message;
       if (empty && !posts.length) {
         empty.querySelector('h2').textContent = '\u65e0\u6cd5\u8bfb\u53d6 Instagram 帖子';
         empty.querySelector('p:not(.empty-kicker)').textContent = message;
       }
-    });
+    })
+    .finally(() => window.clearTimeout(apiTimeout));
 } else if (root) {
   const status = document.querySelector('#feed-status');
   const message = configuredApiUrl ? '\u63a5\u53e3\u5730\u5740\u65e0\u6548\uff0c\u8bf7\u68c0\u67e5 GitHub variable' : '\u672a\u914d\u7f6e\u5b9e\u65f6\u63a5\u53e3\u5730\u5740';
