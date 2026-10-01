@@ -9,7 +9,7 @@
   "scripts": {
     "predev": "node scripts/sync-images.mjs",
     "dev": "astro dev",
-    "prebuild": "node scripts/sync-images.mjs",
+    "prebuild": "node scripts/sync-images.mjs && node scripts/sync-instagram.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },

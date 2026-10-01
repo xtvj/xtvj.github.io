@@ -1,0 +1,159 @@
+---
+import { readFile } from 'node:fs/promises';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+const dataUrl = new URL('../../../public/instagram/posts.json', import.meta.url);
+let feed = { username: 'xtvjdev', fetchedAt: null, posts: [] };
+try { feed = JSON.parse((await readFile(dataUrl, 'utf8')).replace(/^\\uFEFF/, '')); } catch {}
+const posts = feed.posts || [];
+const apiUrl = import.meta.env.PUBLIC_INSTAGRAM_API_URL || '';
+const base = import.meta.env.BASE_URL;
+const dateFormat = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+const numberFormat = new Intl.NumberFormat('zh-CN');
+const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '多图' }[type] || 'Post');
+---
+<SiteLayout title="Instagram" description="XTVJ 在 Instagram 上分享的照片、视频与日常记录。">
+<section class="ig-page">
+  <header class="ig-heading">
+    <div class="ig-heading-copy">
+      <p class="eyebrow"><span class="ig-glyph">◎</span> INSTAGRAM JOURNAL</p>
+      <h1>镜头里的日常<span>，慢慢收藏。</span></h1>
+      <p class="ig-lede">这里收录了我在 Instagram 分享的照片、片段和生活记录。</p>
+    </div>
+    <a class="ig-profile" href="https://www.instagram.com/xtvjdev/" target="_blank" rel="noopener noreferrer">
+      <span class="profile-avatar">X</span><span class="profile-copy"><strong>@{feed.username || 'xtvjdev'}</strong><small>在 Instagram 查看个人主页 ↗</small></span>
+    </a>
+  </header>
+  <div class="feed-bar"><span><i></i> 最新分享</span><span id="feed-status">{apiUrl ? (posts.length ? posts.length + ' 篇记录' : '实时接口连接中') : (posts.length ? '最近构建缓存' : '实时接口待配置')}</span></div>
+  <div class="ig-feed" id="ig-feed" data-api-url={apiUrl}>
+    {posts.map((post, index) => <article class="ig-post">
+      <a class="post-visual" href={post.permalink} target="_blank" rel="noopener noreferrer" aria-label="在 Instagram 查看这篇帖子">
+        {post.image ? <img src={base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
+        <span class="media-badge">{mediaLabel(post.mediaType)}</span>
+      </a>
+      <div class="post-detail">
+        <div class="post-meta"><time datetime={post.timestamp}>{dateFormat.format(new Date(post.timestamp))}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
+        <p class="post-caption">{post.caption || '这篇分享没有添加文字。'}</p>
+        <div class="post-stats">
+          {post.likes !== null && post.likes !== undefined && <span><b>♡</b>{numberFormat.format(post.likes)} <small>赞</small></span>}
+          {post.comments !== null && post.comments !== undefined && <span><b>◌</b>{numberFormat.format(post.comments)} <small>评论</small></span>}
+          <span class="post-account">@{feed.username}</span>
+        </div>
+      </div>
+    </article>)}
+  </div>
+  <section class="ig-empty" hidden={posts.length > 0}>
+    <div class="empty-camera"><span></span></div><p class="empty-kicker">A LITTLE WINDOW TO MY WORLD</p>
+    <h2>新记录正在路上</h2><p>配置 Instagram API 后，这里会自动整理最新的帖子。也可以先去 Instagram 看看我的分享。</p>
+    <a href="https://www.instagram.com/xtvjdev/" target="_blank" rel="noopener noreferrer">前往 Instagram <span>↗</span></a>
+  </section>
+  {feed.fetchedAt && <p class="sync-note">最近同步于 {dateFormat.format(new Date(feed.fetchedAt))} · 内容来自 Instagram</p>}
+</section>
+</SiteLayout>
+<script>
+const root = document.querySelector('#ig-feed');
+const apiUrl = root?.dataset.apiUrl;
+if (root && apiUrl) {
+  const status = document.querySelector('#feed-status');
+  const empty = document.querySelector('.ig-empty');
+  const mediaName = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '多图' }[type] || 'Post');
+  const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+  const count = new Intl.NumberFormat('zh-CN');
+  const el = (tag, className, text) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+  const postNode = (post, username, index) => {
+    const article = el('article', 'ig-post');
+    const link = el('a', 'post-visual');
+    link.href = post.permalink;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.setAttribute('aria-label', '在 Instagram 查看这篇帖子');
+    if (post.imageUrl && /^https:\/\//.test(post.imageUrl)) {
+      const image = el('img');
+      image.src = post.imageUrl;
+      image.alt = post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片';
+      image.loading = index > 1 ? 'lazy' : 'eager';
+      link.append(image);
+    } else {
+      const placeholder = el('div', 'visual-placeholder');
+      placeholder.append(el('span', '', '◎'), el('small', '', mediaName(post.mediaType)));
+      link.append(placeholder);
+    }
+    link.append(el('span', 'media-badge', mediaName(post.mediaType)));
+    const detail = el('div', 'post-detail');
+    const meta = el('div', 'post-meta');
+    const time = el('time', '', date.format(new Date(post.timestamp)));
+    time.dateTime = post.timestamp;
+    meta.append(time, el('span', 'post-dot', '·'), el('span', '', mediaName(post.mediaType)));
+    const original = el('a', '', '查看原帖 ↗');
+    original.href = post.permalink;
+    original.target = '_blank';
+    original.rel = 'noopener noreferrer';
+    meta.append(original);
+    const caption = el('p', 'post-caption', post.caption || '这篇分享没有添加文字。');
+    const stats = el('div', 'post-stats');
+    if (post.likes !== null && post.likes !== undefined) {
+      const likes = el('span');
+      likes.append(el('b', '', '♡'), document.createTextNode(count.format(post.likes) + ' '), el('small', '', '赞'));
+      stats.append(likes);
+    }
+    if (post.comments !== null && post.comments !== undefined) {
+      const comments = el('span');
+      comments.append(el('b', '', '◌'), document.createTextNode(count.format(post.comments) + ' '), el('small', '', '评论'));
+      stats.append(comments);
+    }
+    stats.append(el('span', 'post-account', '@' + username));
+    detail.append(meta, caption, stats);
+    article.append(link, detail);
+    return article;
+  };
+  fetch(apiUrl, { headers: { Accept: 'application/json' } })
+    .then((response) => {
+      if (!response.ok) throw new Error('Instagram API HTTP ' + response.status);
+      return response.json();
+    })
+    .then((feed) => {
+      if (!Array.isArray(feed.posts)) throw new Error('Invalid Instagram feed');
+      root.replaceChildren(...feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', index)));
+      if (empty) empty.hidden = feed.posts.length > 0;
+      status.textContent = feed.posts.length ? feed.posts.length + ' 篇记录 · 实时' : '暂时没有帖子';
+      const note = document.querySelector('.sync-note');
+      if (note) note.textContent = '刚刚从 Instagram 获取 · 内容来自 Instagram';
+    })
+    .catch(() => {
+      status.textContent = '显示最近缓存';
+    });
+}
+</script>
+<style>
+.ig-page{padding:3.6rem 0 5rem}.ig-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding:0 0 2.5rem}
+.eyebrow{display:flex;align-items:center;gap:.55rem;margin:0 0 1rem;color:var(--muted);font:500 .72rem var(--mono);letter-spacing:.13em}
+.ig-glyph{display:grid;place-items:center;width:23px;height:23px;border:1px solid var(--line);border-radius:50%;color:#b77b55;font:1rem sans-serif;letter-spacing:0}
+h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);line-height:1.16;letter-spacing:-.06em}h1 span{color:var(--muted)}
+.ig-lede{margin:.9rem 0 0;color:var(--muted);font-size:.94rem}
+.ig-profile{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem .7rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);transition:border-color .2s,transform .2s;white-space:nowrap}
+.ig-profile:hover{border-color:var(--accent);transform:translateY(-2px)}.profile-avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:white;font-weight:700;background:linear-gradient(135deg,#f2b95f,#dc605d 52%,#9c4c9f)}
+.profile-copy{display:grid;gap:.15rem}.profile-copy strong{font-size:.84rem}.profile-copy small{color:var(--muted);font-size:.68rem}
+.feed-bar{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-size:.77rem}
+.feed-bar>span:first-child{display:flex;align-items:center;gap:.55rem;color:var(--ink);font-weight:650}.feed-bar i{width:7px;height:7px;border-radius:50%;background:#7c9c80;box-shadow:0 0 0 4px #7c9c8026}
+.ig-feed{display:grid}.ig-post{display:grid;grid-template-columns:minmax(220px,32%) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.25rem);padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.post-visual{position:relative;overflow:hidden;display:grid;place-items:center;aspect-ratio:1.28;border-radius:12px;background:linear-gradient(145deg,#e8e3d8,#c7d0c5)}
+.post-visual img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}.post-visual:hover img{transform:scale(1.035)}
+.media-badge{position:absolute;top:.75rem;left:.75rem;padding:.32rem .58rem;border:1px solid #ffffff72;border-radius:999px;color:white;background:#171b17a8;backdrop-filter:blur(10px);font-size:.68rem}
+.visual-placeholder{display:grid;justify-items:center;gap:.2rem;color:#fff;font-size:3rem}.visual-placeholder small{font:.7rem var(--mono)}
+.post-detail{display:flex;min-width:0;flex-direction:column;padding:.35rem 0}.post-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;color:var(--muted);font-size:.75rem}.post-meta a{margin-left:auto;color:var(--accent)}
+.post-dot{color:var(--soft)}.post-caption{margin:1.35rem 0;font-size:.97rem;line-height:1.9;white-space:pre-line;overflow-wrap:anywhere}
+.post-stats{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+.post-stats span{display:inline-flex;align-items:center;gap:.35rem}.post-stats b{color:#b77b72;font-size:1.05rem}.post-stats small{font-size:.72rem}.post-account{margin-left:auto;font:.72rem var(--mono)}
+.ig-empty{display:grid;justify-items:center;padding:5.4rem 1.5rem 6rem;text-align:center}.empty-camera{position:relative;display:grid;place-items:center;width:74px;height:74px;margin-bottom:1.5rem;border:1px solid var(--line);border-radius:24px;background:var(--paper);transform:rotate(-5deg)}
+.empty-camera:before{content:'';width:30px;height:23px;border:2px solid var(--accent);border-radius:7px}.empty-camera span{position:absolute;width:9px;height:9px;border:2px solid var(--accent);border-radius:50%}
+.empty-kicker{margin:0 0 .8rem;color:var(--soft);font:.65rem var(--mono);letter-spacing:.14em}.ig-empty h2{margin:0;font-size:1.7rem;letter-spacing:-.04em}
+.ig-empty>p:not(.empty-kicker){max-width:430px;margin:.8rem 0 1.3rem;color:var(--muted);font-size:.88rem;line-height:1.8}
+.ig-empty>a{display:inline-flex;gap:.55rem;padding:.72rem 1rem;border-radius:999px;color:#fff;background:#343c35;font-size:.8rem;transition:transform .2s}.ig-empty>a:hover{transform:translateY(-2px);color:#fff}
+.sync-note{margin-top:1.5rem;text-align:right;color:var(--soft);font-size:.7rem}
+@media(max-width:720px){.ig-page{padding:2.5rem 0 3.5rem}.ig-heading{align-items:flex-start;flex-direction:column;gap:1.3rem;padding-bottom:1.8rem}.ig-profile{align-self:flex-start}.ig-post{grid-template-columns:minmax(150px,38%) minmax(0,1fr);gap:1.15rem;padding:1.1rem 0}.post-visual{aspect-ratio:1}.post-caption{margin:.9rem 0;font-size:.87rem;line-height:1.7}.post-stats{gap:.75rem}.post-account{display:none}}
+@media(max-width:480px){.ig-post{grid-template-columns:1fr;gap:.9rem}.post-visual{aspect-ratio:1.28}.post-detail{padding:0 .1rem .2rem}.post-caption{margin:.75rem 0}.ig-empty{padding:4rem 1rem}}
+</style>

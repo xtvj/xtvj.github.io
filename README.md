@@ -28,6 +28,23 @@ npm run preview
 
 该域名是 `xtvj.github.io` 用户站点，因此默认部署在站点根路径，不需要配置子目录。若将项目部署到普通仓库的 `username.github.io/repository/` 路径，可在构建时设置 `SITE_BASE=/repository`。
 
+## Instagram 页面
+
+页面首次打开时会请求 Cloudflare Worker，由 Worker 使用私密 token 实时读取 @xtvjdev 的最新 30 篇帖子；页面每次访问都会刷新，Worker 缓存 60 秒以减少 Instagram API 请求。帖子图片、日期、完整文案、类型、赞数、评论数和原帖链接会显示在每条记录中。若实时接口暂时不可用，页面会保留并显示构建时生成的最近缓存。
+
+Instagram 这里使用授权生成的 User Access Token，不是 API key。账号必须是 Creator（创作者）或 Business（企业）专业账号。Meta 当前读取媒体需要 instagram_business_basic 权限，流程及账号要求以 Meta Instagram Platform 文档为准：
+https://developers.facebook.com/documentation/instagram-platform/instagram-api-with-instagram-login
+
+### 一次性配置实时接口
+
+1. 在 Meta for Developers 创建应用，添加 Instagram Login/API 产品，授权 @xtvjdev，申请 instagram_business_basic 权限并生成 User Access Token。
+2. 安装 Wrangler 并登录 Cloudflare：npm install --global wrangler、npx wrangler login。
+3. 在项目根目录执行 npx wrangler deploy --config workers/instagram-api/wrangler.toml。部署完成会得到类似 https://xtvj-instagram-api.<你的子域>.workers.dev 的地址。
+4. 设置 Worker secret：npx wrangler secret put INSTAGRAM_ACCESS_TOKEN --config workers/instagram-api/wrangler.toml，按提示粘贴 token。token 只存于 Cloudflare，不会下发给浏览器。
+5. 在 GitHub 仓库 Settings → Secrets and variables → Actions → Variables 新增 PUBLIC_INSTAGRAM_API_URL，值为 Worker 地址加 /api/instagram，例如 https://xtvj-instagram-api.example.workers.dev/api/instagram。
+6. 重新部署 GitHub Pages。工作流会把公开的 Worker 地址编进页面；每次访客打开 Instagram 页面时就会获取最新帖子。
+
+Worker 代码位于 workers/instagram-api/。wrangler.toml 默认只允许 https://xtvj.github.io 和本地 Astro 开发地址访问；若网站使用自定义域名，请同步修改 ALLOWED_ORIGIN 并重新部署。部署 Worker 后可用 npx wrangler secret put INSTAGRAM_ACCESS_TOKEN --config workers/instagram-api/wrangler.toml 更新 token。也可以另外在 GitHub Actions secret 设置 INSTAGRAM_ACCESS_TOKEN，这样构建阶段也会更新离线回退缓存；这不是实时接口运行所必需的。
 ## 文章与页面
 
 - 首页展示最新 10 篇文章，其余文章在下一页。
