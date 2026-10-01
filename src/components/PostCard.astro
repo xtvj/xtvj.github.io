@@ -20,7 +20,6 @@ const { data } = post;
       </div>
       <div class="post-stats">
         {data.updated && <span>更新于 {formatDate(data.updated)}</span>}
-        {typeof data.views === 'number' && <span>{data.views.toLocaleString('zh-CN')} 次阅读</span>}
         {typeof data.readMinutes === 'number' && <span>{data.readMinutes} 分钟</span>}
       </div>
     </div>
