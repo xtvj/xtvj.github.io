@@ -131,17 +131,34 @@ if (root && apiUrl) {
       if (!Array.isArray(feed.posts)) throw new Error('Invalid Instagram feed');
       root.replaceChildren(...feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', index)));
       if (empty) empty.hidden = feed.posts.length > 0;
-      status.textContent = feed.posts.length ? feed.posts.length + ' 篇记录 · 实时' : '暂时没有帖子';
+      status.textContent = feed.posts.length ? feed.posts.length + ' 篇记录 · 实时' : '接口已连接，返回 0 条帖子';
+      if (!feed.posts.length && empty) {
+        empty.querySelector('h2').textContent = 'Instagram 接口已连接，但没有返回帖子';
+        empty.querySelector('p:not(.empty-kicker)').textContent = '请确认 Cloudflare Worker 使用的 token 对应 @xtvjdev，并具有读取媒体内容的权限。';
+      }
       const note = document.querySelector('.sync-note');
       if (note) note.textContent = '刚刚从 Instagram 获取 · 内容来自 Instagram';
     })
     .catch((error) => {
       console.error('Instagram feed request failed:', error);
-      status.textContent = posts.length ? '\u5b9e\u65f6\u8bfb\u53d6\u5931\u8d25\uff0c\u663e\u793a\u6700\u8fd1\u7f13\u5b58' : '\u8bfb\u53d6\u5931\u8d25\uff1a' + (error.message || '\u8bf7\u68c0\u67e5 Worker \u914d\u7f6e');
+      const message = error.message || '\u8bf7\u68c0\u67e5 Worker \u914d\u7f6e';
+      status.textContent = posts.length ? '\u5b9e\u65f6\u8bfb\u53d6\u5931\u8d25\uff0c\u663e\u793a\u6700\u8fd1\u7f13\u5b58' : '\u8bfb\u53d6\u5931\u8d25\uff1a' + message;
+      if (empty && !posts.length) {
+        empty.querySelector('h2').textContent = '\u65e0\u6cd5\u8bfb\u53d6 Instagram 帖子';
+        empty.querySelector('p:not(.empty-kicker)').textContent = message;
+      }
     });
 } else if (root) {
   const status = document.querySelector('#feed-status');
-  if (status) status.textContent = configuredApiUrl ? '\u63a5\u53e3\u5730\u5740\u65e0\u6548\uff0c\u8bf7\u68c0\u67e5 GitHub variable' : '\u672a\u914d\u7f6e\u5b9e\u65f6\u63a5\u53e3\u5730\u5740';
+  const message = configuredApiUrl ? '\u63a5\u53e3\u5730\u5740\u65e0\u6548\uff0c\u8bf7\u68c0\u67e5 GitHub variable' : '\u672a\u914d\u7f6e\u5b9e\u65f6\u63a5\u53e3\u5730\u5740';
+  if (status) status.textContent = message;
+  if (root && !configuredApiUrl) {
+    const empty = document.querySelector('.ig-empty');
+    if (empty) {
+      empty.querySelector('h2').textContent = message;
+      empty.querySelector('p:not(.empty-kicker)').textContent = '请在 GitHub 仓库 Actions variables 中设置 PUBLIC_INSTAGRAM_API_URL，然后重新部署。';
+    }
+  }
 }
 </script>
 <style>
@@ -164,7 +181,7 @@ h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);line-height:1.16;letter-spacing:-.0
 .post-dot{color:var(--soft)}.post-caption{margin:1.35rem 0;font-size:.97rem;line-height:1.9;white-space:pre-line;overflow-wrap:anywhere}
 .post-stats{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
 .post-stats span{display:inline-flex;align-items:center;gap:.35rem}.post-stats b{color:#b77b72;font-size:1.05rem}.post-stats small{font-size:.72rem}.post-account{margin-left:auto;font:.72rem var(--mono)}
-.ig-empty{display:grid;justify-items:center;padding:5.4rem 1.5rem 6rem;text-align:center}.empty-camera{position:relative;display:grid;place-items:center;width:74px;height:74px;margin-bottom:1.5rem;border:1px solid var(--line);border-radius:24px;background:var(--paper);transform:rotate(-5deg)}
+.ig-empty{display:grid;justify-items:center;padding:5.4rem 1.5rem 6rem;text-align:center}.ig-empty[hidden]{display:none}.empty-camera{position:relative;display:grid;place-items:center;width:74px;height:74px;margin-bottom:1.5rem;border:1px solid var(--line);border-radius:24px;background:var(--paper);transform:rotate(-5deg)}
 .empty-camera:before{content:'';width:30px;height:23px;border:2px solid var(--accent);border-radius:7px}.empty-camera span{position:absolute;width:9px;height:9px;border:2px solid var(--accent);border-radius:50%}
 .empty-kicker{margin:0 0 .8rem;color:var(--soft);font:.65rem var(--mono);letter-spacing:.14em}.ig-empty h2{margin:0;font-size:1.7rem;letter-spacing:-.04em}
 .ig-empty>p:not(.empty-kicker){max-width:430px;margin:.8rem 0 1.3rem;color:var(--muted);font-size:.88rem;line-height:1.8}
