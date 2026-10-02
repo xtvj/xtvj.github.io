@@ -26,10 +26,10 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
   <div class="feed-bar"><span><i></i> 最新分享</span><span id="feed-status" role="status" aria-live="polite">{apiUrl ? '正在获取最新帖子…' : (posts.length ? '最近构建缓存' : '实时接口待配置')}</span></div>
   <div class="ig-feed" id="ig-feed" data-api-url={apiUrl} data-fallback-count={posts.length}>
     {posts.map((post, index) => <article class="ig-post">
-      <a class="post-visual" href={post.permalink} target="_blank" rel="noopener noreferrer" aria-label="在 Instagram 查看这篇帖子">
+      <button class="post-visual" type="button" aria-label="在当前页面放大查看图片" aria-haspopup="dialog" aria-controls="ig-lightbox" disabled={!post.image}>
         {post.image ? <img src={/^https?:\/\//.test(post.image) ? post.image : base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
         <span class="media-badge">{mediaLabel(post.mediaType)}</span>
-      </a>
+      </button>
       <div class="post-detail">
         <div class="post-meta"><time datetime={post.timestamp}>{dateFormat.format(new Date(post.timestamp))}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
         <p class="post-caption">{post.caption || '这篇分享没有添加文字。'}</p>
@@ -42,6 +42,18 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
       </div>
     </article>)}
   </div>
+  <dialog class="ig-lightbox" id="ig-lightbox" aria-label="图片预览">
+    <div class="lightbox-shell">
+      <div class="lightbox-toolbar"><span>图片预览</span><button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button></div>
+      <div class="lightbox-stage" id="lightbox-stage"><img id="lightbox-image" alt="" draggable="false" /></div>
+      <div class="lightbox-controls" aria-label="图片缩放控制">
+        <button type="button" data-zoom="out" aria-label="缩小图片">−</button>
+        <span id="lightbox-zoom" aria-live="polite">100%</span>
+        <button type="button" data-zoom="in" aria-label="放大图片">＋</button>
+        <button type="button" data-zoom="reset">适应窗口</button>
+      </div>
+    </div>
+  </dialog>
   <div class="feed-pagination" id="feed-pagination" hidden><button id="load-more" type="button">加载更多帖子 <span aria-hidden="true">↓</span></button><p id="page-status" role="status" aria-live="polite"></p></div>
   <section class="ig-empty" hidden={posts.length > 0}>
     <div class="empty-camera"><span></span></div><p class="empty-kicker">A LITTLE WINDOW TO MY WORLD</p>
@@ -76,6 +88,99 @@ root?.addEventListener('click', (event) => {
 });
 if (root) requestAnimationFrame(() => prepareCaptions(root.querySelectorAll('.ig-post')));
 window.addEventListener('resize', () => requestAnimationFrame(() => prepareCaptions(root?.querySelectorAll('.ig-post') || [])));
+const lightbox = document.querySelector('#ig-lightbox');
+const lightboxStage = document.querySelector('#lightbox-stage');
+const lightboxImage = document.querySelector('#lightbox-image');
+const zoomLabel = document.querySelector('#lightbox-zoom');
+const pointers = new Map();
+let zoom = 1;
+let panX = 0;
+let panY = 0;
+const clampPan = () => {
+  const maxX = Math.max(0, (lightboxImage.offsetWidth * zoom - lightboxStage.clientWidth) / 2);
+  const maxY = Math.max(0, (lightboxImage.offsetHeight * zoom - lightboxStage.clientHeight) / 2);
+  panX = Math.max(-maxX, Math.min(maxX, panX));
+  panY = Math.max(-maxY, Math.min(maxY, panY));
+};
+const renderZoom = () => {
+  clampPan();
+  lightboxImage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${zoom})`;
+  zoomLabel.textContent = Math.round(zoom * 100) + '%';
+  lightboxStage.classList.toggle('is-zoomed', zoom > 1);
+};
+const setZoom = (value, clientX, clientY) => {
+  const next = Math.max(1, Math.min(6, value));
+  const rect = lightboxStage.getBoundingClientRect();
+  const focalX = (clientX ?? rect.left + rect.width / 2) - rect.left - rect.width / 2;
+  const focalY = (clientY ?? rect.top + rect.height / 2) - rect.top - rect.height / 2;
+  const ratio = next / zoom;
+  panX = focalX - (focalX - panX) * ratio;
+  panY = focalY - (focalY - panY) * ratio;
+  zoom = next;
+  if (zoom === 1) { panX = 0; panY = 0; }
+  renderZoom();
+};
+root?.addEventListener('click', (event) => {
+  const button = event.target.closest('.post-visual');
+  const source = button?.querySelector('img');
+  if (!source || !lightbox) return;
+  lightboxImage.src = source.currentSrc || source.src;
+  lightboxImage.alt = source.alt;
+  zoom = 1;
+  panX = 0;
+  panY = 0;
+  lightbox.showModal();
+  renderZoom();
+});
+lightboxImage?.addEventListener('load', renderZoom);
+lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
+lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close(); });
+lightbox?.addEventListener('close', () => { pointers.clear(); lightboxImage.removeAttribute('src'); });
+lightbox?.querySelectorAll('[data-zoom]')?.forEach((button) => button.addEventListener('click', () => {
+  if (button.dataset.zoom === 'reset') setZoom(1);
+  else setZoom(zoom * (button.dataset.zoom === 'in' ? 1.25 : 0.8));
+}));
+lightboxStage?.addEventListener('wheel', (event) => {
+  event.preventDefault();
+  setZoom(zoom * (event.deltaY < 0 ? 1.2 : 1 / 1.2), event.clientX, event.clientY);
+}, { passive: false });
+lightboxStage?.addEventListener('dblclick', (event) => setZoom(zoom > 1 ? 1 : 2, event.clientX, event.clientY));
+lightboxStage?.addEventListener('pointerdown', (event) => {
+  if (event.pointerType === 'mouse' && event.button !== 0) return;
+  lightboxStage.setPointerCapture(event.pointerId);
+  pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+});
+lightboxStage?.addEventListener('pointermove', (event) => {
+  const previous = pointers.get(event.pointerId);
+  if (!previous) return;
+  if (pointers.size === 1) {
+    if (zoom > 1) { panX += event.clientX - previous.x; panY += event.clientY - previous.y; renderZoom(); }
+  } else if (pointers.size === 2) {
+    const before = [...pointers.values()];
+    pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    const after = [...pointers.values()];
+    const distance = (points) => Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+    const midpoint = (points) => ({ x: (points[0].x + points[1].x) / 2, y: (points[0].y + points[1].y) / 2 });
+    const oldMid = midpoint(before);
+    const newMid = midpoint(after);
+    const oldDistance = distance(before);
+    if (oldDistance > 0) setZoom(zoom * distance(after) / oldDistance, newMid.x, newMid.y);
+    panX += newMid.x - oldMid.x;
+    panY += newMid.y - oldMid.y;
+    renderZoom();
+    return;
+  }
+  pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+});
+const releasePointer = (event) => pointers.delete(event.pointerId);
+lightboxStage?.addEventListener('pointerup', releasePointer);
+lightboxStage?.addEventListener('pointercancel', releasePointer);
+lightbox?.addEventListener('keydown', (event) => {
+  if (event.key === '+' || event.key === '=') { event.preventDefault(); setZoom(zoom * 1.25); }
+  if (event.key === '-') { event.preventDefault(); setZoom(zoom * 0.8); }
+  if (event.key === '0') { event.preventDefault(); setZoom(1); }
+});
+window.addEventListener('resize', () => { if (lightbox?.open) renderZoom(); });
 const apiUrl = (() => {
   if (!configuredApiUrl) return '';
   try {
@@ -101,11 +206,11 @@ if (root && apiUrl) {
   };
   const postNode = (post, username, index) => {
     const article = el('article', 'ig-post');
-    const link = el('a', 'post-visual');
-    link.href = post.permalink;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.setAttribute('aria-label', '在 Instagram 查看这篇帖子');
+    const link = el('button', 'post-visual');
+    link.type = 'button';
+    link.setAttribute('aria-label', '在当前页面放大查看图片');
+    link.setAttribute('aria-haspopup', 'dialog');
+    link.setAttribute('aria-controls', 'ig-lightbox');
     if (post.imageUrl && /^https:\/\//.test(post.imageUrl)) {
       const image = el('img');
       image.src = post.imageUrl;
@@ -113,6 +218,7 @@ if (root && apiUrl) {
       image.loading = index > 1 ? 'lazy' : 'eager';
       link.append(image);
     } else {
+      link.disabled = true;
       const placeholder = el('div', 'visual-placeholder');
       placeholder.append(el('span', '', '◎'), el('small', '', mediaName(post.mediaType)));
       link.append(placeholder);
@@ -235,9 +341,10 @@ if (root && apiUrl) {
 .ig-page .feed-bar i { width: 7px; height: 7px; border-radius: 50%; background: #7c9c80; box-shadow: 0 0 0 4px #7c9c8026; }
 .ig-page .ig-feed { display: grid; min-width: 0; gap: 1.25rem; padding-top: 1.4rem; }
 .ig-page .ig-post { display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem; min-width: 0; padding: clamp(.7rem, 2vw, 1rem); border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: 0 8px 30px #1c221008; }
-.ig-page .post-visual { position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
+.ig-page .post-visual { appearance: none; padding: 0; border: 0; color: inherit; font: inherit; cursor: zoom-in; position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
 .ig-page .post-visual img { display: block; width: 100%; height: auto; max-width: 100%; max-height: min(720px, 78vh); object-fit: contain; transition: transform .3s ease; }
-.ig-page .post-visual:hover img { transform: scale(1.025); }
+.ig-page .post-visual:not(:disabled):hover img { transform: scale(1.025); }
+.ig-page .post-visual:disabled { cursor: default; }
 .ig-page .media-badge { position: absolute; top: .7rem; left: .7rem; padding: .35rem .62rem; border: 1px solid #ffffff72; border-radius: 999px; color: white; background: #171b17bd; font-size: .76rem; }
 .ig-page .visual-placeholder { display: grid; justify-items: center; align-content: center; gap: .2rem; min-height: 320px; color: var(--muted); font-size: 3rem; }
 .ig-page .visual-placeholder small { font: .8rem var(--mono); }
@@ -254,6 +361,20 @@ if (root && apiUrl) {
 .ig-page .post-stats b { color: #b36a68; font-size: 1.25rem; line-height: 1; font-weight: 500; }
 .ig-page .post-stats small { font-size: .82rem; }
 .ig-page .post-stats .post-account { margin-left: auto; color: var(--muted); font: 500 .8rem var(--mono); background: transparent; }
+.ig-page .ig-lightbox { width: min(96vw, 1400px); height: min(92vh, 1000px); max-width: none; max-height: none; padding: 0; border: 1px solid #3b403d; border-radius: 16px; background: #171b19; color: #f5f5f2; overflow: hidden; box-shadow: 0 25px 80px #0008; }
+.ig-page .ig-lightbox::backdrop { background: #080c0bcf; backdrop-filter: blur(6px); }
+.ig-page .lightbox-shell { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; height: 100%; }
+.ig-page .lightbox-toolbar { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .5rem 1rem; font-size: .85rem; }
+.ig-page .lightbox-close, .ig-page .lightbox-controls button { display: grid; place-items: center; min-width: 38px; min-height: 38px; padding: .3rem .65rem; border: 1px solid #ffffff34; border-radius: 9px; background: #ffffff12; color: inherit; cursor: pointer; }
+.ig-page .lightbox-close { font-size: 1.5rem; line-height: 1; }
+.ig-page .lightbox-close:hover, .ig-page .lightbox-controls button:hover { background: #ffffff29; }
+.ig-page .lightbox-stage { display: grid; place-items: center; min-width: 0; min-height: 0; overflow: hidden; background: #0e1110; touch-action: none; user-select: none; }
+.ig-page .lightbox-stage.is-zoomed { cursor: grab; }
+.ig-page .lightbox-stage.is-zoomed:active { cursor: grabbing; }
+.ig-page .lightbox-stage img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; pointer-events: none; will-change: transform; }
+.ig-page .lightbox-controls { display: flex; justify-content: center; align-items: center; gap: .6rem; min-height: 58px; padding: .5rem; }
+.ig-page .lightbox-controls span { min-width: 4rem; text-align: center; font: .82rem var(--mono); }
+.ig-page .lightbox-controls button[data-zoom='reset'] { padding-inline: .85rem; font-size: .78rem; }
 .ig-page .feed-pagination { display: grid; justify-items: center; gap: .55rem; padding: 1.75rem 0 .5rem; }
 .ig-page .feed-pagination[hidden] { display: none; }
 .ig-page .feed-pagination button { padding: .8rem 1.4rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: 600 .88rem sans-serif; cursor: pointer; }
@@ -279,6 +400,7 @@ if (root && apiUrl) {
 }
 @media (max-width: 520px) {
   .ig-page .ig-post { gap: .7rem; }
+  .ig-page .ig-lightbox { width: 100vw; height: 100dvh; border: 0; border-radius: 0; }
   .ig-page .post-visual img { max-height: 72vh; }
   .ig-page .post-detail { padding: .1rem; }
   .ig-page .post-stats .post-account { margin-left: 0; }
