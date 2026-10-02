@@ -31,7 +31,8 @@ const active = currentPath.includes('/instagram/') ? 'instagram' : currentPath.i
         const saved = JSON.parse(localStorage.getItem('xtvj-display-settings') || '{}');
         const root = document.documentElement;
         root.dataset.theme = ['system', 'light', 'dark'].includes(saved.theme) ? saved.theme : 'system';
-        root.dataset.width = ['normal', 'wide'].includes(saved.width) ? saved.width : 'normal';
+        const widthChoice = saved.width === 'wide' || saved.width === 'auto' || (saved.width === 'normal' && saved.widthExplicit === true) ? saved.width : 'auto';
+        root.dataset.width = widthChoice === 'auto' ? (matchMedia('(min-width: 1280px)').matches ? 'wide' : 'normal') : widthChoice;
         const fontSize = Number(saved.fontSize);
         root.style.fontSize = `${Number.isFinite(fontSize) && fontSize >= 15 && fontSize <= 23 ? fontSize : 17}px`;
       } catch {}
@@ -65,7 +66,8 @@ const active = currentPath.includes('/instagram/') ? 'instagram' : currentPath.i
             </div>
             <fieldset class="setting-group">
               <legend>页面宽度</legend>
-              <div class="setting-options">
+              <div class="setting-options width-options">
+                <button type="button" data-pref="width" data-value="auto">自动</button>
                 <button type="button" data-pref="width" data-value="normal">标准</button>
                 <button type="button" data-pref="width" data-value="wide">宽屏</button>
               </div>

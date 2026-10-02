@@ -1,8 +1,9 @@
 type Theme = 'system' | 'light' | 'dark';
-type Width = 'normal' | 'wide';
-type Preferences = { theme: Theme; width: Width; fontSize: number };
+type Width = 'auto' | 'normal' | 'wide';
+type Preferences = { theme: Theme; width: Width; widthExplicit: boolean; fontSize: number };
 
-const defaults: Preferences = { theme: 'system', width: 'normal', fontSize: 17 };
+const defaults: Preferences = { theme: 'system', width: 'auto', widthExplicit: false, fontSize: 17 };
+const wideViewport = window.matchMedia('(min-width: 1280px)');
 const root = document.documentElement;
 const button = document.querySelector<HTMLButtonElement>('#settings-button');
 const panel = document.querySelector<HTMLDialogElement>('#settings-panel');
@@ -16,7 +17,11 @@ function readPreferences(): Preferences {
     const saved = JSON.parse(localStorage.getItem('xtvj-display-settings') || '{}');
     return {
       theme: ['system', 'light', 'dark'].includes(saved.theme) ? saved.theme : defaults.theme,
-      width: ['normal', 'wide'].includes(saved.width) ? saved.width : defaults.width,
+      // Older versions saved normal even when it was never selected.
+      width: saved.width === 'wide' || saved.width === 'auto' || (saved.width === 'normal' && saved.widthExplicit === true)
+        ? saved.width
+        : defaults.width,
+      widthExplicit: saved.widthExplicit === true,
       fontSize: Number.isFinite(Number(saved.fontSize)) && Number(saved.fontSize) >= 15 && Number(saved.fontSize) <= 23
         ? Number(saved.fontSize)
         : defaults.fontSize,
@@ -28,7 +33,7 @@ function readPreferences(): Preferences {
 
 function applyPreferences() {
   root.dataset.theme = preferences.theme;
-  root.dataset.width = preferences.width;
+  root.dataset.width = preferences.width === 'auto' ? (wideViewport.matches ? 'wide' : 'normal') : preferences.width;
   root.style.fontSize = `${preferences.fontSize}px`;
   try {
     localStorage.setItem('xtvj-display-settings', JSON.stringify(preferences));
@@ -73,8 +78,9 @@ document.querySelectorAll<HTMLButtonElement>('[data-pref]').forEach((choice) => 
     if (key === 'theme' && ['system', 'light', 'dark'].includes(value ?? '')) {
       preferences.theme = value as Theme;
     }
-    if (key === 'width' && ['normal', 'wide'].includes(value ?? '')) {
+    if (key === 'width' && ['auto', 'normal', 'wide'].includes(value ?? '')) {
       preferences.width = value as Width;
+      preferences.widthExplicit = true;
     }
     applyPreferences();
   });
@@ -98,3 +104,7 @@ document.querySelector<HTMLButtonElement>('#font-larger')?.addEventListener('cli
 });
 
 applyPreferences();
+
+wideViewport.addEventListener('change', () => {
+  if (preferences.width === 'auto') root.dataset.width = wideViewport.matches ? 'wide' : 'normal';
+});

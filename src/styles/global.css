@@ -101,7 +101,7 @@ button { color: inherit; }
 .setting-group legend { width: 100%; margin-bottom: 10px; padding: 0; color: var(--muted); font-size: .76rem; }
 .setting-group legend output { float: right; color: var(--soft); font-family: var(--mono); font-size: .7rem; }
 .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
-.setting-options.theme-options { grid-template-columns: repeat(3, 1fr); }
+.setting-options.theme-options, .setting-options.width-options { grid-template-columns: repeat(3, 1fr); }
 .setting-options button, .font-size-control button { min-height: 36px; border: 1px solid var(--line); border-radius: 4px; background: var(--page-bg); color: var(--muted); font-size: .76rem; cursor: pointer; }
 .setting-options button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
 .font-size-control { display: grid; grid-template-columns: 42px 1fr 42px; align-items: center; gap: 9px; }
