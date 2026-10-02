@@ -133,9 +133,6 @@ button { color: inherit; }
 .archive-heading { padding: 68px 0 37px; }
 .archive-heading h1 { font-size: 2.6rem; }
 .archive-heading > p:last-child { margin: 15px 0 0; color: var(--muted); font-size: .82rem; }
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; padding: 4px 0 75px; }
-.tag-item { display: flex; align-items: center; gap: 14px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 4px; background: var(--paper); font-size: .82rem; }
-.tag-item small { color: var(--soft); font: .64rem var(--mono); }
 .article-page { width: 100%; margin: 0 auto; padding: 43px 0 72px; }
 .back-link { color: var(--muted); font-size: .76rem; }
 .article-header { padding: 39px 0 31px; border-bottom: 1px solid var(--line); }

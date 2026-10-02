@@ -96,20 +96,34 @@ const pointers = new Map();
 let zoom = 1;
 let panX = 0;
 let panY = 0;
+let fitWidth = 0;
+let fitHeight = 0;
 const clampPan = () => {
-  const maxX = Math.max(0, (lightboxImage.offsetWidth * zoom - lightboxStage.clientWidth) / 2);
-  const maxY = Math.max(0, (lightboxImage.offsetHeight * zoom - lightboxStage.clientHeight) / 2);
+  const maxX = Math.max(0, (fitWidth * zoom - lightboxStage.clientWidth) / 2);
+  const maxY = Math.max(0, (fitHeight * zoom - lightboxStage.clientHeight) / 2);
   panX = Math.max(-maxX, Math.min(maxX, panX));
   panY = Math.max(-maxY, Math.min(maxY, panY));
 };
 const renderZoom = () => {
   clampPan();
-  lightboxImage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${zoom})`;
+  lightboxImage.style.left = (lightboxStage.clientWidth - fitWidth) / 2 + panX + 'px';
+  lightboxImage.style.top = (lightboxStage.clientHeight - fitHeight) / 2 + panY + 'px';
+  lightboxImage.style.transform = `scale(${zoom})`;
   zoomLabel.textContent = Math.round(zoom * 100) + '%';
   lightboxStage.classList.toggle('is-zoomed', zoom > 1);
 };
+const fitImage = () => {
+  if (!lightboxImage.naturalWidth || !lightboxImage.naturalHeight || !lightboxStage.clientWidth || !lightboxStage.clientHeight) return;
+  const fit = Math.min(lightboxStage.clientWidth / lightboxImage.naturalWidth, lightboxStage.clientHeight / lightboxImage.naturalHeight);
+  fitWidth = lightboxImage.naturalWidth * fit;
+  fitHeight = lightboxImage.naturalHeight * fit;
+  lightboxImage.style.width = fitWidth + 'px';
+  lightboxImage.style.height = fitHeight + 'px';
+  lightboxImage.style.visibility = 'visible';
+  renderZoom();
+};
 const setZoom = (value, clientX, clientY) => {
-  const next = Math.max(1, Math.min(6, value));
+  const next = Math.max(0.25, Math.min(8, value));
   const rect = lightboxStage.getBoundingClientRect();
   const focalX = (clientX ?? rect.left + rect.width / 2) - rect.left - rect.width / 2;
   const focalY = (clientY ?? rect.top + rect.height / 2) - rect.top - rect.height / 2;
@@ -117,22 +131,26 @@ const setZoom = (value, clientX, clientY) => {
   panX = focalX - (focalX - panX) * ratio;
   panY = focalY - (focalY - panY) * ratio;
   zoom = next;
-  if (zoom === 1) { panX = 0; panY = 0; }
+  if (zoom <= 1) { panX = 0; panY = 0; }
   renderZoom();
 };
 root?.addEventListener('click', (event) => {
   const button = event.target.closest('.post-visual');
   const source = button?.querySelector('img');
   if (!source || !lightbox) return;
+  lightboxImage.style.visibility = 'hidden';
   lightboxImage.src = source.currentSrc || source.src;
   lightboxImage.alt = source.alt;
   zoom = 1;
   panX = 0;
   panY = 0;
+  fitWidth = 0;
+  fitHeight = 0;
   lightbox.showModal();
+  if (lightboxImage.complete) fitImage();
   renderZoom();
 });
-lightboxImage?.addEventListener('load', renderZoom);
+lightboxImage?.addEventListener('load', fitImage);
 lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
 lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close(); });
 lightbox?.addEventListener('close', () => { pointers.clear(); lightboxImage.removeAttribute('src'); });
@@ -180,7 +198,7 @@ lightbox?.addEventListener('keydown', (event) => {
   if (event.key === '-') { event.preventDefault(); setZoom(zoom * 0.8); }
   if (event.key === '0') { event.preventDefault(); setZoom(1); }
 });
-window.addEventListener('resize', () => { if (lightbox?.open) renderZoom(); });
+window.addEventListener('resize', () => { if (lightbox?.open) fitImage(); });
 const apiUrl = (() => {
   if (!configuredApiUrl) return '';
   try {
@@ -368,10 +386,10 @@ if (root && apiUrl) {
 .ig-page .lightbox-close, .ig-page .lightbox-controls button { display: grid; place-items: center; min-width: 38px; min-height: 38px; padding: .3rem .65rem; border: 1px solid #ffffff34; border-radius: 9px; background: #ffffff12; color: inherit; cursor: pointer; }
 .ig-page .lightbox-close { font-size: 1.5rem; line-height: 1; }
 .ig-page .lightbox-close:hover, .ig-page .lightbox-controls button:hover { background: #ffffff29; }
-.ig-page .lightbox-stage { display: grid; place-items: center; min-width: 0; min-height: 0; overflow: hidden; background: #0e1110; touch-action: none; user-select: none; }
+.ig-page .lightbox-stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #0e1110; touch-action: none; user-select: none; }
 .ig-page .lightbox-stage.is-zoomed { cursor: grab; }
 .ig-page .lightbox-stage.is-zoomed:active { cursor: grabbing; }
-.ig-page .lightbox-stage img { display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; pointer-events: none; will-change: transform; }
+.ig-page .lightbox-stage img { position: absolute; display: block; max-width: none; max-height: none; transform-origin: center center; user-select: none; pointer-events: none; will-change: transform; }
 .ig-page .lightbox-controls { display: flex; justify-content: center; align-items: center; gap: .6rem; min-height: 58px; padding: .5rem; }
 .ig-page .lightbox-controls span { min-width: 4rem; text-align: center; font: .82rem var(--mono); }
 .ig-page .lightbox-controls button[data-zoom='reset'] { padding-inline: .85rem; font-size: .78rem; }
