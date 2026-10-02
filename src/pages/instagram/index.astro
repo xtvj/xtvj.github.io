@@ -23,8 +23,8 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
       <span class="profile-avatar">X</span><span class="profile-copy"><strong>@{feed.username || 'xtvjdev'}</strong><small>在 Instagram 查看个人主页 ↗</small></span>
     </a>
   </header>
-  <div class="feed-bar"><span><i></i> 最新分享</span><span id="feed-status">{apiUrl ? (posts.length ? posts.length + ' 篇记录' : '实时接口连接中') : (posts.length ? '最近构建缓存' : '实时接口待配置')}</span></div>
-  <div class="ig-feed" id="ig-feed" data-api-url={apiUrl}>
+  <div class="feed-bar"><span><i></i> 最新分享</span><span id="feed-status" role="status" aria-live="polite">{apiUrl ? '正在获取最新帖子…' : (posts.length ? '最近构建缓存' : '实时接口待配置')}</span></div>
+  <div class="ig-feed" id="ig-feed" data-api-url={apiUrl} data-fallback-count={posts.length}>
     {posts.map((post, index) => <article class="ig-post">
       <a class="post-visual" href={post.permalink} target="_blank" rel="noopener noreferrer" aria-label="在 Instagram 查看这篇帖子">
         {post.image ? <img src={/^https?:\/\//.test(post.image) ? post.image : base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
@@ -41,6 +41,7 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
       </div>
     </article>)}
   </div>
+  <div class="feed-pagination" id="feed-pagination" hidden><button id="load-more" type="button">加载更多帖子 <span aria-hidden="true">↓</span></button><p id="page-status" role="status" aria-live="polite"></p></div>
   <section class="ig-empty" hidden={posts.length > 0}>
     <div class="empty-camera"><span></span></div><p class="empty-kicker">A LITTLE WINDOW TO MY WORLD</p>
     <h2>新记录正在路上</h2><p>配置 Instagram API 后，这里会自动整理最新的帖子。也可以先去 Instagram 看看我的分享。</p>
@@ -52,6 +53,7 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
 <script>
 const root = document.querySelector('#ig-feed');
 const configuredApiUrl = root?.dataset.apiUrl?.trim();
+const fallbackCount = Number(root?.dataset.fallbackCount || 0);
 const apiUrl = (() => {
   if (!configuredApiUrl) return '';
   try {
@@ -121,36 +123,59 @@ if (root && apiUrl) {
     article.append(link, detail);
     return article;
   };
-  const apiController = new AbortController();
-  const apiTimeout = window.setTimeout(() => apiController.abort(), 15000);
-  fetch(apiUrl, { headers: { Accept: 'application/json' }, cache: 'no-store', signal: apiController.signal })
-    .then(async (response) => {
+  const pagination = document.querySelector('#feed-pagination');
+  const loadMore = document.querySelector('#load-more');
+  const pageStatus = document.querySelector('#page-status');
+  let nextCursor = null;
+  let loaded = 0;
+  let loading = false;
+  const fetchPage = async (first = false) => {
+    if (loading || (!first && !nextCursor)) return;
+    loading = true;
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15000);
+    if (loadMore) { loadMore.disabled = true; loadMore.textContent = '正在加载…'; }
+    if (pageStatus) pageStatus.textContent = '';
+    try {
+      const endpoint = new URL(apiUrl);
+      if (!first) endpoint.searchParams.set('after', nextCursor);
+      const response = await fetch(endpoint, { headers: { Accept: 'application/json' }, cache: 'no-store', signal: controller.signal });
       const feed = await response.json();
       if (!response.ok || feed.error) throw new Error(feed.error || 'Instagram API HTTP ' + response.status);
-      return feed;
-    })
-    .then((feed) => {
       if (!Array.isArray(feed.posts)) throw new Error('Invalid Instagram feed');
-      root.replaceChildren(...feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', index)));
-      if (empty) empty.hidden = feed.posts.length > 0;
-      status.textContent = feed.posts.length ? feed.posts.length + ' 篇记录 · 实时' : '接口已连接，返回 0 条帖子';
-      if (!feed.posts.length && empty) {
+      const nodes = feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', loaded + index));
+      if (first) root.replaceChildren(...nodes);
+      else root.append(...nodes);
+      loaded += feed.posts.length;
+      nextCursor = feed.nextCursor || null;
+      if (empty) empty.hidden = loaded > 0;
+      status.textContent = loaded ? '已加载 ' + loaded + ' 篇记录 · 实时' : '接口已连接，返回 0 条帖子';
+      if (!loaded && empty) {
         empty.querySelector('h2').textContent = 'Instagram 接口已连接，但没有返回帖子';
         empty.querySelector('p:not(.empty-kicker)').textContent = '请确认 Cloudflare Worker 使用的 token 对应 @xtvjdev，并具有读取媒体内容的权限。';
       }
+      if (pagination) pagination.hidden = !nextCursor;
+      if (pageStatus && !first) pageStatus.textContent = '已加载 ' + loaded + ' 篇帖子';
       const note = document.querySelector('.sync-note');
       if (note) note.textContent = '刚刚从 Instagram 获取 · 内容来自 Instagram';
-    })
-    .catch((error) => {
+    } catch (error) {
       console.error('Instagram feed request failed:', error);
-      const message = error.name === 'AbortError' ? '\u8bf7\u6c42\u8d85\u65f6\uff0c\u8bf7\u68c0\u67e5 Worker \u548c Instagram API' : (error.message || '\u8bf7\u68c0\u67e5 Worker \u914d\u7f6e');
-      status.textContent = posts.length ? '\u5b9e\u65f6\u8bfb\u53d6\u5931\u8d25\uff0c\u663e\u793a\u6700\u8fd1\u7f13\u5b58' : '\u8bfb\u53d6\u5931\u8d25\uff1a' + message;
-      if (empty && !posts.length) {
-        empty.querySelector('h2').textContent = '\u65e0\u6cd5\u8bfb\u53d6 Instagram 帖子';
-        empty.querySelector('p:not(.empty-kicker)').textContent = message;
-      }
-    })
-    .finally(() => window.clearTimeout(apiTimeout));
+      const message = error.name === 'AbortError' ? '请求超时，请稍后重试' : (error.message || '请检查 Worker 配置');
+      if (first) {
+        status.textContent = fallbackCount ? '实时读取失败，显示最近缓存' : '读取失败：' + message;
+        if (empty && !fallbackCount) {
+          empty.querySelector('h2').textContent = '无法读取 Instagram 帖子';
+          empty.querySelector('p:not(.empty-kicker)').textContent = message;
+        }
+      } else if (pageStatus) pageStatus.textContent = '加载失败：' + message + '，请重试。';
+    } finally {
+      loading = false;
+      window.clearTimeout(timeout);
+      if (loadMore) { loadMore.disabled = false; loadMore.innerHTML = '加载更多帖子 <span aria-hidden="true">↓</span>'; }
+    }
+  };
+  loadMore?.addEventListener('click', () => fetchPage());
+  fetchPage(true);
 } else if (root) {
   const status = document.querySelector('#feed-status');
   const message = configuredApiUrl ? '\u63a5\u53e3\u5730\u5740\u65e0\u6548\uff0c\u8bf7\u68c0\u67e5 GitHub variable' : '\u672a\u914d\u7f6e\u5b9e\u65f6\u63a5\u53e3\u5730\u5740';
@@ -164,32 +189,69 @@ if (root && apiUrl) {
   }
 }
 </script>
-<style>
-.ig-page{padding:3.6rem 0 5rem}.ig-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;padding:0 0 2.5rem}
-.eyebrow{display:flex;align-items:center;gap:.55rem;margin:0 0 1rem;color:var(--muted);font:500 .72rem var(--mono);letter-spacing:.13em}
-.ig-glyph{display:grid;place-items:center;width:23px;height:23px;border:1px solid var(--line);border-radius:50%;color:#b77b55;font:1rem sans-serif;letter-spacing:0}
-h1{margin:0;font-size:clamp(2rem,5vw,3.5rem);line-height:1.16;letter-spacing:-.06em}h1 span{color:var(--muted)}
-.ig-lede{margin:.9rem 0 0;color:var(--muted);font-size:.94rem}
-.ig-profile{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem .7rem .7rem;border:1px solid var(--line);border-radius:999px;background:var(--paper);transition:border-color .2s,transform .2s;white-space:nowrap}
-.ig-profile:hover{border-color:var(--accent);transform:translateY(-2px)}.profile-avatar{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;color:white;font-weight:700;background:linear-gradient(135deg,#f2b95f,#dc605d 52%,#9c4c9f)}
-.profile-copy{display:grid;gap:.15rem}.profile-copy strong{font-size:.84rem}.profile-copy small{color:var(--muted);font-size:.68rem}
-.feed-bar{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--muted);font-size:.77rem}
-.feed-bar>span:first-child{display:flex;align-items:center;gap:.55rem;color:var(--ink);font-weight:650}.feed-bar i{width:7px;height:7px;border-radius:50%;background:#7c9c80;box-shadow:0 0 0 4px #7c9c8026}
-.ig-feed{display:grid}.ig-post{display:grid;grid-template-columns:minmax(220px,32%) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.25rem);padding:1.5rem 0;border-bottom:1px solid var(--line)}
-.post-visual{position:relative;overflow:hidden;display:grid;place-items:center;aspect-ratio:1.28;border-radius:12px;background:linear-gradient(145deg,#e8e3d8,#c7d0c5)}
-.post-visual img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.2,.7,.2,1)}.post-visual:hover img{transform:scale(1.035)}
-.media-badge{position:absolute;top:.75rem;left:.75rem;padding:.32rem .58rem;border:1px solid #ffffff72;border-radius:999px;color:white;background:#171b17a8;backdrop-filter:blur(10px);font-size:.68rem}
-.visual-placeholder{display:grid;justify-items:center;gap:.2rem;color:#fff;font-size:3rem}.visual-placeholder small{font:.7rem var(--mono)}
-.post-detail{display:flex;min-width:0;flex-direction:column;padding:.35rem 0}.post-meta{display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;color:var(--muted);font-size:.75rem}.post-meta a{margin-left:auto;color:var(--accent)}
-.post-dot{color:var(--soft)}.post-caption{margin:1.35rem 0;font-size:.97rem;line-height:1.9;white-space:pre-line;overflow-wrap:anywhere}
-.post-stats{display:flex;align-items:center;flex-wrap:wrap;gap:1.2rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
-.post-stats span{display:inline-flex;align-items:center;gap:.35rem}.post-stats b{color:#b77b72;font-size:1.05rem}.post-stats small{font-size:.72rem}.post-account{margin-left:auto;font:.72rem var(--mono)}
-.ig-empty{display:grid;justify-items:center;padding:5.4rem 1.5rem 6rem;text-align:center}.ig-empty[hidden]{display:none}.empty-camera{position:relative;display:grid;place-items:center;width:74px;height:74px;margin-bottom:1.5rem;border:1px solid var(--line);border-radius:24px;background:var(--paper);transform:rotate(-5deg)}
-.empty-camera:before{content:'';width:30px;height:23px;border:2px solid var(--accent);border-radius:7px}.empty-camera span{position:absolute;width:9px;height:9px;border:2px solid var(--accent);border-radius:50%}
-.empty-kicker{margin:0 0 .8rem;color:var(--soft);font:.65rem var(--mono);letter-spacing:.14em}.ig-empty h2{margin:0;font-size:1.7rem;letter-spacing:-.04em}
-.ig-empty>p:not(.empty-kicker){max-width:430px;margin:.8rem 0 1.3rem;color:var(--muted);font-size:.88rem;line-height:1.8}
-.ig-empty>a{display:inline-flex;gap:.55rem;padding:.72rem 1rem;border-radius:999px;color:#fff;background:#343c35;font-size:.8rem;transition:transform .2s}.ig-empty>a:hover{transform:translateY(-2px);color:#fff}
-.sync-note{margin-top:1.5rem;text-align:right;color:var(--soft);font-size:.7rem}
-@media(max-width:720px){.ig-page{padding:2.5rem 0 3.5rem}.ig-heading{align-items:flex-start;flex-direction:column;gap:1.3rem;padding-bottom:1.8rem}.ig-profile{align-self:flex-start}.ig-post{grid-template-columns:minmax(150px,38%) minmax(0,1fr);gap:1.15rem;padding:1.1rem 0}.post-visual{aspect-ratio:1}.post-caption{margin:.9rem 0;font-size:.87rem;line-height:1.7}.post-stats{gap:.75rem}.post-account{display:none}}
-@media(max-width:480px){.ig-post{grid-template-columns:1fr;gap:.9rem}.post-visual{aspect-ratio:1.28}.post-detail{padding:0 .1rem .2rem}.post-caption{margin:.75rem 0}.ig-empty{padding:4rem 1rem}}
+<style is:global>
+.ig-page { min-width: 0; padding: 3.6rem 0 5rem; }
+.ig-page .ig-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; padding-bottom: 2.5rem; }
+.ig-page .eyebrow { display: flex; align-items: center; gap: .55em; margin: 0 0 1rem; color: var(--muted); font: 500 .72rem var(--mono); letter-spacing: .13em; }
+.ig-page .ig-glyph { display: grid; place-items: center; width: 23px; height: 23px; border: 1px solid var(--line); border-radius: 50%; color: #b77b55; font: 1rem sans-serif; letter-spacing: 0; }
+.ig-page h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.16; letter-spacing: -.06em; }
+.ig-page h1 span { color: var(--muted); }
+.ig-page .ig-lede { margin: .9rem 0 0; color: var(--muted); font-size: .94rem; }
+.ig-page .ig-profile { display: flex; align-items: center; gap: .75rem; padding: .7rem 1rem .7rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); transition: border-color .2s, transform .2s; white-space: nowrap; }
+.ig-page .ig-profile:hover { border-color: var(--accent); transform: translateY(-2px); }
+.ig-page .profile-avatar { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: white; font-weight: 700; background: linear-gradient(135deg, #f2b95f, #dc605d 52%, #9c4c9f); }
+.ig-page .profile-copy { display: grid; gap: .15rem; }
+.ig-page .profile-copy strong { font-size: .84rem; }
+.ig-page .profile-copy small { color: var(--muted); font-size: .68rem; }
+.ig-page .feed-bar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .85rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: .85rem; }
+.ig-page .feed-bar > span:first-child { display: flex; align-items: center; gap: .55rem; color: var(--ink); font-weight: 650; }
+.ig-page .feed-bar i { width: 7px; height: 7px; border-radius: 50%; background: #7c9c80; box-shadow: 0 0 0 4px #7c9c8026; }
+.ig-page .ig-feed { display: grid; min-width: 0; gap: 1.25rem; padding-top: 1.4rem; }
+.ig-page .ig-post { display: grid; grid-template-columns: minmax(0, min(34%, 330px)) minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.2rem); min-width: 0; padding: 1.2rem; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: 0 8px 30px #1c221008; }
+.ig-page .post-visual { position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
+.ig-page .post-visual img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .3s ease; }
+.ig-page .post-visual:hover img { transform: scale(1.025); }
+.ig-page .media-badge { position: absolute; top: .7rem; left: .7rem; padding: .35rem .62rem; border: 1px solid #ffffff72; border-radius: 999px; color: white; background: #171b17bd; font-size: .76rem; }
+.ig-page .visual-placeholder { display: grid; justify-items: center; gap: .2rem; color: var(--muted); font-size: 3rem; }
+.ig-page .visual-placeholder small { font: .8rem var(--mono); }
+.ig-page .post-detail { display: flex; min-width: 0; flex-direction: column; padding: .25rem 0; }
+.ig-page .post-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; color: var(--muted); font-size: .83rem; }
+.ig-page .post-meta a { margin-left: auto; color: var(--accent); font-weight: 600; }
+.ig-page .post-dot { color: var(--soft); }
+.ig-page .post-caption { margin: 1.15rem 0; color: var(--ink); font-size: .98rem; line-height: 1.8; white-space: pre-line; overflow-wrap: anywhere; }
+.ig-page .post-stats { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink); font: 500 .88rem/1.4 sans-serif; }
+.ig-page .post-stats > span { display: inline-flex; align-items: center; gap: .3rem; padding: .35rem .55rem; border-radius: 8px; background: color-mix(in srgb, var(--paper) 75%, var(--line)); }
+.ig-page .post-stats b { color: #b36a68; font-size: 1.25rem; line-height: 1; font-weight: 500; }
+.ig-page .post-stats small { font-size: .82rem; }
+.ig-page .post-stats .post-account { margin-left: auto; color: var(--muted); font: 500 .8rem var(--mono); background: transparent; }
+.ig-page .feed-pagination { display: grid; justify-items: center; gap: .55rem; padding: 1.75rem 0 .5rem; }
+.ig-page .feed-pagination[hidden] { display: none; }
+.ig-page .feed-pagination button { padding: .8rem 1.4rem; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); font: 600 .88rem sans-serif; cursor: pointer; }
+.ig-page .feed-pagination button:hover { border-color: var(--accent); color: var(--accent); }
+.ig-page .feed-pagination button:disabled { opacity: .55; cursor: wait; }
+.ig-page .feed-pagination p { min-height: 1.4em; margin: 0; color: var(--muted); font-size: .78rem; }
+.ig-page .ig-empty { display: grid; justify-items: center; padding: 5.4rem 1.5rem 6rem; text-align: center; }
+.ig-page .ig-empty[hidden] { display: none; }
+.ig-page .empty-camera { position: relative; display: grid; place-items: center; width: 74px; height: 74px; margin-bottom: 1.5rem; border: 1px solid var(--line); border-radius: 24px; background: var(--paper); transform: rotate(-5deg); }
+.ig-page .empty-camera:before { content: ''; width: 30px; height: 23px; border: 2px solid var(--accent); border-radius: 7px; }
+.ig-page .empty-camera span { position: absolute; width: 9px; height: 9px; border: 2px solid var(--accent); border-radius: 50%; }
+.ig-page .empty-kicker { margin: 0 0 .8rem; color: var(--soft); font: .65rem var(--mono); letter-spacing: .14em; }
+.ig-page .ig-empty h2 { margin: 0; font-size: 1.7rem; letter-spacing: -.04em; }
+.ig-page .ig-empty > p:not(.empty-kicker) { max-width: 430px; margin: .8rem 0 1.3rem; color: var(--muted); font-size: .88rem; line-height: 1.8; }
+.ig-page .ig-empty > a { display: inline-flex; gap: .55rem; padding: .72rem 1rem; border-radius: 999px; color: #fff; background: #343c35; font-size: .8rem; }
+.ig-page .sync-note { margin-top: 1.5rem; text-align: right; color: var(--soft); font-size: .75rem; }
+@media (max-width: 720px) {
+  .ig-page { padding: 2.5rem 0 3.5rem; }
+  .ig-page .ig-heading { align-items: flex-start; flex-direction: column; gap: 1.3rem; padding-bottom: 1.8rem; }
+  .ig-page .ig-post { grid-template-columns: minmax(0, 38%) minmax(0, 1fr); gap: 1rem; padding: 1rem; }
+  .ig-page .post-caption { margin: .8rem 0; font-size: .9rem; line-height: 1.65; }
+  .ig-page .post-stats { gap: .35rem; }
+}
+@media (max-width: 520px) {
+  .ig-page .ig-post { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
+  .ig-page .post-visual { width: min(100%, 430px); margin-inline: auto; }
+  .ig-page .post-detail { padding: .1rem; }
+  .ig-page .post-stats .post-account { margin-left: 0; }
+  .ig-page .ig-empty { padding: 4rem 1rem; }
+}
 </style>

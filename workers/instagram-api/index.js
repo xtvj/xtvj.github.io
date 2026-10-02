@@ -1,5 +1,7 @@
 ﻿const FIELDS = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count';
 
+const PAGE_SIZE = 12;
+
 function corsHeaders(origin, allowedOrigin) {
   const allowed = new Set([allowedOrigin, 'http://localhost:4321', 'http://127.0.0.1:4321']);
   return {
@@ -27,8 +29,15 @@ export default {
       return Response.json({ error: 'Instagram API is not configured.' }, { status: 503, headers });
     }
 
+    const after = url.searchParams.get('after');
+    if (after !== null && (!after || after.length > 1024)) {
+      return Response.json({ error: 'Invalid pagination cursor.' }, { status: 400, headers });
+    }
+
     const cache = caches.default;
-    const cacheKey = new Request(new URL('/api/instagram', url.origin).toString(), { method: 'GET' });
+    const cacheUrl = new URL('/api/instagram', url.origin);
+    if (after) cacheUrl.searchParams.set('after', after);
+    const cacheKey = new Request(cacheUrl.toString(), { method: 'GET' });
     const cached = await cache.match(cacheKey);
     if (cached) {
       const responseHeaders = new Headers(cached.headers);
@@ -47,7 +56,8 @@ export default {
 
       const mediaUrl = new URL('https://graph.instagram.com/' + version + '/' + profile.user_id + '/media');
       mediaUrl.searchParams.set('fields', FIELDS);
-      mediaUrl.searchParams.set('limit', '30');
+      mediaUrl.searchParams.set('limit', String(PAGE_SIZE));
+      if (after) mediaUrl.searchParams.set('after', after);
       const mediaResponse = await fetch(mediaUrl, { headers: { Authorization: 'Bearer ' + env.INSTAGRAM_ACCESS_TOKEN } });
       const media = await mediaResponse.json();
       if (!mediaResponse.ok || media.error) throw new Error(media.error?.message || 'Instagram media request failed.');
@@ -55,6 +65,7 @@ export default {
       const payload = {
         username: profile.username,
         fetchedAt: new Date().toISOString(),
+        nextCursor: media.paging?.next ? media.paging.cursors?.after || null : null,
         posts: (media.data || []).map((post) => ({
           id: post.id,
           caption: post.caption || '',
