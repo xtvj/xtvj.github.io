@@ -33,6 +33,7 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
       <div class="post-detail">
         <div class="post-meta"><time datetime={post.timestamp}>{dateFormat.format(new Date(post.timestamp))}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
         <p class="post-caption">{post.caption || '这篇分享没有添加文字。'}</p>
+        <button class="caption-toggle" type="button" hidden aria-expanded="false">展开全文</button>
         <div class="post-stats">
           {post.likes !== null && post.likes !== undefined && <span><b>♡</b>{numberFormat.format(post.likes)} <small>赞</small></span>}
           {post.comments !== null && post.comments !== undefined && <span><b>◌</b>{numberFormat.format(post.comments)} <small>评论</small></span>}
@@ -54,6 +55,27 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
 const root = document.querySelector('#ig-feed');
 const configuredApiUrl = root?.dataset.apiUrl?.trim();
 const fallbackCount = Number(root?.dataset.fallbackCount || 0);
+const prepareCaptions = (articles) => {
+  for (const article of articles) {
+    const caption = article.querySelector('.post-caption');
+    const button = article.querySelector('.caption-toggle');
+    if (!caption || !button || article.classList.contains('caption-expanded')) continue;
+    button.hidden = true;
+    article.classList.add('caption-collapsed');
+    if (caption.scrollHeight > caption.clientHeight + 2) button.hidden = false;
+    else article.classList.remove('caption-collapsed');
+  }
+};
+root?.addEventListener('click', (event) => {
+  const button = event.target.closest('.caption-toggle');
+  if (!button) return;
+  const article = button.closest('.ig-post');
+  const expanded = article.classList.toggle('caption-expanded');
+  button.setAttribute('aria-expanded', String(expanded));
+  button.textContent = expanded ? '收起文案' : '展开全文';
+});
+if (root) requestAnimationFrame(() => prepareCaptions(root.querySelectorAll('.ig-post')));
+window.addEventListener('resize', () => requestAnimationFrame(() => prepareCaptions(root?.querySelectorAll('.ig-post') || [])));
 const apiUrl = (() => {
   if (!configuredApiUrl) return '';
   try {
@@ -119,7 +141,11 @@ if (root && apiUrl) {
       stats.append(comments);
     }
     stats.append(el('span', 'post-account', '@' + username));
-    detail.append(meta, caption, stats);
+    const captionToggle = el('button', 'caption-toggle', '展开全文');
+    captionToggle.type = 'button';
+    captionToggle.hidden = true;
+    captionToggle.setAttribute('aria-expanded', 'false');
+    detail.append(meta, caption, captionToggle, stats);
     article.append(link, detail);
     return article;
   };
@@ -146,6 +172,7 @@ if (root && apiUrl) {
       const nodes = feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', loaded + index));
       if (first) root.replaceChildren(...nodes);
       else root.append(...nodes);
+      requestAnimationFrame(() => prepareCaptions(nodes));
       loaded += feed.posts.length;
       nextCursor = feed.nextCursor || null;
       if (empty) empty.hidden = loaded > 0;
@@ -207,19 +234,22 @@ if (root && apiUrl) {
 .ig-page .feed-bar > span:first-child { display: flex; align-items: center; gap: .55rem; color: var(--ink); font-weight: 650; }
 .ig-page .feed-bar i { width: 7px; height: 7px; border-radius: 50%; background: #7c9c80; box-shadow: 0 0 0 4px #7c9c8026; }
 .ig-page .ig-feed { display: grid; min-width: 0; gap: 1.25rem; padding-top: 1.4rem; }
-.ig-page .ig-post { display: grid; grid-template-columns: minmax(0, min(34%, 330px)) minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 2.2rem); min-width: 0; padding: 1.2rem; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: 0 8px 30px #1c221008; }
-.ig-page .post-visual { position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; aspect-ratio: 1; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
-.ig-page .post-visual img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .3s ease; }
+.ig-page .ig-post { display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem; min-width: 0; padding: clamp(.7rem, 2vw, 1rem); border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: 0 8px 30px #1c221008; }
+.ig-page .post-visual { position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
+.ig-page .post-visual img { display: block; width: 100%; height: auto; max-width: 100%; max-height: min(720px, 78vh); object-fit: contain; transition: transform .3s ease; }
 .ig-page .post-visual:hover img { transform: scale(1.025); }
 .ig-page .media-badge { position: absolute; top: .7rem; left: .7rem; padding: .35rem .62rem; border: 1px solid #ffffff72; border-radius: 999px; color: white; background: #171b17bd; font-size: .76rem; }
-.ig-page .visual-placeholder { display: grid; justify-items: center; gap: .2rem; color: var(--muted); font-size: 3rem; }
+.ig-page .visual-placeholder { display: grid; justify-items: center; align-content: center; gap: .2rem; min-height: 320px; color: var(--muted); font-size: 3rem; }
 .ig-page .visual-placeholder small { font: .8rem var(--mono); }
-.ig-page .post-detail { display: flex; min-width: 0; flex-direction: column; padding: .25rem 0; }
+.ig-page .post-detail { display: flex; min-width: 0; flex-direction: column; padding: .2rem .4rem .35rem; }
 .ig-page .post-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .55rem; color: var(--muted); font-size: .83rem; }
 .ig-page .post-meta a { margin-left: auto; color: var(--accent); font-weight: 600; }
 .ig-page .post-dot { color: var(--soft); }
-.ig-page .post-caption { margin: 1.15rem 0; color: var(--ink); font-size: .98rem; line-height: 1.8; white-space: pre-line; overflow-wrap: anywhere; }
-.ig-page .post-stats { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink); font: 500 .88rem/1.4 sans-serif; }
+.ig-page .post-caption { margin: .8rem 0 .25rem; color: var(--muted); font-size: .92rem; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+.ig-page .caption-collapsed:not(.caption-expanded) .post-caption { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; white-space: normal; }
+.ig-page .caption-toggle { align-self: flex-start; margin: .2rem 0 .5rem; padding: 0; border: 0; background: none; color: var(--accent); font: 600 .82rem sans-serif; cursor: pointer; }
+.ig-page .caption-toggle[hidden] { display: none; }
+.ig-page .post-stats { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; margin-top: .7rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink); font: 500 .88rem/1.4 sans-serif; }
 .ig-page .post-stats > span { display: inline-flex; align-items: center; gap: .3rem; padding: .35rem .55rem; border-radius: 8px; background: color-mix(in srgb, var(--paper) 75%, var(--line)); }
 .ig-page .post-stats b { color: #b36a68; font-size: 1.25rem; line-height: 1; font-weight: 500; }
 .ig-page .post-stats small { font-size: .82rem; }
@@ -243,13 +273,13 @@ if (root && apiUrl) {
 @media (max-width: 720px) {
   .ig-page { padding: 2.5rem 0 3.5rem; }
   .ig-page .ig-heading { align-items: flex-start; flex-direction: column; gap: 1.3rem; padding-bottom: 1.8rem; }
-  .ig-page .ig-post { grid-template-columns: minmax(0, 38%) minmax(0, 1fr); gap: 1rem; padding: 1rem; }
-  .ig-page .post-caption { margin: .8rem 0; font-size: .9rem; line-height: 1.65; }
+  .ig-page .ig-post { padding: .8rem; }
+  .ig-page .post-caption { font-size: .9rem; line-height: 1.65; }
   .ig-page .post-stats { gap: .35rem; }
 }
 @media (max-width: 520px) {
-  .ig-page .ig-post { grid-template-columns: minmax(0, 1fr); gap: .9rem; }
-  .ig-page .post-visual { width: min(100%, 430px); margin-inline: auto; }
+  .ig-page .ig-post { gap: .7rem; }
+  .ig-page .post-visual img { max-height: 72vh; }
   .ig-page .post-detail { padding: .1rem; }
   .ig-page .post-stats .post-account { margin-left: 0; }
   .ig-page .ig-empty { padding: 4rem 1rem; }
