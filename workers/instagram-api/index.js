@@ -1,4 +1,4 @@
-﻿const FIELDS = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count';
+﻿import { instagramMediaFields, normalizeInstagramPost } from '../../src/lib/instagram-media.js';
 
 const PAGE_SIZE = 12;
 
@@ -55,7 +55,7 @@ export default {
       if (profile.username?.toLowerCase() !== 'xtvjdev') throw new Error('Configured token is not for @xtvjdev.');
 
       const mediaUrl = new URL('https://graph.instagram.com/' + version + '/' + profile.user_id + '/media');
-      mediaUrl.searchParams.set('fields', FIELDS);
+      mediaUrl.searchParams.set('fields', instagramMediaFields);
       mediaUrl.searchParams.set('limit', String(PAGE_SIZE));
       if (after) mediaUrl.searchParams.set('after', after);
       const mediaResponse = await fetch(mediaUrl, { headers: { Authorization: 'Bearer ' + env.INSTAGRAM_ACCESS_TOKEN } });
@@ -66,16 +66,7 @@ export default {
         username: profile.username,
         fetchedAt: new Date().toISOString(),
         nextCursor: media.paging?.next ? media.paging.cursors?.after || null : null,
-        posts: (media.data || []).map((post) => ({
-          id: post.id,
-          caption: post.caption || '',
-          mediaType: post.media_type,
-          imageUrl: post.media_type === 'VIDEO' || post.media_type === 'REELS' ? post.thumbnail_url : post.media_url,
-          permalink: post.permalink,
-          timestamp: post.timestamp,
-          likes: post.like_count ?? null,
-          comments: post.comments_count ?? null,
-        })),
+        posts: (media.data || []).map(normalizeInstagramPost),
       };
       const responseHeaders = new Headers({
         ...headers,

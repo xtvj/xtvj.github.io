@@ -30,7 +30,7 @@ npm run preview
 
 ## Instagram 页面
 
-页面打开时会请求 Cloudflare Worker，由 Worker 使用私密 token 读取 @xtvjdev 的最新 12 篇帖子；点击“加载更多帖子”可继续按页读取，直到所有可访问的帖子加载完。页面每次访问都会发起请求，Worker 将每页结果缓存 60 秒以减少 Instagram API 请求。帖子图片、日期、完整文案、类型、赞数、评论数和原帖链接会显示在每条记录中。若实时接口暂时不可用，页面会保留并显示构建时生成的最近缓存。
+页面打开时会请求 Cloudflare Worker，由 Worker 使用私密 token 读取 @xtvjdev 的最新 12 篇帖子；点击“加载更多帖子”可继续按页读取，直到所有可访问的帖子加载完。页面每次访问都会发起请求，Worker 将每页结果缓存 60 秒以减少 Instagram API 请求。帖子中的照片、视频/Reel、图集（含混合图片和视频）、日期、完整文案、类型、赞数、评论数和原帖链接会显示在每条记录中。视频在页面内播放；若 Instagram 未提供可播放地址或地址失效，可从该媒体打开原帖。若实时接口暂时不可用，页面会保留并显示构建时生成的最近缓存。
 
 Instagram 这里使用授权生成的 User Access Token，不是 API key。账号必须是 Creator（创作者）或 Business（企业）专业账号。Meta 当前读取媒体需要 instagram_business_basic 权限，流程及账号要求以 Meta Instagram Platform 文档为准：
 https://developers.facebook.com/documentation/instagram-platform/instagram-api-with-instagram-login

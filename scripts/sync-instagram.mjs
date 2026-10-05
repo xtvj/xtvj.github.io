@@ -1,3 +1,4 @@
+import { instagramMediaFields, normalizeInstagramPost } from '../src/lib/instagram-media.js';
 const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 const apiUrl = process.env.PUBLIC_INSTAGRAM_API_URL;
 const version = process.env.INSTAGRAM_API_VERSION || 'v25.0';
@@ -22,7 +23,7 @@ if (!token) {
     await mkdir(new URL('../public/instagram/', import.meta.url), { recursive: true });
     const cachedFeed = {
       ...feed,
-      posts: feed.posts.map(({ imageUrl, ...post }) => ({ ...post, image: imageUrl || post.image || null })),
+      posts: feed.posts.map(normalizeInstagramPost),
     };
     await writeFile(output, JSON.stringify(cachedFeed, null, 2) + '\n');
     console.log('Instagram sync complete from Cloudflare Worker: ' + feed.posts.length + ' posts saved.');
@@ -32,7 +33,7 @@ if (!token) {
   }
   process.exit();
 }
-const fields = 'id,caption,media_type,media_url,permalink,thumbnail_url,timestamp,username,like_count,comments_count';
+const fields = instagramMediaFields;
 async function getJson(url) {
   const response = await fetch(url, { headers: { Authorization: 'Bearer ' + token } });
   const json = await response.json();
@@ -53,19 +54,23 @@ try {
   await mkdir(mediaDir, { recursive: true });
   const result = [];
   for (const post of posts.slice(0, 200)) {
-    const video = post.media_type === 'VIDEO' || post.media_type === 'REELS';
-    const source = video ? post.thumbnail_url : post.media_url;
-    let image = null;
-    if (source) {
-      const ext = video ? 'jpg' : (new URL(source).pathname.split('.').pop()?.match(/^[a-z0-9]{2,5}$/i)?.[0] || 'jpg');
-      const filename = post.id.replace(/[^a-zA-Z0-9_-]/g, '') + '.' + ext;
-      const response = await fetch(source);
-      if (response.ok) {
+    const normalized = normalizeInstagramPost(post);
+    for (const [index, item] of normalized.media.entries()) {
+      const source = item.type === 'VIDEO' ? item.thumbnailUrl : item.url;
+      if (!source) continue;
+      try {
+        const response = await fetch(source);
+        if (!response.ok) continue;
+        const extension = ({ 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' })[response.headers.get('content-type')?.split(';')[0].toLowerCase()] || 'jpg';
+        const filename = post.id.replace(/[^a-zA-Z0-9_-]/g, '') + '-' + index + '.' + extension;
         await writeFile(new URL(filename, mediaDir), new Uint8Array(await response.arrayBuffer()));
-        image = '/instagram/media/' + filename;
+        if (item.type === 'VIDEO') item.thumbnailUrl = '/instagram/media/' + filename;
+        else item.url = '/instagram/media/' + filename;
+      } catch (error) {
+        console.warn('Could not cache Instagram media ' + post.id + ': ' + error.message);
       }
     }
-    result.push({ id: post.id, caption: post.caption || '', mediaType: post.media_type, image, permalink: post.permalink, timestamp: post.timestamp, likes: post.like_count ?? null, comments: post.comments_count ?? null });
+    result.push(normalized);
   }
   await writeFile(output, JSON.stringify({ username: profile.username, fetchedAt: new Date().toISOString(), posts: result }, null, 2) + '\n');
   console.log('Instagram sync complete: ' + result.length + ' posts saved.');

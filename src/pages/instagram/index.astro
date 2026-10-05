@@ -1,15 +1,18 @@
 ---
 import { readFile } from 'node:fs/promises';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { normalizeInstagramPost } from '../../lib/instagram-media.js';
 const dataUrl = new URL('../../../public/instagram/posts.json', import.meta.url);
 let feed = { username: 'xtvjdev', fetchedAt: null, posts: [] };
 try { feed = JSON.parse((await readFile(dataUrl, 'utf8')).replace(/^\\uFEFF/, '')); } catch {}
-const posts = feed.posts || [];
+const posts = (feed.posts || []).map(normalizeInstagramPost);
 const apiUrl = import.meta.env.PUBLIC_INSTAGRAM_API_URL || '';
 const base = import.meta.env.BASE_URL;
 const dateFormat = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 const numberFormat = new Intl.NumberFormat('zh-CN');
-const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '多图' }[type] || 'Post');
+const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '图集' }[type] || '媒体');
+const mediaSrc = (url) => url ? (/^https?:\/\//.test(url) ? url : base + url.replace(/^\//, '')) : '';
+const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `Instagram 帖子媒体 ${index + 1}`;
 ---
 <SiteLayout title="Instagram" description="XTVJ 在 Instagram 上分享的照片、视频与日常记录。">
 <section class="ig-page">
@@ -26,10 +29,15 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
   <div class="feed-bar"><span><i></i> 最新分享</span><span id="feed-status" role="status" aria-live="polite">{apiUrl ? '正在获取最新帖子…' : (posts.length ? '最近构建缓存' : '实时接口待配置')}</span></div>
   <div class="ig-feed" id="ig-feed" data-api-url={apiUrl} data-fallback-count={posts.length}>
     {posts.map((post, index) => <article class="ig-post">
-      <button class="post-visual" type="button" aria-label="在当前页面放大查看图片" aria-haspopup="dialog" aria-controls="ig-lightbox" disabled={!post.image}>
-        {post.image ? <img src={/^https?:\/\//.test(post.image) ? post.image : base + post.image.replace(/^\//, '')} alt={post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片'} loading={index > 1 ? 'lazy' : 'eager'} /> : <div class="visual-placeholder"><span>◎</span><small>{mediaLabel(post.mediaType)}</small></div>}
+      <div class="post-media">
+        {post.media.map((item, mediaIndex) => <div class="media-slide" hidden={mediaIndex > 0}>
+          {item.type === 'VIDEO' && item.url ? <video controls playsinline preload="none" poster={mediaSrc(item.thumbnailUrl)} data-permalink={post.permalink} aria-label={mediaAlt(post, mediaIndex)}><source src={mediaSrc(item.url)} /></video>
+          : item.type === 'IMAGE' && item.url ? <button class="post-visual" type="button" aria-label="在当前页面放大查看图片" aria-haspopup="dialog" aria-controls="ig-lightbox"><img src={mediaSrc(item.url)} alt={mediaAlt(post, mediaIndex)} loading={index > 1 ? 'lazy' : 'eager'} /></button>
+          : <a class="media-fallback" href={post.permalink} target="_blank" rel="noopener noreferrer">{item.thumbnailUrl || (item.type === 'IMAGE' && item.url) ? <img src={mediaSrc(item.thumbnailUrl || item.url)} alt={mediaAlt(post, mediaIndex)} loading="lazy" /> : <span class="visual-placeholder">◎</span>}<span>在 Instagram 查看此媒体 ↗</span></a>}
+        </div>)}
         <span class="media-badge">{mediaLabel(post.mediaType)}</span>
-      </button>
+        {post.media.length > 1 && <div class="media-pagination"><button type="button" class="media-prev" aria-label="上一项媒体" disabled>‹</button><span aria-live="polite">1 / {post.media.length}</span><button type="button" class="media-next" aria-label="下一项媒体">›</button></div>}
+      </div>
       <div class="post-detail">
         <div class="post-meta"><time datetime={post.timestamp}>{dateFormat.format(new Date(post.timestamp))}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
         <p class="post-caption">{post.caption || '这篇分享没有添加文字。'}</p>
@@ -64,6 +72,7 @@ const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel',
 </section>
 </SiteLayout>
 <script>
+import { normalizeInstagramPost } from '../../lib/instagram-media.js';
 const root = document.querySelector('#ig-feed');
 const configuredApiUrl = root?.dataset.apiUrl?.trim();
 const fallbackCount = Number(root?.dataset.fallbackCount || 0);
@@ -134,6 +143,41 @@ const setZoom = (value, clientX, clientY) => {
   if (zoom <= 1) { panX = 0; panY = 0; }
   renderZoom();
 };
+root?.addEventListener('error', (event) => {
+  const video = event.target.closest?.('video');
+  if (!video || video.dataset.failed) return;
+  video.dataset.failed = 'true';
+  const fallback = document.createElement('a');
+  fallback.className = 'media-fallback';
+  fallback.href = video.dataset.permalink || '#';
+  fallback.target = '_blank';
+  fallback.rel = 'noopener noreferrer';
+  if (video.poster) {
+    const image = document.createElement('img');
+    image.src = video.poster;
+    image.alt = video.getAttribute('aria-label') || '';
+    fallback.append(image);
+  }
+  const label = document.createElement('span');
+  label.textContent = '无法播放，前往 Instagram 查看 ↗';
+  fallback.append(label);
+  video.replaceWith(fallback);
+}, true);
+root?.addEventListener('click', (event) => {
+  const nav = event.target.closest('.media-prev, .media-next');
+  if (!nav) return;
+  const media = nav.closest('.post-media');
+  const slides = [...media.querySelectorAll('.media-slide')];
+  const current = slides.findIndex((slide) => !slide.hidden);
+  const next = Math.max(0, Math.min(slides.length - 1, current + (nav.classList.contains('media-next') ? 1 : -1)));
+  if (next === current) return;
+  slides[current].querySelector('video')?.pause();
+  slides[current].hidden = true;
+  slides[next].hidden = false;
+  media.querySelector('.media-prev').disabled = next === 0;
+  media.querySelector('.media-next').disabled = next === slides.length - 1;
+  media.querySelector('.media-pagination span').textContent = (next + 1) + ' / ' + slides.length;
+});
 root?.addEventListener('click', (event) => {
   const button = event.target.closest('.post-visual');
   const source = button?.querySelector('img');
@@ -213,7 +257,7 @@ const apiUrl = (() => {
 if (root && apiUrl) {
   const status = document.querySelector('#feed-status');
   const empty = document.querySelector('.ig-empty');
-  const mediaName = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '多图' }[type] || 'Post');
+  const mediaName = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '图集' }[type] || '媒体');
   const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
   const count = new Intl.NumberFormat('zh-CN');
   const el = (tag, className, text) => {
@@ -224,24 +268,66 @@ if (root && apiUrl) {
   };
   const postNode = (post, username, index) => {
     const article = el('article', 'ig-post');
-    const link = el('button', 'post-visual');
-    link.type = 'button';
-    link.setAttribute('aria-label', '在当前页面放大查看图片');
-    link.setAttribute('aria-haspopup', 'dialog');
-    link.setAttribute('aria-controls', 'ig-lightbox');
-    if (post.imageUrl && /^https:\/\//.test(post.imageUrl)) {
-      const image = el('img');
-      image.src = post.imageUrl;
-      image.alt = post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子图片';
-      image.loading = index > 1 ? 'lazy' : 'eager';
-      link.append(image);
-    } else {
-      link.disabled = true;
-      const placeholder = el('div', 'visual-placeholder');
-      placeholder.append(el('span', '', '◎'), el('small', '', mediaName(post.mediaType)));
-      link.append(placeholder);
+    const media = el('div', 'post-media');
+    const resolveSrc = (url) => url && /^https?:\/\//.test(url) ? url : url ? import.meta.env.BASE_URL + url.replace(/^\//, '') : '';
+    post.media.forEach((item, mediaIndex) => {
+      const slide = el('div', 'media-slide');
+      slide.hidden = mediaIndex > 0;
+      const alt = post.caption ? post.caption.slice(0, 120) : 'Instagram 帖子媒体 ' + (mediaIndex + 1);
+      if (item.type === 'VIDEO' && item.url) {
+        const video = el('video');
+        video.controls = true;
+        video.playsInline = true;
+        video.preload = 'none';
+        video.setAttribute('aria-label', alt);
+        video.dataset.permalink = post.permalink || '';
+        if (item.thumbnailUrl) video.poster = resolveSrc(item.thumbnailUrl);
+        const source = el('source');
+        source.src = resolveSrc(item.url);
+        video.append(source);
+        slide.append(video);
+      } else if (item.type === 'IMAGE' && item.url) {
+        const button = el('button', 'post-visual');
+        button.type = 'button';
+        button.setAttribute('aria-label', '在当前页面放大查看图片');
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.setAttribute('aria-controls', 'ig-lightbox');
+        const image = el('img');
+        image.src = resolveSrc(item.url);
+        image.alt = alt;
+        image.loading = index > 1 ? 'lazy' : 'eager';
+        button.append(image);
+        slide.append(button);
+      } else {
+        const fallback = el('a', 'media-fallback');
+        fallback.href = post.permalink || '#';
+        fallback.target = '_blank';
+        fallback.rel = 'noopener noreferrer';
+        if (item.thumbnailUrl || (item.type === 'IMAGE' && item.url)) {
+          const image = el('img');
+          image.src = resolveSrc(item.thumbnailUrl || item.url);
+          image.alt = alt;
+          image.loading = 'lazy';
+          fallback.append(image);
+        } else fallback.append(el('span', 'visual-placeholder', '◎'));
+        fallback.append(el('span', '', '在 Instagram 查看此媒体 ↗'));
+        slide.append(fallback);
+      }
+      media.append(slide);
+    });
+    media.append(el('span', 'media-badge', mediaName(post.mediaType)));
+    if (post.media.length > 1) {
+      const pagination = el('div', 'media-pagination');
+      const prev = el('button', 'media-prev', '‹');
+      prev.type = 'button';
+      prev.disabled = true;
+      prev.setAttribute('aria-label', '上一项媒体');
+      const next = el('button', 'media-next', '›');
+      next.type = 'button';
+      next.setAttribute('aria-label', '下一项媒体');
+      pagination.append(prev, el('span', '', '1 / ' + post.media.length), next);
+      media.append(pagination);
     }
-    link.append(el('span', 'media-badge', mediaName(post.mediaType)));
     const detail = el('div', 'post-detail');
     const meta = el('div', 'post-meta');
     const time = el('time', '', date.format(new Date(post.timestamp)));
@@ -270,7 +356,7 @@ if (root && apiUrl) {
     captionToggle.hidden = true;
     captionToggle.setAttribute('aria-expanded', 'false');
     detail.append(meta, caption, captionToggle, stats);
-    article.append(link, detail);
+    article.append(media, detail);
     return article;
   };
   const pagination = document.querySelector('#feed-pagination');
@@ -293,7 +379,7 @@ if (root && apiUrl) {
       const feed = await response.json();
       if (!response.ok || feed.error) throw new Error(feed.error || 'Instagram API HTTP ' + response.status);
       if (!Array.isArray(feed.posts)) throw new Error('Invalid Instagram feed');
-      const nodes = feed.posts.map((post, index) => postNode(post, feed.username || 'xtvjdev', loaded + index));
+      const nodes = feed.posts.map((post, index) => postNode(normalizeInstagramPost(post), feed.username || 'xtvjdev', loaded + index));
       if (first) root.replaceChildren(...nodes);
       else root.append(...nodes);
       requestAnimationFrame(() => prepareCaptions(nodes));
@@ -359,6 +445,17 @@ if (root && apiUrl) {
 .ig-page .feed-bar i { width: 7px; height: 7px; border-radius: 50%; background: #7c9c80; box-shadow: 0 0 0 4px #7c9c8026; }
 .ig-page .ig-feed { display: grid; min-width: 0; gap: 1.25rem; padding-top: 1.4rem; }
 .ig-page .ig-post { display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem; min-width: 0; padding: clamp(.7rem, 2vw, 1rem); border: 1px solid var(--line); border-radius: 18px; background: var(--paper); box-shadow: 0 8px 30px #1c221008; }
+.ig-page .post-media { position: relative; min-width: 0; }
+.ig-page .media-slide[hidden] { display: none; }
+.ig-page .media-slide { min-width: 0; }
+.ig-page .media-slide video, .ig-page .media-slide .media-fallback { display: block; width: 100%; max-height: min(720px, 78vh); border-radius: 12px; background: #111; }
+.ig-page .media-slide video { object-fit: contain; }
+.ig-page .media-fallback { position: relative; overflow: hidden; color: white; text-align: center; }
+.ig-page .media-fallback img { display: block; width: 100%; max-height: min(720px, 78vh); object-fit: contain; }
+.ig-page .media-fallback > span:last-child { display: block; padding: .65rem; background: #171b17; }
+.ig-page .media-pagination { display: flex; align-items: center; justify-content: center; gap: .8rem; padding: .6rem 0 0; color: var(--muted); font: .8rem var(--mono); }
+.ig-page .media-pagination button { width: 32px; height: 32px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); color: var(--ink); font-size: 1.2rem; cursor: pointer; }
+.ig-page .media-pagination button:disabled { opacity: .35; cursor: default; }
 .ig-page .post-visual { appearance: none; padding: 0; border: 0; color: inherit; font: inherit; cursor: zoom-in; position: relative; display: grid; place-items: center; width: 100%; min-width: 0; max-width: 100%; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--paper) 65%, #c8d0c8); }
 .ig-page .post-visual img { display: block; width: 100%; height: auto; max-width: 100%; max-height: min(720px, 78vh); object-fit: contain; transition: transform .3s ease; }
 .ig-page .post-visual:not(:disabled):hover img { transform: scale(1.025); }
