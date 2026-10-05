@@ -10,8 +10,8 @@ export function normalizeInstagramPost(post) {
       ? post.children.data
       : [post];
   const media = rawItems.map((item) => {
-    const itemType = item.type || item.media_type || (videoTypes.has(type) ? 'VIDEO' : 'IMAGE');
-    const url = item.url || item.media_url || (videoTypes.has(itemType) ? post.videoUrl : null) || null;
+    const itemType = item.type || item.mediaType || item.media_type || (videoTypes.has(type) ? 'VIDEO' : 'IMAGE');
+    const url = item.url || item.mediaUrl || item.media_url || (videoTypes.has(itemType) ? item.videoUrl || post.videoUrl : null) || null;
     const thumbnailUrl = item.thumbnailUrl || item.thumbnail_url || null;
     return { type: videoTypes.has(itemType) ? 'VIDEO' : itemType === 'CAROUSEL_ALBUM' ? 'IMAGE' : itemType, url, thumbnailUrl };
   });

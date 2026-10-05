@@ -31,8 +31,9 @@ const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `I
     {posts.map((post, index) => <article class="ig-post">
       <div class="post-media">
         {post.media.map((item, mediaIndex) => <div class="media-slide" hidden={mediaIndex > 0}>
-          {item.type === 'VIDEO' && item.url ? <video controls playsinline preload="none" poster={mediaSrc(item.thumbnailUrl)} data-permalink={post.permalink} aria-label={mediaAlt(post, mediaIndex)}><source src={mediaSrc(item.url)} /></video>
+          {item.type === 'VIDEO' && item.url ? <video controls muted playsinline preload="none" poster={mediaSrc(item.thumbnailUrl)} data-permalink={post.permalink} aria-label={mediaAlt(post, mediaIndex)}><source src={mediaSrc(item.url)} /></video>
           : item.type === 'IMAGE' && item.url ? <button class="post-visual" type="button" aria-label="在当前页面放大查看图片" aria-haspopup="dialog" aria-controls="ig-lightbox"><img src={mediaSrc(item.url)} alt={mediaAlt(post, mediaIndex)} loading={index > 1 ? 'lazy' : 'eager'} /></button>
+          : item.type === 'VIDEO' ? <div class="media-unavailable">{item.thumbnailUrl ? <img src={mediaSrc(item.thumbnailUrl)} alt={mediaAlt(post, mediaIndex)} loading="lazy" /> : <span class="visual-placeholder">◎</span>}<p role="status">暂未取得视频播放地址</p></div>
           : <a class="media-fallback" href={post.permalink} target="_blank" rel="noopener noreferrer">{item.thumbnailUrl || (item.type === 'IMAGE' && item.url) ? <img src={mediaSrc(item.thumbnailUrl || item.url)} alt={mediaAlt(post, mediaIndex)} loading="lazy" /> : <span class="visual-placeholder">◎</span>}<span>在 Instagram 查看此媒体 ↗</span></a>}
         </div>)}
         <span class="media-badge">{mediaLabel(post.mediaType)}</span>
@@ -72,6 +73,7 @@ const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `I
 </section>
 </SiteLayout>
 <script>
+import { initInstagramPlayback } from '../../scripts/instagram-playback.js';
 import { normalizeInstagramPost } from '../../lib/instagram-media.js';
 const root = document.querySelector('#ig-feed');
 const configuredApiUrl = root?.dataset.apiUrl?.trim();
@@ -98,6 +100,7 @@ root?.addEventListener('click', (event) => {
 if (root) requestAnimationFrame(() => prepareCaptions(root.querySelectorAll('.ig-post')));
 window.addEventListener('resize', () => requestAnimationFrame(() => prepareCaptions(root?.querySelectorAll('.ig-post') || [])));
 const lightbox = document.querySelector('#ig-lightbox');
+const playback = initInstagramPlayback(root, { isBlocked: () => Boolean(lightbox?.open) });
 const lightboxStage = document.querySelector('#lightbox-stage');
 const lightboxImage = document.querySelector('#lightbox-image');
 const zoomLabel = document.querySelector('#lightbox-zoom');
@@ -145,24 +148,31 @@ const setZoom = (value, clientX, clientY) => {
 };
 root?.addEventListener('error', (event) => {
   const video = event.target.closest?.('video');
-  if (!video || video.dataset.failed) return;
+  if (!video || video.dataset.failed || video.error?.code === 1) return;
   video.dataset.failed = 'true';
-  const fallback = document.createElement('a');
-  fallback.className = 'media-fallback';
-  fallback.href = video.dataset.permalink || '#';
-  fallback.target = '_blank';
-  fallback.rel = 'noopener noreferrer';
-  if (video.poster) {
-    const image = document.createElement('img');
-    image.src = video.poster;
-    image.alt = video.getAttribute('aria-label') || '';
-    fallback.append(image);
-  }
+  video.pause();
+  const message = document.createElement('div');
+  message.className = 'video-message';
+  message.setAttribute('role', 'status');
   const label = document.createElement('span');
-  label.textContent = '无法播放，前往 Instagram 查看 ↗';
-  fallback.append(label);
-  video.replaceWith(fallback);
+  label.textContent = '视频加载失败';
+  const retry = document.createElement('button');
+  retry.type = 'button';
+  retry.className = 'video-retry';
+  retry.textContent = '重新加载';
+  message.append(label, retry);
+  video.closest('.media-slide').append(message);
+  playback.refresh();
 }, true);
+root?.addEventListener('click', (event) => {
+  const retry = event.target.closest('.video-retry');
+  if (!retry) return;
+  const video = retry.closest('.media-slide').querySelector('video');
+  delete video.dataset.failed;
+  retry.closest('.video-message').remove();
+  video.load();
+  playback.refresh();
+});
 root?.addEventListener('click', (event) => {
   const nav = event.target.closest('.media-prev, .media-next');
   if (!nav) return;
@@ -177,6 +187,7 @@ root?.addEventListener('click', (event) => {
   media.querySelector('.media-prev').disabled = next === 0;
   media.querySelector('.media-next').disabled = next === slides.length - 1;
   media.querySelector('.media-pagination span').textContent = (next + 1) + ' / ' + slides.length;
+  playback.refresh();
 });
 root?.addEventListener('click', (event) => {
   const button = event.target.closest('.post-visual');
@@ -191,13 +202,14 @@ root?.addEventListener('click', (event) => {
   fitWidth = 0;
   fitHeight = 0;
   lightbox.showModal();
+  playback.refresh();
   if (lightboxImage.complete) fitImage();
   renderZoom();
 });
 lightboxImage?.addEventListener('load', fitImage);
 lightbox?.querySelector('.lightbox-close')?.addEventListener('click', () => lightbox.close());
 lightbox?.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close(); });
-lightbox?.addEventListener('close', () => { pointers.clear(); lightboxImage.removeAttribute('src'); });
+lightbox?.addEventListener('close', () => { pointers.clear(); lightboxImage.removeAttribute('src'); playback.refresh(); });
 lightbox?.querySelectorAll('[data-zoom]')?.forEach((button) => button.addEventListener('click', () => {
   if (button.dataset.zoom === 'reset') setZoom(1);
   else setZoom(zoom * (button.dataset.zoom === 'in' ? 1.25 : 0.8));
@@ -277,6 +289,8 @@ if (root && apiUrl) {
       if (item.type === 'VIDEO' && item.url) {
         const video = el('video');
         video.controls = true;
+        video.defaultMuted = true;
+        video.muted = true;
         video.playsInline = true;
         video.preload = 'none';
         video.setAttribute('aria-label', alt);
@@ -298,6 +312,19 @@ if (root && apiUrl) {
         image.loading = index > 1 ? 'lazy' : 'eager';
         button.append(image);
         slide.append(button);
+      } else if (item.type === 'VIDEO') {
+        const unavailable = el('div', 'media-unavailable');
+        if (item.thumbnailUrl) {
+          const image = el('img');
+          image.src = resolveSrc(item.thumbnailUrl);
+          image.alt = alt;
+          image.loading = 'lazy';
+          unavailable.append(image);
+        } else unavailable.append(el('span', 'visual-placeholder', '◎'));
+        const message = el('p', '', '暂未取得视频播放地址');
+        message.setAttribute('role', 'status');
+        unavailable.append(message);
+        slide.append(unavailable);
       } else {
         const fallback = el('a', 'media-fallback');
         fallback.href = post.permalink || '#';
@@ -382,6 +409,7 @@ if (root && apiUrl) {
       const nodes = feed.posts.map((post, index) => postNode(normalizeInstagramPost(post), feed.username || 'xtvjdev', loaded + index));
       if (first) root.replaceChildren(...nodes);
       else root.append(...nodes);
+      playback.refresh();
       requestAnimationFrame(() => prepareCaptions(nodes));
       loaded += feed.posts.length;
       nextCursor = feed.nextCursor || null;
@@ -450,6 +478,11 @@ if (root && apiUrl) {
 .ig-page .media-slide { min-width: 0; }
 .ig-page .media-slide video, .ig-page .media-slide .media-fallback { display: block; width: 100%; max-height: min(720px, 78vh); border-radius: 12px; background: #111; }
 .ig-page .media-slide video { object-fit: contain; }
+.ig-page .media-unavailable { overflow: hidden; border-radius: 12px; background: #111; color: white; text-align: center; }
+.ig-page .media-unavailable img { display: block; width: 100%; max-height: min(720px, 78vh); object-fit: contain; }
+.ig-page .media-unavailable p { margin: 0; padding: .65rem; }
+.ig-page .video-message { display: flex; align-items: center; justify-content: center; gap: .75rem; padding: .7rem; color: var(--muted); font-size: .85rem; }
+.ig-page .video-retry { padding: .35rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); cursor: pointer; }
 .ig-page .media-fallback { position: relative; overflow: hidden; color: white; text-align: center; }
 .ig-page .media-fallback img { display: block; width: 100%; max-height: min(720px, 78vh); object-fit: contain; }
 .ig-page .media-fallback > span:last-child { display: block; padding: .65rem; background: #171b17; }
