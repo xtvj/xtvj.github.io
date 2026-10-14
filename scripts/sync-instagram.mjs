@@ -1,9 +1,27 @@
 import { instagramMediaFields, normalizeInstagramPost } from '../src/lib/instagram-media.js';
+import { mkdir, writeFile } from 'node:fs/promises';
 const token = process.env.INSTAGRAM_ACCESS_TOKEN;
 const apiUrl = process.env.PUBLIC_INSTAGRAM_API_URL;
 const version = process.env.INSTAGRAM_API_VERSION || 'v25.0';
 const output = new URL('../public/instagram/posts.json', import.meta.url);
 const mediaDir = new URL('../public/instagram/media/', import.meta.url);
+async function cacheProfilePicture(source) {
+  if (!source) return null;
+  try {
+    const response = await fetch(source, { signal: AbortSignal.timeout(15000) });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const type = response.headers.get('content-type')?.split(';')[0].toLowerCase();
+    const extension = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' }[type];
+    if (!extension) throw new Error('Unexpected avatar format: ' + type);
+    await mkdir(mediaDir, { recursive: true });
+    const name = 'profile-avatar.' + extension;
+    await writeFile(new URL(name, mediaDir), new Uint8Array(await response.arrayBuffer()));
+    return '/instagram/media/' + name;
+  } catch (error) {
+    console.warn('Could not cache Instagram profile picture: ' + error.message);
+    return source;
+  }
+}
 if (!token) {
   if (!apiUrl) {
     console.log('Instagram sync skipped: neither INSTAGRAM_ACCESS_TOKEN nor PUBLIC_INSTAGRAM_API_URL is set.');
@@ -19,10 +37,10 @@ if (!token) {
     if (!Array.isArray(feed.posts) || feed.posts.length === 0) {
       throw new Error('Cloudflare Worker returned 0 Instagram posts. Check its token and Instagram permissions.');
     }
-    const { mkdir, writeFile } = await import('node:fs/promises');
     await mkdir(new URL('../public/instagram/', import.meta.url), { recursive: true });
     const cachedFeed = {
       ...feed,
+      profilePictureUrl: await cacheProfilePicture(feed.profilePictureUrl),
       posts: feed.posts.map(normalizeInstagramPost),
     };
     await writeFile(output, JSON.stringify(cachedFeed, null, 2) + '\n');
@@ -41,7 +59,7 @@ async function getJson(url) {
   return json;
 }
 try {
-  const profile = await getJson('https://graph.instagram.com/' + version + '/me?fields=user_id,username,account_type');
+  const profile = await getJson('https://graph.instagram.com/' + version + '/me?fields=user_id,username,account_type,profile_picture_url');
   if (profile.username?.toLowerCase() !== 'xtvjdev') throw new Error('Token belongs to @' + (profile.username || 'unknown') + ', expected @xtvjdev.');
   const posts = [];
   let next = 'https://graph.instagram.com/' + version + '/' + profile.user_id + '/media?fields=' + encodeURIComponent(fields) + '&limit=50';
@@ -72,7 +90,7 @@ try {
     }
     result.push(normalized);
   }
-  await writeFile(output, JSON.stringify({ username: profile.username, fetchedAt: new Date().toISOString(), posts: result }, null, 2) + '\n');
+  await writeFile(output, JSON.stringify({ username: profile.username, profilePictureUrl: await cacheProfilePicture(profile.profile_picture_url), fetchedAt: new Date().toISOString(), posts: result }, null, 2) + '\n');
   console.log('Instagram sync complete: ' + result.length + ' posts saved.');
 } catch (error) {
   console.error('Instagram sync failed: ' + error.message);

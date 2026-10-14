@@ -47,7 +47,7 @@ export default {
 
     try {
       const version = env.GRAPH_API_VERSION || 'v25.0';
-      const profileResponse = await fetch('https://graph.instagram.com/' + version + '/me?fields=user_id,username,account_type', {
+      const profileResponse = await fetch('https://graph.instagram.com/' + version + '/me?fields=user_id,username,account_type,profile_picture_url', {
         headers: { Authorization: 'Bearer ' + env.INSTAGRAM_ACCESS_TOKEN },
       });
       const profile = await profileResponse.json();
@@ -64,6 +64,7 @@ export default {
 
       const payload = {
         username: profile.username,
+        profilePictureUrl: profile.profile_picture_url || null,
         fetchedAt: new Date().toISOString(),
         nextCursor: media.paging?.next ? media.paging.cursors?.after || null : null,
         posts: (media.data || []).map(normalizeInstagramPost),
