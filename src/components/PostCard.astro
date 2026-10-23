@@ -1,5 +1,6 @@
 ---
 import type { Post } from '../lib/site';
+import { postExcerpt } from '../lib/posts';
 import { formatDate, postHref, tagHref } from '../lib/site';
 
 interface Props {
@@ -8,12 +9,14 @@ interface Props {
 
 const { post } = Astro.props;
 const { data } = post;
+const excerpt = postExcerpt(post.body);
 ---
 
 <article class="post-card">
-  <div class="post-card-date">{formatDate(data.date)}</div>
+  <time class="post-card-date" datetime={data.date.toISOString().slice(0, 10)}>{formatDate(data.date)}</time>
   <div class="post-card-content">
-    <h2><a href={postHref(data.slug)}>{data.title}</a></h2>
+    <h2><a class="post-card-link" href={postHref(data.slug)}>{data.title}</a></h2>
+    {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
     <div class="post-card-footer">
       <div class="post-tags">
         {data.tags.slice(0, 3).map((tag) => <a class="tag" href={tagHref(tag)}>{tag}</a>)}
