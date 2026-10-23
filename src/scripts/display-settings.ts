@@ -1,8 +1,8 @@
 type Theme = 'system' | 'light' | 'dark';
 type Width = 'auto' | 'normal' | 'wide';
-type Preferences = { theme: Theme; width: Width; widthExplicit: boolean; fontSize: number };
+type Preferences = { theme: Theme; width: Width; widthExplicit: boolean; fontSize: number; fontSizeExplicit: boolean };
 
-const defaults: Preferences = { theme: 'system', width: 'auto', widthExplicit: false, fontSize: 17 };
+const defaults: Preferences = { theme: 'system', width: 'auto', widthExplicit: false, fontSize: 20, fontSizeExplicit: false };
 const wideViewport = window.matchMedia('(min-width: 1280px)');
 const root = document.documentElement;
 const button = document.querySelector<HTMLButtonElement>('#settings-button');
@@ -15,6 +15,10 @@ let preferences = readPreferences();
 function readPreferences(): Preferences {
   try {
     const saved = JSON.parse(localStorage.getItem('xtvj-display-settings') || '{}');
+    const savedFontSize = Number(saved.fontSize);
+    const validFontSize = Number.isFinite(savedFontSize) && savedFontSize >= 15 && savedFontSize <= 23;
+    // A saved 17 px without this flag came from the previous default.
+    const fontSizeExplicit = saved.fontSizeExplicit === true || (validFontSize && saved.fontSizeExplicit !== false && savedFontSize !== 17);
     return {
       theme: ['system', 'light', 'dark'].includes(saved.theme) ? saved.theme : defaults.theme,
       // Older versions saved normal even when it was never selected.
@@ -22,9 +26,8 @@ function readPreferences(): Preferences {
         ? saved.width
         : defaults.width,
       widthExplicit: saved.widthExplicit === true,
-      fontSize: Number.isFinite(Number(saved.fontSize)) && Number(saved.fontSize) >= 15 && Number(saved.fontSize) <= 23
-        ? Number(saved.fontSize)
-        : defaults.fontSize,
+      fontSize: validFontSize && fontSizeExplicit ? savedFontSize : defaults.fontSize,
+      fontSizeExplicit,
     };
   } catch {
     return { ...defaults };
@@ -89,17 +92,20 @@ document.querySelectorAll<HTMLButtonElement>('[data-pref]').forEach((choice) => 
 if (slider) {
   slider.addEventListener('input', () => {
     preferences.fontSize = Number(slider.value);
+    preferences.fontSizeExplicit = true;
     applyPreferences();
   });
 }
 
 document.querySelector<HTMLButtonElement>('#font-smaller')?.addEventListener('click', () => {
   preferences.fontSize = Math.max(15, preferences.fontSize - 1);
+  preferences.fontSizeExplicit = true;
   applyPreferences();
 });
 
 document.querySelector<HTMLButtonElement>('#font-larger')?.addEventListener('click', () => {
   preferences.fontSize = Math.min(23, preferences.fontSize + 1);
+  preferences.fontSizeExplicit = true;
   applyPreferences();
 });
 

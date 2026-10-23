@@ -73,10 +73,10 @@ const active = currentPath.includes('/instagram/') ? 'instagram' : currentPath.i
               </div>
             </fieldset>
             <fieldset class="setting-group">
-              <legend>字体大小 <output id="font-size-output">17 px</output></legend>
+              <legend>字体大小 <output id="font-size-output">20 px</output></legend>
               <div class="font-size-control">
                 <button type="button" id="font-smaller" aria-label="减小字体">A−</button>
-                <input id="font-size-slider" type="range" min="15" max="23" step="1" value="17" aria-label="字体大小" />
+                <input id="font-size-slider" type="range" min="15" max="23" step="1" value="20" aria-label="字体大小" />
                 <button type="button" id="font-larger" aria-label="增大字体">A+</button>
               </div>
             </fieldset>
@@ -92,7 +92,7 @@ const active = currentPath.includes('/instagram/') ? 'instagram' : currentPath.i
         </div>
       </div>
     </header>
-    <main class="site-main">
+    <main class:list={['site-main', { 'site-main-instagram': active === 'instagram' }]}>
       <slot />
     </main>
     <footer class="site-footer">

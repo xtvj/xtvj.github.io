@@ -8,8 +8,10 @@ try { feed = JSON.parse((await readFile(dataUrl, 'utf8')).replace(/^\\uFEFF/, ''
 const posts = (feed.posts || []).map(normalizeInstagramPost);
 const apiUrl = import.meta.env.PUBLIC_INSTAGRAM_API_URL || '';
 const base = import.meta.env.BASE_URL;
-const dateFormat = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+const dateFormat = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23', timeZone: 'America/Los_Angeles' });
 const numberFormat = new Intl.NumberFormat('zh-CN');
+const formatDate = (value) => { const date = new Date(value); return Number.isNaN(date.getTime()) ? '时间未提供' : dateFormat.format(date) + '（加州时间）'; };
+const formatCount = (value) => typeof value === 'number' && Number.isFinite(value) ? numberFormat.format(value) : '—';
 const mediaLabel = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '图集' }[type] || '媒体');
 const mediaSrc = (url) => url ? (/^https?:\/\//.test(url) ? url : base + url.replace(/^\//, '')) : '';
 const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `Instagram 帖子媒体 ${index + 1}`;
@@ -40,12 +42,12 @@ const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `I
         {post.media.length > 1 && <div class="media-pagination"><button type="button" class="media-prev" aria-label="上一项媒体" disabled>‹</button><span aria-live="polite">1 / {post.media.length}</span><button type="button" class="media-next" aria-label="下一项媒体">›</button></div>}
       </div>
       <div class="post-detail">
-        <div class="post-meta"><time datetime={post.timestamp}>{dateFormat.format(new Date(post.timestamp))}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
+        <div class="post-meta"><time datetime={post.timestamp}>{formatDate(post.timestamp)}</time><span class="post-dot">·</span><span>{mediaLabel(post.mediaType)}</span><a href={post.permalink} target="_blank" rel="noopener noreferrer">查看原帖 ↗</a></div>
         <p class="post-caption">{post.caption || '这篇分享没有添加文字。'}</p>
         <button class="caption-toggle" type="button" hidden aria-expanded="false">展开全文</button>
         <div class="post-stats">
-          {post.likes !== null && post.likes !== undefined && <span><b>♡</b>{numberFormat.format(post.likes)} <small>赞</small></span>}
-          {post.comments !== null && post.comments !== undefined && <span><b>◌</b>{numberFormat.format(post.comments)} <small>评论</small></span>}
+          <span><b>♡</b>{formatCount(post.likes)} <small>赞</small></span>
+          <span><b>◌</b>{formatCount(post.comments)} <small>评论</small></span>
           <span class="post-account">@{feed.username}</span>
         </div>
       </div>
@@ -69,7 +71,7 @@ const mediaAlt = (post, index) => post.caption ? post.caption.slice(0, 120) : `I
     <h2>新记录正在路上</h2><p>配置 Instagram API 后，这里会自动整理最新的帖子。也可以先去 Instagram 看看我的分享。</p>
     <a href="https://www.instagram.com/xtvjdev/" target="_blank" rel="noopener noreferrer">前往 Instagram <span>↗</span></a>
   </section>
-  {feed.fetchedAt && <p class="sync-note">最近同步于 {dateFormat.format(new Date(feed.fetchedAt))} · 内容来自 Instagram</p>}
+  {feed.fetchedAt && <p class="sync-note">最近同步于 {formatDate(feed.fetchedAt)} · 内容来自 Instagram</p>}
 </section>
 </SiteLayout>
 <script>
@@ -289,8 +291,10 @@ if (root && apiUrl) {
   const status = document.querySelector('#feed-status');
   const empty = document.querySelector('.ig-empty');
   const mediaName = (type) => ({ IMAGE: '照片', VIDEO: '视频', REELS: 'Reel', CAROUSEL_ALBUM: '图集' }[type] || '媒体');
-  const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+  const date = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23', timeZone: 'America/Los_Angeles' });
   const count = new Intl.NumberFormat('zh-CN');
+  const formatDate = (value) => { const parsed = new Date(value); return Number.isNaN(parsed.getTime()) ? '时间未提供' : date.format(parsed) + '（加州时间）'; };
+  const formatCount = (value) => typeof value === 'number' && Number.isFinite(value) ? count.format(value) : '—';
   const el = (tag, className, text) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -376,7 +380,7 @@ if (root && apiUrl) {
     }
     const detail = el('div', 'post-detail');
     const meta = el('div', 'post-meta');
-    const time = el('time', '', date.format(new Date(post.timestamp)));
+    const time = el('time', '', formatDate(post.timestamp));
     time.dateTime = post.timestamp;
     meta.append(time, el('span', 'post-dot', '·'), el('span', '', mediaName(post.mediaType)));
     const original = el('a', '', '查看原帖 ↗');
@@ -386,16 +390,12 @@ if (root && apiUrl) {
     meta.append(original);
     const caption = el('p', 'post-caption', post.caption || '这篇分享没有添加文字。');
     const stats = el('div', 'post-stats');
-    if (post.likes !== null && post.likes !== undefined) {
-      const likes = el('span');
-      likes.append(el('b', '', '♡'), document.createTextNode(count.format(post.likes) + ' '), el('small', '', '赞'));
-      stats.append(likes);
-    }
-    if (post.comments !== null && post.comments !== undefined) {
-      const comments = el('span');
-      comments.append(el('b', '', '◌'), document.createTextNode(count.format(post.comments) + ' '), el('small', '', '评论'));
-      stats.append(comments);
-    }
+    const likes = el('span');
+    likes.append(el('b', '', '♡'), document.createTextNode(formatCount(post.likes) + ' '), el('small', '', '赞'));
+    stats.append(likes);
+    const comments = el('span');
+    comments.append(el('b', '', '◌'), document.createTextNode(formatCount(post.comments) + ' '), el('small', '', '评论'));
+    stats.append(comments);
     stats.append(el('span', 'post-account', '@' + username));
     const captionToggle = el('button', 'caption-toggle', '展开全文');
     captionToggle.type = 'button';
@@ -576,5 +576,19 @@ if (root && apiUrl) {
   .ig-page .post-detail { padding: .1rem; }
   .ig-page .post-stats .post-account { margin-left: 0; }
   .ig-page .ig-empty { padding: 4rem 1rem; }
+}
+:root .site-main.site-main-instagram { width: min(1500px, calc(100% - clamp(32px, 5vw, 112px))); }
+.ig-page .ig-feed { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+.ig-page .ig-post { grid-template-rows: auto minmax(0, 1fr); }
+.ig-page .media-slide { aspect-ratio: 4 / 5; overflow: hidden; border-radius: 12px; background: #111; }
+.ig-page .media-slide .post-visual, .ig-page .media-slide video, .ig-page .media-slide .media-fallback, .ig-page .media-slide .media-unavailable { width: 100%; height: 100%; max-height: none; }
+.ig-page .media-slide .post-visual img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+.ig-page .media-slide video { object-fit: contain; }
+.ig-page .media-unavailable img { height: 100%; max-height: none; object-fit: cover; }
+.ig-page .post-stats { margin-top: auto; }
+@media (max-width: 980px) { .ig-page .ig-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  :root .site-main.site-main-instagram { width: calc(100% - 32px); }
+  .ig-page .ig-feed { grid-template-columns: minmax(0, 1fr); }
 }
 </style>
