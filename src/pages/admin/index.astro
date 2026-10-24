@@ -1,15 +1,17 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import { getPosts } from '../../lib/posts';
 
 const viewsApiUrl = import.meta.env.PUBLIC_POST_VIEWS_API_URL || '';
 const adminApiUrl = viewsApiUrl ? new URL('./admin/comments', viewsApiUrl).toString() : '';
+const posts = (await getPosts()).map((post) => ({ slug: post.data.slug, title: post.data.title })).sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'));
 ---
 
 <SiteLayout title="评论管理" description="博客评论管理" noindex>
   <section class="admin-page" data-admin-api={adminApiUrl}>
     <p class="eyebrow">MODERATION</p>
     <h1>评论管理</h1>
-    <p class="admin-intro">输入管理密码，查看各文章的公开评论并删除垃圾信息。</p>
+    <p class="admin-intro">选择文章后查看评论，发现垃圾信息时可以删除。</p>
 
     <form class="admin-login" id="admin-login">
       <label for="admin-password">管理密码</label>
@@ -22,20 +24,12 @@ const adminApiUrl = viewsApiUrl ? new URL('./admin/comments', viewsApiUrl).toStr
     <div class="admin-dashboard" id="admin-dashboard" hidden>
       <div class="admin-toolbar">
         <h2>已公开的评论</h2>
-        <button class="admin-logout" id="admin-logout" type="button">退出</button>
+        <div class="admin-toolbar-actions"><a href={`${import.meta.env.BASE_URL}admin/settings/`}>管理员设置</a><button class="admin-logout" id="admin-logout" type="button">退出</button></div>
       </div>
+      <label class="admin-post-label" for="admin-post-select">选择文章</label>
+      <select id="admin-post-select" class="admin-post-select"><option value="">请选择文章</option>{posts.map((post) => <option value={post.slug}>{post.title}</option>)}</select>
       <div class="admin-comments" id="admin-comments"></div>
       <button class="admin-more" id="admin-more" type="button" hidden>加载更多</button>
-      <form class="admin-password-form" id="admin-password-form">
-        <h2>修改管理密码</h2>
-        <label for="admin-current-password">当前密码</label>
-        <input id="admin-current-password" type="password" required autocomplete="current-password" />
-        <label for="admin-new-password">新密码（至少 8 个字符）</label>
-        <input id="admin-new-password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
-        <label for="admin-confirm-password">确认新密码</label>
-        <input id="admin-confirm-password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
-        <button type="submit">保存新密码</button>
-      </form>
     </div>
     <p class="admin-message" id="admin-message" role="status">
       {adminApiUrl ? '密码由 Worker 验证；管理会话仅保存在当前浏览器标签页。' : '请先配置 PUBLIC_POST_VIEWS_API_URL。'}

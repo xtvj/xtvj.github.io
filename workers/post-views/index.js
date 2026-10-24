@@ -1,8 +1,15 @@
 import { PASSWORD_ITERATIONS, createSession, equalHex, passwordHash, randomHex, validPassword, verifySession } from './auth.js';
+import { COMMENT_AVATARS } from '../../src/lib/comment-avatars.js';
 
 const MAX_SLUGS = 50;
 const VIEW_WINDOW_SECONDS = 24 * 60 * 60;
 const COMMENT_PAGE_SIZE = 50;
+const VISITOR_ID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
+const avatarIds = COMMENT_AVATARS.map(({ id }) => id);
+const validNickname = (value) => typeof value === 'string' && value.length > 0 && value.length <= 30 && !/[\u0000-\u001f\u007f]/u.test(value);
+const commentColumns = `c.id, c.parent_id, CASE WHEN c.is_admin = 1 THEN p.nickname ELSE c.nickname END AS nickname,
+  c.body, c.created_at, CASE WHEN c.is_admin = 1 THEN p.avatar_id ELSE c.avatar_id END AS avatar_id, c.is_admin`;
+const avatarFallback = (comment) => ({ ...comment, avatar_id: avatarIds.includes(comment.avatar_id) ? comment.avatar_id : avatarIds[comment.id % avatarIds.length] });
 
 function validSlug(value) {
   return typeof value === 'string' && value.length > 0 && value.length <= 200 &&
@@ -13,8 +20,8 @@ function responseHeaders(origin, allowedOrigins) {
   const headers = new Headers({ 'Cache-Control': 'no-store', Vary: 'Origin' });
   if (allowedOrigins.has(origin)) {
     headers.set('Access-Control-Allow-Origin', origin);
-    headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    headers.set('Access-Control-Allow-Headers', 'Content-Type');
+    headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
+    headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
   return headers;
 }
@@ -71,7 +78,7 @@ export default {
       if (request.method === 'OPTIONS') {
         if (!origin) return adminJson({ error: 'Origin required' }, 400);
         const preflightHeaders = new Headers(headers);
-        preflightHeaders.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+        preflightHeaders.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
         preflightHeaders.set('Access-Control-Allow-Headers', 'Authorization, Content-Type');
         return new Response(null, { status: 204, headers: preflightHeaders });
       }
@@ -119,16 +126,33 @@ export default {
           return adminJson({ session: await createSession(env.VIEW_HASH_SECRET, result.version) });
         }
 
+        if (url.pathname === '/api/admin/profile') {
+          if (request.method === 'GET') {
+            const profile = await env.DB.prepare('SELECT nickname, avatar_id FROM admin_profile WHERE id = 1').first();
+            return adminJson({ profile });
+          }
+          if (request.method === 'PUT') {
+            const body = await readJson(request);
+            const nickname = typeof body?.nickname === 'string' ? body.nickname.trim() : '';
+            if (!validNickname(nickname) || !avatarIds.includes(body?.avatarId)) return adminJson({ error: 'Invalid profile' }, 400);
+            await env.DB.prepare('UPDATE admin_profile SET nickname = ?1, avatar_id = ?2, updated_at = ?3 WHERE id = 1')
+              .bind(nickname, body.avatarId, Math.floor(Date.now() / 1000)).run();
+            return adminJson({ profile: { nickname, avatar_id: body.avatarId } });
+          }
+          return adminJson({ error: 'Method not allowed' }, 405);
+        }
+
         if (url.pathname === '/api/admin/comments' && request.method === 'GET') {
           const cursor = url.searchParams.get('cursor') || '0';
-          if (!/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) {
+          const slug = url.searchParams.get('slug');
+          if (!validSlug(slug) || !/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) {
             return adminJson({ error: 'Invalid query' }, 400);
           }
           const rows = await env.DB.prepare(`
-            SELECT id, post_slug, parent_id, nickname, body, status, created_at
-            FROM comments WHERE status = 'approved' AND id > ?1 ORDER BY id LIMIT ?2
-          `).bind(Number(cursor), COMMENT_PAGE_SIZE + 1).all();
-          const comments = rows.results.slice(0, COMMENT_PAGE_SIZE);
+            SELECT ${commentColumns}, c.post_slug FROM comments c LEFT JOIN admin_profile p ON p.id = 1
+            WHERE c.status = 'approved' AND c.post_slug = ?1 AND c.id > ?2 ORDER BY c.id LIMIT ?3
+          `).bind(slug, Number(cursor), COMMENT_PAGE_SIZE + 1).all();
+          const comments = rows.results.slice(0, COMMENT_PAGE_SIZE).map(avatarFallback);
           return adminJson({ comments, nextCursor: rows.results.length > COMMENT_PAGE_SIZE ? comments.at(-1).id : null });
         }
         const match = url.pathname.match(/^\/api\/admin\/comments\/(\d+)$/);
@@ -189,23 +213,36 @@ export default {
         const cursor = url.searchParams.get('cursor') || '0';
         if (!validSlug(slug) || !/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) return json({ error: 'Invalid query' }, 400);
         const rows = await env.DB.prepare(`
-          SELECT id, parent_id, nickname, body, created_at FROM comments
-          WHERE post_slug = ?1 AND status = 'approved' AND id > ?2 ORDER BY id LIMIT ?3
+          SELECT ${commentColumns} FROM comments c LEFT JOIN admin_profile p ON p.id = 1
+          WHERE c.post_slug = ?1 AND c.status = 'approved' AND c.id > ?2 ORDER BY c.id LIMIT ?3
         `).bind(slug, Number(cursor), COMMENT_PAGE_SIZE + 1).all();
-        const comments = rows.results.slice(0, COMMENT_PAGE_SIZE);
+        const comments = rows.results.slice(0, COMMENT_PAGE_SIZE).map(avatarFallback);
         return json({ comments, nextCursor: rows.results.length > COMMENT_PAGE_SIZE ? comments.at(-1).id : null });
       }
 
       if (url.pathname === '/api/comments' && request.method === 'POST') {
-        if (!env.TURNSTILE_SECRET_KEY || !env.COMMENT_RATE_LIMITER || !env.VIEW_HASH_SECRET) {
+        if (!env.COMMENT_RATE_LIMITER || !env.VIEW_HASH_SECRET) {
           return json({ error: 'Comment protection is not configured' }, 503);
         }
         const body = await readJson(request);
         const slug = body?.slug;
-        const nickname = typeof body?.nickname === 'string' ? body.nickname.trim() : '';
+        let nickname = typeof body?.nickname === 'string' ? body.nickname.trim() : '';
         const content = typeof body?.body === 'string' ? body.body.trim() : '';
         const parentId = body?.parentId == null ? null : positiveId(body.parentId);
-        if (!validSlug(slug) || !nickname || nickname.length > 30 || /[\u0000-\u001f\u007f]/u.test(nickname) ||
+        const bearer = request.headers.get('Authorization');
+        let isAdmin = false;
+        let avatarId;
+        if (bearer) {
+          const auth = await env.DB.prepare('SELECT version FROM admin_auth WHERE id = 1').first();
+          const token = bearer.match(/^Bearer (\S+)$/)?.[1];
+          if (!auth || !await verifySession(env.VIEW_HASH_SECRET, auth.version, token)) return json({ error: 'Unauthorized' }, 401);
+          const profile = await env.DB.prepare('SELECT nickname, avatar_id FROM admin_profile WHERE id = 1').first();
+          if (!profile) return json({ error: 'Admin profile is not configured' }, 503);
+          isAdmin = true;
+          nickname = profile.nickname;
+          avatarId = profile.avatar_id;
+        }
+        if (!validSlug(slug) || (!isAdmin && !validNickname(nickname)) ||
           !content || content.length > 2000 || (body.parentId != null && !parentId)) {
           return json({ error: 'Invalid comment' }, 400);
         }
@@ -221,16 +258,22 @@ export default {
           `).bind(parentId, slug).first();
           if (!parent) return json({ error: 'Reply target not found' }, 400);
         }
-        if (!await verifyTurnstile(body.turnstileToken, request, env, origin)) {
-          return json({ error: 'Verification failed or expired' }, 400);
+        if (!isAdmin) {
+          if (!VISITOR_ID.test(body?.visitorId || '')) return json({ error: 'Visitor ID required' }, 400);
+          if (!env.TURNSTILE_SECRET_KEY || !await verifyTurnstile(body.turnstileToken, request, env, origin)) {
+            return json({ error: 'Verification failed or expired' }, 400);
+          }
+          const hash = await hmac(env.VIEW_HASH_SECRET, body.visitorId.toLowerCase());
+          avatarId = avatarIds[parseInt(hash.slice(0, 8), 16) % avatarIds.length];
         }
         const result = await env.DB.prepare(`
-          INSERT INTO comments (post_slug, parent_id, nickname, body, status) VALUES (?1, ?2, ?3, ?4, 'approved')
-        `).bind(slug, parentId, nickname, content).run();
+          INSERT INTO comments (post_slug, parent_id, nickname, body, status, avatar_id, is_admin)
+          VALUES (?1, ?2, ?3, ?4, 'approved', ?5, ?6)
+        `).bind(slug, parentId, nickname, content, avatarId, isAdmin ? 1 : 0).run();
         const comment = await env.DB.prepare(`
-          SELECT id, parent_id, nickname, body, created_at FROM comments WHERE id = ?1
+          SELECT ${commentColumns} FROM comments c LEFT JOIN admin_profile p ON p.id = 1 WHERE c.id = ?1
         `).bind(result.meta.last_row_id).first();
-        return json({ comment }, 201);
+        return json({ comment: avatarFallback(comment) }, 201);
       }
 
       return json({ error: 'Method not allowed' }, 405);

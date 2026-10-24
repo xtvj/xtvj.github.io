@@ -4,7 +4,10 @@ interface Comment {
   nickname: string;
   body: string;
   created_at: string;
+  avatar_id: string;
+  is_admin: number;
 }
+import { avatarPath } from '../lib/comment-avatars.js';
 
 const section = document.querySelector<HTMLElement>('.comments[data-post-slug]');
 const list = document.querySelector<HTMLElement>('#comments-list');
@@ -23,6 +26,35 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
   const nodes = new Map<number, HTMLElement>();
   let nextCursor: number | null = null;
   let parentId: number | null = null;
+  let adminSession = '';
+  const adminIdentity = document.querySelector<HTMLElement>('#comment-admin-identity');
+  const guestFields = document.querySelector<HTMLElement>('#comment-guest-fields');
+  const turnstileBox = document.querySelector<HTMLElement>('#comment-turnstile');
+  const visitorId = (() => {
+    try {
+      const saved = localStorage.getItem('xtvj-visitor-id');
+      if (saved && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(saved)) return saved;
+      const generated = crypto.randomUUID();
+      localStorage.setItem('xtvj-visitor-id', generated);
+      return generated;
+    } catch { return crypto.randomUUID(); }
+  })();
+  const setAdmin = (active: boolean, profile?: { nickname: string; avatar_id: string }) => {
+    adminSession = active ? adminSession : '';
+    if (adminIdentity) adminIdentity.hidden = !active;
+    if (guestFields) guestFields.hidden = active;
+    if (turnstileBox) turnstileBox.hidden = active;
+    nickname.required = !active;
+    const submit = form.querySelector<HTMLButtonElement>('[type="submit"]');
+    if (submit) submit.disabled = !active && (!form.querySelector('.cf-turnstile') || !apiUrl);
+    if (active && profile) {
+      const name = document.querySelector<HTMLElement>('#comment-admin-name');
+      const avatar = document.querySelector<HTMLImageElement>('#comment-admin-avatar');
+      if (name) name.textContent = profile.nickname;
+      if (avatar) avatar.src = avatarPath(profile.avatar_id, import.meta.env.BASE_URL);
+      formStatus.textContent = '以管理员身份发表评论。';
+    }
+  };
 
   const clearReply = () => {
     parentId = null;
@@ -37,6 +69,12 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     article.id = `comment-${comment.id}`;
     const header = document.createElement('div');
     header.className = 'comment-meta';
+    const avatar = document.createElement('img');
+    avatar.className = 'comment-avatar';
+    avatar.src = avatarPath(comment.avatar_id, import.meta.env.BASE_URL);
+    avatar.alt = '';
+    avatar.width = 36;
+    avatar.height = 36;
     const author = document.createElement('strong');
     author.textContent = comment.nickname;
     const time = document.createElement('time');
@@ -45,7 +83,14 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     time.textContent = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('zh-CN', {
       year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
     }).format(date);
-    header.append(author, time);
+    header.append(avatar, author);
+    if (comment.is_admin) {
+      const badge = document.createElement('span');
+      badge.className = 'comment-admin-badge';
+      badge.textContent = '管理员';
+      header.append(badge);
+    }
+    header.append(time);
     const content = document.createElement('p');
     content.className = 'comment-body';
     content.textContent = comment.body;
@@ -100,7 +145,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     event.preventDefault();
     if (!apiUrl || !slug) return;
     const token = form.querySelector<HTMLInputElement>('[name="cf-turnstile-response"]')?.value;
-    if (!token) {
+    if (!adminSession && !token) {
       formStatus.textContent = '请先完成安全验证。';
       return;
     }
@@ -109,11 +154,16 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     formStatus.textContent = '正在提交…';
     void fetch(apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug, nickname: nickname.value, body: body.value, parentId, turnstileToken: token }),
+      headers: { 'Content-Type': 'application/json', ...(adminSession ? { Authorization: `Bearer ${adminSession}` } : {}) },
+      body: JSON.stringify({ slug, nickname: nickname.value, body: body.value, parentId, turnstileToken: token, visitorId }),
       cache: 'no-store',
     }).then(async (response) => {
       if (response.status === 429) throw new Error('操作太频繁，请稍后再试。');
+      if (response.status === 401) {
+        try { sessionStorage.removeItem('xtvj-admin-session'); } catch {}
+        setAdmin(false);
+        throw new Error('管理员登录已失效，请完成安全验证后重试。');
+      }
       if (!response.ok) throw new Error(response.status === 400 ? '提交失败，请检查内容并重新完成验证。' : '提交失败，请稍后再试。');
       const data: { comment: Comment } = await response.json();
       renderComment(data.comment);
@@ -126,9 +176,25 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     }).finally(() => {
       if (submit) submit.disabled = false;
       const turnstile = (window as Window & { turnstile?: { reset: () => void } }).turnstile;
-      turnstile?.reset();
+      if (!adminSession) turnstile?.reset();
     });
   });
 
+  try { adminSession = sessionStorage.getItem('xtvj-admin-session') || ''; } catch {}
+  if (adminSession && apiUrl) {
+    void fetch(new URL('./admin/profile', apiUrl), { headers: { Authorization: `Bearer ${adminSession}` }, cache: 'no-store' })
+      .then(async (response) => {
+        if (response.status === 401) {
+          try { sessionStorage.removeItem('xtvj-admin-session'); } catch {}
+          setAdmin(false);
+          return;
+        }
+        if (!response.ok) throw new Error('Profile unavailable');
+        const data: { profile: { nickname: string; avatar_id: string } } = await response.json();
+        setAdmin(true, data.profile);
+      }).catch(() => {
+        formStatus.textContent = '暂时无法确认管理员身份，请稍后刷新页面重试。';
+      });
+  }
   void load();
 }

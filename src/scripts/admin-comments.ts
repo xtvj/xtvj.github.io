@@ -4,7 +4,10 @@ interface AdminComment {
   nickname: string;
   body: string;
   created_at: string;
+  avatar_id: string;
+  is_admin: number;
 }
+import { avatarPath } from '../lib/comment-avatars.js';
 
 const page = document.querySelector<HTMLElement>('.admin-page');
 const login = document.querySelector<HTMLFormElement>('#admin-login');
@@ -14,9 +17,9 @@ const comments = document.querySelector<HTMLElement>('#admin-comments');
 const message = document.querySelector<HTMLElement>('#admin-message');
 const more = document.querySelector<HTMLButtonElement>('#admin-more');
 const logout = document.querySelector<HTMLButtonElement>('#admin-logout');
-const passwordForm = document.querySelector<HTMLFormElement>('#admin-password-form');
+const postSelect = document.querySelector<HTMLSelectElement>('#admin-post-select');
 
-if (page && login && passwordInput && dashboard && comments && message && more && logout && passwordForm) {
+if (page && login && passwordInput && dashboard && comments && message && more && logout && postSelect) {
   const apiUrl = page.dataset.adminApi;
   const sessionKey = 'xtvj-admin-session';
   let session = '';
@@ -37,6 +40,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     login.hidden = false;
     comments.replaceChildren();
     cursor = null;
+    postSelect.value = '';
   };
 
   const request = async (url: URL, method = 'GET', body?: object) => {
@@ -54,7 +58,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
       throw new Error('登录已失效，请重新输入密码。');
     }
     if (response.status === 429) throw new Error('请求太频繁，请稍后重试。');
-    if (response.status === 400) throw new Error('当前密码不正确，或新密码不符合长度要求。');
+    if (response.status === 400) throw new Error('请求内容无效。');
     if (!response.ok) throw new Error('操作失败，请稍后重试。');
     return response.json();
   };
@@ -64,12 +68,18 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     card.className = 'admin-comment';
     const meta = document.createElement('p');
     meta.className = 'admin-comment-meta';
+    const avatar = document.createElement('img');
+    avatar.className = 'comment-avatar';
+    avatar.src = avatarPath(comment.avatar_id, import.meta.env.BASE_URL);
+    avatar.alt = '';
+    avatar.width = 36;
+    avatar.height = 36;
     const author = document.createElement('strong');
-    author.textContent = comment.nickname;
+    author.textContent = `${comment.nickname}${comment.is_admin ? ' · 管理员' : ''}`;
     const date = document.createElement('span');
     const parsedDate = new Date(comment.created_at);
     date.textContent = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toLocaleString('zh-CN');
-    meta.append(author, date);
+    meta.append(avatar, author, date);
     const articleLink = document.createElement('a');
     articleLink.href = `${import.meta.env.BASE_URL}posts/${encodeURIComponent(comment.post_slug)}/#comments`;
     articleLink.textContent = comment.post_slug;
@@ -102,7 +112,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
   };
 
   const load = async (reset = false) => {
-    if (!apiUrl || !session) return false;
+    if (!apiUrl || !session || !postSelect.value) return false;
     if (reset) {
       comments.replaceChildren();
       cursor = null;
@@ -111,9 +121,12 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     more.disabled = true;
     message.textContent = '正在读取评论…';
     const url = new URL(apiUrl);
+    const selectedSlug = postSelect.value;
+    url.searchParams.set('slug', selectedSlug);
     if (cursor !== null) url.searchParams.set('cursor', String(cursor));
     try {
       const data: { comments: AdminComment[]; nextCursor: number | null } = await request(url);
+      if (postSelect.value !== selectedSlug) return false;
       for (const comment of data.comments) renderComment(comment);
       cursor = data.nextCursor;
       more.hidden = cursor === null;
@@ -147,35 +160,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
       passwordInput.value = '';
       login.hidden = true;
       dashboard.hidden = false;
-      await load(true);
-    }).catch((error: Error) => {
-      message.textContent = error.message;
-    }).finally(() => {
-      if (submit) submit.disabled = false;
-    });
-  });
-
-  passwordForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (!apiUrl) return;
-    const current = passwordForm.querySelector<HTMLInputElement>('#admin-current-password');
-    const next = passwordForm.querySelector<HTMLInputElement>('#admin-new-password');
-    const confirm = passwordForm.querySelector<HTMLInputElement>('#admin-confirm-password');
-    if (!current || !next || !confirm) return;
-    if (next.value !== confirm.value) {
-      message.textContent = '两次输入的新密码不一致。';
-      return;
-    }
-    const submit = passwordForm.querySelector<HTMLButtonElement>('[type="submit"]');
-    if (submit) submit.disabled = true;
-    message.textContent = '正在修改密码…';
-    void request(new URL('./password', apiUrl), 'POST', {
-      currentPassword: current.value,
-      newPassword: next.value,
-    }).then((data: { session: string }) => {
-      saveSession(data.session);
-      passwordForm.reset();
-      message.textContent = '密码已修改，其他登录会话已失效。';
+      message.textContent = '请选择文章。';
     }).catch((error: Error) => {
       message.textContent = error.message;
     }).finally(() => {
@@ -185,14 +170,22 @@ if (page && login && passwordInput && dashboard && comments && message && more &
 
   logout.addEventListener('click', () => {
     showLogin();
-    passwordForm.reset();
     message.textContent = '已退出。';
+  });
+  postSelect.addEventListener('change', () => {
+    comments.replaceChildren();
+    cursor = null;
+    more.hidden = true;
+    message.textContent = postSelect.value ? '' : '请选择文章。';
+    if (postSelect.value) void load(true);
   });
   more.addEventListener('click', () => void load());
 
   if (session && apiUrl) {
     login.hidden = true;
     dashboard.hidden = false;
-    void load(true);
+    void request(new URL('./profile', apiUrl)).then(() => {
+      message.textContent = '请选择文章。';
+    }).catch((error: Error) => { message.textContent = error.message; });
   }
 }

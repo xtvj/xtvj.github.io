@@ -18,13 +18,13 @@ const commentsApiUrl = viewsApiUrl ? new URL('./comments', viewsApiUrl).toString
 
   <form class="comment-form" id="comment-form">
     <h3>发表评论</h3>
+    <div class="comment-admin-identity" id="comment-admin-identity" hidden><img id="comment-admin-avatar" width="42" height="42" alt="" /><span><strong id="comment-admin-name"></strong><small>管理员身份</small></span></div>
     <p class="comment-reply-label" id="comment-reply-label" hidden></p>
     <button class="comment-cancel-reply" id="comment-cancel-reply" type="button" hidden>取消回复</button>
-    <label for="comment-nickname">昵称</label>
-    <input id="comment-nickname" name="nickname" type="text" maxlength="30" required autocomplete="nickname" placeholder="怎么称呼你？" />
+    <div class="comment-guest-fields" id="comment-guest-fields"><label for="comment-nickname">昵称</label><input id="comment-nickname" name="nickname" type="text" maxlength="30" required autocomplete="nickname" placeholder="怎么称呼你？" /></div>
     <label for="comment-body">评论内容</label>
     <textarea id="comment-body" name="body" maxlength="2000" rows="5" required placeholder="写下你的想法…"></textarea>
-    {siteKey && <div class="cf-turnstile" data-sitekey={siteKey} data-action="comment" data-theme="auto"></div>}
+    {siteKey && <div id="comment-turnstile"><div class="cf-turnstile" data-sitekey={siteKey} data-action="comment" data-theme="auto"></div></div>}
     <button class="comment-submit" type="submit" disabled={!siteKey || !commentsApiUrl}>提交评论</button>
     <p class="comment-form-status" id="comment-form-status" role="status">
       {!commentsApiUrl ? '评论接口尚未配置。' : !siteKey ? '评论验证尚未配置。' : '通过安全验证后，评论会立即公开。'}

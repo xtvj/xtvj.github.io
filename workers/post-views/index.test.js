@@ -13,6 +13,7 @@ test('password login, immediate comments, deletion and session invalidation', as
   const views = new Map([['article', 5]]);
   const visitors = new Map();
   const comments = [];
+  const profile = { nickname: '博主', avatar_id: 'moses' };
   const limiter = { async limit() { return { success: true }; } };
   const db = {
     prepare(sql) {
@@ -21,11 +22,12 @@ test('password login, immediate comments, deletion and session invalidation', as
           return {
             async all() {
               if (sql.includes('FROM post_views')) return { results: args.filter((slug) => views.has(slug)).map((slug) => ({ slug, views: views.get(slug) })) };
-              if (sql.includes('FROM comments')) return { results: comments.filter((comment) => comment.status === 'approved' && (sql.includes('post_slug = ?1') ? comment.post_slug === args[0] && comment.id > args[1] : comment.id > args[0])) };
+              if (sql.includes('FROM comments')) return { results: comments.filter((comment) => comment.status === 'approved' && comment.post_slug === args[0] && comment.id > args[1]).map((comment) => ({ ...comment, nickname: comment.is_admin ? profile.nickname : comment.nickname, avatar_id: comment.is_admin ? profile.avatar_id : comment.avatar_id })) };
               return { results: [] };
             },
             async first() {
               if (sql.includes('FROM admin_auth')) return auth;
+              if (sql.includes('FROM admin_profile')) return profile;
               if (sql.includes('UPDATE admin_auth')) {
                 if (args[4] !== auth.version) return null;
                 [auth.salt, auth.password_hash, auth.iterations] = args;
@@ -34,7 +36,10 @@ test('password login, immediate comments, deletion and session invalidation', as
               }
               if (sql.includes('FROM post_views')) return views.has(args[0]) ? { slug: args[0], views: views.get(args[0]) } : null;
               if (sql.includes('FROM comments') && sql.includes('post_slug')) return comments.find((comment) => comment.id === args[0] && comment.post_slug === args[1] && comment.status === 'approved') || null;
-              if (sql.includes('FROM comments')) return comments.find((comment) => comment.id === args[0]) || null;
+              if (sql.includes('FROM comments')) {
+                const comment = comments.find((item) => item.id === args[0]);
+                return comment ? { ...comment, nickname: comment.is_admin ? profile.nickname : comment.nickname, avatar_id: comment.is_admin ? profile.avatar_id : comment.avatar_id } : null;
+              }
               return null;
             },
             async run() {
@@ -47,8 +52,13 @@ test('password login, immediate comments, deletion and session invalidation', as
                 return { meta: { changes: 1 } };
               }
               if (sql.includes('INTO comments')) {
-                comments.push({ id: comments.length + 1, post_slug: args[0], parent_id: args[1], nickname: args[2], body: args[3], status: 'approved', created_at: new Date().toISOString() });
+                comments.push({ id: comments.length + 1, post_slug: args[0], parent_id: args[1], nickname: args[2], body: args[3], avatar_id: args[4], is_admin: args[5], status: 'approved', created_at: new Date().toISOString() });
                 return { meta: { last_row_id: comments.length } };
+              }
+              if (sql.includes('UPDATE admin_profile')) {
+                profile.nickname = args[0];
+                profile.avatar_id = args[1];
+                return { meta: { changes: 1 } };
               }
               if (sql.includes('DELETE FROM comments')) {
                 const index = comments.findIndex((item) => item.id === args[0]);
@@ -61,6 +71,7 @@ test('password login, immediate comments, deletion and session invalidation', as
         },
         async first() {
           if (sql.includes('FROM admin_auth')) return auth;
+          if (sql.includes('FROM admin_profile')) return profile;
           throw new Error('Unexpected SQL');
         },
       };
@@ -80,11 +91,16 @@ test('password login, immediate comments, deletion and session invalidation', as
   try {
     let response = await worker.fetch(post('/views', { slug: 'article', visitorId: 'f3b10118-236f-4553-a297-b79e55999a11' }), env);
     assert.equal((await response.json()).views, 6);
-    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '你好', turnstileToken: 'valid' }), env);
+    const visitorId = 'f3b10118-236f-4553-a297-b79e55999a11';
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '你好', turnstileToken: 'valid', visitorId }), env);
     assert.equal(response.status, 201);
-    assert.equal((await response.json()).comment.body, '你好');
+    const firstComment = (await response.json()).comment;
+    assert.equal(firstComment.body, '你好');
+    assert.ok(firstComment.avatar_id);
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '另一个昵称', body: '再见', turnstileToken: 'valid', visitorId }), env);
+    assert.equal((await response.json()).comment.avatar_id, firstComment.avatar_id);
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.equal((await response.json()).comments.length, 1);
+    assert.equal((await response.json()).comments.length, 2);
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器', body: '垃圾', turnstileToken: 'invalid' }), env);
     assert.equal(response.status, 400);
 
@@ -99,19 +115,27 @@ test('password login, immediate comments, deletion and session invalidation', as
     }), env);
     assert.equal(response.status, 204);
     assert.match(response.headers.get('Access-Control-Allow-Headers'), /Authorization/);
-    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${oldSession}` }), env);
-    assert.equal((await response.json()).comments.length, 1);
+    response = await worker.fetch(get('/admin/comments?slug=article', { Authorization: `Bearer ${oldSession}` }), env);
+    assert.equal((await response.json()).comments.length, 2);
+    response = await worker.fetch(new Request(`${base}/admin/profile`, { method: 'PUT', headers: { ...headers, Authorization: `Bearer ${oldSession}` }, body: JSON.stringify({ nickname: '站长', avatarId: 'ruth' }) }), env);
+    assert.equal(response.status, 200);
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '伪造', body: '管理员回复' }, { Authorization: `Bearer ${oldSession}` }), env);
+    assert.equal(response.status, 201);
+    const adminComment = (await response.json()).comment;
+    assert.equal(adminComment.nickname, '站长');
+    assert.equal(adminComment.avatar_id, 'ruth');
+    assert.equal(adminComment.is_admin, 1);
     response = await worker.fetch(post('/admin/password', { currentPassword: oldPassword, newPassword }, { Authorization: `Bearer ${oldSession}` }), env);
     assert.equal(response.status, 200);
     const newSession = (await response.json()).session;
-    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${oldSession}` }), env);
+    response = await worker.fetch(get('/admin/comments?slug=article', { Authorization: `Bearer ${oldSession}` }), env);
     assert.equal(response.status, 401);
-    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${newSession}` }), env);
+    response = await worker.fetch(get('/admin/comments?slug=article', { Authorization: `Bearer ${newSession}` }), env);
     assert.equal(response.status, 200);
     response = await worker.fetch(new Request(`${base}/admin/comments/1`, { method: 'DELETE', headers: { Authorization: `Bearer ${newSession}`, Origin: 'https://xtvj.github.io' } }), env);
     assert.equal(response.status, 200);
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.equal((await response.json()).comments.length, 0);
+    assert.equal((await response.json()).comments.length, 2);
   } finally {
     globalThis.fetch = originalFetch;
   }

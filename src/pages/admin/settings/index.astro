@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { COMMENT_AVATARS, avatarPath } from '../../../lib/comment-avatars.js';
+
+const viewsApiUrl = import.meta.env.PUBLIC_POST_VIEWS_API_URL || '';
+const adminApiUrl = viewsApiUrl ? new URL('./admin/profile', viewsApiUrl).toString() : '';
+---
+
+<SiteLayout title="管理员设置" description="管理员资料与密码" noindex>
+  <section class="admin-page admin-settings-page" data-profile-api={adminApiUrl}>
+    <p class="eyebrow">PROFILE</p>
+    <h1>管理员设置</h1>
+    <p class="admin-intro"><a href={`${import.meta.env.BASE_URL}admin/`}>← 返回评论管理</a></p>
+    <div id="admin-settings-content" hidden>
+      <form class="admin-password-form" id="admin-profile-form">
+        <h2>评论身份</h2>
+        <label for="admin-nickname">昵称</label>
+        <input id="admin-nickname" type="text" maxlength="30" required />
+        <fieldset class="admin-avatar-picker">
+          <legend>选择头像</legend>
+          {COMMENT_AVATARS.map((avatar) => <label><input type="radio" name="avatar" value={avatar.id} required /><img src={avatarPath(avatar.id, import.meta.env.BASE_URL)} width="80" height="80" alt="" /><span>{avatar.name}</span></label>)}
+        </fieldset>
+        <button type="submit">保存资料</button>
+      </form>
+      <form class="admin-password-form" id="admin-password-form">
+        <h2>修改管理密码</h2>
+        <label for="admin-current-password">当前密码</label>
+        <input id="admin-current-password" type="password" required autocomplete="current-password" />
+        <label for="admin-new-password">新密码（至少 8 个字符）</label>
+        <input id="admin-new-password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+        <label for="admin-confirm-password">确认新密码</label>
+        <input id="admin-confirm-password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" />
+        <button type="submit">保存新密码</button>
+      </form>
+    </div>
+    <p class="admin-message" id="admin-settings-message" role="status">正在验证管理员登录…</p>
+  </section>
+</SiteLayout>
+
+<script>import '../../../scripts/admin-settings.ts';</script>
