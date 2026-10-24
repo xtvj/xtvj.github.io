@@ -9,6 +9,8 @@ export const GET: APIRoute = async () => {
     tags: data.tags,
     date: data.date.toISOString(),
     href: postHref(data.slug),
+    slug: data.slug,
+    views: data.views ?? 0,
   }));
 
   return new Response(JSON.stringify(index), {

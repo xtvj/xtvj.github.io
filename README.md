@@ -45,6 +45,31 @@ https://developers.facebook.com/documentation/instagram-platform/instagram-api-w
 6. 重新部署 GitHub Pages。工作流会把公开的 Worker 地址编进页面；每次访客打开 Instagram 页面时就会获取最新帖子。
 
 修改媒体返回字段后，必须重新部署 Worker 和网站；旧版 Worker 只返回视频封面，更新网站本身无法补出视频源。Worker 代码位于 workers/instagram-api/。wrangler.toml 默认只允许 https://xtvj.github.io 和本地 Astro 开发地址访问；若网站使用自定义域名，请同步修改 ALLOWED_ORIGIN 并重新部署。部署 Worker 后可用 npx wrangler secret put INSTAGRAM_ACCESS_TOKEN --config workers/instagram-api/wrangler.toml 更新 token。也可以另外在 GitHub Actions secret 设置 INSTAGRAM_ACCESS_TOKEN，这样构建阶段也会更新离线回退缓存；这不是实时接口运行所必需的。
+
+## 文章阅读次数
+
+文章详情页每次打开会向 Cloudflare Worker 发送一次计数请求；首页、分页和标签列表只批量读取，不增加次数。D1 中保存最新次数，页面构建时先显示 Markdown frontmatter 中的历史 `views`，接口返回后更新为实时值。接口暂时不可用时会保留历史值。阅读次数按页面加载次数计算，不区分访客。
+
+首次部署需要 Cloudflare 账号，并安装/登录 Wrangler：
+
+```sh
+npx wrangler login
+npx wrangler d1 create xtvj-post-views
+```
+
+将创建结果中的 `database_id` 填入 `workers/post-views/wrangler.toml`，替换 `REPLACE_WITH_D1_DATABASE_ID`。然后从项目根目录执行：
+
+```sh
+npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/schema.sql --config workers/post-views/wrangler.toml
+npx wrangler deploy --config workers/post-views/wrangler.toml
+```
+
+`schema.sql` 会建立数据表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。已有统计时不要用新的初始值覆盖数据库；脚本中的 `INSERT OR IGNORE` 不会覆盖已有行。
+
+在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 新增 `PUBLIC_POST_VIEWS_API_URL`，值为部署得到的 Worker 地址加 `/api/views`，例如 `https://xtvj-post-views.example.workers.dev/api/views`。重新部署 GitHub Pages 后，页面才会开始读取和记录次数。本地开发可将同一变量放入项目根目录 `.env` 文件。如果使用自定义站点域名，修改 Worker 配置中的 `ALLOWED_ORIGIN` 后重新部署。
+
+新增文章可直接发布：首次访问详情页时，D1 会为新 slug 建立从 1 开始的统计记录。修改文章 slug 会被视为新文章；如需保留旧次数，先在 D1 中迁移对应的 `slug`。
+
 ## 文章与页面
 
 - 首页展示最新 10 篇文章，其余文章在下一页。

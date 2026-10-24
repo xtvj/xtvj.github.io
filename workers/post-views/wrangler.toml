@@ -1,0 +1,11 @@
+name = "xtvj-post-views"
+main = "index.js"
+compatibility_date = "2026-09-15"
+
+[vars]
+ALLOWED_ORIGIN = "https://xtvj.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "xtvj-post-views"
+database_id = "0807e227-d0a3-431d-8f91-3082d675abc7"
