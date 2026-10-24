@@ -10,7 +10,7 @@ const commentsApiUrl = viewsApiUrl ? new URL('./comments', viewsApiUrl).toString
   <div class="comments-heading">
     <p class="eyebrow">DISCUSSION</p>
     <h2 id="comments-title">评论</h2>
-    <p>欢迎分享想法。评论经审核后公开显示。</p>
+    <p>欢迎分享想法。发表评论后会立即显示。</p>
   </div>
   <div class="comments-list" id="comments-list" aria-live="polite"></div>
   <button class="comments-more" id="comments-more" type="button" hidden>加载更多评论</button>
@@ -27,7 +27,7 @@ const commentsApiUrl = viewsApiUrl ? new URL('./comments', viewsApiUrl).toString
     {siteKey && <div class="cf-turnstile" data-sitekey={siteKey} data-action="comment" data-theme="auto"></div>}
     <button class="comment-submit" type="submit" disabled={!siteKey || !commentsApiUrl}>提交评论</button>
     <p class="comment-form-status" id="comment-form-status" role="status">
-      {!commentsApiUrl ? '评论接口尚未配置。' : !siteKey ? '评论验证尚未配置。' : '提交后将进入审核。'}
+      {!commentsApiUrl ? '评论接口尚未配置。' : !siteKey ? '评论验证尚未配置。' : '通过安全验证后，评论会立即公开。'}
     </p>
   </form>
 </section>

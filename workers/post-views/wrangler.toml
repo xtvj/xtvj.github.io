@@ -28,3 +28,19 @@ namespace_id = "1002"
 
 [triggers]
 crons = ["0 4 * * *"]
+
+[[ratelimits]]
+name = "ADMIN_RATE_LIMITER"
+namespace_id = "1003"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60
+
+[[ratelimits]]
+name = "ADMIN_LOGIN_RATE_LIMITER"
+namespace_id = "1004"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60

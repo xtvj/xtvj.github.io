@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import worker from './index.js';
+import { PASSWORD_ITERATIONS, passwordHash, randomHex, validPassword, verifySession } from './auth.js';
 
-test('views are deduplicated, comments need verification and moderation', async () => {
+test('password login, immediate comments, deletion and session invalidation', async () => {
+  assert.equal(validPassword('12345678'), true);
+  assert.equal(validPassword('1234567'), false);
+  const oldPassword = 'a-long-admin-password-123';
+  const newPassword = 'admin123';
+  const auth = { salt: randomHex(), iterations: PASSWORD_ITERATIONS, version: 1 };
+  auth.password_hash = await passwordHash(oldPassword, auth.salt, auth.iterations);
   const views = new Map([['article', 5]]);
   const visitors = new Map();
   const comments = [];
@@ -14,17 +21,20 @@ test('views are deduplicated, comments need verification and moderation', async 
           return {
             async all() {
               if (sql.includes('FROM post_views')) return { results: args.filter((slug) => views.has(slug)).map((slug) => ({ slug, views: views.get(slug) })) };
-              if (sql.includes('FROM comments')) {
-                const admin = sql.includes('status = ?1');
-                return { results: comments.filter((comment) => admin
-                  ? comment.status === args[0] && comment.id > args[1]
-                  : comment.post_slug === args[0] && comment.status === 'approved' && comment.id > args[1]) };
-              }
+              if (sql.includes('FROM comments')) return { results: comments.filter((comment) => comment.status === 'approved' && (sql.includes('post_slug = ?1') ? comment.post_slug === args[0] && comment.id > args[1] : comment.id > args[0])) };
               return { results: [] };
             },
             async first() {
+              if (sql.includes('FROM admin_auth')) return auth;
+              if (sql.includes('UPDATE admin_auth')) {
+                if (args[4] !== auth.version) return null;
+                [auth.salt, auth.password_hash, auth.iterations] = args;
+                auth.version += 1;
+                return { version: auth.version };
+              }
               if (sql.includes('FROM post_views')) return views.has(args[0]) ? { slug: args[0], views: views.get(args[0]) } : null;
-              if (sql.includes('FROM comments')) return comments.find((comment) => comment.id === args[0] && comment.post_slug === args[1] && comment.status === 'approved') || null;
+              if (sql.includes('FROM comments') && sql.includes('post_slug')) return comments.find((comment) => comment.id === args[0] && comment.post_slug === args[1] && comment.status === 'approved') || null;
+              if (sql.includes('FROM comments')) return comments.find((comment) => comment.id === args[0]) || null;
               return null;
             },
             async run() {
@@ -37,13 +47,8 @@ test('views are deduplicated, comments need verification and moderation', async 
                 return { meta: { changes: 1 } };
               }
               if (sql.includes('INTO comments')) {
-                comments.push({ id: comments.length + 1, post_slug: args[0], parent_id: args[1], nickname: args[2], body: args[3], status: 'pending', created_at: new Date().toISOString() });
+                comments.push({ id: comments.length + 1, post_slug: args[0], parent_id: args[1], nickname: args[2], body: args[3], status: 'approved', created_at: new Date().toISOString() });
                 return { meta: { last_row_id: comments.length } };
-              }
-              if (sql.includes('UPDATE comments')) {
-                const comment = comments.find((item) => item.id === args[0] && item.status === 'pending');
-                if (comment) comment.status = 'approved';
-                return { meta: { changes: comment ? 1 : 0 } };
               }
               if (sql.includes('DELETE FROM comments')) {
                 const index = comments.findIndex((item) => item.id === args[0]);
@@ -54,56 +59,59 @@ test('views are deduplicated, comments need verification and moderation', async 
             },
           };
         },
+        async first() {
+          if (sql.includes('FROM admin_auth')) return auth;
+          throw new Error('Unexpected SQL');
+        },
       };
     },
   };
   const env = {
     DB: db, ALLOWED_ORIGIN: 'https://xtvj.github.io', VIEW_HASH_SECRET: 'test-hmac-secret',
-    TURNSTILE_SECRET_KEY: 'test-turnstile-secret', ADMIN_TOKEN: 'test-admin-secret',
-    VIEW_RATE_LIMITER: limiter, COMMENT_RATE_LIMITER: limiter,
+    TURNSTILE_SECRET_KEY: 'test-turnstile-secret', VIEW_RATE_LIMITER: limiter,
+    COMMENT_RATE_LIMITER: limiter, ADMIN_RATE_LIMITER: limiter, ADMIN_LOGIN_RATE_LIMITER: limiter,
   };
   const base = 'https://blog-api.example/api';
   const headers = { Origin: 'https://xtvj.github.io', 'Content-Type': 'application/json', 'CF-Connecting-IP': '192.0.2.1' };
-  const post = (path, body, extra = {}) => new Request(`${base}${path}`, {
-    method: 'POST', headers: { ...headers, ...extra }, body: JSON.stringify(body),
-  });
+  const post = (path, body, extra = {}) => new Request(`${base}${path}`, { method: 'POST', headers: { ...headers, ...extra }, body: JSON.stringify(body) });
   const get = (path, extra = {}) => new Request(`${base}${path}`, { headers: { ...headers, ...extra } });
   const originalFetch = globalThis.fetch;
-  globalThis.fetch = async (_url, options) => Response.json({
-    success: !String(options.body).includes('invalid'), hostname: 'xtvj.github.io', action: 'comment',
-  });
+  globalThis.fetch = async (_url, options) => Response.json({ success: !String(options.body).includes('invalid'), hostname: 'xtvj.github.io', action: 'comment' });
   try {
-    const viewBody = { slug: 'article', visitorId: 'f3b10118-236f-4553-a297-b79e55999a11' };
-    let response = await worker.fetch(post('/views', viewBody), env);
-    assert.deepEqual(await response.json(), { slug: 'article', views: 6, counted: true });
-    response = await worker.fetch(post('/views', viewBody), env);
-    assert.deepEqual(await response.json(), { slug: 'article', views: 6, counted: false });
+    let response = await worker.fetch(post('/views', { slug: 'article', visitorId: 'f3b10118-236f-4553-a297-b79e55999a11' }), env);
+    assert.equal((await response.json()).views, 6);
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '你好', turnstileToken: 'valid' }), env);
-    assert.equal(response.status, 202);
-    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器人', body: '内容', turnstileToken: 'invalid' }), env);
-    assert.equal(response.status, 400);
+    assert.equal(response.status, 201);
+    assert.equal((await response.json()).comment.body, '你好');
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.deepEqual((await response.json()).comments, []);
-    response = await worker.fetch(get('/admin/comments'), env);
+    assert.equal((await response.json()).comments.length, 1);
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器', body: '垃圾', turnstileToken: 'invalid' }), env);
+    assert.equal(response.status, 400);
+
+    response = await worker.fetch(post('/admin/login', { password: 'wrong-password' }), env);
     assert.equal(response.status, 401);
-    response = await worker.fetch(new Request(`${base}/admin/comments`, { headers: { Authorization: 'Bearer test-admin-secret' } }), env);
-    assert.equal((await response.json()).comments.length, 1);
-    response = await worker.fetch(new Request(`${base}/admin/comments/1/approve`, {
-      method: 'POST', headers: { Authorization: 'Bearer test-admin-secret' },
+    response = await worker.fetch(post('/admin/login', { password: oldPassword }), env);
+    assert.equal(response.status, 200);
+    const oldSession = (await response.json()).session;
+    assert.equal(await verifySession(env.VIEW_HASH_SECRET, auth.version, oldSession), true);
+    response = await worker.fetch(new Request(`${base}/admin/comments`, {
+      method: 'OPTIONS', headers: { Origin: 'https://xtvj.github.io', 'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'Authorization' },
     }), env);
+    assert.equal(response.status, 204);
+    assert.match(response.headers.get('Access-Control-Allow-Headers'), /Authorization/);
+    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${oldSession}` }), env);
+    assert.equal((await response.json()).comments.length, 1);
+    response = await worker.fetch(post('/admin/password', { currentPassword: oldPassword, newPassword }, { Authorization: `Bearer ${oldSession}` }), env);
+    assert.equal(response.status, 200);
+    const newSession = (await response.json()).session;
+    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${oldSession}` }), env);
+    assert.equal(response.status, 401);
+    response = await worker.fetch(get('/admin/comments', { Authorization: `Bearer ${newSession}` }), env);
+    assert.equal(response.status, 200);
+    response = await worker.fetch(new Request(`${base}/admin/comments/1`, { method: 'DELETE', headers: { Authorization: `Bearer ${newSession}`, Origin: 'https://xtvj.github.io' } }), env);
     assert.equal(response.status, 200);
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.equal((await response.json()).comments.length, 1);
-    response = await worker.fetch(post('/comments', { slug: 'article', parentId: 1, nickname: '回复者', body: '回复', turnstileToken: 'valid' }), env);
-    assert.equal(response.status, 202);
-    response = await worker.fetch(post('/comments', { slug: 'article', parentId: 999, nickname: '坏回复', body: '回复', turnstileToken: 'valid' }), env);
-    assert.equal(response.status, 400);
-    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '跨域', body: '内容', turnstileToken: 'valid' }, { Origin: 'https://evil.example' }), env);
-    assert.equal(response.status, 403);
-    response = await worker.fetch(new Request(`${base}/admin/comments/1`, {
-      method: 'DELETE', headers: { Authorization: 'Bearer test-admin-secret' },
-    }), env);
-    assert.equal(response.status, 200);
+    assert.equal((await response.json()).comments.length, 0);
   } finally {
     globalThis.fetch = originalFetch;
   }

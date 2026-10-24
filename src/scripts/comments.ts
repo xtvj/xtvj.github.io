@@ -31,6 +31,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
   };
 
   const renderComment = (comment: Comment) => {
+    if (nodes.has(comment.id)) return;
     const article = document.createElement('article');
     article.className = 'comment';
     article.id = `comment-${comment.id}`;
@@ -114,9 +115,12 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     }).then(async (response) => {
       if (response.status === 429) throw new Error('操作太频繁，请稍后再试。');
       if (!response.ok) throw new Error(response.status === 400 ? '提交失败，请检查内容并重新完成验证。' : '提交失败，请稍后再试。');
+      const data: { comment: Comment } = await response.json();
+      renderComment(data.comment);
+      listStatus.textContent = '';
       body.value = '';
       clearReply();
-      formStatus.textContent = '提交成功，审核通过后会公开显示。';
+      formStatus.textContent = '评论已发表。';
     }).catch((error: Error) => {
       formStatus.textContent = error.message;
     }).finally(() => {

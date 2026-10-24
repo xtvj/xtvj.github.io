@@ -1,3 +1,5 @@
+import { PASSWORD_ITERATIONS, createSession, equalHex, passwordHash, randomHex, validPassword, verifySession } from './auth.js';
+
 const MAX_SLUGS = 50;
 const VIEW_WINDOW_SECONDS = 24 * 60 * 60;
 const COMMENT_PAGE_SIZE = 50;
@@ -17,27 +19,11 @@ function responseHeaders(origin, allowedOrigins) {
   return headers;
 }
 
-async function digest(value) {
-  const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(bytes), (byte) => byte.toString(16).padStart(2, '0')).join('');
-}
-
 async function hmac(secret, value) {
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret),
     { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   const bytes = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(value));
   return Array.from(new Uint8Array(bytes), (byte) => byte.toString(16).padStart(2, '0')).join('');
-}
-
-async function adminAuthorized(request, token) {
-  const supplied = request.headers.get('Authorization')?.match(/^Bearer (\S+)$/)?.[1];
-  if (!token || !supplied) return false;
-  const [left, right] = await Promise.all([digest(token), digest(supplied)]);
-  let difference = 0;
-  for (let index = 0; index < left.length; index++) {
-    difference |= left.charCodeAt(index) ^ right.charCodeAt(index);
-  }
-  return difference === 0;
 }
 
 async function readJson(request) {
@@ -77,38 +63,78 @@ export default {
       status, headers: { ...Object.fromEntries(headers), ...extraHeaders },
     });
 
-    if (url.pathname.startsWith('/api/admin/comments')) {
-      // The moderation API has no browser CORS access. Keep the bearer token in an admin terminal.
+    if (url.pathname.startsWith('/api/admin/')) {
       const adminJson = (body, status = 200) => Response.json(body, {
-        status, headers: { 'Cache-Control': 'no-store' },
+        status, headers,
       });
-      if (!await adminAuthorized(request, env.ADMIN_TOKEN)) return adminJson({ error: 'Unauthorized' }, 401);
+      if (origin && !allowedOrigins.has(origin)) return adminJson({ error: 'Origin not allowed' }, 403);
+      if (request.method === 'OPTIONS') {
+        if (!origin) return adminJson({ error: 'Origin required' }, 400);
+        const preflightHeaders = new Headers(headers);
+        preflightHeaders.set('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+        preflightHeaders.set('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+        return new Response(null, { status: 204, headers: preflightHeaders });
+      }
       if (!env.DB) return adminJson({ error: 'Database is not configured' }, 503);
       try {
+        if (url.pathname === '/api/admin/login' && request.method === 'POST') {
+          if (!origin || !env.VIEW_HASH_SECRET || !env.ADMIN_LOGIN_RATE_LIMITER) return adminJson({ error: 'Login is not configured' }, 503);
+          const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+          if (!(await env.ADMIN_LOGIN_RATE_LIMITER.limit({ key: ip })).success) return adminJson({ error: 'Too many login attempts' }, 429);
+          const body = await readJson(request);
+          if (!body || typeof body.password !== 'string' || body.password.length > 128) return adminJson({ error: 'Invalid request' }, 400);
+          const auth = await env.DB.prepare('SELECT salt, password_hash, iterations, version FROM admin_auth WHERE id = 1').first();
+          if (!auth) return adminJson({ error: 'Admin password is not initialized' }, 503);
+          const hash = await passwordHash(body.password, auth.salt, auth.iterations);
+          if (!equalHex(hash, auth.password_hash)) return adminJson({ error: 'Incorrect password' }, 401);
+          return adminJson({ session: await createSession(env.VIEW_HASH_SECRET, auth.version) });
+        }
+
+        if (env.ADMIN_RATE_LIMITER) {
+          const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+          if (!(await env.ADMIN_RATE_LIMITER.limit({ key: ip })).success) return adminJson({ error: 'Too many requests' }, 429);
+        }
+        if (!env.VIEW_HASH_SECRET) return adminJson({ error: 'Admin authentication is not configured' }, 503);
+        const auth = await env.DB.prepare('SELECT salt, password_hash, iterations, version FROM admin_auth WHERE id = 1').first();
+        const token = request.headers.get('Authorization')?.match(/^Bearer (\S+)$/)?.[1];
+        if (!auth || !await verifySession(env.VIEW_HASH_SECRET, auth.version, token)) {
+          return adminJson({ error: 'Unauthorized' }, 401);
+        }
+
+        if (url.pathname === '/api/admin/password' && request.method === 'POST') {
+          const body = await readJson(request);
+          if (!body || typeof body.currentPassword !== 'string' || !validPassword(body.newPassword)) {
+            return adminJson({ error: 'New password must contain 8–128 characters' }, 400);
+          }
+          const currentHash = await passwordHash(body.currentPassword, auth.salt, auth.iterations);
+          if (!equalHex(currentHash, auth.password_hash)) return adminJson({ error: 'Current password is incorrect' }, 400);
+          const salt = randomHex();
+          const newHash = await passwordHash(body.newPassword, salt, PASSWORD_ITERATIONS);
+          const result = await env.DB.prepare(`
+            UPDATE admin_auth SET salt = ?1, password_hash = ?2, iterations = ?3,
+              version = version + 1, updated_at = ?4 WHERE id = 1 AND version = ?5
+            RETURNING version
+          `).bind(salt, newHash, PASSWORD_ITERATIONS, Math.floor(Date.now() / 1000), auth.version).first();
+          if (!result) return adminJson({ error: 'Password changed concurrently; retry' }, 409);
+          return adminJson({ session: await createSession(env.VIEW_HASH_SECRET, result.version) });
+        }
+
         if (url.pathname === '/api/admin/comments' && request.method === 'GET') {
-          const status = url.searchParams.get('status') || 'pending';
           const cursor = url.searchParams.get('cursor') || '0';
-          if (!['pending', 'approved'].includes(status) || !/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) {
+          if (!/^\d+$/.test(cursor) || !Number.isSafeInteger(Number(cursor))) {
             return adminJson({ error: 'Invalid query' }, 400);
           }
           const rows = await env.DB.prepare(`
             SELECT id, post_slug, parent_id, nickname, body, status, created_at
-            FROM comments WHERE status = ?1 AND id > ?2 ORDER BY id LIMIT ?3
-          `).bind(status, Number(cursor), COMMENT_PAGE_SIZE + 1).all();
+            FROM comments WHERE status = 'approved' AND id > ?1 ORDER BY id LIMIT ?2
+          `).bind(Number(cursor), COMMENT_PAGE_SIZE + 1).all();
           const comments = rows.results.slice(0, COMMENT_PAGE_SIZE);
           return adminJson({ comments, nextCursor: rows.results.length > COMMENT_PAGE_SIZE ? comments.at(-1).id : null });
         }
-        const match = url.pathname.match(/^\/api\/admin\/comments\/(\d+)(?:\/(approve))?$/);
+        const match = url.pathname.match(/^\/api\/admin\/comments\/(\d+)$/);
         const id = match && positiveId(match[1]);
         if (!id) return adminJson({ error: 'Not found' }, 404);
-        if (request.method === 'POST' && match[2] === 'approve') {
-          const result = await env.DB.prepare(`
-            UPDATE comments SET status = 'approved', reviewed_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
-            WHERE id = ?1 AND status = 'pending'
-          `).bind(id).run();
-          return result.meta.changes ? adminJson({ id, status: 'approved' }) : adminJson({ error: 'Pending comment not found' }, 404);
-        }
-        if (request.method === 'DELETE' && !match[2]) {
+        if (request.method === 'DELETE') {
           const result = await env.DB.prepare('DELETE FROM comments WHERE id = ?1').bind(id).run();
           return result.meta.changes ? adminJson({ id, deleted: true }) : adminJson({ error: 'Comment not found' }, 404);
         }
@@ -199,9 +225,12 @@ export default {
           return json({ error: 'Verification failed or expired' }, 400);
         }
         const result = await env.DB.prepare(`
-          INSERT INTO comments (post_slug, parent_id, nickname, body) VALUES (?1, ?2, ?3, ?4)
+          INSERT INTO comments (post_slug, parent_id, nickname, body, status) VALUES (?1, ?2, ?3, ?4, 'approved')
         `).bind(slug, parentId, nickname, content).run();
-        return json({ id: result.meta.last_row_id, status: 'pending' }, 202);
+        const comment = await env.DB.prepare(`
+          SELECT id, parent_id, nickname, body, created_at FROM comments WHERE id = ?1
+        `).bind(result.meta.last_row_id).first();
+        return json({ comment }, 201);
       }
 
       return json({ error: 'Method not allowed' }, 405);

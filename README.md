@@ -62,9 +62,10 @@ npx wrangler d1 create xtvj-post-views
 ```sh
 npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/schema.sql --config workers/post-views/wrangler.toml
 npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/comments.sql --config workers/post-views/wrangler.toml
+node scripts/reset-admin-password.mjs
 ```
 
-`schema.sql` 会建立阅读数表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。`comments.sql` 新增评论表和阅读去重表，不会清空现有阅读数。若之前已执行过 `schema.sql`，只需执行 `comments.sql`。初始化脚本均使用 `IF NOT EXISTS`，历史数值采用 `INSERT OR IGNORE`，不会覆盖已有统计。
+`schema.sql` 会建立阅读数表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。`comments.sql` 新增评论表和阅读去重表，不会清空现有阅读数。若之前已执行过它们，不必重复执行。`reset-admin-password.mjs` 会提示输入两次密码、创建管理密码表、把旧的待审核评论公开，并把加盐密码哈希写入远程 D1。
 
 部署和密钥配置见下方“评论系统”。在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 设置 `PUBLIC_POST_VIEWS_API_URL`，值为 Worker 地址加 `/api/views`，例如 `https://xtvj-post-views.example.workers.dev/api/views`。重新部署 GitHub Pages 后，页面才会读取和记录次数。本地开发可将同一变量放入项目根目录 `.env` 文件。如果使用自定义站点域名，修改 Worker 配置中的 `ALLOWED_ORIGIN` 后重新部署。
 
@@ -72,38 +73,34 @@ npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/comme
 
 ## 评论系统
 
-每篇文章按 frontmatter 中的 `slug` 分开存储评论。游客填写昵称和正文，完成 Turnstile 验证后提交；评论和回复先进入待审核队列，审核通过后才会在文章页公开。回复支持多级嵌套，评论正文按纯文本显示，不执行 HTML。公开接口每次最多读取 50 条，可继续加载；管理员使用终端工具查看、审核和删除评论，不在网站前端输入管理员令牌。
+每篇文章按 frontmatter 中的 `slug` 分开存储评论。游客填写昵称和正文，完成 Turnstile 验证后提交，评论和回复会立即公开。回复支持多级嵌套，评论正文按纯文本显示，不执行 HTML。公开接口每次最多读取 50 条，可继续加载；管理员可通过网站页脚的“评论管理”入口查看和删除垃圾评论。
 
 1. 在 Cloudflare Turnstile 创建一个 Widget，允许的 hostname 填 `xtvj.github.io`。取得公开的 **site key** 和私密的 **secret key**；本地调试可另外使用允许 `localhost` 的测试 Widget。
-2. 在项目根目录执行上方的 `comments.sql` 初始化命令。继续使用 `workers/post-views/wrangler.toml` 中现有的 D1 绑定及数据库 ID。
-3. 生成两个随机密钥，分别用作管理员令牌和阅读数 HMAC 密钥。例如执行 `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"` 两次，并分别妥善保存。
+2. 在项目根目录执行上方的 D1 初始化命令。继续使用 `workers/post-views/wrangler.toml` 中现有的 D1 绑定及数据库 ID。已经运行过 `schema.sql` 和 `comments.sql` 的站点只需运行 `node scripts/reset-admin-password.mjs`。
+3. 生成一个随机密钥用作阅读数 HMAC 密钥和管理员会话签名密钥。例如执行 `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"`，并妥善保存结果。
 4. 使用以下命令将私密值写入 Cloudflare Worker Secrets。每条命令会提示输入对应的值，**不要**将真实值写入 `wrangler.toml`、网站 `.env` 或 Git 仓库：
 
    ```sh
    npx wrangler secret put TURNSTILE_SECRET_KEY --config workers/post-views/wrangler.toml
    npx wrangler secret put VIEW_HASH_SECRET --config workers/post-views/wrangler.toml
-   npx wrangler secret put ADMIN_TOKEN --config workers/post-views/wrangler.toml
    npx wrangler deploy --config workers/post-views/wrangler.toml
    ```
 
-5. 在 GitHub Actions **Variables** 中设置 `PUBLIC_TURNSTILE_SITE_KEY` 为公开的 site key，并保留 `PUBLIC_POST_VIEWS_API_URL`。重新部署 GitHub Pages。`PUBLIC_TURNSTILE_SITE_KEY` 是公开标识，可以出现在前端；Turnstile secret、`ADMIN_TOKEN` 和 `VIEW_HASH_SECRET` 只存在 Cloudflare Worker Secrets 中。
+5. 在 GitHub Actions **Variables** 中设置 `PUBLIC_TURNSTILE_SITE_KEY` 为公开的 site key，并保留 `PUBLIC_POST_VIEWS_API_URL`。重新部署 GitHub Pages。`PUBLIC_TURNSTILE_SITE_KEY` 是公开标识，可以出现在前端；Turnstile secret 和 `VIEW_HASH_SECRET` 只存在 Cloudflare Worker Secrets 中。旧的 `ADMIN_TOKEN` 不再使用，可执行 `npx wrangler secret delete ADMIN_TOKEN --config workers/post-views/wrangler.toml` 清理。
 
-现有 Worker 如果此前没有配置上述 Secrets，更新后的评论提交和阅读计数会返回 503，直到密钥写入。评论读取和历史阅读数显示仍可用。Worker 已按 IP 与浏览器标识配置每分钟最多 3 次评论提交、30 次阅读计数请求的近似限流；Turnstile token 会在 Worker 中向 Cloudflare 验证，并检查 hostname 和 action。阅读记录超过 30 天会由每日定时任务清理。使用自定义域名时，需同步修改 `ALLOWED_ORIGIN` 和 Turnstile Widget 的允许 hostname。
+现有 Worker 如果此前没有配置上述 Secrets，更新后的评论提交和阅读计数会返回 503，直到密钥写入。评论读取和历史阅读数显示仍可用。Worker 已按 IP 与浏览器标识配置每分钟最多 3 次评论提交、30 次阅读计数请求的近似限流；管理密码登录每 IP 每分钟最多尝试 5 次。Turnstile token 会在 Worker 中向 Cloudflare 验证，并检查 hostname 和 action。阅读记录超过 30 天会由每日定时任务清理。使用自定义域名时，需同步修改 `ALLOWED_ORIGIN` 和 Turnstile Widget 的允许 hostname。
 
-### 审核评论
+### 管理评论与密码
 
-在**自己的终端**设置 `BLOG_API_URL` 为 Worker 根地址（不带 `/api/views`），设置 `BLOG_ADMIN_TOKEN` 为上面生成的管理员令牌。Windows PowerShell 示例：
+打开 `https://xtvj.github.io/admin/`（页脚也有“评论管理”入口），输入管理密码后即可查看各文章评论并删除垃圾信息。密码不写入网站源码或浏览器存储；浏览器标签页仅保存有效期为 12 小时的签名会话，关闭标签页或退出后会清除。昵称和 Turnstile 验证不会赋予管理员身份。密码至少 8 个字符；请只在自己信任的设备上管理评论。
 
-```powershell
-$env:BLOG_API_URL = 'https://xtvj-post-views.example.workers.dev'
-$env:BLOG_ADMIN_TOKEN = Read-Host 'Admin token'
-node scripts/moderate-comments.mjs list
-node scripts/moderate-comments.mjs approve 123
-node scripts/moderate-comments.mjs delete 123
-Remove-Item Env:BLOG_ADMIN_TOKEN
+管理页面底部可填写当前密码和新密码进行修改。修改后其他标签页的旧会话立即失效。忘记密码时，在**项目根目录**运行以下一个命令；它会隐藏密码输入，经 Wrangler 登录的 Cloudflare 账号更新远程 D1 并使旧会话失效：
+
+```sh
+node scripts/reset-admin-password.mjs
 ```
 
-`list` 默认列出待审核评论，`list approved` 列出已公开评论；结果中的 `id` 用于审核或删除。每次最多列出 50 条，API 响应中的 `nextCursor` 可传给 `list pending <nextCursor>` 读取下一页。管理员令牌只放在本机临时环境变量中，不放到 GitHub Actions Variables 或前端。删除某条评论后，其已公开的回复会作为顶层评论保留。
+如需本地测试，可使用 `node scripts/reset-admin-password.mjs --local`，它只更新 Wrangler 的本地 D1。远程重置需要 Wrangler 已登录并可访问 `xtvj-post-views` 数据库。命令只上传随机盐和密码哈希，不把明文密码写入 Git 或命令参数。删除某条评论后，其已公开的回复会作为顶层评论保留。修改 Worker 或网站代码后，分别重新执行 Worker 部署命令并重新运行 GitHub Pages 部署。
 
 ## 文章与页面
 

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS comments (
   parent_id INTEGER REFERENCES comments(id) ON DELETE SET NULL,
   nickname TEXT NOT NULL CHECK (length(nickname) BETWEEN 1 AND 30),
   body TEXT NOT NULL CHECK (length(body) BETWEEN 1 AND 2000),
-  status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved')),
+  status TEXT NOT NULL DEFAULT 'approved' CHECK (status IN ('pending', 'approved')),
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
   reviewed_at TEXT
 );
