@@ -1,17 +1,19 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getPosts } from '../../lib/posts';
+import { formatDate, sortPosts } from '../../lib/site';
 
 const viewsApiUrl = import.meta.env.PUBLIC_POST_VIEWS_API_URL || '';
 const adminApiUrl = viewsApiUrl ? new URL('./admin/comments', viewsApiUrl).toString() : '';
-const posts = (await getPosts()).map((post) => ({ slug: post.data.slug, title: post.data.title })).sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'));
+const posts = sortPosts(await getPosts());
 ---
 
 <SiteLayout title="评论管理" description="博客评论管理" noindex>
   <section class="admin-page" data-admin-api={adminApiUrl}>
-    <p class="eyebrow">MODERATION</p>
-    <h1>评论管理</h1>
-    <p class="admin-intro">选择文章后查看评论，发现垃圾信息时可以删除。</p>
+    <div class="admin-page-heading">
+      <div><p class="eyebrow">MODERATION</p><h1>评论管理</h1><p class="admin-intro">按文章查看评论，及时清理不合适的内容。</p></div>
+      <a class="admin-settings-link" href={`${import.meta.env.BASE_URL}admin/settings/`} id="admin-settings-link" hidden>账号设置 <span aria-hidden="true">↗</span></a>
+    </div>
 
     <form class="admin-login" id="admin-login">
       <label for="admin-password">管理密码</label>
@@ -23,13 +25,25 @@ const posts = (await getPosts()).map((post) => ({ slug: post.data.slug, title: p
 
     <div class="admin-dashboard" id="admin-dashboard" hidden>
       <div class="admin-toolbar">
-        <h2>已公开的评论</h2>
-        <div class="admin-toolbar-actions"><a href={`${import.meta.env.BASE_URL}admin/settings/`}>管理员设置</a><button class="admin-logout" id="admin-logout" type="button">退出</button></div>
+        <span>已公开的评论</span>
+        <button class="admin-logout" id="admin-logout" type="button">退出登录</button>
       </div>
-      <label class="admin-post-label" for="admin-post-select">选择文章</label>
-      <select id="admin-post-select" class="admin-post-select"><option value="">请选择文章</option>{posts.map((post) => <option value={post.slug}>{post.title}</option>)}</select>
-      <div class="admin-comments" id="admin-comments"></div>
-      <button class="admin-more" id="admin-more" type="button" hidden>加载更多</button>
+      <div class="admin-workspace">
+        <aside class="admin-article-panel">
+          <p class="admin-panel-kicker">文章筛选</p>
+          <label class="admin-post-label" for="admin-post-select">选择文章</label>
+          <select id="admin-post-select" class="admin-post-select" disabled={posts.length === 0}>
+            {posts.length === 0 && <option value="">暂无文章</option>}
+            {posts.map((post, index) => <option value={post.data.slug} selected={index === 0}>{formatDate(post.data.date)} · {post.data.title}</option>)}
+          </select>
+          <p class="admin-panel-hint">按发布时间排列，最新文章在最上方。</p>
+        </aside>
+        <div class="admin-comment-panel">
+          <div class="admin-comments-heading"><h2>评论列表</h2><span id="admin-comment-count" aria-live="polite"></span></div>
+          <div class="admin-comments" id="admin-comments"></div>
+          <button class="admin-more" id="admin-more" type="button" hidden>加载更多评论</button>
+        </div>
+      </div>
     </div>
     <p class="admin-message" id="admin-message" role="status">
       {adminApiUrl ? '密码由 Worker 验证；管理会话仅保存在当前浏览器标签页。' : '请先配置 PUBLIC_POST_VIEWS_API_URL。'}

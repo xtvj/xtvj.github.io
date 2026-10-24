@@ -1,6 +1,7 @@
 interface AdminComment {
   id: number;
   post_slug: string;
+  parent_id: number | null;
   nickname: string;
   body: string;
   created_at: string;
@@ -18,12 +19,16 @@ const message = document.querySelector<HTMLElement>('#admin-message');
 const more = document.querySelector<HTMLButtonElement>('#admin-more');
 const logout = document.querySelector<HTMLButtonElement>('#admin-logout');
 const postSelect = document.querySelector<HTMLSelectElement>('#admin-post-select');
+const settingsLink = document.querySelector<HTMLElement>('#admin-settings-link');
+const count = document.querySelector<HTMLElement>('#admin-comment-count');
 
 if (page && login && passwordInput && dashboard && comments && message && more && logout && postSelect) {
   const apiUrl = page.dataset.adminApi;
   const sessionKey = 'xtvj-admin-session';
   let session = '';
   let cursor: number | null = null;
+  let requestSerial = 0;
+  postSelect.selectedIndex = 0;
   try { session = sessionStorage.getItem(sessionKey) || ''; } catch {}
 
   const saveSession = (value: string) => {
@@ -38,9 +43,12 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     saveSession('');
     dashboard.hidden = true;
     login.hidden = false;
+    if (settingsLink) settingsLink.hidden = true;
     comments.replaceChildren();
     cursor = null;
-    postSelect.value = '';
+    requestSerial++;
+    if (count) count.textContent = '';
+    postSelect.selectedIndex = 0;
   };
 
   const request = async (url: URL, method = 'GET', body?: object) => {
@@ -66,7 +74,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
   const renderComment = (comment: AdminComment) => {
     const card = document.createElement('article');
     card.className = 'admin-comment';
-    const meta = document.createElement('p');
+    const meta = document.createElement('div');
     meta.className = 'admin-comment-meta';
     const avatar = document.createElement('img');
     avatar.className = 'comment-avatar';
@@ -75,14 +83,29 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     avatar.width = 36;
     avatar.height = 36;
     const author = document.createElement('strong');
-    author.textContent = `${comment.nickname}${comment.is_admin ? ' · 管理员' : ''}`;
+    author.textContent = comment.nickname;
+    const authorDetails = document.createElement('div');
+    authorDetails.className = 'admin-comment-author';
+    authorDetails.append(author);
+    if (comment.is_admin) {
+      const badge = document.createElement('span');
+      badge.className = 'comment-admin-badge';
+      badge.textContent = '管理员';
+      authorDetails.append(badge);
+    }
+    if (comment.parent_id) {
+      const reply = document.createElement('span');
+      reply.className = 'admin-reply-label';
+      reply.textContent = `回复 #${comment.parent_id}`;
+      authorDetails.append(reply);
+    }
     const date = document.createElement('span');
     const parsedDate = new Date(comment.created_at);
     date.textContent = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toLocaleString('zh-CN');
-    meta.append(avatar, author, date);
+    meta.append(avatar, authorDetails, date);
     const articleLink = document.createElement('a');
     articleLink.href = `${import.meta.env.BASE_URL}posts/${encodeURIComponent(comment.post_slug)}/#comments`;
-    articleLink.textContent = comment.post_slug;
+    articleLink.textContent = '查看文章 ↗';
     const content = document.createElement('p');
     content.className = 'admin-comment-body';
     content.textContent = comment.body;
@@ -95,8 +118,8 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     remove.addEventListener('click', () => {
       if (window.confirm(`确定删除 #${comment.id} 的评论吗？`)) void deleteComment(comment.id, card);
     });
-    actions.append(remove);
-    card.append(meta, articleLink, content, actions);
+    actions.append(articleLink, remove);
+    card.append(meta, content, actions);
     comments.append(card);
   };
 
@@ -105,6 +128,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     try {
       await request(new URL(`${apiUrl}/${id}`), 'DELETE');
       card.remove();
+      if (count) count.textContent = `已加载 ${comments.childElementCount} 条`;
       message.textContent = `评论 #${id} 已删除。`;
     } catch (error) {
       message.textContent = error instanceof Error ? error.message : '删除失败。';
@@ -122,21 +146,23 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     message.textContent = '正在读取评论…';
     const url = new URL(apiUrl);
     const selectedSlug = postSelect.value;
+    const serial = ++requestSerial;
     url.searchParams.set('slug', selectedSlug);
     if (cursor !== null) url.searchParams.set('cursor', String(cursor));
     try {
       const data: { comments: AdminComment[]; nextCursor: number | null } = await request(url);
-      if (postSelect.value !== selectedSlug) return false;
+      if (postSelect.value !== selectedSlug || serial !== requestSerial) return false;
       for (const comment of data.comments) renderComment(comment);
       cursor = data.nextCursor;
       more.hidden = cursor === null;
+      if (count) count.textContent = `已加载 ${comments.childElementCount} 条`;
       message.textContent = comments.childElementCount ? '' : '当前没有评论。';
       return true;
     } catch (error) {
-      message.textContent = error instanceof Error ? error.message : '读取失败。';
+      if (serial === requestSerial) message.textContent = error instanceof Error ? error.message : '读取失败。';
       return false;
     } finally {
-      more.disabled = false;
+      if (serial === requestSerial) more.disabled = false;
     }
   };
 
@@ -160,7 +186,9 @@ if (page && login && passwordInput && dashboard && comments && message && more &
       passwordInput.value = '';
       login.hidden = true;
       dashboard.hidden = false;
-      message.textContent = '请选择文章。';
+      if (settingsLink) settingsLink.hidden = false;
+      if (postSelect.value) await load(true);
+      else message.textContent = '暂无文章。';
     }).catch((error: Error) => {
       message.textContent = error.message;
     }).finally(() => {
@@ -173,10 +201,12 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     message.textContent = '已退出。';
   });
   postSelect.addEventListener('change', () => {
+    requestSerial++;
     comments.replaceChildren();
     cursor = null;
     more.hidden = true;
-    message.textContent = postSelect.value ? '' : '请选择文章。';
+    if (count) count.textContent = '';
+    message.textContent = postSelect.value ? '' : '暂无文章。';
     if (postSelect.value) void load(true);
   });
   more.addEventListener('click', () => void load());
@@ -184,8 +214,10 @@ if (page && login && passwordInput && dashboard && comments && message && more &
   if (session && apiUrl) {
     login.hidden = true;
     dashboard.hidden = false;
+    if (settingsLink) settingsLink.hidden = false;
     void request(new URL('./profile', apiUrl)).then(() => {
-      message.textContent = '请选择文章。';
+      if (postSelect.value) void load(true);
+      else message.textContent = '暂无文章。';
     }).catch((error: Error) => { message.textContent = error.message; });
   }
 }
