@@ -260,11 +260,12 @@ export default {
         }
         if (!isAdmin) {
           if (!VISITOR_ID.test(body?.visitorId || '')) return json({ error: 'Visitor ID required' }, 400);
+          if (body.avatarId !== undefined && !avatarIds.includes(body.avatarId)) return json({ error: 'Invalid avatar' }, 400);
           if (!env.TURNSTILE_SECRET_KEY || !await verifyTurnstile(body.turnstileToken, request, env, origin)) {
             return json({ error: 'Verification failed or expired' }, 400);
           }
           const hash = await hmac(env.VIEW_HASH_SECRET, body.visitorId.toLowerCase());
-          avatarId = avatarIds[parseInt(hash.slice(0, 8), 16) % avatarIds.length];
+          avatarId = body.avatarId || avatarIds[parseInt(hash.slice(0, 8), 16) % avatarIds.length];
         }
         const result = await env.DB.prepare(`
           INSERT INTO comments (post_slug, parent_id, nickname, body, status, avatar_id, is_admin)

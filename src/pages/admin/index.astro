@@ -36,6 +36,10 @@ const posts = sortPosts(await getPosts());
             {posts.length === 0 && <option value="">暂无文章</option>}
             {posts.map((post, index) => <option value={post.data.slug} selected={index === 0}>{formatDate(post.data.date)} · {post.data.title}</option>)}
           </select>
+          <div class="admin-post-list" role="group" aria-label="选择文章">
+            {posts.map((post, index) => <button type="button" class="admin-post-item" data-post-slug={post.data.slug} aria-pressed={index === 0 ? 'true' : 'false'}><span class="admin-post-item-date">{formatDate(post.data.date)}</span><span class="admin-post-item-title">{post.data.title}</span></button>)}
+            {posts.length === 0 && <p class="admin-panel-hint">暂无文章。</p>}
+          </div>
           <p class="admin-panel-hint">按发布时间排列，最新文章在最上方。</p>
         </aside>
         <div class="admin-comment-panel">

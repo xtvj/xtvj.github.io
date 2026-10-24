@@ -7,7 +7,7 @@ interface Comment {
   avatar_id: string;
   is_admin: number;
 }
-import { avatarPath } from '../lib/comment-avatars.js';
+import { COMMENT_AVATARS, avatarPath } from '../lib/comment-avatars.js';
 
 const section = document.querySelector<HTMLElement>('.comments[data-post-slug]');
 const list = document.querySelector<HTMLElement>('#comments-list');
@@ -30,6 +30,11 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
   const adminIdentity = document.querySelector<HTMLElement>('#comment-admin-identity');
   const guestFields = document.querySelector<HTMLElement>('#comment-guest-fields');
   const turnstileBox = document.querySelector<HTMLElement>('#comment-turnstile');
+  const avatarDialog = document.querySelector<HTMLDialogElement>('#comment-avatar-dialog');
+  const avatarTrigger = document.querySelector<HTMLButtonElement>('#comment-avatar-trigger');
+  const avatarClose = document.querySelector<HTMLButtonElement>('#comment-avatar-close');
+  const guestAvatar = document.querySelector<HTMLImageElement>('#comment-guest-avatar');
+  const avatarOptions = [...document.querySelectorAll<HTMLButtonElement>('[data-avatar-id]')];
   const visitorId = (() => {
     try {
       const saved = localStorage.getItem('xtvj-visitor-id');
@@ -39,11 +44,36 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
       return generated;
     } catch { return crypto.randomUUID(); }
   })();
+  const avatarKey = 'xtvj-comment-avatar';
+  let selectedAvatar = '';
+  try { selectedAvatar = localStorage.getItem(avatarKey) || ''; } catch {}
+  if (!COMMENT_AVATARS.some((avatar) => avatar.id === selectedAvatar)) {
+    selectedAvatar = COMMENT_AVATARS[crypto.getRandomValues(new Uint32Array(1))[0] % COMMENT_AVATARS.length].id;
+    try { localStorage.setItem(avatarKey, selectedAvatar); } catch {}
+  }
+  const showSelectedAvatar = () => {
+    if (guestAvatar) guestAvatar.src = avatarPath(selectedAvatar, import.meta.env.BASE_URL);
+    for (const option of avatarOptions) option.setAttribute('aria-pressed', String(option.dataset.avatarId === selectedAvatar));
+  };
+  showSelectedAvatar();
+  avatarTrigger?.addEventListener('click', () => avatarDialog?.showModal());
+  avatarClose?.addEventListener('click', () => avatarDialog?.close());
+  avatarDialog?.addEventListener('click', (event) => { if (event.target === avatarDialog) avatarDialog.close(); });
+  for (const option of avatarOptions) option.addEventListener('click', () => {
+    const id = option.dataset.avatarId;
+    if (!COMMENT_AVATARS.some((avatar) => avatar.id === id)) return;
+    selectedAvatar = id!;
+    try { localStorage.setItem(avatarKey, selectedAvatar); } catch {}
+    showSelectedAvatar();
+    avatarDialog?.close();
+    avatarTrigger?.focus();
+  });
   const setAdmin = (active: boolean, profile?: { nickname: string; avatar_id: string }) => {
     adminSession = active ? adminSession : '';
     if (adminIdentity) adminIdentity.hidden = !active;
     if (guestFields) guestFields.hidden = active;
     if (turnstileBox) turnstileBox.hidden = active;
+    if (active) avatarDialog?.close();
     nickname.required = !active;
     const submit = form.querySelector<HTMLButtonElement>('[type="submit"]');
     if (submit) submit.disabled = !active && (!form.querySelector('.cf-turnstile') || !apiUrl);
@@ -155,7 +185,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     void fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(adminSession ? { Authorization: `Bearer ${adminSession}` } : {}) },
-      body: JSON.stringify({ slug, nickname: nickname.value, body: body.value, parentId, turnstileToken: token, visitorId }),
+      body: JSON.stringify({ slug, nickname: nickname.value, body: body.value, parentId, turnstileToken: token, visitorId, avatarId: selectedAvatar }),
       cache: 'no-store',
     }).then(async (response) => {
       if (response.status === 429) throw new Error('操作太频繁，请稍后再试。');

@@ -19,6 +19,7 @@ const message = document.querySelector<HTMLElement>('#admin-message');
 const more = document.querySelector<HTMLButtonElement>('#admin-more');
 const logout = document.querySelector<HTMLButtonElement>('#admin-logout');
 const postSelect = document.querySelector<HTMLSelectElement>('#admin-post-select');
+const postItems = [...document.querySelectorAll<HTMLButtonElement>('.admin-post-item')];
 const settingsLink = document.querySelector<HTMLElement>('#admin-settings-link');
 const count = document.querySelector<HTMLElement>('#admin-comment-count');
 
@@ -29,6 +30,10 @@ if (page && login && passwordInput && dashboard && comments && message && more &
   let cursor: number | null = null;
   let requestSerial = 0;
   postSelect.selectedIndex = 0;
+  const syncPostItems = () => {
+    for (const item of postItems) item.setAttribute('aria-pressed', String(item.dataset.postSlug === postSelect.value));
+  };
+  syncPostItems();
   try { session = sessionStorage.getItem(sessionKey) || ''; } catch {}
 
   const saveSession = (value: string) => {
@@ -49,6 +54,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     requestSerial++;
     if (count) count.textContent = '';
     postSelect.selectedIndex = 0;
+    syncPostItems();
   };
 
   const request = async (url: URL, method = 'GET', body?: object) => {
@@ -201,6 +207,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     message.textContent = '已退出。';
   });
   postSelect.addEventListener('change', () => {
+    syncPostItems();
     requestSerial++;
     comments.replaceChildren();
     cursor = null;
@@ -208,6 +215,11 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     if (count) count.textContent = '';
     message.textContent = postSelect.value ? '' : '暂无文章。';
     if (postSelect.value) void load(true);
+  });
+  for (const item of postItems) item.addEventListener('click', () => {
+    if (item.dataset.postSlug === postSelect.value) return;
+    postSelect.value = item.dataset.postSlug || '';
+    postSelect.dispatchEvent(new Event('change'));
   });
   more.addEventListener('click', () => void load());
 

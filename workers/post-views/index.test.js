@@ -99,9 +99,13 @@ test('password login, immediate comments, deletion and session invalidation', as
     assert.ok(firstComment.avatar_id);
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '另一个昵称', body: '再见', turnstileToken: 'valid', visitorId }), env);
     assert.equal((await response.json()).comment.avatar_id, firstComment.avatar_id);
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '自选头像', turnstileToken: 'valid', visitorId, avatarId: 'david' }), env);
+    assert.equal((await response.json()).comment.avatar_id, 'david');
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '错误头像', turnstileToken: 'valid', visitorId, avatarId: 'unknown' }), env);
+    assert.equal(response.status, 400);
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.equal((await response.json()).comments.length, 2);
-    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器', body: '垃圾', turnstileToken: 'invalid' }), env);
+    assert.equal((await response.json()).comments.length, 3);
+    response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器', body: '垃圾', turnstileToken: 'invalid', visitorId }), env);
     assert.equal(response.status, 400);
 
     response = await worker.fetch(post('/admin/login', { password: 'wrong-password' }), env);
@@ -116,7 +120,7 @@ test('password login, immediate comments, deletion and session invalidation', as
     assert.equal(response.status, 204);
     assert.match(response.headers.get('Access-Control-Allow-Headers'), /Authorization/);
     response = await worker.fetch(get('/admin/comments?slug=article', { Authorization: `Bearer ${oldSession}` }), env);
-    assert.equal((await response.json()).comments.length, 2);
+    assert.equal((await response.json()).comments.length, 3);
     response = await worker.fetch(new Request(`${base}/admin/profile`, { method: 'PUT', headers: { ...headers, Authorization: `Bearer ${oldSession}` }, body: JSON.stringify({ nickname: '站长', avatarId: 'ruth' }) }), env);
     assert.equal(response.status, 200);
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '伪造', body: '管理员回复' }, { Authorization: `Bearer ${oldSession}` }), env);
@@ -135,7 +139,7 @@ test('password login, immediate comments, deletion and session invalidation', as
     response = await worker.fetch(new Request(`${base}/admin/comments/1`, { method: 'DELETE', headers: { Authorization: `Bearer ${newSession}`, Origin: 'https://xtvj.github.io' } }), env);
     assert.equal(response.status, 200);
     response = await worker.fetch(get('/comments?slug=article'), env);
-    assert.equal((await response.json()).comments.length, 2);
+    assert.equal((await response.json()).comments.length, 3);
   } finally {
     globalThis.fetch = originalFetch;
   }

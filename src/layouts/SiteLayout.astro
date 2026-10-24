@@ -94,7 +94,7 @@ const active = currentPath.includes('/instagram/') ? 'instagram' : currentPath.i
         </div>
       </div>
     </header>
-    <main class:list={['site-main', { 'site-main-instagram': active === 'instagram' }]}>
+    <main class:list={['site-main', { 'site-main-instagram': active === 'instagram', 'site-main-admin-settings': currentPath.includes('/admin/settings/') }]}>
       <slot />
     </main>
     <footer class="site-footer">
