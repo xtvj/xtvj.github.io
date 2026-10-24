@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import { getPosts } from '../../lib/posts';
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import Comments from '../../components/Comments.astro';
 import { formatDate, postHref, sortPosts, tagHref } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -46,4 +47,5 @@ const older = posts[index + 1];
       {older ? <a class="older" href={postHref(older.data.slug)}><small>下一篇</small><span>{older.data.title}</span></a> : <span></span>}
     </nav>
   </article>
+  <Comments slug={post.data.slug} />
 </SiteLayout>

@@ -9,3 +9,22 @@ ALLOWED_ORIGIN = "https://xtvj.github.io"
 binding = "DB"
 database_name = "xtvj-post-views"
 database_id = "0807e227-d0a3-431d-8f91-3082d675abc7"
+
+[[ratelimits]]
+name = "COMMENT_RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 3
+  period = 60
+
+[[ratelimits]]
+name = "VIEW_RATE_LIMITER"
+namespace_id = "1002"
+
+  [ratelimits.simple]
+  limit = 30
+  period = 60
+
+[triggers]
+crons = ["0 4 * * *"]

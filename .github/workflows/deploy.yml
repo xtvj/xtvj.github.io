@@ -38,6 +38,7 @@ jobs:
           INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
           PUBLIC_INSTAGRAM_API_URL: ${{ vars.PUBLIC_INSTAGRAM_API_URL }}
           PUBLIC_POST_VIEWS_API_URL: ${{ vars.PUBLIC_POST_VIEWS_API_URL }}
+          PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
 
   deploy:
     needs: build

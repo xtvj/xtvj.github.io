@@ -1,0 +1,38 @@
+---
+interface Props { slug: string }
+const { slug } = Astro.props;
+const viewsApiUrl = import.meta.env.PUBLIC_POST_VIEWS_API_URL || '';
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const commentsApiUrl = viewsApiUrl ? new URL('./comments', viewsApiUrl).toString() : '';
+---
+
+<section class="comments" id="comments" aria-labelledby="comments-title" data-post-slug={slug} data-comments-api={commentsApiUrl}>
+  <div class="comments-heading">
+    <p class="eyebrow">DISCUSSION</p>
+    <h2 id="comments-title">评论</h2>
+    <p>欢迎分享想法。评论经审核后公开显示。</p>
+  </div>
+  <div class="comments-list" id="comments-list" aria-live="polite"></div>
+  <button class="comments-more" id="comments-more" type="button" hidden>加载更多评论</button>
+  <p class="comments-list-status" id="comments-list-status" role="status">正在加载评论…</p>
+
+  <form class="comment-form" id="comment-form">
+    <h3>发表评论</h3>
+    <p class="comment-reply-label" id="comment-reply-label" hidden></p>
+    <button class="comment-cancel-reply" id="comment-cancel-reply" type="button" hidden>取消回复</button>
+    <label for="comment-nickname">昵称</label>
+    <input id="comment-nickname" name="nickname" type="text" maxlength="30" required autocomplete="nickname" placeholder="怎么称呼你？" />
+    <label for="comment-body">评论内容</label>
+    <textarea id="comment-body" name="body" maxlength="2000" rows="5" required placeholder="写下你的想法…"></textarea>
+    {siteKey && <div class="cf-turnstile" data-sitekey={siteKey} data-action="comment" data-theme="auto"></div>}
+    <button class="comment-submit" type="submit" disabled={!siteKey || !commentsApiUrl}>提交评论</button>
+    <p class="comment-form-status" id="comment-form-status" role="status">
+      {!commentsApiUrl ? '评论接口尚未配置。' : !siteKey ? '评论验证尚未配置。' : '提交后将进入审核。'}
+    </p>
+  </form>
+</section>
+
+{siteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+<script>
+  import '../scripts/comments.ts';
+</script>

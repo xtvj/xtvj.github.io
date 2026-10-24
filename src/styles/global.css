@@ -67,7 +67,7 @@ html { min-width: 320px; font-size: 20px; scroll-behavior: smooth; }
 body { margin: 0; min-height: 100vh; background: var(--page-bg); color: var(--ink); transition: background-color .18s ease, color .18s ease; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--accent); }
-button, input { font: inherit; }
+button, input, textarea { font: inherit; }
 button { color: inherit; }
 ::selection { color: #fff; background: #557064; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -175,6 +175,35 @@ button { color: inherit; }
 .article-side-link:hover, .article-side-link:focus-visible { width: clamp(52px, 4.8vw, 70px); background: var(--paper); color: var(--accent); opacity: 1; }
 .article-side-newer { left: 0; border-left: 0; border-radius: 0 7px 7px 0; }
 .article-side-older { right: 0; border-right: 0; border-radius: 7px 0 0 7px; }
+.comments { margin: 72px 0 90px; padding-top: 31px; border-top: 1px solid var(--line); }
+.comments-heading .eyebrow { margin-bottom: 10px; }
+.comments-heading h2 { margin: 0; font-size: 1.4rem; letter-spacing: -.04em; }
+.comments-heading > p:last-child { margin: 9px 0 26px; color: var(--muted); font-size: .75rem; }
+.comments-list { display: grid; gap: 15px; }
+.comment { min-width: 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.comment-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.comment-meta strong { font-size: .8rem; font-weight: 650; overflow-wrap: anywhere; }
+.comment-meta time { color: var(--soft); font: .62rem var(--mono); }
+.comment-body { margin: 12px 0; color: var(--ink); font-size: .8rem; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comment-reply, .comment-cancel-reply, .comments-more { padding: 0; border: 0; background: none; color: var(--accent); font-size: .7rem; cursor: pointer; }
+.comment-reply:hover, .comment-cancel-reply:hover, .comments-more:hover { text-decoration: underline; }
+.comment-children { display: grid; gap: 12px; margin: 14px 0 0 18px; }
+.comment-children:empty { display: none; }
+.comment-children .comment-children { margin-left: 0; }
+.comment-children .comment { border-left: 2px solid var(--accent); }
+.comments-more { margin-top: 18px; }
+.comments-list-status, .comment-form-status { min-height: 1.5em; color: var(--muted); font-size: .72rem; }
+.comment-form { display: flex; flex-direction: column; align-items: flex-start; gap: 9px; margin-top: 34px; padding: 24px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); }
+.comment-form h3 { margin: 0 0 7px; font-size: 1rem; }
+.comment-form label { font-size: .73rem; font-weight: 600; }
+.comment-form input, .comment-form textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 5px; outline-color: var(--accent); background: var(--page-bg); color: var(--ink); font-size: .78rem; }
+.comment-form textarea { resize: vertical; min-height: 110px; line-height: 1.7; }
+.comment-form input::placeholder, .comment-form textarea::placeholder { color: var(--soft); }
+.comment-form .cf-turnstile { max-width: 100%; margin-top: 8px; }
+.comment-submit { padding: 10px 18px; border: 1px solid var(--accent); border-radius: 5px; background: var(--accent); color: var(--paper); font-size: .75rem; font-weight: 650; cursor: pointer; }
+.comment-submit:disabled { opacity: .5; cursor: not-allowed; }
+.comment-reply-label { margin: 0; color: var(--muted); font-size: .73rem; }
+.comment-form-status { margin: 0; }
 .about-page { max-width: 660px; margin: 0 auto; padding: 75px 0 100px; }
 .about-page h1 { margin-bottom: 28px; font-size: 2.75rem; }
 .about-page p:not(.eyebrow) { color: var(--muted); font-size: .96rem; line-height: 2; }
@@ -230,6 +259,10 @@ button { color: inherit; }
   .article-body pre { padding: 14px; font-size: .72rem; }
   .article-side-link { width: 44px; height: 128px; min-height: 0; }
   .article-side-link:hover, .article-side-link:focus-visible { width: 50px; }
+  .comments { margin: 52px 0 70px; }
+  .comment { padding: 15px 13px; }
+  .comment-children { margin-left: 9px; }
+  .comment-form { padding: 18px 14px; }
   .about-page { padding: 56px 0 75px; }
   .site-footer, :root[data-width='wide'] .site-footer { width: calc(100% - 36px); }
 }

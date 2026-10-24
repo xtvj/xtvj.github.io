@@ -48,7 +48,7 @@ https://developers.facebook.com/documentation/instagram-platform/instagram-api-w
 
 ## 文章阅读次数
 
-文章详情页每次打开会向 Cloudflare Worker 发送一次计数请求；首页、分页和标签列表只批量读取，不增加次数。D1 中保存最新次数，页面构建时先显示 Markdown frontmatter 中的历史 `views`，接口返回后更新为实时值。接口暂时不可用时会保留历史值。阅读次数按页面加载次数计算，不区分访客。
+文章详情页打开时会向 Cloudflare Worker 发送计数请求；同一浏览器和文章在 24 小时内重复刷新不会再次计数。Worker 将浏览器随机 ID 与访客 IP、浏览器标识经服务端密钥做 HMAC 后用于去重；D1 不保存原始 IP。换浏览器、清理浏览器数据或伪造请求仍可能产生新计数，因此这不是唯一访客统计。首页、分页、标签和搜索列表只批量读取，不增加次数。页面构建时先显示 Markdown frontmatter 中的历史 `views`，接口返回后更新为实时值；接口暂时不可用时保留历史值。
 
 首次部署需要 Cloudflare 账号，并安装/登录 Wrangler：
 
@@ -61,14 +61,49 @@ npx wrangler d1 create xtvj-post-views
 
 ```sh
 npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/schema.sql --config workers/post-views/wrangler.toml
-npx wrangler deploy --config workers/post-views/wrangler.toml
+npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/comments.sql --config workers/post-views/wrangler.toml
 ```
 
-`schema.sql` 会建立数据表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。已有统计时不要用新的初始值覆盖数据库；脚本中的 `INSERT OR IGNORE` 不会覆盖已有行。
+`schema.sql` 会建立阅读数表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。`comments.sql` 新增评论表和阅读去重表，不会清空现有阅读数。若之前已执行过 `schema.sql`，只需执行 `comments.sql`。初始化脚本均使用 `IF NOT EXISTS`，历史数值采用 `INSERT OR IGNORE`，不会覆盖已有统计。
 
-在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 新增 `PUBLIC_POST_VIEWS_API_URL`，值为部署得到的 Worker 地址加 `/api/views`，例如 `https://xtvj-post-views.example.workers.dev/api/views`。重新部署 GitHub Pages 后，页面才会开始读取和记录次数。本地开发可将同一变量放入项目根目录 `.env` 文件。如果使用自定义站点域名，修改 Worker 配置中的 `ALLOWED_ORIGIN` 后重新部署。
+部署和密钥配置见下方“评论系统”。在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 设置 `PUBLIC_POST_VIEWS_API_URL`，值为 Worker 地址加 `/api/views`，例如 `https://xtvj-post-views.example.workers.dev/api/views`。重新部署 GitHub Pages 后，页面才会读取和记录次数。本地开发可将同一变量放入项目根目录 `.env` 文件。如果使用自定义站点域名，修改 Worker 配置中的 `ALLOWED_ORIGIN` 后重新部署。
 
 新增文章可直接发布：首次访问详情页时，D1 会为新 slug 建立从 1 开始的统计记录。修改文章 slug 会被视为新文章；如需保留旧次数，先在 D1 中迁移对应的 `slug`。
+
+## 评论系统
+
+每篇文章按 frontmatter 中的 `slug` 分开存储评论。游客填写昵称和正文，完成 Turnstile 验证后提交；评论和回复先进入待审核队列，审核通过后才会在文章页公开。回复支持多级嵌套，评论正文按纯文本显示，不执行 HTML。公开接口每次最多读取 50 条，可继续加载；管理员使用终端工具查看、审核和删除评论，不在网站前端输入管理员令牌。
+
+1. 在 Cloudflare Turnstile 创建一个 Widget，允许的 hostname 填 `xtvj.github.io`。取得公开的 **site key** 和私密的 **secret key**；本地调试可另外使用允许 `localhost` 的测试 Widget。
+2. 在项目根目录执行上方的 `comments.sql` 初始化命令。继续使用 `workers/post-views/wrangler.toml` 中现有的 D1 绑定及数据库 ID。
+3. 生成两个随机密钥，分别用作管理员令牌和阅读数 HMAC 密钥。例如执行 `node -e "console.log(require('node:crypto').randomBytes(32).toString('hex'))"` 两次，并分别妥善保存。
+4. 使用以下命令将私密值写入 Cloudflare Worker Secrets。每条命令会提示输入对应的值，**不要**将真实值写入 `wrangler.toml`、网站 `.env` 或 Git 仓库：
+
+   ```sh
+   npx wrangler secret put TURNSTILE_SECRET_KEY --config workers/post-views/wrangler.toml
+   npx wrangler secret put VIEW_HASH_SECRET --config workers/post-views/wrangler.toml
+   npx wrangler secret put ADMIN_TOKEN --config workers/post-views/wrangler.toml
+   npx wrangler deploy --config workers/post-views/wrangler.toml
+   ```
+
+5. 在 GitHub Actions **Variables** 中设置 `PUBLIC_TURNSTILE_SITE_KEY` 为公开的 site key，并保留 `PUBLIC_POST_VIEWS_API_URL`。重新部署 GitHub Pages。`PUBLIC_TURNSTILE_SITE_KEY` 是公开标识，可以出现在前端；Turnstile secret、`ADMIN_TOKEN` 和 `VIEW_HASH_SECRET` 只存在 Cloudflare Worker Secrets 中。
+
+现有 Worker 如果此前没有配置上述 Secrets，更新后的评论提交和阅读计数会返回 503，直到密钥写入。评论读取和历史阅读数显示仍可用。Worker 已按 IP 与浏览器标识配置每分钟最多 3 次评论提交、30 次阅读计数请求的近似限流；Turnstile token 会在 Worker 中向 Cloudflare 验证，并检查 hostname 和 action。阅读记录超过 30 天会由每日定时任务清理。使用自定义域名时，需同步修改 `ALLOWED_ORIGIN` 和 Turnstile Widget 的允许 hostname。
+
+### 审核评论
+
+在**自己的终端**设置 `BLOG_API_URL` 为 Worker 根地址（不带 `/api/views`），设置 `BLOG_ADMIN_TOKEN` 为上面生成的管理员令牌。Windows PowerShell 示例：
+
+```powershell
+$env:BLOG_API_URL = 'https://xtvj-post-views.example.workers.dev'
+$env:BLOG_ADMIN_TOKEN = Read-Host 'Admin token'
+node scripts/moderate-comments.mjs list
+node scripts/moderate-comments.mjs approve 123
+node scripts/moderate-comments.mjs delete 123
+Remove-Item Env:BLOG_ADMIN_TOKEN
+```
+
+`list` 默认列出待审核评论，`list approved` 列出已公开评论；结果中的 `id` 用于审核或删除。每次最多列出 50 条，API 响应中的 `nextCursor` 可传给 `list pending <nextCursor>` 读取下一页。管理员令牌只放在本机临时环境变量中，不放到 GitHub Actions Variables 或前端。删除某条评论后，其已公开的回复会作为顶层评论保留。
 
 ## 文章与页面
 

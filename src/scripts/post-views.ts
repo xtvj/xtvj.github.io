@@ -12,10 +12,16 @@ if (apiUrl && counters.length) {
 
   const currentPost = counters.find((counter) => counter.hasAttribute('data-count-view'));
   if (currentPost?.dataset.postViews) {
+    let visitorId: string | undefined;
+    try {
+      const saved = localStorage.getItem('xtvj-visitor-id');
+      visitorId = saved && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(saved) ? saved : crypto.randomUUID();
+      localStorage.setItem('xtvj-visitor-id', visitorId);
+    } catch {}
     void fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: currentPost.dataset.postViews }),
+      body: JSON.stringify({ slug: currentPost.dataset.postViews, visitorId }),
       cache: 'no-store',
     }).then(async (response) => {
       if (!response.ok) throw new Error('Could not record view');
