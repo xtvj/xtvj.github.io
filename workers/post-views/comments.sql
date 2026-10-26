@@ -2,11 +2,11 @@
 CREATE TABLE IF NOT EXISTS view_visitors (
   post_slug TEXT NOT NULL,
   visitor_hash TEXT NOT NULL,
-  last_counted INTEGER NOT NULL,
+  last_seen INTEGER NOT NULL,
   PRIMARY KEY (post_slug, visitor_hash)
 );
 
-CREATE INDEX IF NOT EXISTS idx_view_visitors_last_counted ON view_visitors(last_counted);
+CREATE INDEX IF NOT EXISTS idx_view_visitors_last_seen ON view_visitors(last_seen);
 
 CREATE TRIGGER IF NOT EXISTS count_first_view
 AFTER INSERT ON view_visitors
@@ -16,8 +16,8 @@ BEGIN
 END;
 
 CREATE TRIGGER IF NOT EXISTS count_return_view
-AFTER UPDATE OF last_counted ON view_visitors
-WHEN NEW.last_counted > OLD.last_counted
+AFTER UPDATE OF last_seen ON view_visitors
+WHEN NEW.last_seen - OLD.last_seen >= 60
 BEGIN
   INSERT INTO post_views (slug, views) VALUES (NEW.post_slug, 1)
   ON CONFLICT(slug) DO UPDATE SET views = views + 1;

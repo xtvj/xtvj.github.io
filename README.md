@@ -48,7 +48,7 @@ https://developers.facebook.com/documentation/instagram-platform/instagram-api-w
 
 ## 文章阅读次数
 
-文章详情页打开时会向 Cloudflare Worker 发送计数请求；同一浏览器和文章在 24 小时内重复刷新不会再次计数。Worker 将浏览器随机 ID 与访客 IP、浏览器标识经服务端密钥做 HMAC 后用于去重；D1 不保存原始 IP。换浏览器、清理浏览器数据或伪造请求仍可能产生新计数，因此这不是唯一访客统计。首页、分页、标签和搜索列表只批量读取，不增加次数。页面构建时先显示 Markdown frontmatter 中的历史 `views`，接口返回后更新为实时值；接口暂时不可用时保留历史值。
+文章详情页打开或刷新时会向 Cloudflare Worker 发送计数请求；同一浏览器在同一文章连续刷新，只要距上一次打开不足 1 分钟，就不会重复计数。停止访问满 1 分钟后再次打开会增加一次。Worker 将浏览器随机 ID 经服务端密钥做 HMAC 后用于去重；浏览器存储不可用时才使用 IP 与浏览器标识作为后备，D1 不保存原始 IP。换浏览器、清理浏览器数据或伪造请求仍可能产生新计数，因此这不是唯一访客统计。评论在页面内局部更新不会增加阅读次数。首页、分页、标签和搜索列表只批量读取，不增加次数。页面构建时先显示 Markdown frontmatter 中的历史 `views`，接口返回后更新为实时值；接口暂时不可用时保留历史值。
 
 首次部署需要 Cloudflare 账号，并安装/登录 Wrangler：
 
@@ -67,6 +67,13 @@ node scripts/reset-admin-password.mjs
 ```
 
 `schema.sql` 会建立阅读数表，并将现有文章 frontmatter 中的旧阅读数作为初始值写入 D1。`comments.sql` 新增评论表和阅读去重表；`comment-identity.sql` 为评论增加头像及管理员标记，并建立管理员资料表。它们不会清空现有阅读数或评论。每个 SQL 文件只运行一次。`reset-admin-password.mjs` 会提示输入两次密码、创建管理密码表、把旧的待审核评论公开，并把加盐密码哈希写入远程 D1。
+
+**已有数据库从旧的 24 小时规则切换到 1 分钟规则**时，先在项目根目录执行下面的一次性迁移，再部署新 Worker。迁移会保留已有阅读次数，将去重时间字段改为最近访问时间，并替换计数触发器；已按本版 `comments.sql` 新建的数据库无需执行。
+
+```sh
+npx wrangler d1 execute xtvj-post-views --remote --file=workers/post-views/view-window-1-minute.sql --config workers/post-views/wrangler.toml
+npx wrangler deploy --config workers/post-views/wrangler.toml
+```
 
 部署和密钥配置见下方“评论系统”。在 GitHub 仓库 **Settings → Secrets and variables → Actions → Variables** 设置 `PUBLIC_POST_VIEWS_API_URL`，值为 Worker 地址加 `/api/views`，例如 `https://xtvj-post-views.example.workers.dev/api/views`。重新部署 GitHub Pages 后，页面才会读取和记录次数。本地开发可将同一变量放入项目根目录 `.env` 文件。如果使用自定义站点域名，修改 Worker 配置中的 `ALLOWED_ORIGIN` 后重新部署。
 

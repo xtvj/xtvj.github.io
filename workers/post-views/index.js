@@ -2,7 +2,7 @@ import { PASSWORD_ITERATIONS, createSession, equalHex, passwordHash, randomHex, 
 import { COMMENT_AVATARS } from '../../src/lib/comment-avatars.js';
 
 const MAX_SLUGS = 50;
-const VIEW_WINDOW_SECONDS = 24 * 60 * 60;
+const VIEW_RETENTION_SECONDS = 30 * 24 * 60 * 60;
 const COMMENT_PAGE_SIZE = 50;
 const RECENT_COMMENT_COUNT = 6;
 const VISITOR_ID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
@@ -224,15 +224,15 @@ export default {
         const agent = (request.headers.get('User-Agent') || '').slice(0, 200);
         const key = await hmac(env.VIEW_HASH_SECRET, `${ip}\n${agent}`);
         if (!(await env.VIEW_RATE_LIMITER.limit({ key })).success) return json({ error: 'Too many requests' }, 429);
-        const visitorHash = await hmac(env.VIEW_HASH_SECRET, `${ip}\n${agent}\n${body.visitorId || ''}`);
+        const visitorHash = await hmac(env.VIEW_HASH_SECRET,
+          body.visitorId ? `visitor:${body.visitorId.toLowerCase()}` : `fallback:${ip}\n${agent}`);
         const now = Math.floor(Date.now() / 1000);
-        const result = await env.DB.prepare(`
-          INSERT INTO view_visitors (post_slug, visitor_hash, last_counted) VALUES (?1, ?2, ?3)
-          ON CONFLICT(post_slug, visitor_hash) DO UPDATE SET last_counted = excluded.last_counted
-          WHERE view_visitors.last_counted <= ?4
-        `).bind(body.slug, visitorHash, now, now - VIEW_WINDOW_SECONDS).run();
+        await env.DB.prepare(`
+          INSERT INTO view_visitors (post_slug, visitor_hash, last_seen) VALUES (?1, ?2, ?3)
+          ON CONFLICT(post_slug, visitor_hash) DO UPDATE SET last_seen = excluded.last_seen
+        `).bind(body.slug, visitorHash, now).run();
         const row = await env.DB.prepare('SELECT views FROM post_views WHERE slug = ?1').bind(body.slug).first();
-        return json({ slug: body.slug, views: row?.views ?? 0, counted: result.meta.changes > 0 });
+        return json({ slug: body.slug, views: row?.views ?? 0 });
       }
 
       if (url.pathname === '/api/comments' && request.method === 'GET') {
@@ -312,7 +312,7 @@ export default {
 
   async scheduled(_event, env) {
     // Keep a month of deduplication state; current visitors are refreshed on return.
-    await env.DB.prepare('DELETE FROM view_visitors WHERE last_counted < ?1')
-      .bind(Math.floor(Date.now() / 1000) - 30 * VIEW_WINDOW_SECONDS).run();
+    await env.DB.prepare('DELETE FROM view_visitors WHERE last_seen < ?1')
+      .bind(Math.floor(Date.now() / 1000) - VIEW_RETENTION_SECONDS).run();
   },
 };

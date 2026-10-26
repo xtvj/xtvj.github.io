@@ -46,11 +46,11 @@ test('password login, immediate comments, deletion and session invalidation', as
             },
             async run() {
               if (sql.includes('INTO view_visitors')) {
-                const [slug, hash, now, threshold] = args;
+                const [slug, hash, now] = args;
                 const key = `${slug}:${hash}`;
-                if (visitors.has(key) && visitors.get(key) > threshold) return { meta: { changes: 0 } };
+                const shouldCount = !visitors.has(key) || now - visitors.get(key) >= 60;
                 visitors.set(key, now);
-                views.set(slug, (views.get(slug) || 0) + 1);
+                if (shouldCount) views.set(slug, (views.get(slug) || 0) + 1);
                 return { meta: { changes: 1 } };
               }
               if (sql.includes('INTO comments')) {
@@ -89,11 +89,23 @@ test('password login, immediate comments, deletion and session invalidation', as
   const post = (path, body, extra = {}) => new Request(`${base}${path}`, { method: 'POST', headers: { ...headers, ...extra }, body: JSON.stringify(body) });
   const get = (path, extra = {}) => new Request(`${base}${path}`, { headers: { ...headers, ...extra } });
   const originalFetch = globalThis.fetch;
+  const originalNow = Date.now;
+  let clock = Date.now();
+  Date.now = () => clock;
   globalThis.fetch = async (_url, options) => Response.json({ success: !String(options.body).includes('invalid'), hostname: 'xtvj.github.io', action: 'comment' });
   try {
-    let response = await worker.fetch(post('/views', { slug: 'article', visitorId: 'f3b10118-236f-4553-a297-b79e55999a11' }), env);
-    assert.equal((await response.json()).views, 6);
     const visitorId = 'f3b10118-236f-4553-a297-b79e55999a11';
+    let response = await worker.fetch(post('/views', { slug: 'article', visitorId }), env);
+    assert.equal((await response.json()).views, 6);
+    clock += 30_000;
+    response = await worker.fetch(post('/views', { slug: 'article', visitorId }, { 'CF-Connecting-IP': '192.0.2.2' }), env);
+    assert.equal((await response.json()).views, 6);
+    clock += 31_000;
+    response = await worker.fetch(post('/views', { slug: 'article', visitorId }), env);
+    assert.equal((await response.json()).views, 6);
+    clock += 61_000;
+    response = await worker.fetch(post('/views', { slug: 'article', visitorId }), env);
+    assert.equal((await response.json()).views, 7);
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '游客', body: '你好', turnstileToken: 'valid', visitorId }), env);
     assert.equal(response.status, 201);
     const firstComment = (await response.json()).comment;
@@ -150,5 +162,6 @@ test('password login, immediate comments, deletion and session invalidation', as
     assert.equal((await response.json()).counts.article, 3);
   } finally {
     globalThis.fetch = originalFetch;
+    Date.now = originalNow;
   }
 });

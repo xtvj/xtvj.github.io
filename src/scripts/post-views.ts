@@ -12,22 +12,26 @@ if (apiUrl && counters.length) {
 
   const currentPost = counters.find((counter) => counter.hasAttribute('data-count-view'));
   if (currentPost?.dataset.postViews) {
-    let visitorId: string | undefined;
-    try {
-      const saved = localStorage.getItem('xtvj-visitor-id');
-      visitorId = saved && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(saved) ? saved : crypto.randomUUID();
-      localStorage.setItem('xtvj-visitor-id', visitorId);
-    } catch {}
-    void fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: currentPost.dataset.postViews, visitorId }),
-      cache: 'no-store',
-    }).then(async (response) => {
-      if (!response.ok) throw new Error('Could not record view');
-      const data: { slug: string; views: number } = await response.json();
-      showCount(data.slug, data.views);
-    }).catch(() => {});
+    const recordView = () => {
+      let visitorId: string | undefined;
+      try {
+        const saved = localStorage.getItem('xtvj-visitor-id');
+        visitorId = saved && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(saved) ? saved : crypto.randomUUID();
+        localStorage.setItem('xtvj-visitor-id', visitorId);
+      } catch {}
+      void fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug: currentPost.dataset.postViews, visitorId }),
+        cache: 'no-store',
+      }).then(async (response) => {
+        if (!response.ok) throw new Error('Could not record view');
+        const data: { slug: string; views: number } = await response.json();
+        showCount(data.slug, data.views);
+      }).catch(() => {});
+    };
+    recordView();
+    window.addEventListener('pageshow', (event) => { if (event.persisted) recordView(); });
   } else {
     const url = new URL(apiUrl);
     for (const slug of new Set(counters.map((counter) => counter.dataset.postViews).filter((slug): slug is string => !!slug))) {
