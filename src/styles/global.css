@@ -138,6 +138,7 @@ button { color: inherit; }
 .tag:hover { border-color: var(--accent); color: var(--accent); }
 .post-stats { display: flex; gap: 12px; color: var(--soft); font: .57rem var(--mono); }
 .recent-comments { margin: 8px 0 88px; }
+.intro + .recent-comments { margin: 0 0 42px; }
 .recent-comments .section-heading { margin-bottom: 18px; }
 .recent-comments-track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(235px, 32%, 350px); gap: 13px; overflow-x: auto; padding: 3px 2px 14px; scroll-snap-type: x mandatory; scrollbar-color: var(--line) transparent; }
 .recent-comment-card { display: flex; flex-direction: column; min-width: 0; min-height: 180px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); scroll-snap-align: start; transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }

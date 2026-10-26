@@ -17,11 +17,12 @@ const visiblePosts = posts.slice(0, pageSize);
     <div class="intro-meta"><span>{posts.length} 篇文章</span></div>
   </section>
 
+  <RecentComments />
+
   <section class="post-list" aria-label="文章列表">
     <div class="section-heading"><h2>最近的记录</h2><span>按发布时间排列</span></div>
     {visiblePosts.map((post) => <PostCard post={post} />)}
     {visiblePosts.length === 0 && <p class="empty-state">还没有文章。</p>}
     <Pagination current={1} total={totalPages} />
   </section>
-  <RecentComments />
 </SiteLayout>
