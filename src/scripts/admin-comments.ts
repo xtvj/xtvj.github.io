@@ -22,6 +22,7 @@ const postSelect = document.querySelector<HTMLSelectElement>('#admin-post-select
 const postItems = [...document.querySelectorAll<HTMLButtonElement>('.admin-post-item')];
 const settingsLink = document.querySelector<HTMLElement>('#admin-settings-link');
 const count = document.querySelector<HTMLElement>('#admin-comment-count');
+const emptyState = document.querySelector<HTMLElement>('#admin-empty-state');
 
 if (page && login && passwordInput && dashboard && comments && message && more && logout && postSelect) {
   const apiUrl = page.dataset.adminApi;
@@ -50,6 +51,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     login.hidden = false;
     if (settingsLink) settingsLink.hidden = true;
     comments.replaceChildren();
+    if (emptyState) emptyState.hidden = true;
     cursor = null;
     requestSerial++;
     if (count) count.textContent = '';
@@ -110,7 +112,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     date.textContent = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toLocaleString('zh-CN');
     meta.append(avatar, authorDetails, date);
     const articleLink = document.createElement('a');
-    articleLink.href = `${import.meta.env.BASE_URL}posts/${encodeURIComponent(comment.post_slug)}/#comments`;
+    articleLink.href = `${import.meta.env.BASE_URL}posts/${encodeURIComponent(comment.post_slug)}/#comment-${comment.id}`;
     articleLink.textContent = '查看文章 ↗';
     const content = document.createElement('p');
     content.className = 'admin-comment-body';
@@ -134,6 +136,8 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     try {
       await request(new URL(`${apiUrl}/${id}`), 'DELETE');
       card.remove();
+      window.dispatchEvent(new Event('comments-changed'));
+      if (emptyState) emptyState.hidden = comments.childElementCount > 0;
       if (count) count.textContent = `已加载 ${comments.childElementCount} 条`;
       message.textContent = `评论 #${id} 已删除。`;
     } catch (error) {
@@ -145,6 +149,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     if (!apiUrl || !session || !postSelect.value) return false;
     if (reset) {
       comments.replaceChildren();
+      if (emptyState) emptyState.hidden = true;
       cursor = null;
       more.hidden = true;
     }
@@ -161,8 +166,9 @@ if (page && login && passwordInput && dashboard && comments && message && more &
       for (const comment of data.comments) renderComment(comment);
       cursor = data.nextCursor;
       more.hidden = cursor === null;
+      if (emptyState) emptyState.hidden = comments.childElementCount > 0;
       if (count) count.textContent = `已加载 ${comments.childElementCount} 条`;
-      message.textContent = comments.childElementCount ? '' : '当前没有评论。';
+      message.textContent = '';
       return true;
     } catch (error) {
       if (serial === requestSerial) message.textContent = error instanceof Error ? error.message : '读取失败。';
@@ -210,6 +216,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     syncPostItems();
     requestSerial++;
     comments.replaceChildren();
+    if (emptyState) emptyState.hidden = true;
     cursor = null;
     more.hidden = true;
     if (count) count.textContent = '';

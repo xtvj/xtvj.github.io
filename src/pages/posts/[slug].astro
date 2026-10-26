@@ -34,7 +34,7 @@ const older = posts[index + 1];
       <div class="article-meta">
         <span>发布于 {formatDate(post.data.date)}</span>
         {post.data.updated && <span>更新于 {formatDate(post.data.updated)}</span>}
-        {typeof post.data.readMinutes === 'number' && <span>{post.data.readMinutes} 分钟阅读</span>}
+        <span>评论 <span data-comment-count={post.data.slug}>—</span> 条</span>
         <span>阅读 <span data-post-views={post.data.slug} data-count-view>{(post.data.views ?? 0).toLocaleString('zh-CN')}</span> 次</span>
       </div>
     </header>

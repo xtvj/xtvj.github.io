@@ -4,6 +4,7 @@ import { COMMENT_AVATARS } from '../../src/lib/comment-avatars.js';
 const MAX_SLUGS = 50;
 const VIEW_WINDOW_SECONDS = 24 * 60 * 60;
 const COMMENT_PAGE_SIZE = 50;
+const RECENT_COMMENT_COUNT = 6;
 const VISITOR_ID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const avatarIds = COMMENT_AVATARS.map(({ id }) => id);
 const validNickname = (value) => typeof value === 'string' && value.length > 0 && value.length <= 30 && !/[\u0000-\u001f\u007f]/u.test(value);
@@ -168,12 +169,38 @@ export default {
       }
     }
 
-    if (!['/api/views', '/api/comments'].includes(url.pathname)) return json({ error: 'Not found' }, 404);
+    if (!['/api/views', '/api/comments', '/api/comment-overview'].includes(url.pathname)) return json({ error: 'Not found' }, 404);
     if (!allowedOrigins.has(origin)) return json({ error: 'Origin not allowed' }, 403);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });
     if (!env.DB) return json({ error: 'Database is not configured' }, 503);
 
     try {
+      if (url.pathname === '/api/comment-overview' && request.method === 'GET') {
+        const slugs = [...new Set(url.searchParams.getAll('slug'))];
+        const includeRecent = url.searchParams.get('recent') === '1';
+        if ((!slugs.length && !includeRecent) || slugs.length > MAX_SLUGS || slugs.some((slug) => !validSlug(slug))) {
+          return json({ error: 'Invalid query' }, 400);
+        }
+        const counts = Object.fromEntries(slugs.map((slug) => [slug, 0]));
+        if (slugs.length) {
+          const placeholders = slugs.map(() => '?').join(', ');
+          const rows = await env.DB.prepare(`
+            SELECT post_slug, COUNT(*) AS count FROM comments
+            WHERE status = 'approved' AND post_slug IN (${placeholders}) GROUP BY post_slug
+          `).bind(...slugs).all();
+          for (const row of rows.results) counts[row.post_slug] = row.count;
+        }
+        let recent = [];
+        if (includeRecent) {
+          const rows = await env.DB.prepare(`
+            SELECT ${commentColumns}, c.post_slug FROM comments c LEFT JOIN admin_profile p ON p.id = 1
+            WHERE c.status = 'approved' ORDER BY c.id DESC LIMIT ?1
+          `).bind(RECENT_COMMENT_COUNT).all();
+          recent = rows.results.map(avatarFallback);
+        }
+        return json({ counts, recent });
+      }
+
       if (url.pathname === '/api/views' && request.method === 'GET') {
         const slugs = [...new Set(url.searchParams.getAll('slug'))];
         if (!slugs.length || slugs.length > MAX_SLUGS || slugs.some((slug) => !validSlug(slug))) {

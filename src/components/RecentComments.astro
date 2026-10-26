@@ -1,0 +1,11 @@
+---
+import { getPosts } from '../lib/posts';
+
+const titles = Object.fromEntries((await getPosts()).map((post) => [post.data.slug, post.data.title]));
+---
+
+<section class="recent-comments" data-recent-comments data-post-titles={JSON.stringify(titles)} aria-labelledby="recent-comments-title">
+  <div class="section-heading"><h2 id="recent-comments-title">最新评论</h2><span>来自各篇文章</span></div>
+  <div class="recent-comments-track" data-recent-track></div>
+  <p class="recent-comments-status" data-recent-status role="status">正在加载最新评论…</p>
+</section>

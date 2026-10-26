@@ -3,6 +3,7 @@ import { getPosts } from '../lib/posts';
 import PostCard from '../components/PostCard.astro';
 import Pagination from '../components/Pagination.astro';
 import SiteLayout from '../layouts/SiteLayout.astro';
+import RecentComments from '../components/RecentComments.astro';
 import { sortPosts } from '../lib/site';
 
 const posts = sortPosts(await getPosts());
@@ -22,4 +23,5 @@ const visiblePosts = posts.slice(0, pageSize);
     {visiblePosts.length === 0 && <p class="empty-state">还没有文章。</p>}
     <Pagination current={1} total={totalPages} />
   </section>
+  <RecentComments />
 </SiteLayout>

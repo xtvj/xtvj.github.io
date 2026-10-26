@@ -137,6 +137,19 @@ button { color: inherit; }
 .tag { position: relative; z-index: 1; display: inline-flex; align-items: center; padding: 5px 8px; border: 1px solid var(--tag-border); border-radius: 3px; color: var(--muted); font-size: .64rem; line-height: 1; }
 .tag:hover { border-color: var(--accent); color: var(--accent); }
 .post-stats { display: flex; gap: 12px; color: var(--soft); font: .57rem var(--mono); }
+.recent-comments { margin: 8px 0 88px; }
+.recent-comments .section-heading { margin-bottom: 18px; }
+.recent-comments-track { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(235px, 32%, 350px); gap: 13px; overflow-x: auto; padding: 3px 2px 14px; scroll-snap-type: x mandatory; scrollbar-color: var(--line) transparent; }
+.recent-comment-card { display: flex; flex-direction: column; min-width: 0; min-height: 180px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); scroll-snap-align: start; transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.recent-comment-card:hover { border-color: var(--accent); box-shadow: 0 8px 20px #00000012; transform: translateY(-2px); }
+.recent-comment-author { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.recent-comment-author img { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; object-fit: cover; }
+.recent-comment-author strong { flex: 1; min-width: 0; overflow: hidden; color: var(--ink); font-size: .73rem; text-overflow: ellipsis; white-space: nowrap; }
+.recent-comment-author time { color: var(--soft); font: .6rem var(--mono); white-space: nowrap; }
+.recent-comment-body { display: -webkit-box; flex: 1; overflow: hidden; margin: 15px 0 16px; color: var(--ink); font-size: .78rem; line-height: 1.65; overflow-wrap: anywhere; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.recent-comment-post { overflow: hidden; padding-top: 10px; border-top: 1px solid var(--line); color: var(--accent); font-size: .67rem; text-overflow: ellipsis; white-space: nowrap; }
+.recent-comments-status { margin: 0; color: var(--muted); font-size: .75rem; }
+.recent-comments-status[hidden] { display: none; }
 .pagination { display: flex; justify-content: center; align-items: center; gap: 26px; padding: 35px 0 8px; color: var(--muted); font-size: .74rem; }
 .pagination a { color: var(--accent); }
 .archive-heading { padding: 68px 0 37px; }
@@ -182,6 +195,7 @@ button { color: inherit; }
 .comments-heading > p:last-child { margin: 9px 0 26px; color: var(--muted); font-size: .75rem; }
 .comments-list { display: grid; gap: 15px; }
 .comment { min-width: 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.comment:target { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .comment-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
 .comment-avatar { width: 36px; height: 36px; flex: 0 0 36px; align-self: center; border-radius: 50%; object-fit: cover; background: var(--accent-soft); }
 .comment-admin-badge { padding: 3px 7px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); font-size: .62rem; }
@@ -256,6 +270,7 @@ button { color: inherit; }
 .admin-post-item[aria-pressed='true'] .admin-post-item-title { color: var(--accent); font-weight: 650; }
 .admin-panel-hint { margin: 12px 0 0; color: var(--soft); font-size: .66rem; line-height: 1.6; }
 .admin-comment-panel { min-width: 0; }
+.admin-page .recent-comments { margin: 5px 0 38px; }
 .admin-comments-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 0 14px; }
 .admin-comments-heading h2 { margin: 0; font-size: 1.02rem; }
 .admin-comments-heading span { color: var(--soft); font: .64rem var(--mono); }
@@ -263,6 +278,10 @@ button { color: inherit; }
 .admin-logout { padding: 4px 0; border: 0; background: none; }
 .admin-logout:hover, .admin-more:hover { color: var(--accent); }
 .admin-comments { display: grid; gap: 13px; }
+.admin-empty-state { display: grid; justify-items: center; align-content: center; min-height: 330px; padding: 34px 20px; border: 1px dashed var(--line); border-radius: 9px; background: var(--paper); color: var(--soft); text-align: center; }
+.admin-empty-state svg { width: 132px; height: 100px; color: var(--accent); opacity: .65; }
+.admin-empty-state h3 { margin: 16px 0 6px; color: var(--ink); font-size: .95rem; }
+.admin-empty-state p { margin: 0; font-size: .72rem; }
 .admin-comment { min-width: 0; padding: 21px 23px 16px; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); box-shadow: 0 2px 8px #00000006; }
 .admin-comment-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
 .admin-comment-author { display: flex; flex: 1; flex-wrap: wrap; align-items: center; gap: 5px 9px; min-width: 0; font-size: .8rem; }
@@ -326,6 +345,8 @@ button { color: inherit; }
 }
 
 @media (max-width: 680px) {
+  .recent-comments { margin-bottom: 62px; }
+  .recent-comments-track { grid-auto-columns: min(80vw, 290px); }
   .comment-avatar-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .admin-avatar-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   :root[data-width='wide'] .admin-workspace, :root[data-width='wide'] .admin-settings-page #admin-settings-content { grid-template-columns: 1fr; }

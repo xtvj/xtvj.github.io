@@ -22,6 +22,8 @@ test('password login, immediate comments, deletion and session invalidation', as
           return {
             async all() {
               if (sql.includes('FROM post_views')) return { results: args.filter((slug) => views.has(slug)).map((slug) => ({ slug, views: views.get(slug) })) };
+              if (sql.includes('COUNT(*) AS count')) return { results: [...new Set(args)].map((slug) => ({ post_slug: slug, count: comments.filter((comment) => comment.status === 'approved' && comment.post_slug === slug).length })).filter((row) => row.count > 0) };
+              if (sql.includes('ORDER BY c.id DESC')) return { results: comments.filter((comment) => comment.status === 'approved').slice().reverse().slice(0, args[0]).map((comment) => ({ ...comment, nickname: comment.is_admin ? profile.nickname : comment.nickname, avatar_id: comment.is_admin ? profile.avatar_id : comment.avatar_id })) };
               if (sql.includes('FROM comments')) return { results: comments.filter((comment) => comment.status === 'approved' && comment.post_slug === args[0] && comment.id > args[1]).map((comment) => ({ ...comment, nickname: comment.is_admin ? profile.nickname : comment.nickname, avatar_id: comment.is_admin ? profile.avatar_id : comment.avatar_id })) };
               return { results: [] };
             },
@@ -105,6 +107,10 @@ test('password login, immediate comments, deletion and session invalidation', as
     assert.equal(response.status, 400);
     response = await worker.fetch(get('/comments?slug=article'), env);
     assert.equal((await response.json()).comments.length, 3);
+    response = await worker.fetch(get('/comment-overview?slug=article&slug=another&recent=1'), env);
+    const overview = await response.json();
+    assert.deepEqual(overview.counts, { article: 3, another: 0 });
+    assert.equal(overview.recent[0].body, '自选头像');
     response = await worker.fetch(post('/comments', { slug: 'article', nickname: '机器', body: '垃圾', turnstileToken: 'invalid', visitorId }), env);
     assert.equal(response.status, 400);
 
@@ -140,6 +146,8 @@ test('password login, immediate comments, deletion and session invalidation', as
     assert.equal(response.status, 200);
     response = await worker.fetch(get('/comments?slug=article'), env);
     assert.equal((await response.json()).comments.length, 3);
+    response = await worker.fetch(get('/comment-overview?slug=article&recent=1'), env);
+    assert.equal((await response.json()).counts.article, 3);
   } finally {
     globalThis.fetch = originalFetch;
   }

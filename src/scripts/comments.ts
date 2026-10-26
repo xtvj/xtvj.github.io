@@ -147,7 +147,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
   const load = async () => {
     if (!apiUrl || !slug) {
       listStatus.textContent = '评论暂时不可用。';
-      return;
+      return false;
     }
     more.disabled = true;
     listStatus.textContent = '正在加载评论…';
@@ -162,8 +162,10 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
       nextCursor = data.nextCursor;
       more.hidden = nextCursor === null;
       listStatus.textContent = nodes.size ? '' : '暂无评论，欢迎留下第一条。';
+      return true;
     } catch {
       listStatus.textContent = '评论加载失败，请稍后重试。';
+      return false;
     } finally {
       more.disabled = false;
     }
@@ -197,6 +199,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
       if (!response.ok) throw new Error(response.status === 400 ? '提交失败，请检查内容并重新完成验证。' : '提交失败，请稍后再试。');
       const data: { comment: Comment } = await response.json();
       renderComment(data.comment);
+      window.dispatchEvent(new Event('comments-changed'));
       listStatus.textContent = '';
       body.value = '';
       clearReply();
@@ -226,5 +229,16 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
         formStatus.textContent = '暂时无法确认管理员身份，请稍后刷新页面重试。';
       });
   }
-  void load();
+  const focusHashComment = async () => {
+    const match = location.hash.match(/^#comment-(\d+)$/);
+    if (!match) return;
+    const id = Number(match[1]);
+    while (!nodes.has(id) && nextCursor !== null) {
+      if (!await load()) return;
+    }
+    const target = nodes.get(id);
+    if (target) requestAnimationFrame(() => target.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+  };
+  window.addEventListener('hashchange', () => { void focusHashComment(); });
+  void load().then((loaded) => { if (loaded) void focusHashComment(); });
 }

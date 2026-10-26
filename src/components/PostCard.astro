@@ -23,7 +23,7 @@ const excerpt = postExcerpt(post.body);
       </div>
       <div class="post-stats">
         {data.updated && <span>更新于 {formatDate(data.updated)}</span>}
-        {typeof data.readMinutes === 'number' && <span>{data.readMinutes} 分钟</span>}
+        <span>评论 <span data-comment-count={data.slug}>—</span> 条</span>
         <span>阅读 <span data-post-views={data.slug}>{(data.views ?? 0).toLocaleString('zh-CN')}</span> 次</span>
       </div>
     </div>
