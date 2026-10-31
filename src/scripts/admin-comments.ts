@@ -109,7 +109,7 @@ if (page && login && passwordInput && dashboard && comments && message && more &
     }
     const date = document.createElement('span');
     const parsedDate = new Date(comment.created_at);
-    date.textContent = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toLocaleString('zh-CN');
+    date.textContent = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toLocaleString('zh-CN', { timeZone: 'America/Los_Angeles' });
     meta.append(avatar, authorDetails, date);
     const articleLink = document.createElement('a');
     articleLink.href = `${import.meta.env.BASE_URL}posts/${encodeURIComponent(comment.post_slug)}/#comment-${comment.id}`;

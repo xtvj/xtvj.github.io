@@ -111,7 +111,7 @@ if (section && list && listStatus && more && form && formStatus && nickname && b
     time.dateTime = comment.created_at;
     const date = new Date(comment.created_at);
     time.textContent = Number.isNaN(date.getTime()) ? '' : new Intl.DateTimeFormat('zh-CN', {
-      year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit',
+      year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'America/Los_Angeles',
     }).format(date);
     header.append(avatar, author);
     if (comment.is_admin) {

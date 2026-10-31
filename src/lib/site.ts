@@ -23,6 +23,6 @@ export function formatDate(date: Date) {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
-    timeZone: 'UTC',
+    timeZone: 'America/Los_Angeles',
   }).format(date).replaceAll('/', '.');
 }

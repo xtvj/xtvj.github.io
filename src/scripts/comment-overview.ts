@@ -57,7 +57,7 @@ if (counters.length || recentSection) {
           const date = document.createElement('time');
           date.dateTime = comment.created_at;
           const parsed = new Date(comment.created_at);
-          date.textContent = Number.isNaN(parsed.getTime()) ? '' : new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' }).format(parsed);
+          date.textContent = Number.isNaN(parsed.getTime()) ? '' : new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric', timeZone: 'America/Los_Angeles' }).format(parsed);
           header.append(avatar, name, date);
           const body = document.createElement('p');
           body.className = 'recent-comment-body';
