@@ -3,6 +3,15 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import icon from 'astro-icon';
 
+const tableLayoutSchema = z.object({
+  width: z.number().positive().max(100).default(100),
+  minWidth: z.number().nonnegative().default(900),
+  columns: z.array(z.number().positive().max(100)).min(1)
+    .refine((columns) => Math.abs(columns.reduce((sum, width) => sum + width, 0) - 100) < 0.001, {
+      message: '表格各列宽度的百分比总和必须为 100',
+    }),
+});
+
 const posts = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/posts' }),
   schema: z.object({
@@ -13,14 +22,17 @@ const posts = defineCollection({
     tags: z.array(z.string()).default([]),
     views: z.number().optional(),
     readMinutes: z.number().optional(),
-    tableLayout: z.object({
-      width: z.number().positive().max(100).default(100),
-      minWidth: z.number().nonnegative().default(900),
-      columns: z.array(z.number().positive().max(100)).min(1)
-        .refine((columns) => Math.abs(columns.reduce((sum, width) => sum + width, 0) - 100) < 0.001, {
-          message: '表格各列宽度的百分比总和必须为 100',
-        }),
-    }).optional(),
+    tableLayout: tableLayoutSchema.optional(),
+  }).catchall(z.unknown()).superRefine((data, context) => {
+    for (const [key, value] of Object.entries(data)) {
+      if (!/^tableLayout(?:[2-9]|[1-9]\d+)$/.test(key)) continue;
+      const result = tableLayoutSchema.safeParse(value);
+      if (!result.success) {
+        for (const issue of result.error.issues) {
+          context.addIssue({ ...issue, path: [key, ...issue.path] });
+        }
+      }
+    }
   }),
   integrations: [icon()],
 });

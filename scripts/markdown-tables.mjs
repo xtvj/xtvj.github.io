@@ -4,7 +4,10 @@ export const markdownTables = {
   element: {
     filter: ['table'],
     visit(node, context) {
-      const layout = context.data.astro?.frontmatter?.tableLayout;
+      const tableIndex = (context.data.tableLayoutIndex ?? 0) + 1;
+      context.data.tableLayoutIndex = tableIndex;
+      const layoutKey = tableIndex === 1 ? 'tableLayout' : `tableLayout${tableIndex}`;
+      const layout = context.data.astro?.frontmatter?.[layoutKey];
       if (!layout) return;
 
       const { columns, width = 100, minWidth = 900 } = layout;
@@ -13,14 +16,14 @@ export const markdownTables = {
           Math.abs(columns.reduce((sum, value) => sum + value, 0) - 100) > 0.001 ||
           !Number.isFinite(width) || width <= 0 || width > 100 ||
           !Number.isFinite(minWidth) || minWidth < 0) {
-        throw new Error('tableLayout：columns 请填写合计为 100 的正数百分比，width 为 1–100，minWidth 为非负像素数。');
+        throw new Error(`${layoutKey}：columns 请填写合计为 100 的正数百分比，width 为 1–100，minWidth 为非负像素数。`);
       }
 
       const heading = node.children.find((child) => child.type === 'element' && child.tagName === 'thead');
       const row = heading?.children.find((child) => child.type === 'element' && child.tagName === 'tr');
       const count = row?.children.filter((child) => child.type === 'element' && ['th', 'td'].includes(child.tagName)).length;
       if (count !== columns.length) {
-        throw new Error(`tableLayout：配置了 ${columns.length} 列宽，但表格实际有 ${count} 列。请按表格从左到右填写全部列宽。`);
+        throw new Error(`${layoutKey}：配置了 ${columns.length} 列宽，但表格实际有 ${count} 列。请按表格从左到右填写全部列宽。`);
       }
 
       context.prependChild(node, {
