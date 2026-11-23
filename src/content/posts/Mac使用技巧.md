@@ -5,6 +5,10 @@ date: 2020-10-29
 tags: [macOS, 软件]
 views: 3541
 readMinutes: 8
+tableLayout:
+  width: 98 # 表格占正文宽度的百分比
+  minWidth: 900 # 最小宽度（像素）；屏幕较窄时在表格内横向滚动
+  columns: [12, 88]
 ---
 
 之前很多东西都懒得记录，现在发现改的东西多了，很多细节很容易就忘，故做此流水记录。
