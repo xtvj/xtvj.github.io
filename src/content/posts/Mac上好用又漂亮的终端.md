@@ -119,17 +119,6 @@ source ~/.zshrc
 
 用于解压，不用另行安装，直接在plugins中加就行 [官方说明](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/extract)
 
-##### autojump
-
-自动跳转目录，只能当使用cd命令进入文件夹后，才能使用`j 文件夹名`进入文件夹
-
-安装：`brew install autojump`
-
-再执行一句命令：
-
-```
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
-```
 
 ##### zsh-syntax-highlighting
 
@@ -153,7 +142,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 
 Mac下快捷命令应用，参考[官方说明](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/macos)，可实现在终端快速定位到访达目录等操作。
 
-自用.zshrc中的plugins字段：plugins=(git extract autojump zsh-syntax-highlighting zsh-autosuggestions macos)
+---
+
+自用.zshrc中的plugins字段：
+```
+plugins=(git extract zsh-syntax-highlighting zsh-autosuggestions macos)
+```
 
 最后再执行一次
 
@@ -161,33 +155,7 @@ Mac下快捷命令应用，参考[官方说明](https://github.com/ohmyzsh/ohmyz
 source ~/.zshrc
 ```
 
----
 
-#### 完成上面设置后终端会提示~~：
-
-目前已无此提示
-
-```
-[oh-my-zsh] Insecure completion-dependent directories detected:
-drwxrwxr-x  7 **  admin  224 Nov  3 12:31 /usr/local/share/zsh
-drwxrwxr-x  5 **  admin  160 Nov  3 12:34 /usr/local/share/zsh/site-functions
-
-[oh-my-zsh] For safety, we will not load completions from these directories until
-[oh-my-zsh] you fix their permissions and ownership and restart zsh.
-[oh-my-zsh] See the above list for directories with group or other writability.
-
-[oh-my-zsh] To fix your permissions you can do so by disabling
-[oh-my-zsh] the write permission of "group" and "others" and making sure that the
-[oh-my-zsh] owner of these directories is either root or your current user.
-[oh-my-zsh] The following command may help:
-[oh-my-zsh]     compaudit | xargs chmod g-w,o-w
-
-[oh-my-zsh] If the above didn't help or you want to skip the verification of
-[oh-my-zsh] insecure directories you can set the variable ZSH_DISABLE_COMPFIX to
-[oh-my-zsh] "true" before oh-my-zsh is sourced in your zshrc file.
-```
-
-~~按照说明在.zshrc文件**第一行**中添加 ZSH_DISABLE_COMPFIX=true即可。~~
 
 参考文章：
 
