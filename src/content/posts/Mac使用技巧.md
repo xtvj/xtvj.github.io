@@ -2,7 +2,6 @@
 title: Mac使用技巧
 slug: mac使用技巧
 date: 2020-10-29
-updated: 2024-03-24
 tags: [macOS, 软件]
 views: 3541
 readMinutes: 8

@@ -2,7 +2,6 @@
 title: Mac上好用又漂亮的终端
 slug: mac上好用又漂亮的终端
 date: 2020-10-19
-updated: 2024-02-12
 tags: [macOS, 终端, zsh]
 views: 1247
 readMinutes: 3
