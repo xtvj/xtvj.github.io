@@ -121,6 +121,9 @@ button { color: inherit; }
 .section-heading { display: flex; justify-content: space-between; align-items: baseline; padding: 0 0 13px; border-bottom: 1px solid var(--line); }
 .section-heading h2 { margin: 0; font-size: .94rem; font-weight: 600; }
 .section-heading > span { color: var(--soft); font: .66rem var(--mono); }
+.post-sort-toggle { padding: 4px 0; border: 0; background: transparent; color: var(--soft); font: .78rem var(--mono); cursor: pointer; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 4px; }
+.post-sort-toggle:hover { color: var(--accent); }
+.post-sort-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
 .post-card { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 24px; margin-top: 18px; }
 .post-card-date { position: relative; padding: 27px 18px 0 0; color: var(--soft); font: .68rem var(--mono); text-align: right; white-space: nowrap; }
 .post-card-date::before { position: absolute; top: -18px; right: 0; bottom: -18px; width: 1px; background: var(--line); content: ''; }

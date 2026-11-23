@@ -1,0 +1,66 @@
+---
+import type { Post } from '../lib/site';
+import { sortPosts } from '../lib/site';
+import PostCard from './PostCard.astro';
+import Pagination from './Pagination.astro';
+
+interface Props {
+  posts: Post[];
+  current?: number;
+  pageSize?: number;
+}
+
+const { posts, current = 1, pageSize = 10 } = Astro.props;
+const total = Math.ceil(posts.length / pageSize);
+const start = (current - 1) * pageSize;
+---
+
+<section class="post-list" aria-label="文章列表" data-sortable-posts>
+  <div class="section-heading">
+    <h2>最近的记录</h2>
+    <button class="post-sort-toggle" type="button" aria-pressed="false" hidden>
+      按发布时间排列
+    </button>
+  </div>
+  {(['published', 'updated'] as const).map((sort) => (
+    <div data-post-order={sort} hidden={sort === 'updated'} aria-label={sort === 'updated' ? '按更新时间排列的文章' : '按发布时间排列的文章'}>
+      {sortPosts(posts, sort).slice(start, start + pageSize).map((post) => <PostCard post={post} sort={sort} />)}
+    </div>
+  ))}
+  {posts.length === 0 && <p class="empty-state">还没有文章。</p>}
+  <Pagination current={current} total={total} />
+</section>
+
+<script>
+  const list = document.querySelector<HTMLElement>('[data-sortable-posts]');
+  const toggle = list?.querySelector<HTMLButtonElement>('.post-sort-toggle');
+
+  if (list && toggle) {
+    const render = () => {
+      const updated = new URL(window.location.href).searchParams.get('sort') === 'updated';
+      toggle.textContent = updated ? '按更新时间排列' : '按发布时间排列';
+      toggle.setAttribute('aria-pressed', String(updated));
+      toggle.title = updated ? '点击切换为按发布时间排列' : '点击切换为按更新时间排列';
+      for (const group of list.querySelectorAll<HTMLElement>('[data-post-order]')) {
+        group.hidden = group.dataset.postOrder !== (updated ? 'updated' : 'published');
+      }
+      for (const link of list.querySelectorAll<HTMLAnchorElement>('.pagination a')) {
+        const url = new URL(link.href);
+        if (updated) url.searchParams.set('sort', 'updated');
+        else url.searchParams.delete('sort');
+        link.href = url.href;
+      }
+      toggle.hidden = false;
+    };
+
+    toggle.addEventListener('click', () => {
+      const url = new URL(window.location.href);
+      if (url.searchParams.get('sort') === 'updated') url.searchParams.delete('sort');
+      else url.searchParams.set('sort', 'updated');
+      window.history.pushState(null, '', url);
+      render();
+    });
+    window.addEventListener('popstate', render);
+    render();
+  }
+</script>

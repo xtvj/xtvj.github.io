@@ -2,8 +2,16 @@ import type { CollectionEntry } from 'astro:content';
 
 export type Post = CollectionEntry<'posts'>;
 
-export function sortPosts(posts: Post[]) {
-  return [...posts].sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+export type PostSort = 'published' | 'updated';
+
+export function postSortDate(post: Post, sort: PostSort = 'published') {
+  return sort === 'updated' ? post.data.updated ?? post.data.date : post.data.date;
+}
+
+export function sortPosts(posts: Post[], sort: PostSort = 'published') {
+  return [...posts].sort((a, b) =>
+    postSortDate(b, sort).getTime() - postSortDate(a, sort).getTime()
+    || b.data.date.getTime() - a.data.date.getTime());
 }
 
 export function postHref(slug: string) {

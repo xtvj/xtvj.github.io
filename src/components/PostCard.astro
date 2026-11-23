@@ -1,19 +1,21 @@
 ---
-import type { Post } from '../lib/site';
+import type { Post, PostSort } from '../lib/site';
 import { postExcerpt } from '../lib/posts';
-import { formatDate, postHref, tagHref } from '../lib/site';
+import { formatDate, postHref, postSortDate, tagHref } from '../lib/site';
 
 interface Props {
   post: Post;
+  sort?: PostSort;
 }
 
-const { post } = Astro.props;
+const { post, sort = 'published' } = Astro.props;
+const timelineDate = postSortDate(post, sort);
 const { data } = post;
 const excerpt = postExcerpt(post.body);
 ---
 
 <article class="post-card">
-  <time class="post-card-date" datetime={data.date.toISOString().slice(0, 10)}>{formatDate(data.date)}</time>
+  <time class="post-card-date" datetime={timelineDate.toISOString()}>{formatDate(timelineDate)}</time>
   <div class="post-card-content">
     <h2><a class="post-card-link" href={postHref(data.slug)}>{data.title}</a></h2>
     {excerpt && <p class="post-card-excerpt">{excerpt}</p>}
@@ -22,7 +24,9 @@ const excerpt = postExcerpt(post.body);
         {data.tags.slice(0, 3).map((tag) => <a class="tag" href={tagHref(tag)}>{tag}</a>)}
       </div>
       <div class="post-stats">
-        {data.updated && <span>更新于 {formatDate(data.updated)}</span>}
+        {sort === 'updated'
+          ? <span>发布于 {formatDate(data.date)}</span>
+          : data.updated && <span>更新于 {formatDate(data.updated)}</span>}
         <span>评论 <span data-comment-count={data.slug}>—</span> 条</span>
         <span>阅读 <span data-post-views={data.slug}>{(data.views ?? 0).toLocaleString('zh-CN')}</span> 次</span>
       </div>
